@@ -17,6 +17,16 @@ export default function Home() {
           推荐文章
         </h3>
         <BlogPost
+          title="构造你自己的React（翻译）"
+          summary="带你从零实现一个简易版本的React,包含React当中最新的Fiber,Hook,Concurrent等概念。"
+          slug="build-your-owen-react"
+        />
+        <BlogPost
+          title="HTTP的强缓存和协商缓存"
+          summary="介绍关于浏览器缓存的前因后果，分清强缓存和协商缓存，了解相关的http的头字段。"
+          slug="http-cache-intoduce"
+        />
+        <BlogPost
           title="利用Generator执行异步任务"
           summary="使用generator执行javascript中的异步任务，从generator基础使用到，自己编写执行器，到自己封装类似async/await的功能。"
           slug="use-generator-in-async-task"
@@ -26,15 +36,15 @@ export default function Home() {
         </h3>
         <ProjectCard
           title="风影院"
-          description="一个没有广告，没有VIP，免费追美剧，动漫，电视剧的影视网站。"
+          description="一个没有广告，没有VIP，免费追美剧，动漫，电视剧的影视网站。另外也支持安卓APP，从2017年稳定运行至今。"
           href="https://movie.zackdk.top/"
-          icon="nextjs"
+          icon="project"
         />
         <ProjectCard
           title="小词导航"
-          description="一个适用于前端开发者使用的导航网站。"
+          description="一个适用于前端开发者使用的导航网站，包含了大量常用的前端技术的官网，也包含了一些有趣适合放松的网站，还有一些素材网站。"
           href="https://xclinks.com/"
-          icon="react2025"
+          icon="project"
         />
         <Timeline />
       </div>
