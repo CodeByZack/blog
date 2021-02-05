@@ -1,4 +1,4 @@
-const title = '行者、空山 – 前端开发者, 作者, 创作者。';
+const title = '行者、空山 – 天真的是天，还是我的眼。';
 const description = '一个热爱 JavaScript , React 的前端工程师。';
 
 const SEO = {
