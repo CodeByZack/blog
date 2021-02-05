@@ -1,0 +1,193 @@
+---
+title: 'JS知识点之作用域那些事儿'
+publishedAt: '2021-02-05'
+summary: '关于作用域是什么，有什么作用，以及JS里有可能提到的作用域链又是什么？'
+---
+
+## 作用域
+
+作用域（scope），程序设计概念，通常来说，一段程序代码中所用到的名字并不总是有效/可用的，而限定这个名字的可用性的代码范围就是这个名字的作用域。（来自百度百科）。
+
+---
+
+## 词法作用域与动态作用域
+
+- 词法作用域，也叫静态作用域（lexical scope），函数的作用域在函数书写的时候就决定了。JavaScript即采用的词法作用域。
+- 动态作用域，是在运行时根据程序的流程信息来动态确定的，即根据程序的调用栈来确定的。
+
+---
+
+
+## JS之词法作用域
+
+先看一个例子
+
+```javascript
+var a= 1;
+
+function foo() {
+    console.log(a);
+}
+
+function bar() {
+    var a= 2;
+    foo();
+}
+
+bar();
+
+// 结果是 ???
+```
+
+上面的例子中，先定义变量a，再定义了函数foo，然后是函数bar，并在bar中调用了foo，最后调用bar。
+
+**如果JS是静态作用域**，则foo函数运行时，查找自己内部是否有a变量，没有则向外层查找，此时会找到全局作用域中的a，（注意，并不是从它调用的位置向外去找，而是定义的位置向外去找）然后输出1。
+
+**如果JS是动态作用域**，则foo函数运行时，查找自己内部是否有a变量，没有则向外层查找，此时会找到bar函数中的a，（注意，此时是从调用函数的地方开始向外找）然后输出2。
+
+**bash脚本是采用的动态作用域。**
+
+```bash
+#!/bin/bash
+a=1
+foo(){
+  echo $a
+}
+bar(){
+	a=2
+  foo
+}
+bar
+```
+
+---
+
+
+## 思考题
+
+```javascript
+var scope = "global scope";
+function checkscope(){
+    var scope = "local scope";
+    function f(){
+        return scope;
+    }
+    return f();
+}
+checkscope();
+```
+
+```javascript
+var scope = "global scope";
+function checkscope(){
+    var scope = "local scope";
+    function f(){
+        return scope;
+    }
+    return f;
+}
+checkscope()();
+```
+
+结果：两段代码都会打印：local scope。
+
+---
+
+
+## ES6之前，JS无块级作用域
+
+**块级作用域**，任何一对花括号中的语句集都属于一个块，在这之中定义的所有变量在代码块外都是不可见的，我们称之为块级作用域。
+
+大多数类c语言都是拥有块级作用域的，比如下面的
+
+```c
+//C语言 
+#include <stdio.h> 
+void main() 
+{ 
+    if(1) { 
+        int j=3; 
+    } 
+    printf("%d/n",j); 
+}
+```
+
+这段代码会抛出错误：
+
+```c
+error: use of undeclared identifier 'j'
+```
+
+JavaScript是无块级作用域的，同样的代码如下
+
+```javascript
+if(true) { 
+    var j=3; 
+} 
+console.log(j);
+```
+
+是能够正常输出结果的。
+
+再看另一个例子
+
+```javascript
+var test = 111;
+var a ={
+	test:222,
+	b:function(){
+		console.log(test);
+	}
+}
+a.b()
+```
+
+按照静态作用域来理解的话，b函数定义在a内，b中找不到test变量，则在a中去找，找到222，输出222？
+
+但实际运行时，输出的是111，因为a是一个对象，仅仅是一个变量，不会有作用域，b函数去找test会直接找到全局作用域中的111。
+
+ES5中，只有全局作用域，和函数作用域两种。其它都不会产生作用域。
+
+ES6中，已经增加块级作用域。使用let、const定义变量即会有块级作用域。
+
+## JS里的作用域链
+
+那么JS里作用域链又是指什么呢？故名所以，是一个个作用域串起来了。
+
+这都是因为函数调用都是可以嵌套的。像下面这样:
+
+```javascript
+let a = "global";
+
+function fn_a(){
+  let b = "inner_fn_a";
+  function fn_b(){
+    let c = "inner_fn_b";
+    function fn_c(){
+      console.log(c);
+      console.log(b);
+      console.log(a);
+    };
+    fn_c();
+  }
+  fn_b();
+}
+
+fn_a();
+```
+fn_c函数调用时，本地变量里找不到c变量，往上查找到b函数，找到c。
+
+本地变量里找不到b变量，往上查找到b函数，没有，再往上查找到a函数，找到b。
+
+本地变量找不到a变量，往上查找到b函数，没有，再往上查找到a函数，也没有，最后在全局作用域里找到a。
+
+这样一层层查找，就是在作用域链上查找。
+
+那这个作用域链具体又保存在哪里的？函数执行依赖于执行上下文，执行上下文里保存了很多东西，其中一个就是作用域链。
+
+
+ES3的时候，这东西在网上流传的通常说法是，函数内部有一个隐藏属性[scope]保存了作用域链的引用。
+
+ES5的时候，这东西变成了`Lexical Environment`，下属一个`Environment Record`记录了词法作用域下所有变量的指向。下属一个outer指针指向外部的`Lexical Environment`。
+
+不管咋变，这个叫作用域链的东西都保存在执行上下文里的，且作用域链的形成都是由词法由作用域决定的。
