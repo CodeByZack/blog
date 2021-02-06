@@ -26,6 +26,7 @@ class MyDocument extends Document {
           />
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
           <meta content="#ffffff" name="theme-color" />
+          <meta name="baidu-site-verification" content="code-MHMhtd1XLr" />
           <script src="./baidu.js"></script>
         </Head>
         <body className="bg-white dark:bg-black text-white dark:text-black">
