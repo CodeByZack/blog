@@ -9,14 +9,14 @@ const editUrl = (slug) =>
   `https://github.com/codebyzack/blog/edit/master/data/blog/${slug}.mdx`;
 const discussUrl = (slug) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    `https://blog.zackdk.top//${slug}`
+    `https://blog.zackdk.com//${slug}`
   )}`;
 
 export default function BlogLayout({ children, frontMatter }) {
   return (
     <Container>
       <BlogSeo
-        url={`https://blog.zackdk.top/${frontMatter.slug}`}
+        url={`https://blog.zackdk.com/${frontMatter.slug}`}
         {...frontMatter}
       />
       <article className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16 w-full">

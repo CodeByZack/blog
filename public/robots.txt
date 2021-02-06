@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://blog.zackdk.top/sitemap.xml
+Sitemap: https://blog.zackdk.com/sitemap.xml

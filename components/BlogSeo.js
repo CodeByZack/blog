@@ -3,7 +3,7 @@ import { NextSeo, ArticleJsonLd } from 'next-seo';
 const BlogSeo = ({ title, summary, publishedAt, url, image }) => {
   const date = new Date(publishedAt).toISOString();
   const featuredImage = {
-    url: `https://blog.zackdk.top${image}`,
+    url: `https://blog.zackdk.com${image}`,
     alt: title
   };
 

@@ -4,7 +4,7 @@ import Container from '@/components/Container';
 import NewsletterLink from '@/components/NewsletterLink';
 import { getAllFilesFrontMatter } from '@/lib/mdx';
 
-const url = 'https://blog.zackdk.top/newsletter';
+const url = 'https://blog.zackdk.com/newsletter';
 const title = '最新动向 – 行者、空山';
 const description = '关于编程技术，个人生活的一些想法和计划';
 

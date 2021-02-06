@@ -4,16 +4,16 @@ const description = '一个热爱 JavaScript , React 的前端工程师。';
 const SEO = {
   title,
   description,
-  canonical: 'https://blog.zackdk.top',
+  canonical: 'https://blog.zackdk.com',
   openGraph: {
     type: 'website',
     locale: 'zh_CN',
-    url: 'https://blog.zackdk.top',
+    url: 'https://blog.zackdk.com',
     title,
     description,
     images: [
       {
-        url: 'https://blog.zackdk.top/static/images/banner.jpg',
+        url: 'https://blog.zackdk.com/static/images/banner.jpg',
         alt: title,
         width: 1280,
         height: 720
