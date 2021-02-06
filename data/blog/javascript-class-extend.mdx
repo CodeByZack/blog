@@ -1,0 +1,348 @@
+---
+title: 'JS知识点之类和继承的实现'
+publishedAt: '2021-02-06'
+summary: '众所周知，JS不是天生的面向对象的语言，但内置有一个原型机制，在OOP大行其道的今天，它也不得不投奔向它。'
+---
+
+我们平时在前端搬砖过程中，其实可能大部分时间都用不上面向对象。但面向对象太流行了，导致你还是得了解，某些时候还是得在JS里使用面向对象。
+
+JS里面向对象的实现主要是靠JS的原型机制。这也导致了它和其它面向对象语言本质的差异。因为比较熟悉java，就拿java做一个简单的比较。
+
+Java里类是一种抽象模板， 是不可操作的，可操作的是通过模板构造出来的实例对象，且构造出来的对象是完全隔离的，互不影响。
+
+JS里类虽然也被当作模板，但它是可以被操作的，而且构造出来的实例对象，由于共享构造函数的原型，所以相互之间是存在影响的。
+
+## 类和继承
+
+ES6之前的时代，JS里没有类，只有构造函数和new操作符，可以通过这两个东西生成实例对象，达到了和类一样的效果。
+
+构造函数，其实就是普通函数，当它被new操作符调用时，就可以称之为构造函数。
+
+new操作符，其实是个语法糖，按照一定的方式去执行一个函数，并返回一个新对象，具体实现在下面。
+
+JS里，构造实现对象的主要利用了this和原型机制。
+
+原型机制是指每个对象都带有一个原型的引用`__proto__`，当在对象上找不到某个属性，就会去原型上找。
+
+原型与构造函数的关系是，构造函数有一个`prototype`属性，当通过构造函数生成新对象时，新对象的原型(`__proto__`)指向了这个`prototype`属性。
+
+this的运行时绑定特性，能给新建对象添加自己的属性或者方法。
+
+原型机制则让生成的对象和构造函数相互关联上，以便模拟类的继承，公用方法，等特性。
+
+### 基本用法
+
+```javascript
+function Dog(name){
+  //使用new调用Dog时,this会指向新生成的对象,所以以下就是在新对象上添加属性了.
+	this.name = name;
+  this.barking = function(){
+		console.log("名字："+this.name);
+  }
+}
+
+//goHome函数是定义在Dog.protype上的一个属性
+//而通过new 生成的新对象,原型会委托到这个protype上。
+Dog.protytpe.goHome = function(){
+  //这里的this能访问到新对象的name属性,主要是因为调用方式,让this绑定到了新对象上.
+	console.log(this.name + " is go home!");
+}
+
+let dog1 = new Dog("汪汪");
+dog1.barking();
+//名字：汪汪
+dog1.goHome();
+//汪汪 is go home！
+
+
+//补充
+//构造函数也是对象，也可以添加属性，通常这种用来放一下所谓静态变量，常量等。
+Dog.HOME = "地球";
+
+
+```
+
+其实JS模拟类的行为就这些东西，一个this，一个prototype。
+
+至于继承，也是通过this，prototype来模拟，没有更多东西了。
+
+下面看看这个new到底是怎么创造新对象的。
+
+```javascript
+function createObj(func) {
+		//创建新对象
+    let obj = Object.create(null);
+
+    let Constructor = func;
+		//关联新对象的原型到构造函数的prototype上
+    obj.__proto__ = Constructor.prototype;
+		
+  	//执行构造函数，并显示改变this指向
+    var ret = Constructor.apply(obj, arguments);
+		
+  	//这里是判断构造函数是否返回了一个对象，是的话直接返回构造函数返回的对象，否则返回这里创建的新对象
+    return typeof ret === 'object' ? ret : obj;
+};
+```
+
+大概就这么个流程了，细节可能还有些差异，但大体没差。
+
+1.创建个新的空对象，不带原型。
+2.新对象原型指向构造函数的`prototype`属性。
+3.显示改变this指向为新对象，调用构造函数。
+4.判断构造函数的返回值，是对象就原样返回，不是就返回新对象。
+
+JS是没有类的，这和从类模板生成一个全新的对象，有着本质的差异。
+
+但为什么有这个new操作符，还是因为面向对象太流行了，各种设计模式都是基于面向对象的，接受度也比较高。
+
+
+### 组合继承
+
+继承，就是子类能拥有父类的属性和方法。
+
+JS里想达到类似的效果，一靠原型机制，二靠this。 
+
+原型机制，只是让你子对象可以访问到父对象的属性了，但父对象的属性并不真正存在于子对象上。
+
+this，则是因为无论构造函数，还是继承关系都是开发者可以控制的，我们可以在子类构造函数里显示去执行父类构造函数，这样子类就真正的拥有了父类的属性。
+
+组合继承就是原型链继承（原型机制），和借用构造函数继承（this）组合在一起。
+
+#### 借用构造函数继承
+
+```javascript
+function Animal(name){
+	this.name = name;
+  this.barking = function(){
+		console.log("名字："+this.name);
+  }
+}
+Animal.prototype.goHome = function(){
+	console.log(this.name + " is go home!");
+}
+
+//2.借用构造函数动态改变this指向，为作用域添加属性。
+function Dog2(){
+	Animal.call(this);
+}
+//dog2只能访问到name,barking属性，且这个属性是dog2本身上的属性。
+//访问不到goHome,借用构造函数只添加了属性，而失去了和Animal.prototype的关联。
+let dog2 = new Dog2();
+
+//个人看法：丢了（没有关联上）父类protype上的属性。
+//其实这样只是把属性全部拷贝到了子类上而已，每个子类都是独一份。
+```
+
+
+#### 原型链继承
+
+
+```javascript
+function Animal(name){
+	this.name = name;
+  this.barking = function(){
+		console.log("名字："+this.name);
+  }
+}
+Animal.prototype.goHome = function(){
+	console.log(this.name + " is go home!");
+}
+
+
+//1.直接关联原型,将父类的实列对象关联到子类的原型上。
+function Dog(){}
+
+//把Dog的prototype 关联到 由Animal函数构造的新对象上.
+let obj = new Animal();
+Dog.prototype = obj;
+
+//dog1就能访问到name,barking,goHome 这些属性了.
+//此时原型链的指向关系 
+//dog1.__proto__ --> obj
+//obj.__proto__ --> Animal.prototype
+let dog1 = new Dog();
+
+//个人看法：很别扭吧  明明就是一个对象通过属性值关联到另一个对象上，强行说成是继承。
+//最大的缺点是，所有构造出来的实列共享一个原型对象（obj）上的属性。一个实列去改了，所有都改了。
+```
+
+
+#### 组合一下
+
+
+```javascript
+function Animal(name){
+	this.name = name;
+  this.barking = function(){
+		console.log("名字："+this.name);
+  }
+}
+Animal.prototype.goHome = function(){
+	console.log(this.name + " is go home!");
+}
+
+function Dog3(){
+	//借用构造函数
+  Animal.call(this);
+}
+
+//关联原型
+Dog3.prototype = new Animal();
+
+//修复constructor,之前一直没提过这个，这里简单一句话介绍下。
+//function本身带了一个prototype属性，是一个对象，只有一个属性constructor指向函数本身。
+//不把事情搞复杂了，详情请自行查询，其实就是一个容器，提供给子类存放公共函数之类的东西。
+Dog3.prototype.constructor = Dog3;
+
+//看起来没啥问题了，每个子类都有一份单独的属性，且父类上的公共方法也能关联到了。
+let dog3 = new Dog3();
+
+
+//个人看法：已经很好了，就一点需要注意，在关联原型时执行了一次父类构造函数，所有原型上也有一份父类属性。
+//生成子类时，借用了构造函数，也生成了一份属性，所以时重复了的。
+//访问的时候由于先访问到子类上的属性，所以原型上的那份属性永远不会被用到。有一点浪费。
+//当然你可以想办法把它干掉，很容易。这里就不继续写了，已经差不多了。继承就这么些东西。
+//============================
+```
+
+
+### 寄生继承
+
+寄生继承，可以解决上面组合继承的一个问题。可以解决子类实例上那份浪费的原型属性。
+
+其实也就是间接等同于拿父类的prototype直接作为子类的prototype。
+
+寄生继承，看起来是下面这样的。
+
+```javascript
+//这个函数现在可以用Object.create代替
+//该函数的作用是，生成一个空对象{},且空对象的原型是传入的o参数
+function object(o) {
+  function F() {};
+  F.prototype = o;
+  return new F();
+}
+
+function Animal(name){
+	this.name = name;
+  this.barking = function(){
+		console.log("名字："+this.name);
+  }
+}
+
+Animal.prototype.goHome = function(){
+	console.log(this.name + " is go home!");
+}
+function Dog4(){
+  //生成一个指定原型的空对象that
+  var that = object(Animal.prototype);
+  //可以对that添加属性。
+  that.name = "xxx";
+  return that;
+}
+
+var dog4 = new Dog4();
+
+console.log(dog4);
+```
+
+### 组合寄生继承
+
+顾名思义，组合和寄生再二次组合。
+
+至于为什么要组合，就是寄生继承能解决，组合产生的那份冗余属性。
+
+看代码吧。
+
+```javascript
+function Animal(name){
+	this.name = name;
+  this.barking = function(){
+		console.log("名字："+this.name);
+  }
+}
+Animal.prototype.goHome = function(){
+	console.log(this.name + " is go home!");
+}
+
+function Dog3(){
+	//借用构造函数
+  Animal.call(this);
+}
+
+//关联原型
+Dog3.prototype = Object.create(Animal.prototype);
+//其实如果不介意constructor指向混乱，你完全可以直接赋值
+//Dog3.prototype = Animal.prototype;
+
+//修复constructor
+Dog3.prototype.constructor = Dog3;
+
+//看起来没啥问题了，每个子类都有一份单独的属性，且父类上的公共方法也能关联到了。
+let dog3 = new Dog3();
+
+//============================
+```
+
+## ES6的class
+
+
+其实理解了js的类，class其实也就是语法糖而已，更统一规范了js里面向对象的写法用法。
+
+这里只列出了我关心的两点，更多请参考阮一峰的Class[链接](http://es6.ruanyifeng.com/#docs/class)。
+
+### 基本用法
+
+```javascript
+class Dog{
+	constructor(name){
+    //this的调用同样会添加到新生成的对象上。
+  	this.name = name;
+    this.barking = function(){
+    	console.log("姓名：" + this.name);
+    }
+  }
+  //这样写的函数会挂载到protype上。
+  goHome(){
+  	console.log(this.name + " is go home!");
+  }
+  //静态变量，会挂载到DOG对象上
+  static HOME = "地球";
+}
+
+//用法一样
+let dog1 = new Dog("汪汪");
+dog1.barking();
+//名字：汪汪
+dog1.goHome();
+//汪汪 is go home！
+```
+
+
+### 继承（待补充）
+不得不说，es6 class里的继承，东西其实有点多。想要详细了解还是得看看阮一峰的Class继承[链接](http://es6.ruanyifeng.com/#docs/class)。
+这里先简单总结一下：
+
+1. 多了静态变量，静态方法的说法。即在class内部使用static声明函数和变量，这样声明的属性会挂载在构造函数这个对象上。
+1. 继承存在两条链，一条是 **子类构造函数**的 **原型对象**会关联到 **父类构造函数。**另一条是**子类构造函数**的**prototype**属性的**原型对象**会关联到**父类构造函数**的prototype属性。
+1. 还有超级强大**super**关键字。
+   - 子类构造函数里可以当作函数使用。
+   - 普通方法里可以当作对象，指向父类的prototype属性。
+   - 静态方法里可以当作对象，指向父类自己。
+
+例子就不举了，实际用到的时候再来补充。
+
+
+## 一些参考。
+
+闭包是解决函数式语言的一个问题的一种技术，这个问题就是如何保证将函数当做值创造并传来传去的时候函数仍能正确运行。[链接](https://www.cnblogs.com/yyrdl/p/5330274.html)
+
+闭包使得函数可以继续访问定义时的 词法作用域。
+
+需要明确的是，事实上 JavaScript 并不具有动态作用域。它只有词法作用域，简单明了。 但是 this 机制某种程度上很像动态作用域。
+主要区别：词法作用域是在写代码或者说定义时确定的，而动态作用域是在运行时确定 的。（this 也是！）词法作用域关注函数在何处声明，而动态作用域关注函数从何处调用。
+
+需要明确的是，this 在任何情况下都不指向函数的词法作用域。
+
+在 JavaScript 中，构造函数只是一些 使用 new 操作符时被调用的函数。
