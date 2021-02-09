@@ -68,6 +68,9 @@ export default function Footer() {
         <Link href="/snippets">
           <a className="text-sm text-gray-500 hover:text-gray-600">/snippets</a>
         </Link>
+        <Link href="/sentence">
+          <a className="text-sm text-gray-500 hover:text-gray-600">/sentence</a>
+        </Link>
       </div>
     </footer>
   );
