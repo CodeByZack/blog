@@ -5,7 +5,7 @@ import Container from '@/components/Container';
 import BlogPost from '@/components/BlogPost';
 import { getAllFilesFrontMatter } from '@/lib/mdx';
 
-const url = 'https://blog.zackdk.com';
+const url = 'https://zackdk.com';
 const title = '行者、空山的日志';
 const description =
   '记录自己在前端路上的点点滴滴，关于JavaScript，React，Vue，当然还关于我自己。';

@@ -97,9 +97,9 @@ export default function About() {
     <Container>
       <NextSeo
         title="关于 – 行者、空山"
-        canonical="https://blog.zackdk.com/about"
+        canonical="https://zackdk.com/about"
         openGraph={{
-          url: 'https://blog.zackdk.com/about',
+          url: 'https://zackdk.com/about',
           title: '关于 – 行者、空山'
         }}
       />

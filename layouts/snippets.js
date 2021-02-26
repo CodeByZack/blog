@@ -5,7 +5,7 @@ import Container from '@/components/Container';
 
 export default function SnippetLayout({ children, frontMatter }) {
   const title = `${frontMatter.title} - Code Snippet`;
-  const url = `https://blog.zackdk.com/snippets/${frontMatter.slug}`;
+  const url = `https://zackdk.com/snippets/${frontMatter.slug}`;
 
   return (
     <Container>

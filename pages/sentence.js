@@ -3,7 +3,7 @@ import { NextSeo } from 'next-seo';
 import Container from '@/components/Container';
 import sentenceData from '@/data/sentence';
 
-const url = 'https://blog.zackdk.com/sentence';
+const url = 'https://zackdk.com/sentence';
 const title = '小词 – 行者、空山';
 const description = '年少时的梦啊，像朵永不凋零的花儿。';
 
