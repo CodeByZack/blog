@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ThemeProvider attribute="class">
-      <MDXProvider components={MDXComponents}>
+      <MDXProvider>
         <Head>
           <meta content="width=device-width, initial-scale=1" name="viewport" />
         </Head>
