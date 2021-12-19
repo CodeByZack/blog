@@ -4,9 +4,11 @@ import { parseISO, format } from 'date-fns';
 import Container from '@/components/Container';
 import ViewCounter from '@/components/ViewCounter';
 import BlogSeo from '@/components/BlogSeo';
+import Link from 'next/link';
 
 const editUrl = (slug) =>
   `https://github.com/codebyzack/blog/edit/master/data/blog/${slug}.mdx`;
+const onLineEditUrl = (slug)=>`/data/blog/${slug}.mdx`; 
 const discussUrl = (slug) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
     `https://zackdk.com//${slug}`
@@ -63,7 +65,15 @@ export default function BlogLayout({ children, frontMatter }) {
             rel="noopener noreferrer"
           >
             {'在GitHub编辑'}
-          </a>
+          </a>{` • `}
+          <Link
+            href={{
+              pathname: '/onlineedtior',
+              query: { path: onLineEditUrl(frontMatter.slug) }
+            }}
+          >
+            <a>在线编辑</a>
+          </Link>
         </div>
       </article>
     </Container>
