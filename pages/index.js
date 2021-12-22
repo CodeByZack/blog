@@ -2,12 +2,9 @@ import Timeline from '../components/Timeline';
 import Container from '../components/Container';
 import BlogPost from '../components/BlogPost';
 import ProjectCard from '../components/ProjectCard';
-import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home() {
   
-  const { data: session } = useSession()
-  console.log(session);
   return (
     <Container>
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">

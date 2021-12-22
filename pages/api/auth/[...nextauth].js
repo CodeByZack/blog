@@ -10,6 +10,7 @@ const options = {
             authorization: { params: { scope: "repo" } },
         }),
     ],
+    secret : Math.random().toString(36).slice(-6),
     callbacks: {
       async jwt({ token, account }) {
         // Persist the OAuth access_token to the token right after signin
