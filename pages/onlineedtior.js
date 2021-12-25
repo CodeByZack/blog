@@ -71,6 +71,7 @@ export default function OnlineEdtior(props) {
       path: repoFileObj.path,
       content: value
     });
+    console.log('保存成功！');
   };
 
   if (!session) {
@@ -80,7 +81,7 @@ export default function OnlineEdtior(props) {
   return (
     <div className='h-screen flex flex-col'>
       <div className='px-3 item-center flex flex-wrap justify-between text-gray-600 dark:text-gray-400'>
-        <span>路径：{path}</span><span className='text-gray-900 dark:text-gray-100 cursor-pointer'>保存</span>
+        <span>路径：{path}</span><span className='text-gray-900 dark:text-gray-100 cursor-pointer' onClick={test}>保存</span>
       </div>
       <div className="flex-1 flex overflow-hidden">
         <div className="w-2/4  flex-shrink-0 h-full overflow-auto">
