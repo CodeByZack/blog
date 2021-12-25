@@ -11,6 +11,8 @@ import * as runtime from 'react/jsx-runtime';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import repoUtil from '@/lib/repoUtil';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import { parseISO, format } from 'date-fns';
 
 export default function OnlineEdtior(props) {
   const extensions = useMemo(() => [basicSetup, oneDark, langMarkdown()], []);
@@ -23,6 +25,7 @@ export default function OnlineEdtior(props) {
 
   const [result, setResult] = useState({});
   const [value, setValue] = useState('');
+  const [frontMatter, setFrontMatter] = useState({});
   const [repoFileObj, setRepoFile] = useState(null);
 
   const onUpdate = async (v) => {
@@ -33,6 +36,7 @@ export default function OnlineEdtior(props) {
 
       const { data, content } = matter(doc);
       setValue(doc);
+      setFrontMatter(data);
       console.log(data);
 
       const res = await evaluate(content, {
@@ -74,17 +78,11 @@ export default function OnlineEdtior(props) {
   }
 
   return (
-    <div>
-      <div className='flex'>
-
-      <div className="bg-red-500" onClick={test}>
-        点我测试
+    <div className='h-screen flex flex-col'>
+      <div className='px-3 item-center flex flex-wrap justify-between text-gray-600 dark:text-gray-400'>
+        <span>路径：{path}</span><span className='text-gray-900 dark:text-gray-100 cursor-pointer'>保存</span>
       </div>
-      <div className='bg-green-500' onClick={signOut}>
-        登出
-      </div>
-      </div>
-      <div className="flex h-screen">
+      <div className="flex-1 flex overflow-hidden">
         <div className="w-2/4  flex-shrink-0 h-full overflow-auto">
           <CodeMirror
             elementProps={{
@@ -97,6 +95,25 @@ export default function OnlineEdtior(props) {
         </div>
         <div className="w-2/4 flex-shrink-0 h-full overflow-auto flex justify-center">
           <div className="prose dark:prose-dark">
+            <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
+              {frontMatter.title || '标题'}
+            </h1>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mt-2 mb-8">
+              <div className="flex items-center">
+                <Image
+                  alt="行者、空山"
+                  height={24}
+                  width={24}
+                  src="/avatar.jpg"
+                  className="rounded-full"
+                />
+                <p className="text-sm text-gray-700 dark:text-gray-300 ml-2">
+                  {frontMatter.by}
+                  {'行者、空山 / '}
+                  {frontMatter.publishedAt ? format(parseISO(frontMatter.publishedAt), 'MMMM dd, yyyy') : '-------'}
+                </p>
+              </div>
+            </div>
             {typeof result.comp === 'function' ? result.comp() : ''}
           </div>
         </div>
