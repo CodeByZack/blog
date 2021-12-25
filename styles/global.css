@@ -150,3 +150,7 @@ input[type='email'] {
 .step > h3 {
   @apply my-0;
 }
+
+.cm-editor{
+  height: 100%;
+}

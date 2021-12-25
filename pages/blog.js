@@ -35,7 +35,7 @@ export default function Blog({ posts }) {
       />
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-          日志
+          博客
         </h1>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           {`我从2017年开始踏入编程行业，担任过安卓开发，前端开发，现在主要从事前端开发。无知无畏的度过了三年时光，回首才发现自己毫无积累，所有2021年初有了这个网站。

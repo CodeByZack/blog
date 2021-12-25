@@ -1,0 +1,180 @@
+---
+title: 'TypeScript入门介绍'
+publishedAt: '2021-11-14'
+summary: 'typescript 基础类型介绍 内置常用工具类型 泛型计算介绍'
+---
+
+## 基础类型
+
+### 原始值类型
+
+原始值类型，ts 会自动推导出来。
+
+类型语法：string，number，boolean
+
+```typescript
+const a: string = 'hello ts';
+const b: number = 2;
+const c: boolean = true;
+```
+
+需要注意的是：String, Number, Boolean 在 TS 里都是有效值，但平时使用中几乎不会用到。
+
+### 数组类型
+
+如下定义：
+
+```typescript
+// 可以使用[]进行类型定义
+const numArr: number[] = [1, 2, 3];
+const strArr: string[] = ['1', '2', '3'];
+const booleanArr: boolean[] = [true, false];
+
+// 也可以使用Array<T>进行类型定义
+const numArr: Arrary<number> = [1, 2, 3];
+const strArr: Arrary<string> = ['1', '2', '3'];
+const booleanArr: Arrary<boolean> = [true, false];
+```
+
+### 函数类型
+
+```typescript
+函数主要定义入参和出参的类型：
+// function 定义
+function identify( params : string ) : string{
+  return params;
+};
+
+const identify2 = function(params : number) : number{
+  return params;
+};
+
+// 箭头函数
+const arrowFunc = (i : boolean) : boolean =>{ return i };
+
+export type identifyType = typeof identify;
+export type identify2Type = typeof identify2;
+export type identify3Type = typeof arrowFunc;
+```
+
+todo-函数重载
+
+### 对象类型
+
+最常用的类型，使用 ?: 可以让某个属性可选。
+
+```typescript
+const obj: {
+  x: number;
+  z: boolean;
+  c?: string;
+} = {
+  x: 1,
+  z: false,
+  c: ''
+};
+```
+
+### 联合类型（Union Types）
+
+简单来说就是，一个变量可能有多个类型选项。
+
+当一个函数入参可能是这种类型，或者是那种类型。就可以使用联合类型。如下：
+
+```typescript
+const printId = (id: number | string) => {
+  console.log('Your ID is: ' + id);
+};
+
+printId(1);
+printId('str');
+// printId(true); 此处会提示类型错误
+```
+
+有一个问题，既然变量可能有多个类型定义，你就不能只使用属于某个类型定义的属性。
+
+```typescript
+const printId = (id: number | string) => {
+  console.log(id.toUpperCase()); // 此处会提示类型错误
+};
+```
+
+此时你需要做一个操作，类型收窄，即判断了类型再使用相应类型的属性。
+
+```typescript
+const printId = (id: number | string) => {
+  if (typeof id === 'string') {
+    // In this branch, id is of type 'string'
+    console.log(id.toUpperCase());
+  } else {
+    // Here, id is of type 'number'
+    console.log(id);
+  }
+};
+```
+
+### 类型别名（Type Aliases）
+
+上面都是直接在变量后面追加类型定义，很方便，但是不方便复用。这个时候你就可以考虑类型别名。
+
+```typescript
+// 对象类型 别名Point
+type Point = {
+  x: number;
+  y: number;
+};
+
+// 联合类型 别名ID
+type ID = string | number;
+```
+
+### 接口类型（Interfaces）
+
+还有一种方式定义对象类型的别名。
+
+```typescript
+interface Point {
+  x: number;
+  y: number;
+}
+```
+
+接口类型和类型别名的差异
+
+<Image
+  alt={`interface-type-diff`}
+  src={`/static/images/typescript-intro/interface-type-diff.png`}
+  width={733}
+  height={740}
+/>
+
+搬官网的，
+interface 可以使用 extends 继承。定义多个同名 interface 可以合并属性。
+
+Type 可以使用 & 进行继承合并。多个同名 Type 会报错。
+
+个人补充一点，类型计算一般都使用的 Type . 无法使用 interface .
+
+```typescript
+// 以下会报错
+interface I<T>{
+   [i in keyof T] : T[i]
+}
+
+// 以下不会
+export type D<T> = {
+  [i in keyof T]: T[i];
+};
+```
+
+### 类型断言
+
+### 字面量类型
+
+### null、undefined、any
+
+### enum
+
+## 类型计算
+
+### 泛型
