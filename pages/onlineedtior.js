@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { parseISO, format } from 'date-fns';
 import Editor from '@monaco-editor/react';
+import SplitContainer from '@/components/SplitContainer';
 
 const testvalue = ``;
 
@@ -79,6 +80,47 @@ export default function OnlineEdtior(props) {
   //   );
   // }
 
+  const leftChildren = (
+    <div className="h-full">
+      <Editor
+        onMount={handleEditorDidMount}
+        theme="vs-dark"
+        onChange={handleChange}
+        defaultLanguage="markdown"
+        defaultValue={testvalue}
+      />
+    </div>
+  );
+
+  const rightChildren = (
+    <div className="h-full overflow-auto flex justify-center">
+      <div className="prose dark:prose-dark">
+        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
+          {frontMatter.title || '标题'}
+        </h1>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mt-2 mb-8">
+          <div className="flex items-center">
+            <Image
+              alt="行者、空山"
+              height={24}
+              width={24}
+              src="/avatar.jpg"
+              className="rounded-full"
+            />
+            <p className="text-sm text-gray-700 dark:text-gray-300 ml-2">
+              {frontMatter.by}
+              {'行者、空山 / '}
+              {frontMatter.publishedAt
+                ? format(parseISO(frontMatter.publishedAt), 'MMMM dd, yyyy')
+                : '-------'}
+            </p>
+          </div>
+        </div>
+        {typeof result.comp === 'function' ? result.comp() : ''}
+      </div>
+    </div>
+  );
+
   return (
     <div className="h-screen flex flex-col">
       <div className="px-3 item-center flex flex-wrap justify-between text-gray-600 dark:text-gray-400">
@@ -91,41 +133,10 @@ export default function OnlineEdtior(props) {
         </span>
       </div>
       <div className="w-full flex-1 flex overflow-hidden">
-        <div className="w-2/4 flex-shrink-0 h-full">
-          <Editor
-            onMount={handleEditorDidMount}
-            theme="vs-dark"
-            onChange={handleChange}
-            defaultLanguage="markdown"
-            defaultValue={testvalue}
-          />
-        </div>
-        <div className="w-2/4 flex-shrink-0 h-full overflow-auto flex justify-center">
-          <div className="prose dark:prose-dark">
-            <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-              {frontMatter.title || '标题'}
-            </h1>
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mt-2 mb-8">
-              <div className="flex items-center">
-                <Image
-                  alt="行者、空山"
-                  height={24}
-                  width={24}
-                  src="/avatar.jpg"
-                  className="rounded-full"
-                />
-                <p className="text-sm text-gray-700 dark:text-gray-300 ml-2">
-                  {frontMatter.by}
-                  {'行者、空山 / '}
-                  {frontMatter.publishedAt
-                    ? format(parseISO(frontMatter.publishedAt), 'MMMM dd, yyyy')
-                    : '-------'}
-                </p>
-              </div>
-            </div>
-            {typeof result.comp === 'function' ? result.comp() : ''}
-          </div>
-        </div>
+        <SplitContainer
+          leftChildren={leftChildren}
+          rightChildren={rightChildren}
+        />
       </div>
     </div>
   );
