@@ -60,6 +60,7 @@ export default function OnlineEdtior(props) {
     repoUtil.getRepoFile(path).then((res) => {
       setValue(res.content);
       setRepoFile(res);
+      editorRef.current.editor.setValue(res.content);
     });
   }, [session?.accessToken, path]);
 
@@ -72,13 +73,13 @@ export default function OnlineEdtior(props) {
     console.log('保存成功！');
   };
 
-  // if (!session) {
-  //   return (
-  //     <div className="bg-red-500" onClick={signIn}>
-  //       登录
-  //     </div>
-  //   );
-  // }
+  if (!session) {
+    return (
+      <div className="bg-red-500" onClick={signIn}>
+        登录
+      </div>
+    );
+  }
 
   const leftChildren = (
     <div className="h-full">
