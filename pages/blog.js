@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NextSeo } from 'next-seo';
-
+import { useRouter } from 'next/router';
 import Container from '@/components/Container';
 import BlogPost from '@/components/BlogPost';
 import { getAllFilesFrontMatter } from '@/lib/mdx';
@@ -12,6 +12,7 @@ const description =
 
 export default function Blog({ posts }) {
   const [searchValue, setSearchValue] = useState('');
+  const router = useRouter();
   const filteredBlogPosts = posts
     .sort(
       (a, b) =>
@@ -20,6 +21,13 @@ export default function Blog({ posts }) {
     .filter((frontMatter) =>
       frontMatter.title.toLowerCase().includes(searchValue.toLowerCase())
     );
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && e.target.value === 'new post') {
+      console.log('new post');
+      router.push('/onlineedtior');
+    }
+  };
 
   return (
     <Container>
@@ -45,6 +53,7 @@ export default function Blog({ posts }) {
           <input
             aria-label="Search articles"
             type="text"
+            onKeyDown={handleKeyDown}
             onChange={(e) => setSearchValue(e.target.value)}
             placeholder="搜索文章"
             className="px-4 py-2 border border-gray-300 dark:border-gray-900 focus:ring-blue-500 focus:border-blue-500 block w-full rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
