@@ -36,6 +36,9 @@ html {
   backdrop-filter: saturate(180%) blur(20px);
   transition: background-color 0.1 ease-in-out;
 }
+.cursor-col-resize{
+  cursor: col-resize;
+}
 
 .prose pre {
   @apply bg-gray-50 border border-gray-200 dark:border-gray-700 dark:bg-gray-900;

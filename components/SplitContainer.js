@@ -7,7 +7,7 @@ const getWidth = (w, min, max) => {
 };
 
 const SplitContainer = (props) => {
-  const { min = 1, max = 2, leftChildren, rightChildren } = props;
+  const { min = 1, max = 3, leftChildren, rightChildren } = props;
 
   const leftRef = useRef(null);
   const rightRef = useRef(null);
@@ -24,6 +24,7 @@ const SplitContainer = (props) => {
     const minDragWidth = (containerWidth / (min + max)) * min;
 
     rightRef.current.style.pointerEvents = 'none';
+    rightRef.current.style.userSelect = 'none';
     leftRef.current.style.userSelect = 'none';
     const onMousemove = (e) => {
       const nowX = e.clientX;
@@ -44,6 +45,7 @@ const SplitContainer = (props) => {
       if (!rightRef.current || !leftRef.current) return;
       rightRef.current.style.pointerEvents = '';
       leftRef.current.style.userSelect = '';
+      rightRef.current.style.userSelect = '';
       containerRef.current?.removeEventListener('mousemove', onMousemove);
       containerRef.current?.removeEventListener('mouseup', onMousemove);
     };
@@ -53,7 +55,7 @@ const SplitContainer = (props) => {
   };
 
   return (
-    <div ref={containerRef} className="flex h-full">
+    <div ref={containerRef} className="flex h-full w-full">
       <div ref={leftRef} className="relative w-2/4 h-full">
         {leftChildren}
       </div>
