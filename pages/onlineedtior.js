@@ -52,10 +52,11 @@ export default function OnlineEdtior(props) {
   const handleEditorDidMount = (editor, monaco) => {
     editorRef.current = { editor, monaco };
     console.log(editorRef.current);
-    editor.onDidScrollChange((e)=>{
+    editor.onDidScrollChange((e) => {
       const { scrollHeight, scrollTop } = e;
       const previewBox = document.querySelector('#preview-box');
-      previewBox.scrollTop = scrollTop/scrollHeight*previewBox.scrollHeight;
+      previewBox.scrollTop =
+        (scrollTop / scrollHeight) * previewBox.scrollHeight;
     });
     if (repoFileObj) {
       editorRef.current.editor.setValue(value);
