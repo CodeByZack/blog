@@ -1,3 +1,5 @@
+@import './animation/slide.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -154,17 +156,6 @@ input[type='email'] {
   @apply my-0;
 }
 
-@keyframes slideleft {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
 .toast {
   position: fixed;
   right: 1rem;
@@ -183,5 +174,4 @@ input[type='email'] {
   max-height: 100px;
   overflow: hidden;
   cursor: pointer;
-  animation: slideleft 0.5 ease;
 }

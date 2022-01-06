@@ -72,6 +72,9 @@ export function cssTransition({
 
     useLayoutEffect(() => {
       onEnter();
+      return () => {
+        preventExitTransition ? onExited() : onExit();
+      };
     }, []);
 
     useEffect(() => {
@@ -79,13 +82,16 @@ export function cssTransition({
     }, [isIn]);
 
     function onEnter() {
+      console.log('onEnter');
       const node = nodeRef.current!;
       baseClassName.current = node.className;
       node.className += ` ${enterClassName}`;
+      console.log(node);
       node.addEventListener('animationend', onEntered);
     }
 
     function onEntered(e: AnimationEvent) {
+      console.log('onEntered');
       if (e.target !== nodeRef.current) return;
 
       const node = nodeRef.current!;
@@ -135,4 +141,3 @@ export const Flip = cssTransition({
   enter: `${Default.CSS_NAMESPACE}--animate ${Default.CSS_NAMESPACE}__flip-enter`,
   exit: `${Default.CSS_NAMESPACE}--animate ${Default.CSS_NAMESPACE}__flip-exit`
 });
-

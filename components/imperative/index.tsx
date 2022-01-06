@@ -1,4 +1,7 @@
+import { useRef } from 'react';
 import { unmountComponentAtNode, render } from 'react-dom';
+import { POSITION } from './constants';
+import { Slide } from './cssTransition';
 
 interface ImpreativeShowOption {
   element: React.ReactElement;
@@ -7,7 +10,23 @@ interface ImpreativeShowOption {
 }
 
 const Toast = (props) => {
-  return <div className="toast">测试toast</div>;
+  const nodeRef = useRef<HTMLDivElement>();
+
+  return (
+    <Slide
+      isIn={true}
+      done={() => {
+        console.log('done');
+      }}
+      position={POSITION.TOP_RIGHT}
+      preventExitTransition={false}
+      nodeRef={nodeRef}
+    >
+      <div ref={nodeRef} className="toast">
+        测试toast
+      </div>
+    </Slide>
+  );
 };
 
 export const imperative = {
@@ -23,6 +42,17 @@ export const imperative = {
     }
     return imperative.containerDom;
   },
+  destory: () => {
+    const containerDom = document.getElementById('imperative-container');
+    if (containerDom) {
+      unmountComponentAtNode(containerDom);
+    }
+    imperative.isShowing = false;
+    if (imperative.timeout) {
+      clearTimeout(imperative.timeout);
+      imperative.timeout = null;
+    }
+  },
   remove: () => {
     unmountComponentAtNode(document.getElementById('imperative-container'));
     imperative.isShowing = false;
@@ -32,7 +62,7 @@ export const imperative = {
     }
   },
   show: (option: ImpreativeShowOption) => {
-    const { element, duration = 3, autoClose } = option;
+    const { element, duration = 3, autoClose = true } = option;
 
     if (imperative.isShowing) {
       imperative.remove();
