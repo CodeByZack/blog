@@ -8,6 +8,8 @@ specifiers:
   '@monaco-editor/react': ^4.3.1
   '@next/mdx': 10.0.5
   '@tailwindcss/typography': ^0.5.0
+  '@types/react': ^17.0.38
+  '@types/react-dom': ^17.0.11
   autoprefixer: ^10.4.1
   big.js: 6.0.3
   comma-number: 2.0.1
@@ -45,6 +47,7 @@ specifiers:
   rodemirror: ^1.6.5
   swr: 0.4.0
   tailwindcss: ^3.0.10
+  typescript: ^4.5.4
   unified: 9.2.0
   unist-util-visit: 2.0.3
   unsplash-js: 6.3.0
@@ -90,6 +93,8 @@ dependencies:
 
 devDependencies:
   '@tailwindcss/typography': 0.5.0_tailwindcss@3.0.10
+  '@types/react': 17.0.38
+  '@types/react-dom': 17.0.11
   autoprefixer: 10.4.1_postcss@8.4.5
   cross-env: 7.0.3
   globby: 11.0.2
@@ -101,6 +106,7 @@ devDependencies:
   remark-parse: 9.0.0
   remark-stringify: 9.0.1
   tailwindcss: 3.0.10_cefe482e8d38053bbf3d5815e0c551b3
+  typescript: 4.5.4
   unified: 9.2.0
   unist-util-visit: 2.0.3
 
@@ -1185,6 +1191,28 @@ packages:
   /@types/parse5/5.0.3:
     resolution: {integrity: sha512-kUNnecmtkunAoQ3CnjmMkzNU/gtxG8guhi+Fk2U/kOpIKjIMKnXGp4IJCgQJrXSgMsWYimYG4TGjz/UzbGEBTw==}
 
+  /@types/prop-types/15.7.4:
+    resolution: {integrity: sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==}
+    dev: true
+
+  /@types/react-dom/17.0.11:
+    resolution: {integrity: sha512-f96K3k+24RaLGVu/Y2Ng3e1EbZ8/cVJvypZWd7cy0ofCBaf2lcM46xNhycMZ2xGwbBjRql7hOlZ+e2WlJ5MH3Q==}
+    dependencies:
+      '@types/react': 17.0.38
+    dev: true
+
+  /@types/react/17.0.38:
+    resolution: {integrity: sha512-SI92X1IA+FMnP3qM5m4QReluXzhcmovhZnLNm3pyeQlooi02qI7sLiepEYqT678uNiyc25XfCqxREFpy3W7YhQ==}
+    dependencies:
+      '@types/prop-types': 15.7.4
+      '@types/scheduler': 0.16.2
+      csstype: 3.0.10
+    dev: true
+
+  /@types/scheduler/0.16.2:
+    resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
+    dev: true
+
   /@types/unist/2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
 
@@ -1860,6 +1888,10 @@ packages:
       cssnano-preset-simple: 3.0.0_postcss@8.2.15
       postcss: 8.2.15
     dev: false
+
+  /csstype/3.0.10:
+    resolution: {integrity: sha512-2u44ZG2OcNUO9HDp/Jl8C07x6pU/eTR3ncV91SiK3dhG9TWvRVsCoJw14Ckx5DgWkzGA3waZWO3d7pgqpUI/XA==}
+    dev: true
 
   /data-uri-to-buffer/3.0.1:
     resolution: {integrity: sha512-WboRycPNsVw3B3TL559F7kuBUM4d8CgMEvk6xEJlOp7OBPjt6G7z8WMWlD2rOFZLk6OYfFIUGsCOWzcQH9K2og==}
@@ -5433,6 +5465,12 @@ packages:
       is-typedarray: 1.0.0
     dev: false
     optional: true
+
+  /typescript/4.5.4:
+    resolution: {integrity: sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
 
   /unbox-primitive/1.0.1:
     resolution: {integrity: sha512-tZU/3NqK3dA5gpE1KtyiJUrEB0lxnGkMFHptJ7q6ewdZ8s12QrODwNbhIJStmJkd1QDXa1NRA8aF2A1zk/Ypyw==}
