@@ -1,5 +1,14 @@
-module.exports = {
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: []
+  }
+});
+
+module.exports = withMDX({
   images: {},
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   webpack: (config, { dev, isServer }) => {
     if (isServer) {
       require('./scripts/generate-sitemap');
@@ -16,4 +25,4 @@ module.exports = {
 
     return config;
   }
-};
+});

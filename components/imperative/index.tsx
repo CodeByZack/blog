@@ -3,14 +3,11 @@ import { unmountComponentAtNode, render } from 'react-dom';
 interface ImpreativeShowOption {
   element: React.ReactElement;
   duration?: number;
+  autoClose?: boolean;
 }
 
 const Toast = (props) => {
-  return (
-    <div className="z-50 fixed right-4 top-4 p-2 bg-white rounded-lg">
-      测试toast
-    </div>
-  );
+  return <div className="toast">测试toast</div>;
 };
 
 export const imperative = {
@@ -35,7 +32,7 @@ export const imperative = {
     }
   },
   show: (option: ImpreativeShowOption) => {
-    const { element, duration } = option;
+    const { element, duration = 3, autoClose } = option;
 
     if (imperative.isShowing) {
       imperative.remove();
@@ -44,7 +41,7 @@ export const imperative = {
     render(element, containerDom);
     imperative.isShowing = true;
 
-    if (duration) {
+    if (duration && autoClose) {
       imperative.timeout = setTimeout(imperative.remove, duration * 1000);
     }
   }

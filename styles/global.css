@@ -36,7 +36,7 @@ html {
   backdrop-filter: saturate(180%) blur(20px);
   transition: background-color 0.1 ease-in-out;
 }
-.cursor-col-resize{
+.cursor-col-resize {
   cursor: col-resize;
 }
 
@@ -154,6 +154,34 @@ input[type='email'] {
   @apply my-0;
 }
 
-.cm-editor{
-  height: 100%;
+@keyframes slideleft {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast {
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  background: #121212;
+  color: #fff;
+  min-height: 40px;
+  min-width: 200px;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 1px 10px 0 rgb(0 0 0 / 10%), 0 2px 15px 0 rgb(0 0 0 / 5%);
+  display: flex;
+  justify-content: space-between;
+  max-height: 100px;
+  overflow: hidden;
+  cursor: pointer;
+  animation: slideleft 0.5 ease;
 }
