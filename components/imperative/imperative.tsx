@@ -1,7 +1,16 @@
-import { useRef } from 'react';
+import React, {
+  Children,
+  PropsWithChildren,
+  useImperativeHandle,
+  useState
+} from 'react';
+import { useReducer } from 'react';
 import { unmountComponentAtNode, render } from 'react-dom';
-import { POSITION } from './constants';
-import { Slide } from './cssTransition';
+import {
+  AnimationStep,
+  CSSTransitionContainer,
+  ICSSContainerRef
+} from './cssTransition';
 
 interface ImpreativeShowOption {
   element: React.ReactElement;
@@ -9,30 +18,23 @@ interface ImpreativeShowOption {
   autoClose?: boolean;
 }
 
-const Toast = (props) => {
-  const nodeRef = useRef<HTMLDivElement>();
-
-  return (
-    <Slide
-      isIn={true}
-      done={() => {
-        console.log('done');
-      }}
-      position={POSITION.TOP_RIGHT}
-      preventExitTransition={false}
-      nodeRef={nodeRef}
-    >
-      <div ref={nodeRef} className="toast">
-        测试toast
-      </div>
-    </Slide>
-  );
-};
-
 export const imperative = {
   isShowing: false,
   timeout: null,
   containerDom: null,
+  containerRef: null,
+  init: () => {
+    const containerDom = imperative.getContainerDom();
+    const ref = React.createRef<ICSSContainerRef>();
+    render(<CSSTransitionContainer ref={ref} />, containerDom);
+    imperative.containerRef = ref;
+  },
+  getContainerRef: () => {
+    if (!imperative.containerRef) {
+      imperative.init();
+    }
+    return imperative.containerRef.current as ICSSContainerRef;
+  },
   getContainerDom: () => {
     if (!imperative.containerDom) {
       const containerDom = document.createElement('div');
@@ -54,7 +56,9 @@ export const imperative = {
     }
   },
   remove: () => {
-    unmountComponentAtNode(document.getElementById('imperative-container'));
+    // unmountComponentAtNode(document.getElementById('imperative-container'));
+    const containerRef = imperative.getContainerRef();
+    containerRef.unmount();
     imperative.isShowing = false;
     if (imperative.timeout) {
       clearTimeout(imperative.timeout);
@@ -67,17 +71,12 @@ export const imperative = {
     if (imperative.isShowing) {
       imperative.remove();
     }
-    const containerDom = imperative.getContainerDom();
-    render(element, containerDom);
-    imperative.isShowing = true;
+    const containerRef = imperative.getContainerRef();
+    containerRef.mount(element);
 
+    imperative.isShowing = true;
     if (duration && autoClose) {
       imperative.timeout = setTimeout(imperative.remove, duration * 1000);
     }
   }
-};
-
-export const toast = () => {
-  const element = <Toast />;
-  imperative.show({ element });
 };

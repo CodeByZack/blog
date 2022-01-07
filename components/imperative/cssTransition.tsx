@@ -1,4 +1,11 @@
-import React, { useEffect, useLayoutEffect, useRef } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useLayoutEffect,
+  useRef,
+  useState
+} from 'react';
 import { Default } from './constants';
 import { ToastTransitionProps } from './types';
 
@@ -34,10 +41,50 @@ export interface CSSTransitionProps {
   collapseDuration?: number;
 }
 
-const enum AnimationStep {
+export const enum AnimationStep {
   Enter,
   Exit
 }
+export interface ICSSContainerRef {
+  unmount: () => void;
+  mount: (content: React.ReactNode) => void;
+}
+
+export const CSSTransitionContainer = React.forwardRef<ICSSContainerRef>(
+  (props, ref) => {
+    const [content, setContent] = useState<React.ReactElement>();
+    const [isIn, setIsIn] = useState(false);
+    const [mountStatus, setMountStatus] = useState(false);
+
+    const doRealUnmount = () => {
+      setMountStatus(false);
+      setContent(null);
+    };
+
+    useImperativeHandle(ref, () => {
+      const unmount = () => {
+        setIsIn(false);
+      };
+      const mount = (element) => {
+        setContent(element);
+        setIsIn(true);
+        setMountStatus(true);
+      };
+      return {
+        unmount,
+        mount
+      };
+    });
+
+    return (
+      <div>
+        {mountStatus
+          ? React.cloneElement(content, { done: doRealUnmount, isIn })
+          : null}
+      </div>
+    );
+  }
+);
 
 /**
  * Css animation that just work.
@@ -72,9 +119,6 @@ export function cssTransition({
 
     useLayoutEffect(() => {
       onEnter();
-      return () => {
-        preventExitTransition ? onExited() : onExit();
-      };
     }, []);
 
     useEffect(() => {
@@ -102,16 +146,16 @@ export function cssTransition({
     }
 
     function onExit() {
+      console.log('onExit');
       animationStep.current = AnimationStep.Exit;
       const node = nodeRef.current!;
-
       node.className += ` ${exitClassName}`;
       node.addEventListener('animationend', onExited);
     }
 
     function onExited() {
+      console.log('onExited');
       const node = nodeRef.current!;
-
       node.removeEventListener('animationend', onExited);
       done();
     }

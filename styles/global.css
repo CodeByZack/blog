@@ -160,18 +160,19 @@ input[type='email'] {
   position: fixed;
   right: 1rem;
   top: 1rem;
-  background: #121212;
-  color: #fff;
-  min-height: 40px;
-  min-width: 200px;
-  box-sizing: border-box;
-  margin-bottom: 1rem;
-  padding: 8px;
-  border-radius: 4px;
-  box-shadow: 0 1px 10px 0 rgb(0 0 0 / 10%), 0 2px 15px 0 rgb(0 0 0 / 5%);
+  min-width: 288px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 3px 5px -1px,
+    rgb(0 0 0 / 14%) 0px 6px 10px 0px, rgb(0 0 0 / 12%) 0px 1px 18px 0px;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgb(255, 255, 255);
+  background-color: rgb(50, 50, 50);
   display: flex;
-  justify-content: space-between;
-  max-height: 100px;
-  overflow: hidden;
-  cursor: pointer;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 6px 16px;
+  border-radius: 4px;
 }
