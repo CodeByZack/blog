@@ -1085,6 +1085,7 @@ function useState(initial){
 }
 ```
 
+
 但是我们现在还没有执行action（作者默认action为函数）。<br />我们在下一次更新组件的时候执行它，我们从老hook中的queue中取出所有actions。然后依次执行，赋值给当前hook的state。这样返回出去的就是最新的state了。
 
 STEP1-8[代码地址](https://github.com/CodeByZack/build-your-react-code/tree/step1-8)
