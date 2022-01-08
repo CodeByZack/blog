@@ -79,7 +79,7 @@ export const CSSTransitionContainer = React.forwardRef<ICSSContainerRef>(
     return (
       <div>
         {mountStatus
-          ? React.cloneElement(content, { done: doRealUnmount, isIn })
+          ? React.cloneElement(content, { done: doRealUnmount, isIn, close: ()=>setIsIn(false) })
           : null}
       </div>
     );

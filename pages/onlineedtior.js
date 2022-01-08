@@ -12,9 +12,20 @@ import Image from 'next/image';
 import { parseISO, format } from 'date-fns';
 import Editor from '@monaco-editor/react';
 import SplitContainer from '@/components/SplitContainer';
-import { toast } from '@/components/imperative';
+import { toast, dialog } from '@/components/imperative';
 import Loading from '@/components/Loading';
 const testvalue = ``;
+
+const EDIT_MODE = {
+  EDIT: 'EDIT',
+  ADD: 'ADD'
+};
+
+const templateValue = (data) => `---
+title: '${data.title}'
+publishedAt: '${format(new Date(), 'yyyy-MM-dd')}'
+summary: '${data.desc}'
+---`;
 
 export default function OnlineEdtior(props) {
   const { data: session } = useSession();
@@ -31,6 +42,8 @@ export default function OnlineEdtior(props) {
   const [value, setValue] = useState(testvalue);
   const [frontMatter, setFrontMatter] = useState({});
   const [loading, setLoading] = useState(false);
+  const [editPath, setEditPath] = useState();
+  const [editMode, setEditMode] = useState(EDIT_MODE.EDIT);
   const repoFileObj = useRef(null);
   const editorRef = useRef(null);
 
@@ -66,20 +79,31 @@ export default function OnlineEdtior(props) {
   };
 
   const save = async () => {
-    setLoading(true);
-    const res = await repoUtil.updateRepoFile({
-      sha: repoFileObj.current.sha,
-      path: repoFileObj.current.path,
-      content: value
-    });
-    setLoading(false);
-    toast.info('保存成功！');
+    if (editMode === EDIT_MODE.ADD) {
+      setLoading(true);
+      const res = await repoUtil.updateRepoFile({
+        path: editPath,
+        content: value
+      });
+      setLoading(false);
+      toast.info('保存成功！');
+    } else {
+      setLoading(true);
+      const res = await repoUtil.updateRepoFile({
+        sha: repoFileObj.current.sha,
+        path: repoFileObj.current.path,
+        content: value
+      });
+      setLoading(false);
+      toast.info('保存成功！');
+    }
   };
 
   useEffect(() => {
     if (!session?.accessToken) return;
-    if (!path) return;
     repoUtil.init(session.accessToken);
+    if (editMode === EDIT_MODE.ADD) return;
+    if (!path) return;
     setLoading(true);
     repoUtil.getRepoFile(path).then((res) => {
       setValue(res.content);
@@ -89,7 +113,29 @@ export default function OnlineEdtior(props) {
       }
       setLoading(false);
     });
-  }, [session?.accessToken, path]);
+  }, [session?.accessToken, path, editMode]);
+
+  useEffect(() => {
+    console.log(path);
+    if (!path) {
+      setEditMode(EDIT_MODE.ADD);
+      setTimeout(() => {
+        dialog.info({
+          onConfirm: (values) => {
+            console.log(values);
+            setEditPath(values.postfile);
+            const value = templateValue({
+              title: values.posttitle,
+              desc: values.postdesc
+            });
+            editorRef.current.editor.setValue(value);
+          }
+        });
+      }, 0);
+    } else {
+      setEditPath(path);
+    }
+  }, [path]);
 
   const leftChildren = (
     <div className="h-full">
@@ -183,7 +229,7 @@ export default function OnlineEdtior(props) {
               )}
             </button>
             <span className="ml-4">标题：{frontMatter?.title}</span>
-            <span className="ml-4">路径：{path}</span>
+            <span className="ml-4">路径：{editPath}</span>
           </div>
 
           <div className="text-gray-900 dark:text-gray-100">
