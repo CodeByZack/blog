@@ -175,4 +175,5 @@ input[type='email'] {
   flex-wrap: wrap;
   padding: 6px 16px;
   border-radius: 4px;
+  z-index: 999;
 }

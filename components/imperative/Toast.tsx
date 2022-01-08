@@ -48,7 +48,7 @@ const showToast = (parmas: IShowToastProps) => {
 };
 
 export const toast = {
-  info: (parmas: IShowToastProps) => showToast(parmas)
+  info: (msg : string) => showToast({ msg })
 };
 
 export default Toast;
