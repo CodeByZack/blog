@@ -7,7 +7,9 @@ const withMDX = require('@next/mdx')({
 });
 
 module.exports = withMDX({
-  images: {},
+  images: {
+    domains: ['testzack.oss-cn-beijing.aliyuncs.com'],
+  },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   webpack: (config, { dev, isServer }) => {
     if (isServer) {
