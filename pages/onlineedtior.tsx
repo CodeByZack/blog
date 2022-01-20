@@ -1,5 +1,5 @@
 import { signIn, useSession } from 'next-auth/react';
-import { useQueryString } from '@/lib/hook';
+import { useQueryString } from '@/lib/hooks';
 import Editor from '@/components/edtior';
 
 export default function OnlineEdtior() {
