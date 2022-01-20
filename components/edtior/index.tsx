@@ -41,7 +41,7 @@ const OnlineEdtior = (props: IProps) => {
   const [editMode, setEditMode] = useState(EDIT_MODE.EDIT);
   const [mdxResult, setMdxResult] = useState<any>({});
   const [loading, setLoading] = useState(false);
-  const [editPath, setEditPath] = useState('');
+  const [editPath, setEditPath] = useState(path);
   const [value, setValue] = useState('');
   const repoFileObj = useRef(null);
   const editorRef = useRef(null);
@@ -108,7 +108,7 @@ const OnlineEdtior = (props: IProps) => {
       rehypePlugins: [mdxPrism]
     });
     console.log(res);
-    setMdxResult({ comp : res.default});
+    setMdxResult({ comp: res.default });
   };
 
   const save = async () => {
@@ -145,7 +145,7 @@ const OnlineEdtior = (props: IProps) => {
     <Editor onMount={handleEditorDidMount} onChange={handleChange} />
   );
   const rightChildren = (
-    <Preview frontMatter={frontMatter} mdxResult={ mdxResult.comp } />
+    <Preview frontMatter={frontMatter} mdxResult={mdxResult.comp} />
   );
 
   return (

@@ -1,12 +1,10 @@
 import { signIn, useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
+import { useQueryString } from '@/lib/hook';
 import Editor from '@/components/edtior';
 
 export default function OnlineEdtior() {
   const { data: session } = useSession();
-  const router = useRouter();
-  const { query } = router;
-  const { path } = query;
+  const queryObj = useQueryString();
 
   if (!session) {
     return (
@@ -22,7 +20,7 @@ export default function OnlineEdtior() {
   }
 
   return (
-    <Editor path={path as string} accessToken={session.accessToken as string} />
+    <Editor path={queryObj.path as string} accessToken={session.accessToken as string} />
   );
 }
 
