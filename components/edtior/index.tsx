@@ -12,6 +12,8 @@ import Editor from './Edtior';
 import Preview from './Preview';
 import { dialog, toast } from '../imperative';
 import { format } from 'date-fns';
+import { OnMount } from '@monaco-editor/react';
+import { registerAutoCompletion } from './configEdtior';
 
 interface IProps {
   path?: string;
@@ -62,9 +64,10 @@ const OnlineEdtior = (props: IProps) => {
     }
   };
 
-  const handleEditorDidMount = (editor, monaco) => {
+  const handleEditorDidMount: OnMount = (editor, monaco) => {
     editorRef.current = { editor, monaco };
-    console.log(editorRef.current);
+    // 注册代码提示
+    registerAutoCompletion(monaco);
     if (editPath) {
       getRepoFile();
     } else {
