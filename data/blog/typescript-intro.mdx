@@ -176,22 +176,44 @@ export type D<T> = {
 像下面这样的
 
 ```typescript
-
 const myCanvas = document.getElementById("main_canvas");
-
 ```
 
 typescript只能推断出它属于`HTMLElement`类型，但你是明确知道元素是`HTMLCanvasElement`。这种时候你就可以使用类型断言，像下面这样
 
 
 ```typescript
-
 const myCanvas = document.getElementById("main_canvas") as HTMLCanvasElement;
-
 ```
 
 
 ### 字面量类型
+
+字面量类型，顾名思义就是像下面这样，`a`的类型就固定为`test`了，不是`string`。
+
+```typescript
+let a : 'test'  = 'test';
+```
+
+需要特别注意的是，取决于Javascript声明变量的方式，Ts会推断出不同的类型。`let`、`var`声明的变量都允许修改。`const`则不允许。
+
+因此对于`let`、`var`声明的变量：
+
+```typescript
+let str = "str"; // 推断为 string 类型
+let num = "num"; // 推断为 number 类型
+let b = true; // 推断为 boolean 类型
+```
+
+对于`const`声明的变量：
+
+```typescript
+const str = "str"; // 推断为字面量 'str' 类型
+const num = "num"; // 推断为字面量 'num' 类型
+const b = true; // 推断为字面量 true 类型
+```
+
+
 
 ### null、undefined、any
 
