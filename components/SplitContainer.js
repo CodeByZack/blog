@@ -7,7 +7,13 @@ const getWidth = (w, min, max) => {
 };
 
 const SplitContainer = (props) => {
-  const { min = 1, max = 3, leftChildren, rightChildren } = props;
+  const {
+    minLeftWidth = 0,
+    minRightWidth = 0,
+    maxWidth,
+    leftChildren,
+    rightChildren
+  } = props;
 
   const leftRef = useRef(null);
   const rightRef = useRef(null);
@@ -20,8 +26,7 @@ const SplitContainer = (props) => {
     const rightWidth = rightRef.current.offsetWidth;
     const containerWidth = containerRef.current.offsetWidth;
 
-    const maxDragWidth = (containerWidth / (min + max)) * max;
-    const minDragWidth = (containerWidth / (min + max)) * min;
+    const maxDragWidth = maxWidth || containerWidth;
 
     rightRef.current.style.pointerEvents = 'none';
     rightRef.current.style.userSelect = 'none';
@@ -31,10 +36,10 @@ const SplitContainer = (props) => {
       // 右移动为 正数， 左移动为负数
       const dx = nowX - firstX;
 
-      const nowLeftWidth = getWidth(leftWidth + dx, minDragWidth, maxDragWidth);
+      const nowLeftWidth = getWidth(leftWidth + dx, minLeftWidth, maxDragWidth);
       const nowRightWidth = getWidth(
         rightWidth - dx,
-        minDragWidth,
+        minRightWidth,
         maxDragWidth
       );
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import MonacoEditor, { OnChange, OnMount } from '@monaco-editor/react';
 interface IProps {
-    onMount?: OnMount;
+  onMount?: OnMount;
   onChange?: OnChange;
   defaultValue?: string;
 }

@@ -93,22 +93,26 @@ const OnlineEdtior = (props: IProps) => {
   };
 
   const handleChange = async (v, event) => {
-    console.log(v);
     const { data, content } = matter(v);
     setFrontMatter(data);
     setValue(v);
-    const res = await evaluate(content, {
-      ...provider,
-      ...runtime,
-      remarkPlugins: [
-        require('remark-autolink-headings'),
-        require('remark-slug'),
-        require('remark-code-titles')
-      ],
-      rehypePlugins: [mdxPrism]
-    });
-    console.log(res);
-    setMdxResult({ comp: res.default });
+
+    try {
+      const res = await evaluate(content, {
+        ...provider,
+        ...runtime,
+        remarkPlugins: [
+          require('remark-autolink-headings'),
+          require('remark-slug'),
+          require('remark-code-titles')
+        ],
+        rehypePlugins: [mdxPrism]
+      });
+      console.log(res);
+      setMdxResult({ comp: res.default });
+    } catch (error) {
+      toast.info(JSON.stringify(error));
+    }
   };
 
   const save = async () => {
@@ -156,6 +160,7 @@ const OnlineEdtior = (props: IProps) => {
           <SplitContainer
             leftChildren={leftChildren}
             rightChildren={rightChildren}
+            minRightWidth={700}
           />
         </div>
       </div>

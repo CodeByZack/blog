@@ -17,7 +17,7 @@ const Preview = (props: IProps) => {
     : '-------';
 
   return (
-    <div id="preview-box" className="h-full overflow-auto flex justify-center">
+    <div id="preview-box" className="h-full overflow-auto flex justify-center pt-8">
       <div className="prose dark:prose-dark">
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
           {title}
