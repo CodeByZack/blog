@@ -8,12 +8,12 @@ import * as runtime from 'react/jsx-runtime';
 import { evaluate } from '@mdx-js/mdx';
 import mdxPrism from 'mdx-prism';
 import NavHeader from './NavHeader';
-import Editor from './Edtior';
+import Editor from './Editor';
 import Preview from './Preview';
 import { dialog, toast } from '../imperative';
 import { format } from 'date-fns';
 import { OnMount } from '@monaco-editor/react';
-import { registerAutoCompletion } from './configEdtior';
+import { registerAutoCompletion } from './configEditor';
 
 interface IProps {
   path?: string;

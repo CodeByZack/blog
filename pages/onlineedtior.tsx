@@ -1,6 +1,6 @@
 import { signIn, useSession } from 'next-auth/react';
 import { useQueryString } from '@/lib/hooks';
-import Editor from '@/components/edtior';
+import Editor from '@/components/editor';
 
 export default function OnlineEdtior() {
   const { data: session } = useSession();
