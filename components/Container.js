@@ -50,6 +50,9 @@ export default function Container({ children }) {
           <NextLink href="/blog">
             <a className="p-1 sm:p-4 text-gray-900 dark:text-gray-100">博客</a>
           </NextLink>
+          <NextLink href="/life">
+            <a className="p-1 sm:p-4 text-gray-900 dark:text-gray-100">生活</a>
+          </NextLink>
           <NextLink href="/about">
             <a className="p-1 sm:p-4 text-gray-900 dark:text-gray-100">关于</a>
           </NextLink>

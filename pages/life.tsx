@@ -5,10 +5,10 @@ import Container from '@/components/Container';
 import BlogPost from '@/components/BlogPost';
 import { getAllFilesFrontMatter } from '@/lib/mdx';
 
-const url = 'https://zackdk.com';
-const title = '行者、空山的日志';
+const url = 'https://zackdk.com/life';
+const title = '行者、空山的生活日志';
 const description =
-  '记录自己在前端路上的点点滴滴，关于JavaScript，React，Vue，当然还关于我自己。';
+  '记录自己在生活上点点滴滴，关于日常，关于生活，关于过去，关于未来。';
 
 export default function Blog({ posts }) {
   const [searchValue, setSearchValue] = useState('');
@@ -43,11 +43,13 @@ export default function Blog({ posts }) {
       />
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
         <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
-          博客
+          关于生活
         </h1>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {`我从2017年开始踏入编程行业，开发过安卓，开发过前端，现在主要做前端开发，技术主要围绕React及其生态圈上。在2021年初，使用Next.js做了这个网站。
-            到现在为止，一共写了${posts.length}篇文章。你可以在下方搜索你感兴趣的关键字。`}
+          {`西风轻敲慢打，几处温暖人家，几处灯下无话，伤痛愈合成花，情绪挥挥洒洒，点落人间诗画，素白，淡雅，年岁本该如此，单纯无华。。。`}
+          <br />
+          <br />
+          {`这里一共有${posts.length}篇记录。你可以在下方搜索你感兴趣的关键字。`}
         </p>
         <div className="relative w-full mb-4">
           <input
@@ -73,7 +75,7 @@ export default function Blog({ posts }) {
             />
           </svg>
         </div>
-        {!searchValue && (
+        {/* {!searchValue && (
           <>
             <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 mt-8 text-black dark:text-white">
               推荐文章
@@ -84,13 +86,13 @@ export default function Blog({ posts }) {
               slug="use-generator-in-async-task"
             />
           </>
-        )}
+        )} */}
         <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 mt-8 text-black dark:text-white">
           所有文章
         </h3>
         {!filteredBlogPosts.length && 'No posts found.'}
         {filteredBlogPosts.map((frontMatter) => (
-          <BlogPost key={frontMatter.title} {...frontMatter} />
+          <BlogPost key={frontMatter.title} {...frontMatter} type='life' />
         ))}
       </div>
     </Container>
@@ -98,7 +100,7 @@ export default function Blog({ posts }) {
 }
 
 export async function getStaticProps() {
-  const posts = await getAllFilesFrontMatter('blog');
+  const posts = await getAllFilesFrontMatter('life');
 
   return { props: { posts } };
 }

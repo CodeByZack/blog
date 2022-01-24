@@ -95,6 +95,7 @@ export default function Timeline() {
           借助MDX和GITHUB API的加持，可以不需服务器，就能编辑博客了。
         </Step>
       </ul>
+      <Divider />
       <Year>2021</Year>
       <ul>
         <Step title="看完了《沙丘》🏫">
@@ -106,7 +107,7 @@ export default function Timeline() {
         <Step title="买房了 🏠">
           虽然很难，但还是咬咬牙，有了自己的一个窝。
         </Step>
-        <Step title="我结婚了。 🎎">
+        <Step title="我结婚了。 🎎">
           我结婚了！2021-05-19，领到了结婚证！希望一切都能顺顺利利！
         </Step>
         <Step title="搭建自己的博客 🏆">

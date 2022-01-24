@@ -25,7 +25,7 @@ export default function Home() {
         <BlogPost
           title="HTTP的强缓存和协商缓存"
           summary="介绍关于浏览器缓存的前因后果，分清强缓存和协商缓存，了解相关的http的头字段。"
-          slug="http-cache-intoduce"
+          slug="http-cache-introduce"
         />
         <BlogPost
           title="利用Generator执行异步任务"
