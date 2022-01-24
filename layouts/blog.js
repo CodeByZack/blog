@@ -8,13 +8,13 @@ import Link from 'next/link';
 
 const editUrl = (slug) =>
   `https://github.com/codebyzack/blog/edit/master/data/blog/${slug}.mdx`;
-const onLineEditUrl = (slug)=>`/data/blog/${slug}.mdx`; 
+const onLineEditUrl = (slug, type) => `/data/${type}/${slug}.mdx`;
 const discussUrl = (slug) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
     `https://zackdk.com//${slug}`
   )}`;
 
-export default function BlogLayout({ children, frontMatter }) {
+export default function BlogLayout({ children, frontMatter, type }) {
   return (
     <Container>
       <BlogSeo
@@ -65,11 +65,12 @@ export default function BlogLayout({ children, frontMatter }) {
             rel="noopener noreferrer"
           >
             {'在GitHub编辑'}
-          </a>{` • `}
+          </a>
+          {` • `}
           <Link
             href={{
               pathname: '/onlineedtior',
-              query: { path: onLineEditUrl(frontMatter.slug) }
+              query: { path: onLineEditUrl(frontMatter.slug, type) }
             }}
           >
             <a>在线编辑</a>

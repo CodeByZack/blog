@@ -5,7 +5,7 @@ import BlogLayout from '@/layouts/blog';
 
 export default function Blog({ mdxSource, frontMatter }) {
   return (
-    <BlogLayout frontMatter={frontMatter}>
+    <BlogLayout type='life' frontMatter={frontMatter}>
       <MDXRemote {...mdxSource} />
     </BlogLayout>
   );

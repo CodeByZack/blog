@@ -163,7 +163,7 @@ const OnlineEdtior = (props: IProps) => {
           <SplitContainer
             leftChildren={leftChildren}
             rightChildren={rightChildren}
-            minRightWidth={700}
+            // minRightWidth={700}
           />
         </div>
       </div>
