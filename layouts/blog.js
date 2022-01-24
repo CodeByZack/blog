@@ -18,7 +18,7 @@ export default function BlogLayout({ children, frontMatter, type }) {
   return (
     <Container>
       <BlogSeo
-        url={`https://zackdk.com/${frontMatter.slug}`}
+        url={`https://zackdk.com/${type}/${frontMatter.slug}`}
         {...frontMatter}
       />
       <article className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16 w-full">

@@ -4,7 +4,7 @@ import format from 'comma-number';
 
 import fetcher from '@/lib/fetcher';
 
-const BlogPost = ({ title, summary, slug, type = 'post' }) => {
+const BlogPost = ({ title, summary, slug, type = 'blog' }) => {
   // const { data } = useSWR(`/api/views/${slug}`, fetcher);
   // const views = data?.total;
 
