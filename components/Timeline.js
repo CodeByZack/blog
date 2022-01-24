@@ -41,6 +41,23 @@ const Step = ({ title, children }) => {
 const FullTimeline = () => (
   <>
     <Divider />
+    <Year>2020</Year>
+    <ul>
+      <Step title="终于旅游了 🏆">
+        工作后各种原因，一直没有出去玩过，今年国庆终于腾出时间了，和女朋友一起去了若尔盖、郎木寺。坐车很累，但路上风景真的很好。
+      </Step>
+      <Step title="重写了风影院">
+        使用 Material UI
+        重写了风影院，支持了日夜间模式切换，支持了观看和搜索记录，最重要的是支持了PWA，可以添加到主屏幕使用了。
+      </Step>
+      <Step title="上线了小词导航网站 👨🏻‍💻">
+        开发中经常要查找资料，每次都需要百度找网站再进去，就自己把常用的站点集合在一起，搭建了一个前端的导航网站。
+      </Step>
+      <Step title="加入一家新公司">
+        年初换工作，加入到新公司。他们在做在线直播的场景，个人对音视频比较感兴趣，所以选择了这家公司。
+      </Step>
+    </ul>
+    <Divider />
     <Year>2019</Year>
     <ul>
       <Step title="技术分享 ✨">
@@ -72,8 +89,17 @@ export default function Timeline() {
       <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 mt-8 text-black dark:text-white">
         时光机
       </h3>
+      <Year>2022</Year>
+      <ul>
+        <Step title="可以在线编辑博客了 🏆">
+          借助MDX和GITHUB API的加持，可以不需服务器，就能编辑博客了。
+        </Step>
+      </ul>
       <Year>2021</Year>
       <ul>
+        <Step title="看完了《沙丘》🏫">
+          一本科幻氛围不是特别足，但哲学气息浓厚的一本科幻小说。
+        </Step>
         <Step title="开始学习TypeScript 🏫">
           今年事比较多，公司也很忙，第一次体验了995。闲暇时间学习了TS。
         </Step>
@@ -85,23 +111,6 @@ export default function Timeline() {
         </Step>
         <Step title="搭建自己的博客 🏆">
           从语雀迁移博客，独立搭建自己的网站。
-        </Step>
-      </ul>
-      <Divider />
-      <Year>2020</Year>
-      <ul>
-        <Step title="终于旅游了 🏆">
-          工作后各种原因，一直没有出去玩过，今年国庆终于腾出时间了，和女朋友一起去了若尔盖、郎木寺。坐车很累，但路上风景真的很好。
-        </Step>
-        <Step title="重写了风影院">
-          使用 Material UI
-          重写了风影院，支持了日夜间模式切换，支持了观看和搜索记录，最重要的是支持了PWA，可以添加到主屏幕使用了。
-        </Step>
-        <Step title="上线了小词导航网站 👨🏻‍💻">
-          开发中经常要查找资料，每次都需要百度找网站再进去，就自己把常用的站点集合在一起，搭建了一个前端的导航网站。
-        </Step>
-        <Step title="加入一家新公司">
-          年初换工作，加入到新公司。他们在做在线直播的场景，个人对音视频比较感兴趣，所以选择了这家公司。
         </Step>
       </ul>
 
