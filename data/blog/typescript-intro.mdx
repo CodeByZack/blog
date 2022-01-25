@@ -38,8 +38,9 @@ const booleanArr: Arrary<boolean> = [true, false];
 
 ### 函数类型
 
-```typescript
 函数主要定义入参和出参的类型：
+
+```typescript
 // function 定义
 function identify( params : string ) : string{
   return params;
@@ -195,7 +196,7 @@ const myCanvas = document.getElementById("main_canvas") as HTMLCanvasElement;
 let a : 'test'  = 'test';
 ```
 
-需要特别注意的是，取决于Javascript声明变量的方式，Ts会推断出不同的类型。`let`、`var`声明的变量都允许修改。`const`则不允许。
+需要特别注意的是，取决于Javascript声明变量的方式，TS会推断出不同的类型。`let`、`var`声明的变量都允许修改。`const`则不允许。
 
 因此对于`let`、`var`声明的变量：
 
@@ -213,12 +214,52 @@ const num = "num"; // 推断为字面量 'num' 类型
 const b = true; // 推断为字面量 true 类型
 ```
 
+但当在用const声明一个对象时，TS会默认该对象的属性都是可以修改的。所以推断出的类型都是基本类型。如果你想推断为字面量的类型，需要在后面加上`as const`，示例如下：
 
+```typescript
+// 以下推断出的类型为
+interface {
+  url : string;
+  method : string;
+}
+const req = { url: "https://example.com", method: "GET" };
 
-### null、undefined、any
+// 以下推断出的类型为
+interface {
+  url : "https://example.com";
+  method : "GET";
+}
+ 
+const req = { url: "https://example.com", method: "GET" } as const;
+```
+
+### null、undefined
+
+`JavaScript`有两个特殊的类型`null`和`undefined`用于代表不存在或者未初始化。
+
+`TypeScript`也有这两个相对应的类型的定义`null`和`undefined`。
+
+这两个类型和`strictNullChecks`配置相关，当配置为`off`时，这两个类型可以赋值给任意类型，不会报错。当配置为`on`时，使用之前需要先检查是否为空，否则`TS`会提示错误。
+
+```typescript
+function doSomething(x: string | null) {
+  if (x === null) {
+    // do nothing
+  } else {
+    console.log("Hello, " + x.toUpperCase());
+  }
+}
+```
+
+你也可以使用`!`进行非空断言，但需要注意的是，类型断言不会影响代码运行时的行为，你需要自己确保这个值不会为空值。
+
+```typescript
+function liveDangerously(x?: number | null) {
+  // No error
+  console.log(x!.toFixed());
+}
+```
 
 ### enum
 
-## 类型计算
-
-### 泛型
+枚举是 `TypeScript` 添加到 `JavaScript` 的一项功能，与其它类型不同的是，枚举是会添加代码到运行时的，也就是说会影响你的代码。所以在使用枚举之前，确保你知道自己在做什么。
