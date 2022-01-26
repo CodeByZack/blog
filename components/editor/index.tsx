@@ -10,10 +10,15 @@ import mdxPrism from 'mdx-prism';
 import NavHeader from './NavHeader';
 import Editor from './Editor';
 import Preview from './Preview';
-import { dialog, toast } from '../imperative';
+import { toast } from '../imperative';
 import { format } from 'date-fns';
 import { OnMount } from '@monaco-editor/react';
 import { registerAutoCompletion } from './configEditor';
+import Upload from '../upload';
+import {
+  showCreatePostDialog,
+  showImageUploadDialog
+} from '../imperative/WrapperDialog';
 
 interface IProps {
   path?: string;
@@ -72,15 +77,13 @@ const OnlineEdtior = (props: IProps) => {
       getRepoFile();
     } else {
       setTimeout(() => {
-        dialog.info({
-          onConfirm: (values) => {
-            setEditPath(values.postfile);
-            const value = templateValue({
-              title: values.posttitle,
-              desc: values.postdesc
-            });
-            editorRef.current.editor.setValue(value);
-          }
+        showCreatePostDialog((values) => {
+          setEditPath(values.post_file);
+          const value = templateValue({
+            title: values.post_title,
+            desc: values.post_desc
+          });
+          editorRef.current.editor.setValue(value);
         });
       }, 0);
     }
@@ -149,7 +152,9 @@ const OnlineEdtior = (props: IProps) => {
   }, [path]);
 
   const leftChildren = (
-    <Editor onMount={handleEditorDidMount} onChange={handleChange} />
+    <Upload>
+      <Editor onMount={handleEditorDidMount} onChange={handleChange} />
+    </Upload>
   );
   const rightChildren = (
     <Preview frontMatter={frontMatter} mdxResult={mdxResult.comp} />

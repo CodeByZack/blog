@@ -1,18 +1,11 @@
-import React, {
-  Children,
-  PropsWithChildren,
-  useImperativeHandle,
-  useState
-} from 'react';
-import { useReducer } from 'react';
+import React from 'react';
 import { unmountComponentAtNode, render } from 'react-dom';
 import {
-  AnimationStep,
   CSSTransitionContainer,
   ICSSContainerRef
 } from './cssTransition';
 
-interface ImpreativeShowOption {
+interface ImperativeShowOption {
   element: React.ReactElement;
   duration?: number;
   autoClose?: boolean;
@@ -44,7 +37,7 @@ export const imperative = {
     }
     return imperative.containerDom;
   },
-  destory: () => {
+  destroy: () => {
     const containerDom = document.getElementById('imperative-container');
     if (containerDom) {
       unmountComponentAtNode(containerDom);
@@ -65,7 +58,7 @@ export const imperative = {
       imperative.timeout = null;
     }
   },
-  show: (option: ImpreativeShowOption) => {
+  show: (option: ImperativeShowOption) => {
     const { element, duration = 3, autoClose = true } = option;
 
     if (imperative.isShowing) {

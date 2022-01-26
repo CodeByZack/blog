@@ -1,9 +1,12 @@
 {
     "typescript.tsdk": "node_modules/typescript/lib",
     "cSpell.words": [
+        "headlessui",
+        "ICSS",
         "noopener",
         "noreferrer",
         "onlineedtior",
+        "rehype",
         "semibold"
     ]
 }
