@@ -325,3 +325,138 @@ store.subscribe(()=>{
 store.dispatch({type : "INCREMENT"});
 store.dispatch({type : "DECREMENT"});
 ```
+
+combineReducers
+
+随着应用程序变得越来越复杂，你可能需要将你的reducer分成几个独立的reducer，每个reducer都管理着store的独立部分。然后就需要用到今天的主角 combineReducers 了。
+它会合并多个recuders，并生成一个reducer。当你传递action给这个reducer时，它会把action依次传递每个子reducer，并拿到返回的部分state，然后合并成最终的state。
+
+实现
+其实也很简单， combineReducers  接收一个对象，对象的每个key就代表一个reducer，这个key值也就作为了store上的key，充当了命名空间。
+
+抛开源码中的各种警告信息，源码大概如下。
+
+```javascript
+const combineReducers = (reducers)=>{
+
+    const keys = Object.keys(reducers);
+    const finalReducers = {};
+
+    //下面这个for循环过滤 无效key，即不是function的key
+    for(let i = 0; i<keys.length; i++){
+        const key = keys[i];
+        if(typeof reducers[key] === 'function'){
+            finalReducers[key] = reducers[key];
+        }
+    }
+
+    const finalReducerKeys = Object.keys(finalReducers);
+
+    // 返回一个reducer
+    return (state = {},action)=>{
+        // 用来判断新生成的state是否发生改变。
+        let hasChanged = false;
+      	// 即将生成的state。
+        const nextState = {};
+      	// 下面这个for循环，遍历reducer，生成新state
+        for(let i = 0; i<finalReducerKeys.length; i++){
+          	// 取key
+            const key = finalReducerKeys[i];
+            // 取reducer
+            const reducer = finalReducers[key];
+            // 根据key 取旧state片段。
+          	const prevStateForKey = state[key];
+          	// 调用当前key对应的reducer，生成新state片段
+            const nextStateForKey = reducer(prevStateForKey,action);
+          	// reducer不能返回undefined，否则会抛错
+            if(typeof nextStateForKey === 'undefined'){
+                throw new Error('error')
+            }
+            // 将片段赋值给新state
+            nextState[key] = nextStateForKey;
+            // 对比该片段前后是否有更改，注意下怎么判断的。
+            hasChanged = hasChanged || nextStateForKey !== prevStateForKey;
+        }
+      	// todo 对比state和reducers的长度来确定是否发生改变？
+        hasChanged = hasChanged || finalReducerKeys.length !== Object.keys(state).length;
+        return hasChanged ? nextState : state;
+    }
+};
+```
+
+使用
+
+```javascript
+const counter = (state = 0, action) => {
+  switch (action.type) {
+    case "INCREMENT":
+      return state + 1;
+    case "DECREMENT":
+      return state - 1;
+    default:
+      return state;
+  }
+};
+
+const todos = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return state.concat([action.text])
+    default:
+      return state
+  }
+};
+
+
+const reducer = combineReducers({counter,todos});
+
+const store = createStore(reducer);
+
+store.subscribe(()=>{
+    console.log("数据更改了：");
+    console.log(store.getState());
+});
+
+store.dispatch({type : "INCREMENT"});
+store.dispatch({type : "DECREMENT"});
+store.dispatch({type : "ADD_TODO", text : "dadada"});
+```
+
+以上只是简单代码实现，基本是从源码中摘抄出来的，只稍作更改，如你所见，代码其实都很简单。
+
+## 其它一些杂七杂八的
+
+### 对Action的要求
+
+Action必须是个纯对象，且需要带有一个不为undefined的type属性。
+
+### 对Reudcer的要求
+
+Reducer必须是个纯函数。
+
+中间件可以简单，也可以很复杂
+
+中间件其实就是把UI上触发的action，拦截下来了，自己处理，不管在中间件里怎么折腾，只要最后给Store的Action是纯对象就行。
+
+redux-thunk ，就是特别简单的一个，简单判断了下action是否是函数，是函数就调用，不是就传递Action。
+代码如下：
+
+```javascript
+const ({ dispatch, getState }) => (next) => (action) => {
+    if (typeof action === 'function') {
+      return action(dispatch, getState);
+    }
+    return next(action);
+};
+```
+
+相较之下，redux-saga 和 redux-observable就复杂太多了。
+redux-saga里面使用generator语法。redux-observable里引入了rxjs的概念。
+说实在的这两在处理复杂数据流的时候，都很有优势。但也都很复杂。
+但大部分时间，普通前端搬砖过程中，都遇不到这么复杂的数据流，所以我不太喜欢这两个东西。
+
+以上代码的综合版本链接。
+
+
+-网上觉得很有意思的观点-
+Store 扁平化有很大原因是 js 对 immutable 支持力度不够，导致对深层数据修改非常麻烦导致的。
