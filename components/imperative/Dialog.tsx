@@ -7,6 +7,7 @@ interface IShowModal {
   close?: () => void;
   onCancel?: () => void;
   onOk?: () => void;
+  overlayClose?: boolean;
   showFooter?: boolean;
   showHeader?: boolean;
   content: ReactElement;
@@ -27,9 +28,9 @@ export default function CommonDialog(props: IShowModal) {
     showFooter = true,
     showHeader = true,
     content,
-    onOk
+    onOk,
+    overlayClose = true
   } = props;
-  const formRef = useRef<HTMLFormElement>();
 
   const doClose = () => {
     if (typeof onCancel === 'function') {
@@ -59,7 +60,7 @@ export default function CommonDialog(props: IShowModal) {
         <Dialog
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto"
-          onClose={close}
+          onClose={overlayClose ? doClose : () => {}}
         >
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
@@ -71,7 +72,10 @@ export default function CommonDialog(props: IShowModal) {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay onClick={doClose} className="fixed inset-0" />
+              <Dialog.Overlay
+                onClick={overlayClose ? doClose : () => {}}
+                className="fixed inset-0"
+              />
             </Transition.Child>
 
             {/* This element is to trick the browser into centering the modal contents. */}
