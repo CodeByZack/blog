@@ -8,8 +8,6 @@ import Head from 'next/head';
 
 import SEO from '../next-seo.config';
 import MDXComponents from '@/components/MDXComponents';
-import { useAnalytics } from '@/lib/analytics';
-import { ErrorBoundary } from 'react-error-boundary';
 
 export default function App({
   Component,
