@@ -86,6 +86,8 @@ export const CSSTransitionContainer = React.forwardRef<ICSSContainerRef>(
   }
 );
 
+CSSTransitionContainer.displayName = 'CSSTransitionContainer';
+
 /**
  * Css animation that just work.
  * You could use animate.css for instance

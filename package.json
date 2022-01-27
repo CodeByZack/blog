@@ -48,7 +48,6 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-error-boundary": "^3.1.4",
-    "react-tweet-embed": "1.2.2",
     "reading-time": "1.2.1",
     "remark-autolink-headings": "6.0.1",
     "remark-code-titles": "0.1.1",
