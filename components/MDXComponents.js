@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 import ProsCard from '@/components/ProsCard';
 import ConsCard from '@/components/ConsCard';
+import Video from '@/components/Video';
 import Step from '@/components/Step';
 
 const CustomLink = (props) => {
@@ -22,10 +23,11 @@ const CustomLink = (props) => {
 
 const MDXComponents = {
   Image,
+  Video,
   a: CustomLink,
   ConsCard,
   ProsCard,
-  Step,
+  Step
 };
 
 export default MDXComponents;

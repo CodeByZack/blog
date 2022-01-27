@@ -1,9 +1,4 @@
-import React, {
-  MouseEventHandler,
-  PropsWithChildren,
-  useMemo,
-  useState
-} from 'react';
+import React, { PropsWithChildren, useMemo, useState } from 'react';
 import { useRef } from 'react';
 import { dialog, toast } from '../imperative';
 import { IDialogChildProps } from '../imperative/Dialog';
@@ -21,6 +16,8 @@ const imageCompTemplate = (name, url, w, h) => `<Image
   width={${w}}
   height={${h}}
 />`;
+
+const videoCompTemplate = (src) => `<Video src='${src}'/>`;
 
 const formatBytes = (byte: number, b?: number) => {
   if (0 == byte) return '0 B';
@@ -44,6 +41,9 @@ const getFileSize = (file: File, cb: (w: number, h: number) => void) => {
     cb(image.width, image.height);
   };
 };
+
+const ImagesMineTypes = ['image/gif', 'image/png', 'image/jpeg', 'image/webp'];
+const VideoMineTypes = ['video/webm', 'video/ogg', 'video/mp4'];
 
 const Upload = (props: PropsWithChildren<IProps>) => {
   const overLayRef = useRef<HTMLDivElement>();
@@ -122,7 +122,7 @@ export const ImageUploadPreview = (
 
   console.log(props);
 
-  const { fileUrl, fileInfoStr } = useMemo(() => {
+  const { fileUrl, fileInfoStr, fileType } = useMemo(() => {
     if (!file) return { fileUrl: '', fileInfoStr: '' };
     const { name, type, size } = file;
     getFileSize(file, (w, h) => {
@@ -132,7 +132,8 @@ export const ImageUploadPreview = (
       fileUrl: URL.createObjectURL(new Blob([file])),
       fileInfoStr: `文件名字：${name}，文件大小：${formatBytes(
         size
-      )}，文件类型：${type}`
+      )}，文件类型：${type}`,
+      fileType: type
     };
   }, [file]);
 
@@ -156,14 +157,19 @@ export const ImageUploadPreview = (
   return (
     <div>
       <div className="rounded-lg overflow-auto preview w-full h-[300px] from-slate-300 bg-gradient-to-t	">
-        <img
-          className="object-contain w-full h-full"
-          onLoad={(e) => {
-            console.log(e);
-            console.log(this);
-          }}
-          src={result?.fileUrl || fileUrl}
-        />
+        {ImagesMineTypes.includes(fileType) && (
+          <img
+            className="object-contain w-full h-full"
+            src={result?.fileUrl || fileUrl}
+          />
+        )}
+        {VideoMineTypes.includes(fileType) && (
+          <video
+            className="object-contain w-full h-full"
+            controls
+            src={result?.fileUrl || fileUrl}
+          />
+        )}
       </div>
       <div className="mt-4">
         <label
@@ -198,16 +204,25 @@ export const ImageUploadPreview = (
             代码模版：
           </label>
           <div className="mt-4 relative rounded-md shadow-sm text-gray-500 sm:text-sm px-2 ">
-            <pre className="overflow-auto">
-              {imageCompTemplate(
-                result.fileName,
-                result.fileUrl,
-                fileSize.w,
-                fileSize.h
-              )}
-            </pre>
-            <br />
-            {`![${result.fileName}](${result.fileUrl})`}
+            {ImagesMineTypes.includes(fileType) && (
+              <>
+                <pre className="overflow-auto">
+                  {imageCompTemplate(
+                    result.fileName,
+                    result.fileUrl,
+                    fileSize.w,
+                    fileSize.h
+                  )}
+                </pre>
+                <br />
+                {`![${result.fileName}](${result.fileUrl})`}
+              </>
+            )}
+            {VideoMineTypes.includes(fileType) && (
+              <pre className="overflow-auto">
+                {videoCompTemplate(result.fileUrl)}
+              </pre>
+            )}
           </div>
         </div>
       )}
@@ -238,7 +253,7 @@ export const ImageUploadPreview = (
                 cy="12"
                 r="10"
                 stroke="currentColor"
-                stroke-width="4"
+                strokeWidth="4"
               ></circle>
               <path
                 className="opacity-75"

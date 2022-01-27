@@ -17,7 +17,6 @@ import { registerAutoCompletion } from './configEditor';
 import Upload from '../upload';
 import {
   showCreatePostDialog,
-  showImageUploadDialog
 } from '../imperative/WrapperDialog';
 
 interface IProps {

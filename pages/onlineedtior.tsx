@@ -1,10 +1,18 @@
 import { signIn, useSession } from 'next-auth/react';
 import { useQueryString } from '@/lib/hooks';
 import Editor from '@/components/editor';
+import { useEffect } from 'react';
 
 export default function OnlineEdtior() {
   const { data: session } = useSession();
   const queryObj = useQueryString();
+
+  useEffect(() => {
+    // fix 编辑器莫名其妙高度超高的问题
+    const style = document.createElement('style');
+    style.innerText = 'html{ overflow : hidden }';
+    document.head.appendChild(style);
+  }, []);
 
   if (!session) {
     return (
@@ -20,7 +28,10 @@ export default function OnlineEdtior() {
   }
 
   return (
-    <Editor path={queryObj.path as string} accessToken={session.accessToken as string} />
+    <Editor
+      path={queryObj.path as string}
+      accessToken={session.accessToken as string}
+    />
   );
 }
 
