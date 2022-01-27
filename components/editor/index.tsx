@@ -75,6 +75,7 @@ const OnlineEdtior = (props: IProps) => {
     if (editPath) {
       getRepoFile();
     } else {
+      repoUtil.init(accessToken);
       setTimeout(() => {
         showCreatePostDialog((values) => {
           setEditPath(values.post_file);
