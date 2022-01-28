@@ -12,7 +12,7 @@ export default function Home({ posts }) {
           行者、空山的网站
         </h1>
         <h2 className="text-gray-600 dark:text-gray-400 mb-16">
-          怎么找，也找不到我要的快乐，怎么笑，也笑不出颜色...
+          习惯了无话，习惯了自己的世界，习惯了音乐和雨，习惯了就是这样一个自己，安静的回忆，安静的看着回忆也渐渐远离，那有你的情绪，在我的心里，终遁成了冬季。。。
         </h2>
         <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 text-black dark:text-white">
           推荐文章
