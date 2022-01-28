@@ -2,9 +2,9 @@ import Timeline from '../components/Timeline';
 import Container from '../components/Container';
 import BlogPost from '../components/BlogPost';
 import ProjectCard from '../components/ProjectCard';
+import { getAdvicePost } from '@/lib/mdx';
 
-export default function Home() {
-  
+export default function Home({ posts }) {
   return (
     <Container>
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
@@ -17,21 +17,9 @@ export default function Home() {
         <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 text-black dark:text-white">
           推荐文章
         </h3>
-        <BlogPost
-          title="构造你自己的React（翻译）"
-          summary="带你从零实现一个简易版本的React,包含React当中最新的Fiber,Hook,Concurrent等概念。"
-          slug="build-your-owen-react"
-        />
-        <BlogPost
-          title="HTTP的强缓存和协商缓存"
-          summary="介绍关于浏览器缓存的前因后果，分清强缓存和协商缓存，了解相关的http的头字段。"
-          slug="http-cache-introduce"
-        />
-        <BlogPost
-          title="利用Generator执行异步任务"
-          summary="使用generator执行javascript中的异步任务，从generator基础使用到，自己编写执行器，到自己封装类似async/await的功能。"
-          slug="use-generator-in-async-task"
-        />
+        {posts.map((p) => {
+          return <BlogPost key={p.slug} title={p.title} summary={p.summary} slug={p.slug} />;
+        })}
         <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 mt-8 text-black dark:text-white">
           个人项目
         </h3>
@@ -51,4 +39,9 @@ export default function Home() {
       </div>
     </Container>
   );
+}
+
+export async function getStaticProps() {
+  const posts = await getAdvicePost();
+  return { props: { posts } };
 }
