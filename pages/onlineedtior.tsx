@@ -12,6 +12,9 @@ export default function OnlineEdtior() {
     const style = document.createElement('style');
     style.innerText = 'html{ overflow : hidden }';
     document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
   }, []);
 
   if (!session) {

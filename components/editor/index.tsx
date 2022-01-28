@@ -15,9 +15,7 @@ import { format } from 'date-fns';
 import { OnMount } from '@monaco-editor/react';
 import { registerAutoCompletion } from './configEditor';
 import Upload from '../upload';
-import {
-  showCreatePostDialog,
-} from '../imperative/WrapperDialog';
+import { showCreatePostDialog } from '../imperative/WrapperDialog';
 
 interface IProps {
   path?: string;
@@ -151,12 +149,12 @@ const OnlineEdtior = (props: IProps) => {
     }
   }, [path]);
 
-  const leftChildren = (
+  const rightChildren = (
     <Upload>
       <Editor onMount={handleEditorDidMount} onChange={handleChange} />
     </Upload>
   );
-  const rightChildren = (
+  const leftChildren = (
     <Preview frontMatter={frontMatter} mdxResult={mdxResult.comp} />
   );
 
