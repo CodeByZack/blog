@@ -18,7 +18,7 @@ export default function Home({ posts }) {
           推荐文章
         </h3>
         {posts.map((p) => {
-          return <BlogPost key={p.slug} title={p.title} summary={p.summary} slug={p.slug} />;
+          return <BlogPost key={p.slug} title={p.title} summary={p.summary} slug={p.slug} type={p.type} />;
         })}
         <h3 className="font-bold text-2xl md:text-4xl tracking-tight mb-4 mt-8 text-black dark:text-white">
           个人项目
