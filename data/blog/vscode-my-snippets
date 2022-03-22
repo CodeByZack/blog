@@ -1,0 +1,45 @@
+---
+title: 'VSCODE常用的Snippets'
+publishedAt: '2022-03-22'
+summary: '存放一些自己常用的snippets'
+---
+
+## eslint 的 disable snippets
+
+```json
+"eslint-disable": {
+    "prefix": "eslint-disable",
+    "body": [
+    "eslint-disable"
+    ],
+    "description": "ESLint disable"
+},
+"eslint-disable-line": {
+    "prefix": "eslint-disable-line",
+    "body": [
+    "// eslint-disable-line"
+    ],
+    "description": "ESLint disable line"
+},
+"eslint-disable-next-line": {
+    "prefix": "eslint-disable-next-line",
+    "body": [
+    "// eslint-disable-next-line"
+    ],
+    "description": "ESLint disable next line"
+}
+```
+
+## prttier 的 disable snippets
+
+```json
+
+"prettier-ignore": {
+    "prefix": "pre-ignore",
+    "body": [
+    "// prettier-ignore"
+    ],
+    "description": "prettier-ignore"
+}
+
+```
