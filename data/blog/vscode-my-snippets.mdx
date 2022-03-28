@@ -7,39 +7,65 @@ summary: '存放一些自己常用的snippets'
 ## eslint 的 disable snippets
 
 ```json
-"eslint-disable": {
+  "eslint-disable": {
     "prefix": "eslint-disable",
-    "body": [
-    "eslint-disable"
-    ],
-    "description": "ESLint disable"
-},
-"eslint-disable-line": {
+    "body": ["// eslint-disable"],
+    "description": "ESLint disable wrapper"
+  },
+  "eslint-disable-line": {
     "prefix": "eslint-disable-line",
-    "body": [
-    "// eslint-disable-line"
-    ],
+    "body": ["// eslint-disable-line "],
     "description": "ESLint disable line"
-},
-"eslint-disable-next-line": {
+  },
+  "eslint-disable-next-line": {
     "prefix": "eslint-disable-next-line",
-    "body": [
-    "// eslint-disable-next-line"
-    ],
+    "body": ["// eslint-disable-next-line"],
     "description": "ESLint disable next line"
-}
+  }
 ```
 
 ## prttier 的 disable snippets
 
 ```json
 
-"prettier-ignore": {
+  "prettier-ignore": {
     "prefix": "pre-ignore",
-    "body": [
-    "// prettier-ignore"
-    ],
+    "body": ["// prettier-ignore"],
     "description": "prettier-ignore"
-}
+  }
+
+```
+
+## typescriptreact 的 snippets
+
+```json
+  "react class component": {
+    "prefix": "rcc",
+    "body": [
+      "import React, { Component } from 'react'",
+      "class $1 extends Component {",
+      "    render(){",
+      "        return (<div></div>);",
+      "    }",
+      "}",
+      "export default $1;"
+    ],
+    "description": "react class component"
+  },
+
+  "react function component": {
+    "prefix": "rfc",
+    "body": [
+      "import React from 'react';",
+      "interface IProps {};",
+      "const $1 = (props : IProps)=>{",
+      "    return (",
+      "        <div>$1</div>",
+      "    );",
+      "}",
+      "export default $1;"
+    ],
+    "description": "react function component "
+  }
 
 ```
