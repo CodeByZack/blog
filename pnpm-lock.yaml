@@ -26,6 +26,7 @@ specifiers:
   gray-matter: 4.0.2
   image-size: 0.9.3
   mdx-prism: 0.3.1
+  monaco: ^1.201704190613.0
   monaco-editor: ^0.31.1
   next: 12.0.7
   next-auth: ^4.0.5
@@ -108,6 +109,7 @@ devDependencies:
   cross-env: 7.0.3
   globby: 11.0.2
   image-size: 0.9.3
+  monaco: 1.201704190613.0
   postcss: 8.4.5
   postcss-import: 14.0.2_postcss@8.4.5
   prettier: 2.2.1
@@ -4898,6 +4900,10 @@ packages:
   /monaco-editor/0.31.1:
     resolution: {integrity: sha512-FYPwxGZAeP6mRRyrr5XTGHD9gRXVjy7GUzF4IPChnyt3fS5WrNxIkS8DNujWf6EQy0Zlzpxw8oTVE+mWI2/D1Q==}
     dev: false
+
+  /monaco/1.201704190613.0:
+    resolution: {integrity: sha1-RRluJcAgx9ECIZFJdyzjhkvgShw=}
+    dev: true
 
   /mri/1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
