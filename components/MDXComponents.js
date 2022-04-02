@@ -5,6 +5,7 @@ import ProsCard from '@/components/ProsCard';
 import ConsCard from '@/components/ConsCard';
 import Video from '@/components/Video';
 import Step from '@/components/Step';
+import CodeBlock from '@/components/CodeBlock';
 
 const CustomLink = (props) => {
   const href = props.href;
@@ -27,7 +28,8 @@ const MDXComponents = {
   a: CustomLink,
   ConsCard,
   ProsCard,
-  Step
+  Step,
+  CodeBlock
 };
 
 export default MDXComponents;

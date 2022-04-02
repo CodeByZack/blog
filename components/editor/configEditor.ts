@@ -7,6 +7,10 @@ const imageComp = `<Image
   height={170}
 />`;
 
+const monacoCodeBlock = `<CodeBlock language="javascript" readonly>
+{\`console.log('hello world')\`}
+</CodeBlock>`;
+
 const markdownSnippet = [
   {
     label: 'inline-code',
@@ -42,6 +46,11 @@ const markdownSnippet = [
     label: 'insert-link',
     insertText: '[$1]($2)',
     desc: '插入链接'
+  },
+  {
+    label: 'monaco-code',
+    insertText: monacoCodeBlock,
+    desc: '插入monaco代码块'
   }
 ];
 
