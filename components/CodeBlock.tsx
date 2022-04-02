@@ -5,7 +5,7 @@ interface IProps {
   language: string;
   code: string;
   readonly?: boolean;
-  disableScroll?: boolean;
+  // disableScroll?: boolean;
   height?: React.CSSProperties['height'];
 }
 
@@ -15,8 +15,8 @@ const CodeBlock = (props: PropsWithChildren<IProps>) => {
     code,
     height = 300,
     children,
-    readonly,
-    disableScroll
+    readonly
+    // disableScroll
   } = props;
   const editorRef = useRef<Parameters<OnMount>['0']>(null);
   const monacoRef = useRef<Monaco>(null);
@@ -24,9 +24,7 @@ const CodeBlock = (props: PropsWithChildren<IProps>) => {
   const onMount: OnMount = (editor, monaco) => {
     editorRef.current = editor;
     monacoRef.current = monaco;
-    setTimeout(() => {
-      editor.updateOptions({ readOnly: readonly });
-    }, 0);
+    editor.updateOptions({ readOnly: readonly });
   };
 
   useEffect(() => {
@@ -38,19 +36,19 @@ const CodeBlock = (props: PropsWithChildren<IProps>) => {
     }
   }, [readonly]);
 
-  useEffect(() => {
-    if (editorRef.current && disableScroll) {
-      editorRef.current.updateOptions({
-        overviewRulerLanes: 0,
-        scrollbar: {
-          vertical: 'hidden',
-          horizontal: 'hidden',
-          handleMouseWheel: false
-        },
-        wordWrap: 'on'
-      });
-    }
-  }, [disableScroll]);
+  // useEffect(() => {
+  //   if (editorRef.current && disableScroll) {
+  //     editorRef.current.updateOptions({
+  //       overviewRulerLanes: 0,
+  //       scrollbar: {
+  //         vertical: 'hidden',
+  //         horizontal: 'hidden',
+  //         handleMouseWheel: false
+  //       },
+  //       wordWrap: 'on'
+  //     });
+  //   }
+  // }, [disableScroll]);
 
   useEffect(() => {
     if (editorRef.current) {
@@ -73,7 +71,9 @@ const CodeBlock = (props: PropsWithChildren<IProps>) => {
         onMount={onMount}
         theme="vs-dark"
         options={{
-          minimap: { enabled: false }
+          minimap: { enabled: false },
+          renderFinalNewline: false,
+          lineNumbers: 'off'
         }}
         defaultLanguage={language}
         defaultValue={(children as string) || code}
