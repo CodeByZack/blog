@@ -1,84 +1,55 @@
-.heti h1,
-.heti h2,
-.heti h3,
-.heti h4,
-.heti h5,
-.heti h6 {
-  position: relative;
-  margin: 0;
-  margin-block-start: 24px;
-  margin-block-end: 12px;
-  font-weight: 600;
-}
-.heti h1 {
-  margin-block-end: 24px;
-  font-size: 32px;
-  line-height: 48px;
-}
-.heti h2 {
-  font-size: 24px;
-  line-height: 36px;
-}
-.heti h3 {
-  font-size: 20px;
-  line-height: 36px;
-}
-.heti h4 {
-  font-size: 18px;
-  line-height: 24px;
-}
-.heti h5 {
-  font-size: 16px;
-  line-height: 24px;
-}
-.heti h6 {
-  font-size: 14px;
-  line-height: 24px;
-}
-.heti h1,
-.heti h2,
-.heti h3 {
-  letter-spacing: 0.05em;
+/* .heti p>img {
+  width: 100%;
+} */
+
+.sticky-nav {
+  position: sticky;
+  z-index: 10;
+  top: 0;
+  backdrop-filter: saturate(180%) blur(20px);
+  transition: background-color 0.1 ease-in-out;
 }
 
-.heti p {
-  margin-block-start: 12px;
-  margin-block-end: 24px;
-  text-align: justify;
+code {
+  color: #f81ce5;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  font-size: 0.9em;
+  white-space: pre-wrap;
 }
 
-.heti table {
-  box-sizing: border-box;
-  table-layout: fixed;
-  margin-block-start: 12px;
-  margin-block-end: 24px;
-  margin-inline-start: auto;
-  margin-inline-end: auto;
-  border-collapse: collapse;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #ccc;
-  word-break: break-word;
+.dark code {
+  color: #79ffe1;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  font-size: 0.9em;
+  white-space: pre-wrap;
 }
 
-.heti th,
-.heti td {
-  padding-block-start: 6px;
-  padding-block-end: 6px;
-  padding-inline-start: 8px;
-  padding-inline-end: 8px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #ccc;
+a {
+  color: #0070f3;
 }
 
-.heti b,
-.heti strong {
-  font-weight: 600;
+blockquote {
+  line-height: 1.8;
+  border: 1px solid #666;
+  color: #666;
+  background-color: #fff;
+  border-radius: 6px;
+  font-size: calc(0.875 * 16px);
+  width: auto;
+  height: auto;
+  padding: calc(0.667 * 16px) calc(1.32 * 16px) calc(0.667 * 16px) calc(1.32 * 16px);
+  margin: 0 0 0 0;
 }
-.heti em {
-  font-weight: 600;
-}
-.heti i {
-  font-style: italic;
+
+.dark blockquote {
+  line-height: 1.8;
+  border: 1px solid #888;
+  color: #888;
+  background-color: #000;
+  border-radius: 6px;
+  font-size: calc(0.875 * 16px);
+  width: auto;
+  height: auto;
+  padding: calc(0.667 * 16px) calc(1.32 * 16px) calc(0.667 * 16px) calc(1.32 * 16px);
+  margin: 0 0 0 0;
 }

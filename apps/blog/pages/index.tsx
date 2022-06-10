@@ -28,14 +28,14 @@ const Index = (props: IProps) => {
   };
   return (
     <Container>
-      <div className="heti heti--serif">
-        <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white">
+      <div className='heti heti--sans'>
+        <h1 className="font-bold tracking-tight mb-4 text-black dark:text-white">
           行者、空山的网站
         </h1>
-        <h2 className="text-gray-600 dark:text-gray-400 mb-16">
-          习惯了无话，习惯了自己的世界，习惯了音乐和雨，习惯了就是这样一个自己，安静的回忆，安静的看着回忆也渐渐远离，那有你的情绪，在我的心里，终遁成了冬季。。。
-        </h2>
-        <div className="w-full">
+        <h4 className="text-gray-600 dark:text-gray-400 mb-8">
+          今天花谢，风云浓烈，我在时光里做梦，梦见了你的脸。。。
+        </h4>
+        <div className="w-full my-8">
           <input
             type="text"
             onKeyDown={handleKeyDown}
@@ -47,6 +47,7 @@ const Index = (props: IProps) => {
         {filteredBlogPosts.map((p) => {
           return <ArticleEnter key={p.slug} data={p} />;
         })}
+
       </div>
     </Container>
   );

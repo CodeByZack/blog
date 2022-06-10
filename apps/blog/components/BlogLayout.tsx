@@ -56,7 +56,7 @@ const BlogLayout = (props: PropsWithChildren<IProps>) => {
         image=""
         {...post}
       />
-      <article className="heti heti--serif flex flex-col justify-center text-slate-900 items-start max-w-3xl mx-auto mb-16 w-full">
+      <article className="heti heti--sans flex flex-col justify-center text-slate-900 items-start max-w-3xl mx-auto mb-16 w-full">
         <BlogTitle post={post} />
         <div className="max-w-none w-full mb-6 dark:text-gray-400">
           {children}

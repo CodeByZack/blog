@@ -116,15 +116,18 @@
   margin-block-end: 0 !important;
 }
 .heti blockquote {
-  margin-block-start: 12px;
-  margin-block-end: 24px;
-  margin-inline-start: 32px;
-  margin-inline-end: 32px;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   padding-block-start: 12px;
   padding-block-end: 12px;
   padding-inline-start: 16px;
   padding-inline-end: 16px;
   background-color: rgba(0, 0, 0, 0.054);
+}
+.heti blockquote p {
+  margin: 0;
 }
 @media (prefers-color-scheme: dark) {
   .heti blockquote {
@@ -257,10 +260,10 @@
   margin-block-start: 12px;
   margin-block-end: 24px;
 }
-/* .heti ul,
+.heti ul,
 .heti ol {
   padding-inline-start: 32px;
-} */
+}
 .heti ul ul,
 .heti ul ol,
 .heti ol ul,
@@ -827,8 +830,4 @@
 }
 .heti .heti-adjacent-quarter {
   margin-inline-end: -0.25em;
-}
-
-.heti p > img {
-  width: 100%;
 }
