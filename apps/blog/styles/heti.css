@@ -257,10 +257,10 @@
   margin-block-start: 12px;
   margin-block-end: 24px;
 }
-.heti ul,
+/* .heti ul,
 .heti ol {
   padding-inline-start: 32px;
-}
+} */
 .heti ul ul,
 .heti ul ol,
 .heti ol ul,

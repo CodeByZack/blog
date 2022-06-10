@@ -84,12 +84,7 @@ store.dispatch(someAction);
 
 看完上面代码，有没有觉得其实Redux其实真的很简单。上面代码流程 大概是下面这样：
 
-<Image
-  alt={'redux_flow.png'}
-  src={'https://zackdkblog.oss-cn-beijing.aliyuncs.com/redux_flow.png'}
-  width={1098}
-  height={736}
-/>
+![redux_flow.png](https://zackdkblog.oss-cn-beijing.aliyuncs.com/redux_flow.png)
 
 ## 逐渐复杂的Redux
 
@@ -193,12 +188,7 @@ const applyMiddleware = (...middlewares) => (createStore) => (reducer) => {
 
 简单画了个图，将就看看：
 
-<Image
-  alt={'middleware-flow.png'}
-  src={'https://zackdkblog.oss-cn-beijing.aliyuncs.com/middleware-flow.png'}
-  width={831}
-  height={411}
-/>
+![middleware-flow.png](https://zackdkblog.oss-cn-beijing.aliyuncs.com/middleware-flow.png)
 
 简单来说，中间件是一个三阶函数（自己的叫法）像这样
 ()=>()=>()=>{} 。对应图中的constructor->next->action。
