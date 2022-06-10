@@ -1,0 +1,84 @@
+.heti h1,
+.heti h2,
+.heti h3,
+.heti h4,
+.heti h5,
+.heti h6 {
+  position: relative;
+  margin: 0;
+  margin-block-start: 24px;
+  margin-block-end: 12px;
+  font-weight: 600;
+}
+.heti h1 {
+  margin-block-end: 24px;
+  font-size: 32px;
+  line-height: 48px;
+}
+.heti h2 {
+  font-size: 24px;
+  line-height: 36px;
+}
+.heti h3 {
+  font-size: 20px;
+  line-height: 36px;
+}
+.heti h4 {
+  font-size: 18px;
+  line-height: 24px;
+}
+.heti h5 {
+  font-size: 16px;
+  line-height: 24px;
+}
+.heti h6 {
+  font-size: 14px;
+  line-height: 24px;
+}
+.heti h1,
+.heti h2,
+.heti h3 {
+  letter-spacing: 0.05em;
+}
+
+.heti p {
+  margin-block-start: 12px;
+  margin-block-end: 24px;
+  text-align: justify;
+}
+
+.heti table {
+  box-sizing: border-box;
+  table-layout: fixed;
+  margin-block-start: 12px;
+  margin-block-end: 24px;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  border-collapse: collapse;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ccc;
+  word-break: break-word;
+}
+
+.heti th,
+.heti td {
+  padding-block-start: 6px;
+  padding-block-end: 6px;
+  padding-inline-start: 8px;
+  padding-inline-end: 8px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ccc;
+}
+
+.heti b,
+.heti strong {
+  font-weight: 600;
+}
+.heti em {
+  font-weight: 600;
+}
+.heti i {
+  font-style: italic;
+}
