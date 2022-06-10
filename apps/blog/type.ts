@@ -1,6 +1,7 @@
 export interface IArticleFrontMatter {
   title: string;
   publishedAt: string;
+  updatedAt: string;
   advice: boolean;
   summary: string;
   slug: string;

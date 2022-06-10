@@ -7,8 +7,8 @@ import dayjs from 'dayjs';
 import { PropsWithChildren } from 'react';
 
 // prettier-ignore
-const editUrl = (slug) =>`https://github.com/codebyzack/blog/edit/master/data/blog/${slug}.mdx`;
-const onLineEditUrl = (slug, type) => `/data/${type}/${slug}.mdx`;
+const editUrl = (type, slug) =>`https://github.com/codebyzack/blog/edit/master/apps/blog/data/${type}/${slug}.mdx`;
+const onLineEditUrl = (slug, type) => `/apps/blog/data/${type}/${slug}.mdx`;
 
 interface IProps {
   post: IArticleDetail;
@@ -33,7 +33,7 @@ export const BlogTitle = (props: { post: Partial<IArticleDetail> }) => {
           />
           <span className="text-sm text-gray-700 dark:text-gray-300 ml-2">
             {'行者、空山 / '}
-            {dayjs(post.publishedAt).format('YYYY-MM-DD')}
+            {dayjs(post.updatedAt).format('YYYY-MM-DD HH:mm:ss')}
           </span>
         </div>
         <span className="text-sm text-gray-500">
@@ -64,7 +64,7 @@ const BlogLayout = (props: PropsWithChildren<IProps>) => {
         <div className="text-sm text-gray-700 dark:text-gray-300">
           纠正错误 {` • `}
           <a
-            href={editUrl(post.slug)}
+            href={editUrl(type, post.slug)}
             target="_blank"
             rel="noopener noreferrer"
           >

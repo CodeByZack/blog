@@ -53,7 +53,7 @@ const Index = (props: IProps) => {
 };
 
 export async function getStaticProps() {
-  const posts = await getAllFilesFrontMatter('blog');
+  const posts = await getAllFilesFrontMatter();
   return { props: { posts } };
 }
 

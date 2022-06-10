@@ -6,12 +6,14 @@ import { IArticleFrontMatter } from '../type';
 import readingTime from './read-time';
 
 const root = process.cwd();
+export type PostType = "blog" | "life";
 
-export async function getFiles(type) {
+
+export async function getFiles(type : PostType) {
   return fs.readdirSync(path.join(root, 'data', type));
 }
 
-export async function getFileBySlug(type, slug) {
+export async function getFileBySlug(type : PostType, slug : string) {
   const source = slug
     ? fs.readFileSync(path.join(root, 'data', type, `${slug}.mdx`), 'utf8')
     : fs.readFileSync(path.join(root, 'data', `${type}.mdx`), 'utf8');
@@ -27,7 +29,13 @@ export async function getFileBySlug(type, slug) {
   };
 }
 
-export async function getAllFilesFrontMatter(type) {
+export  const getAllFilesFrontMatter = async ()=>{
+  const blogs = await getPostFrontMatterByType("blog");
+  const life = await getPostFrontMatterByType("life");
+  return [...blogs,...life];
+};
+
+export async function getPostFrontMatterByType(type : PostType) {
   const files = fs.readdirSync(path.join(root, 'data', type));
   return files.reduce((allPosts, postSlug) => {
     const source = fs.readFileSync(
@@ -47,8 +55,8 @@ export async function getAllFilesFrontMatter(type) {
 }
 
 export const getAdvicePost = async () => {
-  const blog_posts = await getAllFilesFrontMatter('blog');
-  const life_posts = await getAllFilesFrontMatter('life');
+  const blog_posts = await getPostFrontMatterByType('blog');
+  const life_posts = await getPostFrontMatterByType('life');
   return [
     ...blog_posts.map((p) => ({ ...p, type: 'blog' })),
     ...life_posts.map((p) => ({ ...p, type: 'life' })),

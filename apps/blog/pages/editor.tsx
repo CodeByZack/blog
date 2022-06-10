@@ -41,6 +41,13 @@ updatedAt: '${dayjs().format('YYYY-MM-DD HH:mm:ss')}'
 summary: '${data.desc}'
 ---`;
 
+const injectUpdateTime = (str : string)=>{
+  const {  data, content } = matter(str);
+  data.updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
+  const result = matter.stringify(content,data);
+  return result;
+};
+
 const BlogEditor = (props: IProps) => {
   const valueRef = useRef('');
   const { data: session } = useSession();
@@ -145,12 +152,13 @@ const BlogEditor = (props: IProps) => {
 
   const savePost = async () => {
     const { path, sha } = dataHolder.current.editPost;
+    const hasUpdateDateContent = injectUpdateTime(valueRef.current);
     try {
       setLoading(true);
       const res = await repoUtil.updateRepoFile({
         path,
         sha: sha || undefined,
-        content: valueRef.current,
+        content: hasUpdateDateContent,
       });
       dataHolder.current.editPost.sha = res.data.content.sha;
       setLoading(false);
