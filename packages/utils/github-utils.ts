@@ -43,7 +43,7 @@ const updateRepoFile = async (updateObj: any) => {
   return res;
 };
 
-const repoUtil = {
+const repoUtil : any = {
   init,
   getRepoFile,
   updateRepoFile,
