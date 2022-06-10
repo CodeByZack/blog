@@ -34,12 +34,7 @@ summary: '虚拟DOM到底是什么？虚拟DOM的由来？虚拟DOM的优缺点�
 
 虚拟dom实际上就是一个js对象，没有什么神奇，大概就长下面这样。属性个数视具体实现而定。但肯定比真实dom轻量多了。
 
-<Image
-  alt={`virtual-dom-obj`}
-  src={`https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/something-about-virtual-dom/virtual-dom-obj.png`}
-  width={217}
-  height={212}
-/>
+![virtual-dom-obj](https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/something-about-virtual-dom/virtual-dom-obj.png)
 
 type（tag）-元素类型
 props - 其它一些用户添加的属性（比如style啥的）
@@ -76,20 +71,10 @@ key - 做diff时会用到，能降低diff算法的复杂度
 
 1. 前端dom树跨层级操作比较少见，常见的操作在于子元素之间的移动，比如列表中的移动，删除，新增。所以有了第一次的优化，只对比同级的元素。然后复杂度降低到了O(n^2)。
 
-<Image
-  alt={`virtual-dom-obj`}
-  src={`https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/something-about-virtual-dom/diff-on2.png`}
-  width={544}
-  height={174}
-/>
+![virtual-dom-obj](https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/something-about-virtual-dom/diff-on2.png)
 
 2. 优化掉了跨级元素的比较，再来看看同级元素还有没有可以优化的。同级元素比较，不同元素标签可以直接判断是不同的，但是相同元素标签就比较麻烦了，三个input，变两个input，你是删除哪一个呢？或者你也可以直接全部删除，然后新建。为了避免这种情况，react使用在虚拟dom上加上一个key属性，来辅助做diff。这样比较的时候就能明确的知道哪个是哪个了。然后结合hash表。复杂度就下降到了O(n)
 
-<Image
-  alt={`virtual-dom-obj`}
-  src={`https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/something-about-virtual-dom/diff-on.png`}
-  width={570}
-  height={223}
-/>
+![virtual-dom-obj](https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/something-about-virtual-dom/diff-on.png)
 
 图片摘自[react是怎样练成的](https://segmentfault.com/a/1190000013365426#item-4)。

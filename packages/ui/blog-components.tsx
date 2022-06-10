@@ -11,7 +11,6 @@ import Image from 'next/image';
 
 export const BlogComponents: any = {
   Button,
-  Image,
   ThemeIcon,
 };
 

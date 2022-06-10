@@ -828,3 +828,7 @@
 .heti .heti-adjacent-quarter {
   margin-inline-end: -0.25em;
 }
+
+.heti p > img {
+  width: 100%;
+}

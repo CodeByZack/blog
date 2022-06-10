@@ -7,12 +7,7 @@ summary: '详细的介绍了React中的新架构Fiber，和新recognition算法�
 
 原文链接：[https://indepth.dev/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react/](https://indepth.dev/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react/)
 
-<Image
-  alt={`react-fiber`}
-  src={`https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/inside-fiber-in-depth-overview-of-the-react/react-fiber.png`}
-  width={1000}
-  height={434}
-/>
+![react-fiber](https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/inside-fiber-in-depth-overview-of-the-react/react-fiber.png)
 
 ** 这篇文章详细的介绍了React中的新架构Fiber，和新recognition算法中的两个主要阶段。还会详细的了解到React是如何更新state和props，以及处理children的。**
 
@@ -36,13 +31,7 @@ React的[文档](https://reactjs.org/docs/reconciliation.html)对该机制进行
 
 在本系列的文章中，我都将使用下面这个简单程序。Counter，点击一次就+1。
 
-<Image
-  alt={`tmp1.gif`}
-  src={`https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/inside-fiber-in-depth-overview-of-the-react/tmp1.gif`}
-  width={210}
-  height={68}
-/>
-
+![tmp1.gif](https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/inside-fiber-in-depth-overview-of-the-react/tmp1.gif)
 
 [在线demo](https://stackblitz.com/edit/react-t4rdmh)，代码如下：
 
@@ -184,12 +173,7 @@ fiber tree 是可变的数据结构，保存了组件的 state 和 DOM 。
 
 React 会为每个 React元素 创建一个 fiber 节点，由于程序的React元素本身就是一颗树形结构，所以我们也会有一颗 fiber tree。我们的示例程序中的 fiber tree 看起来像下面这样：
 
-<Image
-  alt={`image-51`}
-  src={`https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/inside-fiber-in-depth-overview-of-the-react/image-51.png`}
-  width={555}
-  height={242}
-/>
+![image-51](https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/inside-fiber-in-depth-overview-of-the-react/image-51.png)
 
 从图中可以看出,所有的 fiber 节点都由 child，sibling，return 属性连接起来。至于为什么要采用这种形式，你可以参考 [The how and why on React’s usage of linked list in Fiber](https://medium.com/dailyjs/the-how-and-why-on-reacts-usage-of-linked-list-in-fiber-67f1014d0eb7)。
 
@@ -230,21 +214,11 @@ React的更新过程是非常快的，为了做到非常快，React使用了一�
 
 为了更加直观，可以看图中黄色标记的fiber节点，那代表着仍有一些work需要处理。比如说，更新操作导致了`c2`被插入DOM，`d2`和`c1`改变了属性，然后`b2`需要调用生命周期函数。这些都会被线性表 也就是 effect list 连接起来，所以当React要开始执行effect的时候 ，就可以直接跳过没有 side effect 的节点了。
 
-<Image
-  alt={`image-52`}
-  src={`https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/inside-fiber-in-depth-overview-of-the-react/image-52.png`}
-  width={475}
-  height={357}
-/>
+![image-52](https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/inside-fiber-in-depth-overview-of-the-react/image-52.png)
 
 上图中 你可以看到effects是怎么连接起来的。当开始遍历节点时，React使用firstEffect 指向线性表的头部。所以上面这副图可以简化成下面这样的线性表：
 
-<Image
-  alt={`image-53`}
-  src={`https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/inside-fiber-in-depth-overview-of-the-react/image-53.png`}
-  width={712}
-  height={103}
-/>
+![image-53](https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/inside-fiber-in-depth-overview-of-the-react/image-53.png)
 
 ### Root of the fiber tree
 
@@ -422,12 +396,7 @@ function workLoop(isYieldy) {
 
 为了演示如何使用它们，请看下面的动态演示。我在演示中使用了这些函数的简化实现。每个函数都接受一个fiber node进行处理，随着React往树深处遍历，你可以看到当前激活的fiber发生改变。你可以清楚的看到这个算法是怎么从一个分支到另一个分支的。它首先完成子节点的工作，然后再完成父元素的工作。
 
-<Image
-  alt={`tmp2.gif`}
-  src={`https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/inside-fiber-in-depth-overview-of-the-react/tmp2.gif`}
-  width={780}
-  height={420}
-/>
+![tmp2.gif](https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/inside-fiber-in-depth-overview-of-the-react/tmp2.gif)
 
 注意，直线垂直链接表示sibling节点，而弯曲的连接表示子节点。例如b1没有子节点，而b2有一个子节点c1。
 

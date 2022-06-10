@@ -52,20 +52,11 @@ A执行完毕，执行上下文A出栈，销毁
 
 关于结构，网上经常有人讨论VO/AO。那是ES3时代的东西。结构看起来像下面这样。
 
-<Image
-  alt={`javascript-execute-context`}
-  src={`https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/javascript-execute-context/es3-execute-context.png`}
-  width={600}
-  height={270}
-/>
+![javascript-execute-context](https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/inside-fiber-in-depth-overview-of-the-react/es3-execute-context.png)
 
 ES5的时候，已经更改成如下结构了。
 
-<Image
-  alt={`javascript-execute-context`}
-  src={`https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/javascript-execute-context/es5-execute-context.png`}
-  width={1135}
-  height={581}
-/>
+![javascript-execute-context](https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/inside-fiber-in-depth-overview-of-the-react/es5-execute-context.png)
+
 
 虽然变动了，但核心还是保存那几个值，this，参数，本地变量，作用域链这些东西以供函数正常执行。

@@ -1,0 +1,20 @@
+{
+  "cSpell.words": [
+    "aliyuncs",
+    "Attributify",
+    "Devbook",
+    "devbookhq",
+    "heti",
+    "importmap",
+    "nextjs",
+    "Plex",
+    "recma",
+    "rehype",
+    "resizer",
+    "tsup",
+    "turborepo",
+    "unocss",
+    "zackdkblog"
+  ],
+  "eslint.workingDirectories": ["apps/blog"],
+}

@@ -100,12 +100,7 @@ container.appendChild(node)
 
 babel在处理jsx的时候,文本节点和普通的html元素有些差异，文本节点直接是一个字符串，元素则是一个对象。如下图所示。
 
-<Image
-  alt={`virtual-dom-babel`}
-  src={`https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/build-your-owen-react/virtual-dom-babel.png`}
-  width={400}
-  height={170}
-/>
+![virtual-dom-babel](https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/build-your-owen-react/virtual-dom-babel.png)
 
 为了保持处理的一致性我们将文本节点也视为一个node节点，即TextNode。然后通过nodeValue设置文本。这样，就可以把文本节点看成
 
@@ -374,12 +369,7 @@ Didact.render(
 )
 ```
 
-<Image
-  alt={`fiber-tree`}
-  src={`https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/build-your-owen-react/fiber-tree.png`}
-  width={716}
-  height={710}
-/>
+![fiber-tree](https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/build-your-owen-react/fiber-tree.png)
 
 在render函数里，我们会创建root fiber，并把它设置为nextUnitOfWork。剩下的工作将由performUnitOfWork来实现，我们将要做三件事：
 

@@ -259,12 +259,7 @@ notify方法会调用所有subs里的watcher.update().<br />[dep.js#L36](https:/
 
 现在看看官网贴的那张关于响应式的图。[链接](https://vuejs.org/v2/guide/reactivity.html)
 
-<Image
-  alt={`vue-reactive-1`}
-  src={`https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/reactivity-in-vue/vue-reactive-1.png`}
-  width={760}
-  height={442}
-/>
+![vue-reactive-1](https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/reactivity-in-vue/vue-reactive-1.png)
 
 图里watcher/data都有了，暂时把左边那一堆当成getter。就都有了。这样看起来就比较好理解了。<br />实例化Vue的时候，observe(data)为所有属性添加get/set方法，新建watcher，会执行一次getter，触发data属性的get方法，进行依赖收集，与watcher建立关系。当改变data数据的时候，notify告知watcher进行更新。
 
