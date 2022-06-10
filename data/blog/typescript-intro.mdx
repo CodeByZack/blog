@@ -8,9 +8,9 @@ summary: 'typescript 基础类型介绍 内置常用工具类型 泛型计算介
 
 ### 原始值类型
 
-原始值类型，ts 会自动推导出来。
+原始值类型,ts 会自动推导出来。
 
-类型语法：string，number，boolean
+类型语法：string,number,boolean
 
 ```typescript
 const a: string = 'hello ts';
@@ -18,7 +18,7 @@ const b: number = 2;
 const c: boolean = true;
 ```
 
-需要注意的是：String, Number, Boolean 在 TS 里都是有效值，但平时使用中几乎不会用到。
+需要注意的是：String, Number, Boolean 在 TS 里都是有效值,但平时使用中几乎不会用到。
 
 ### 数组类型
 
@@ -62,7 +62,7 @@ todo-函数重载
 
 ### 对象类型
 
-最常用的类型，使用 ?: 可以让某个属性可选。
+最常用的类型,使用 ?: 可以让某个属性可选。
 
 ```typescript
 const obj: {
@@ -78,9 +78,9 @@ const obj: {
 
 ### 联合类型（Union Types）
 
-简单来说就是，一个变量可能有多个类型选项。
+简单来说就是,一个变量可能有多个类型选项。
 
-当一个函数入参可能是这种类型，或者是那种类型。就可以使用联合类型。如下：
+当一个函数入参可能是这种类型,或者是那种类型。就可以使用联合类型。如下：
 
 ```typescript
 const printId = (id: number | string) => {
@@ -92,7 +92,7 @@ printId('str');
 // printId(true); 此处会提示类型错误
 ```
 
-有一个问题，既然变量可能有多个类型定义，你就不能只使用属于某个类型定义的属性。
+有一个问题,既然变量可能有多个类型定义,你就不能只使用属于某个类型定义的属性。
 
 ```typescript
 const printId = (id: number | string) => {
@@ -100,7 +100,7 @@ const printId = (id: number | string) => {
 };
 ```
 
-此时你需要做一个操作，类型收窄，即判断了类型再使用相应类型的属性。
+此时你需要做一个操作,类型收窄,即判断了类型再使用相应类型的属性。
 
 ```typescript
 const printId = (id: number | string) => {
@@ -116,7 +116,7 @@ const printId = (id: number | string) => {
 
 ### 类型别名（Type Aliases）
 
-上面都是直接在变量后面追加类型定义，很方便，但是不方便复用。这个时候你就可以考虑类型别名。
+上面都是直接在变量后面追加类型定义,很方便,但是不方便复用。这个时候你就可以考虑类型别名。
 
 ```typescript
 // 对象类型 别名Point
@@ -150,12 +150,12 @@ interface Point {
   height={740}
 />
 
-搬官网的，
+搬官网的,
 interface 可以使用 extends 继承。定义多个同名 interface 可以合并属性。
 
 Type 可以使用 & 进行继承合并。多个同名 Type 会报错。
 
-个人补充一点，类型计算一般都使用的 Type . 无法使用 interface .
+个人补充一点,类型计算一般都使用的 Type . 无法使用 interface .
 
 ```typescript
 // 以下会报错
@@ -172,7 +172,7 @@ export type D<T> = {
 
 ### 类型断言
 
-有些时候，typescript 并不能推断出具体的类型。
+有些时候,typescript 并不能推断出具体的类型。
 
 像下面这样的
 
@@ -180,7 +180,7 @@ export type D<T> = {
 const myCanvas = document.getElementById("main_canvas");
 ```
 
-typescript只能推断出它属于`HTMLElement`类型，但你是明确知道元素是`HTMLCanvasElement`。这种时候你就可以使用类型断言，像下面这样
+typescript只能推断出它属于`HTMLElement`类型,但你是明确知道元素是`HTMLCanvasElement`。这种时候你就可以使用类型断言,像下面这样
 
 
 ```typescript
@@ -190,13 +190,13 @@ const myCanvas = document.getElementById("main_canvas") as HTMLCanvasElement;
 
 ### 字面量类型
 
-字面量类型，顾名思义就是像下面这样，`a`的类型就固定为`test`了，不是`string`。
+字面量类型,顾名思义就是像下面这样,`a`的类型就固定为`test`了,不是`string`。
 
 ```typescript
 let a : 'test'  = 'test';
 ```
 
-需要特别注意的是，取决于Javascript声明变量的方式，TS会推断出不同的类型。`let`、`var`声明的变量都允许修改。`const`则不允许。
+需要特别注意的是,取决于Javascript声明变量的方式,TS会推断出不同的类型。`let`、`var`声明的变量都允许修改。`const`则不允许。
 
 因此对于`let`、`var`声明的变量：
 
@@ -214,7 +214,7 @@ const num = "num"; // 推断为字面量 'num' 类型
 const b = true; // 推断为字面量 true 类型
 ```
 
-但当在用const声明一个对象时，TS会默认该对象的属性都是可以修改的。所以推断出的类型都是基本类型。如果你想推断为字面量的类型，需要在后面加上`as const`，示例如下：
+但当在用const声明一个对象时,TS会默认该对象的属性都是可以修改的。所以推断出的类型都是基本类型。如果你想推断为字面量的类型,需要在后面加上`as const`,示例如下：
 
 ```typescript
 // 以下推断出的类型为
@@ -239,7 +239,7 @@ const req = { url: "https://example.com", method: "GET" } as const;
 
 `TypeScript`也有这两个相对应的类型的定义`null`和`undefined`。
 
-这两个类型和`strictNullChecks`配置相关，当配置为`off`时，这两个类型可以赋值给任意类型，不会报错。当配置为`on`时，使用之前需要先检查是否为空，否则`TS`会提示错误。
+这两个类型和`strictNullChecks`配置相关,当配置为`off`时,这两个类型可以赋值给任意类型,不会报错。当配置为`on`时,使用之前需要先检查是否为空,否则`TS`会提示错误。
 
 ```typescript
 function doSomething(x: string | null) {
@@ -251,7 +251,7 @@ function doSomething(x: string | null) {
 }
 ```
 
-你也可以使用`!`进行非空断言，但需要注意的是，类型断言不会影响代码运行时的行为，你需要自己确保这个值不会为空值。
+你也可以使用`!`进行非空断言,但需要注意的是,类型断言不会影响代码运行时的行为,你需要自己确保这个值不会为空值。
 
 ```typescript
 function liveDangerously(x?: number | null) {
@@ -262,4 +262,4 @@ function liveDangerously(x?: number | null) {
 
 ### enum
 
-枚举是 `TypeScript` 添加到 `JavaScript` 的一项功能，与其它类型不同的是，枚举是会添加代码到运行时的，也就是说会影响你的代码。所以在使用枚举之前，确保你知道自己在做什么。
+枚举是 `TypeScript` 添加到 `JavaScript` 的一项功能,与其它类型不同的是,枚举是会添加代码到运行时的,也就是说会影响你的代码。所以在使用枚举之前,确保你知道自己在做什么。
