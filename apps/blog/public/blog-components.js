@@ -26,18 +26,6 @@ var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require
     return require.apply(this, arguments);
   throw new Error('Dynamic require of "' + x + '" is not supported');
 });
-var __objRest = (source, exclude) => {
-  var target = {};
-  for (var prop in source)
-    if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0)
-      target[prop] = source[prop];
-  if (source != null && __getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(source)) {
-      if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop))
-        target[prop] = source[prop];
-    }
-  return target;
-};
 var __esm = (fn, res) => function __init() {
   return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
 };
@@ -1233,17 +1221,9 @@ var ThemeIcon_default = ThemeIcon;
 
 // blog-components.tsx
 var import_image = __toESM(require_image2());
-var ImgBaseUrl = "https://zackdkblog.oss-cn-beijing.aliyuncs.com";
-var WrapperImage = (props) => {
-  const _a = props, { src } = _a, rest = __objRest(_a, ["src"]);
-  console.log(src);
-  return /* @__PURE__ */ React.createElement(import_image.default, __spreadValues({
-    src: `${ImgBaseUrl}${src}`
-  }, rest));
-};
 var BlogComponents = {
   Button: Button_default,
-  Image: WrapperImage,
+  Image: import_image.default,
   ThemeIcon: ThemeIcon_default
 };
 var blog_components_default = BlogComponents;
