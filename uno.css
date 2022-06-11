@@ -7,6 +7,7 @@
 .top-0{top:0rem;}
 .mx-auto{margin-left:auto;margin-right:auto;}
 .my-0{margin-top:0rem;margin-bottom:0rem;}
+.my-4{margin-top:1rem;margin-bottom:1rem;}
 .my-8{margin-top:2rem;margin-bottom:2rem;}
 .mb-16{margin-bottom:4rem;}
 .mb-2{margin-bottom:0.5rem;}
@@ -40,7 +41,6 @@
 .w-screen{width:100vw;}
 [h~="\32 5px"]{height:25px;}
 [h1=""]{height:0.25rem;}
-[h2=""]{height:0.5rem;}
 [w~="\32 5px"]{width:25px;}
 .flex,
 [flex=""]{display:flex;}
@@ -117,6 +117,8 @@
 .sm\:p-4{padding:1rem;}
 }
 @media (min-width: 768px){
+.md\:my-0{margin-top:0rem;margin-bottom:0rem;}
+.md\:flex-row{flex-direction:row;}
 .md\:items-center{align-items:center;}
 .md\:text-5xl{font-size:3rem;line-height:1;}
 .md\:text-xl{font-size:1.25rem;line-height:1.75rem;}

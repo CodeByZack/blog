@@ -116,15 +116,15 @@
   margin-block-end: 0 !important;
 }
 .heti blockquote {
-  margin-block-start: 0;
+  /* margin-block-start: 0;
   margin-block-end: 0;
   margin-inline-start: 0;
   margin-inline-end: 0;
   padding-block-start: 12px;
   padding-block-end: 12px;
   padding-inline-start: 16px;
-  padding-inline-end: 16px;
-  background-color: rgba(0, 0, 0, 0.054);
+  padding-inline-end: 16px;*/
+  /* background-color: rgba(0, 0, 0, 0.054);  */
 }
 .heti blockquote p {
   margin: 0;

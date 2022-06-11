@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import Container from '../components/Container';
 import BlogSeo from './BlogSeo';
 import Link from 'next/link';
@@ -22,16 +22,16 @@ export const BlogTitle = (props: { post: Partial<IArticleDetail> }) => {
       <h1 className="font-bold text-3xl md:text-5xl tracking-tight mb-4 dark:text-gray-400">
         {post.title}
       </h1>
-      <div className="flex flex-row justify-between items-start md:items-center w-full mt-2 mb-8">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center w-full mt-2 mb-8">
         <div className="flex items-center">
-          <Image
+          <img
             alt="行者、空山"
             height={24}
             width={24}
             src="/avatar.jpg"
             className="rounded-full"
           />
-          <span className="text-sm text-gray-700 dark:text-gray-300 ml-2">
+          <span className="text-sm my-4 md:my-0 text-gray-700 dark:text-gray-300 ml-2">
             {'行者、空山 / '}
             {dayjs(post.updatedAt).format('YYYY-MM-DD HH:mm:ss')}
           </span>

@@ -1,30 +1,29 @@
-## Getting Started
+# 行者空山的博客
 
-First, run the development server:
+2022 年，重新使用新一点的技术搭建了自己博客。
 
-```bash
-yarn dev
-```
+## 使用到的部分库
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `turborepo`
+- `Next.js`
+- `TypeScript`
+- `Geist UI`
+- `unocss`
+- `next-auth` - 用于登录 Github
+- `MDX.js` - 用于渲染 Markdown + JSX
+- `monaco-editor` - 用于在浏览器编辑 MDX 文件
+- `octokit` - 用于拉取、提交 Github 仓库文件
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## 比较有意思的部分
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### 1.在线 MDX 编辑器
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+实现了在浏览器内，拉取仓库对应的文件，修改，并提交回仓库。编辑时还能实时预览。
 
-## Learn More
+![BlogEditorPreview](https://zackdkblog.oss-cn-beijing.aliyuncs.com/BlogEditor.png)
 
-To learn more about Next.js, take a look at the following resources:
+## TODO
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_source=github.com&utm_medium=referral&utm_campaign=turborepo-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+ - [x] 在线 MDX 编辑器
+ - [] 优化样式
+ - [] 照片墙
