@@ -5,6 +5,7 @@ export interface IFileItem {
   name: string;
   thumbnailUrl?: string;
   url: string;
+  isDir?: boolean;
 }
 export interface ResultWrapper<T> {
   status: 'success' | 'error';

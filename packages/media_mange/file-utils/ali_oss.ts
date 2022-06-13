@@ -1,9 +1,11 @@
 import ALI_OSS from 'ali-oss';
-import { OssInstance, UploadFile } from '.';
+import { IFileItem, OssInstance, UploadFile } from '.';
 
 // const accessKeyId = process.env.NEXT_PUBLIC_ALI_OSS_ACCESS_KEY_ID;
 // const accessKeySecret = process.env.NEXT_PUBLIC_ALI_OSS_ACCESS_KEY_SECRET;
 let OSS_CLIENT: ALI_OSS | null = null;
+
+const BASE_URL = 'http://zackdkblog.oss-cn-beijing.aliyuncs.com/';
 
 const uploadFile: UploadFile = async (ossPath: string, file: any) => {
   if (!OSS_CLIENT)
@@ -45,12 +47,25 @@ const getFileArrByPath = async (path: string) => {
     { prefix: path, delimiter: '/', 'max-keys': 100 },
     {},
   );
-  console.log(result);
-  const files = result.objects.map((o) => ({
-    id: o.url,
-    name: o.name,
-    url: o.url,
-  }));
+  const files: IFileItem[] = [];
+
+  result.objects.forEach((o) => {
+    files.push({
+      id: o.url,
+      name: o.name,
+      url: o.url,
+      thumbnailUrl : o.url
+    });
+  });
+
+  result.prefixes.forEach((p) => {
+    files.push({
+      isDir: true,
+      id: p,
+      name: p.replace(path,""),
+      url: `${BASE_URL}${p}`,
+    });
+  });
 
   return files;
 };
