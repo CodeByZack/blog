@@ -1,0 +1,1 @@
+export { default as MediaManage } from './media_manage';
