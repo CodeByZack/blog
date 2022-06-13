@@ -58,12 +58,13 @@ const getFileArrByPath = async (path: string) => {
     });
   });
 
-  result.prefixes.forEach((p) => {
+  result.prefixes?.forEach((p) => {
     files.push({
       isDir: true,
       id: p,
       name: p.replace(path,""),
       url: `${BASE_URL}${p}`,
+      path : p.replace(path,"")
     });
   });
 

@@ -18,32 +18,11 @@ interface IProps {
 }
 
 const MediaManage = (props: IProps) => {
-  const { path = 'images/' } = props;
+  const { path = '' } = props;
 
   const [utilsDone, setUtilsDone] = useState(false);
   const [files, setFiles] = useState<FileData[]>([]);
-  const [folderChain, setFolderChain] = useState<FileData[]>([
-    { id: '.', path: '', name: '.', isDir: true, isPath: true },
-  ]);
-
-  // const files = [
-  //   { id: 'lht', name: 'Projects', isDir: true },
-  //   {
-  //     id: 'mcd',
-  //     name: 'chonky-sphere-v2.png',
-  //     thumbnailUrl: 'https://chonky.io/chonky-sphere-v2.png',
-  //   },
-  // ];
-  // const folderChain = [
-  //   { id: '.', name: '.', isDir: true, isPath: true },
-  //   { id: 'images', name: 'images', isDir: true, isPath: true },
-  // ];
-
-  useEffect(()=>{
-    const chain = [...folderChain,{ id : path, name : path, path, isDir : true, isPath : true }];
-    setFolderChain(chain);
-  },[path]);
-
+  const [folderChain, setFolderChain] = useState<FileData[]>([]);
 
   const handleAction: FileActionHandler = (data) => {
     console.log(data);
@@ -51,18 +30,27 @@ const MediaManage = (props: IProps) => {
       const { payload } = data;
       const { files } = payload;
       if (files.length === 1 && files[0].isDir) {
-        if (files[0].isPath) {
+        const file = files[0];
+        if (file.isPath) {
         } else {
-          const chain = [...folderChain,{ id : path, name : path, path, isDir : true, isPath : true }];
-
-
+          const chain = [
+            ...folderChain,
+            {
+              id: file.id,
+              name: file.name,
+              path: file.path,
+              isDir: true,
+              isPath: true,
+            },
+          ];
+          setFolderChain(chain);
         }
       }
     }
   };
 
-  const getFiles = async () => {
-    const files = await fileUtils.getFileArrByPath('images/');
+  const getFiles = async (path: string) => {
+    const files = await fileUtils.getFileArrByPath(path);
     console.log(files);
     setFiles(files);
   };
@@ -76,9 +64,19 @@ const MediaManage = (props: IProps) => {
 
   useEffect(() => {
     if (utilsDone) {
-      getFiles();
+      setFolderChain([
+        { id: '.', path: '', name: '.', isDir: true, isPath: true },
+      ]);
     }
   }, [utilsDone]);
+
+  useEffect(() => {
+    if (folderChain.length > 0) {
+      const path = folderChain.map((f) => f.path).join('');
+      console.log(path);
+      getFiles(path);
+    }
+  }, [folderChain]);
 
   return (
     <div className={styles.wrapper}>
