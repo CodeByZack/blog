@@ -3,7 +3,10 @@ import styles from './style.module.css';
 import {
   ChonkyActions,
   ChonkyActionUnion,
+  ChonkyIconName,
+  defineFileAction,
   FileActionHandler,
+  FileArray,
   FileData,
   GenericFileActionHandler,
   setChonkyDefaults,
@@ -11,6 +14,7 @@ import {
 import { ChonkyIconFA } from 'chonky-icon-fontawesome';
 import { FullFileBrowser } from 'chonky';
 import fileUtils from './file-utils';
+import fsHelper from './fs-helper';
 setChonkyDefaults({ iconComponent: ChonkyIconFA });
 
 interface IProps {
@@ -21,17 +25,49 @@ const MediaManage = (props: IProps) => {
   const { path = '' } = props;
 
   const [utilsDone, setUtilsDone] = useState(false);
-  const [files, setFiles] = useState<FileData[]>([]);
-  const [folderChain, setFolderChain] = useState<FileData[]>([]);
+  const [files, setFiles] = useState<FileArray>([]);
+  const [folderChain, setFolderChain] = useState<FileArray>([]);
+
+  const uploadFile = async () => {
+    try {
+      const fileHandle = await fsHelper.getFileHandle();
+      const file = await fileHandle.getFile();
+      const _files: FileArray = [...files, null];
+      setFiles(_files);
+      const prefix = folderChain.map((f) => f.path).join('');
+      console.log(prefix);
+      const uploadRes = await fileUtils.uploadFile(
+        `${prefix}${file.name}`,
+        file,
+      );
+      console.log(uploadRes);
+      const { data } = uploadRes;
+      const uploadFile: FileData = {
+        id: data?.fileUrl!,
+        name: data?.fileName!,
+        url: data?.fileUrl!,
+        thumbnailUrl: data?.fileUrl!,
+      };
+      setFiles([...files, uploadFile]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleAction: FileActionHandler = (data) => {
     console.log(data);
     if (data.id === ChonkyActions.OpenFiles.id) {
       const { payload } = data;
       const { files } = payload;
+      console.log(files);
       if (files.length === 1 && files[0].isDir) {
         const file = files[0];
         if (file.isPath) {
+          const chain = folderChain.slice(
+            0,
+            folderChain.findIndex((f) => f.id === file.id) + 1,
+          );
+          setFolderChain(chain);
         } else {
           const chain = [
             ...folderChain,
@@ -46,6 +82,9 @@ const MediaManage = (props: IProps) => {
           setFolderChain(chain);
         }
       }
+    } else if (data.id === ChonkyActions.UploadFiles.id) {
+      if (files.includes(null)) return;
+      uploadFile();
     }
   };
 
@@ -85,6 +124,13 @@ const MediaManage = (props: IProps) => {
           {utilsDone ? (
             <FullFileBrowser
               files={files}
+              disableDefaultFileActions={true}
+              fileActions={[
+                ChonkyActions.UploadFiles,
+                ChonkyActions.EnableListView,
+                ChonkyActions.EnableGridView,
+                ChonkyActions.DeleteFiles,
+              ]}
               folderChain={folderChain}
               onFileAction={handleAction}
             />

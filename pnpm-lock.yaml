@@ -98,6 +98,7 @@ importers:
       '@types/ali-oss': ^6.16.4
       '@types/react': ^17.0.37
       '@types/react-dom': ^17.0.11
+      '@types/wicg-file-system-access': ^2020.9.5
       ali-oss: ^6.17.1
       chonky: ^2.3.2
       chonky-icon-fontawesome: ^2.3.2
@@ -115,6 +116,7 @@ importers:
       '@types/ali-oss': 6.16.4
       '@types/react': 17.0.43
       '@types/react-dom': 17.0.14
+      '@types/wicg-file-system-access': 2020.9.5
       config: link:../config
       next: 12.0.8
       tsconfig: link:../tsconfig
@@ -1372,6 +1374,10 @@ packages:
   /@types/unist/2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
     dev: false
+
+  /@types/wicg-file-system-access/2020.9.5:
+    resolution: {integrity: sha512-UYK244awtmcUYQfs7FR8710MJcefL2WvkyHMjA8yJzxd1mo0Gfn88sRZ1Bls7hiUhA2w7ne1gpJ9T5g3G0wOyA==}
+    dev: true
 
   /@typescript-eslint/parser/5.10.1:
     resolution: {integrity: sha512-GReo3tjNBwR5RnRO0K2wDIDN31cM3MmDtgyQ85oAxAmC5K3j/g85IjP+cDfcqDsDDBf1HNKQAD0WqOYL8jXqUA==}
