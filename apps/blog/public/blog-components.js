@@ -10,13 +10,16 @@ var Button = (props) => {
 var Button_default = Button;
 
 // ThemeIcon.tsx
+import { useEffect, useState } from "react";
 var ThemeIcon = (props) => {
   const { theme, setTheme } = props;
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   return /* @__PURE__ */ React.createElement("button", {
     type: "button",
-    className: "bg-gray-200 dark:bg-gray-800 rounded p-3",
+    className: "bg-gray-200 dark:bg-gray-800 rounded p-3 w-[40px] h-[40px]",
     onClick: () => setTheme(theme === "dark" ? "light" : "dark")
-  }, /* @__PURE__ */ React.createElement("svg", {
+  }, mounted && /* @__PURE__ */ React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 24 24",
     fill: "currentColor",
