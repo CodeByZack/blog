@@ -1,5 +1,5 @@
 import ALI_OSS from 'ali-oss';
-import { IFileItem, OssInstance, UploadFile } from '.';
+import { DeleteFileByPath, IFileItem, OssInstance, UploadFile } from '.';
 
 // const accessKeyId = process.env.NEXT_PUBLIC_ALI_OSS_ACCESS_KEY_ID;
 // const accessKeySecret = process.env.NEXT_PUBLIC_ALI_OSS_ACCESS_KEY_SECRET;
@@ -54,7 +54,7 @@ const getFileArrByPath = async (path: string) => {
       id: o.url,
       name: o.name,
       url: o.url,
-      thumbnailUrl : o.url
+      thumbnailUrl: o.url,
     });
   });
 
@@ -62,18 +62,36 @@ const getFileArrByPath = async (path: string) => {
     files.push({
       isDir: true,
       id: p,
-      name: p.replace(path,""),
+      name: p.replace(path, ''),
       url: `${BASE_URL}${p}`,
-      path : p.replace(path,"")
+      path: p.replace(path, ''),
     });
   });
 
   return files;
 };
 
+const deleteFileByPath: DeleteFileByPath = async (path) => {
+  if (!OSS_CLIENT)
+    return { status: 'error', message: 'init oss first', data: null };
+  try {
+    const deleteRes = await OSS_CLIENT.delete(path);
+    console.log(deleteRes);
+    return {
+      status: 'success',
+      message: '删除成功！',
+      data: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return { status: 'error', message: '', data: null };
+  }
+};
+
 const AliInstance: OssInstance = {
   uploadFile,
   getFileArrByPath,
+  deleteFileByPath,
   init,
 };
 

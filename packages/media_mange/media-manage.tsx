@@ -55,7 +55,6 @@ const MediaManage = (props: IProps) => {
   };
 
   const handleAction: FileActionHandler = (data) => {
-    console.log(data);
     if (data.id === ChonkyActions.OpenFiles.id) {
       const { payload } = data;
       const { files } = payload;
@@ -85,6 +84,8 @@ const MediaManage = (props: IProps) => {
     } else if (data.id === ChonkyActions.UploadFiles.id) {
       if (files.includes(null)) return;
       uploadFile();
+    } else if (data.id === ChonkyActions.DeleteFiles.id) {
+      console.log(data);
     }
   };
 
