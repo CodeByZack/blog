@@ -8,13 +8,14 @@ interface IProps {
 
 const MDXPreview = (props: IProps) => {
   const { MdxComp } = props;
-  const { comp, postInfo } = MdxComp;
+  const { comp : Comp, postInfo } = MdxComp;
+  console.log({Comp});
   return (
     <article className="heti heti--sans box-border px-8 flex flex-col justify-center items-start max-w-3xl mx-auto mb-16 w-full">
       <BlogTitle post={postInfo} />
-      {typeof comp === 'function' ? comp({}) : ''}
+      {typeof Comp === 'function' ? Comp({}) : ''}
     </article>
   );
 };
 
-export default MDXPreview;
+export default React.memo(MDXPreview);

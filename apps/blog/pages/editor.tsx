@@ -41,10 +41,10 @@ updatedAt: '${dayjs().format('YYYY-MM-DD HH:mm:ss')}'
 summary: '${data.desc}'
 ---`;
 
-const injectUpdateTime = (str : string)=>{
-  const {  data, content } = matter(str);
+const injectUpdateTime = (str: string) => {
+  const { data, content } = matter(str);
   data.updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
-  const result = matter.stringify(content,data);
+  const result = matter.stringify(content, data);
   return result;
 };
 
@@ -86,18 +86,18 @@ const BlogEditor = (props: IProps) => {
     }
   }, [path, session?.accessToken, editorReady]);
 
-  console.log(router);
-
   const handleChange = useDebounceFn(async (v: string) => {
     const { data, content } = matter(v);
-    console.log({ data, content });
-    let comp = null;
-    if (content) {
-      comp = await evaluateMdx(content, {
-        ...runtime,
-        ...provider,
-      } as any);
-    }
+
+    const isEmpty = (str: string) => !!str.replaceAll('\n', '');
+
+    const comp = await evaluateMdx(isEmpty(content) ? content : '请输入内容', {
+      ...runtime,
+      ...provider,
+    } as any);
+
+    console.log({ data, content, comp });
+
     setMdxComp({
       comp: comp?.default,
       postInfo: { ...data, readingTime: readingTime(content) },
