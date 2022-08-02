@@ -1,7 +1,22 @@
 ---
 title: React 里引起 rernder 的几种情况
 publishedAt: '2022-08-02 13:35:45'
-updatedAt: '2022-08-02 13:35:58'
+updatedAt: '2022-08-02 17:20:45'
 summary: React 里引起 rernder 的几种情况
 ---
 
+React 组件的生命周期大概是这样：
+
+`mount -> init-render -> re-render -> unmount`
+
+1. props 变动，引起的渲染
+
+2. context 变动，引起的渲染
+
+3. 父组件渲染引起的子组件重新渲染
+
+4. 组件 unmount -> mount 引起的渲染
+
+5. state 变动，引起的渲染
+
+   自定义hook，三方状态管理
