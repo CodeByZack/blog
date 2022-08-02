@@ -25,15 +25,13 @@ const PWA_HEAD_INFO = (
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="theme-color" content="#000000" />
 
-    <link rel="apple-touch-icon" href="/avatar.jpg" />
-    <link rel="apple-touch-icon" sizes="152x152" href="/avatar.jpg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/avatar.jpg" />
-    <link rel="apple-touch-icon" sizes="167x167" href="/avatar.jpg" />
+    <link rel="apple-touch-icon" href="/logo180_180.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo180_180.png" />
 
-    <link rel="icon" type="image/png" sizes="32x32" href="/avatar.jpg" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/avatar.jpg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo180_180.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo180_180.png" />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="mask-icon" href="/avatar.jpg" color="#5bbad5" />
+    <link rel="mask-icon" href="/logo180_180.png" color="#5bbad5" />
     <link rel="shortcut icon" href="/favicon.ico" />
   </>
 );
