@@ -53,6 +53,7 @@ const BlogEditor = (props: IProps) => {
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const [editorReady, setEditorReady] = useState(false);
+  const [showPreview, setShowPreview] = useState(true);
   const { setToast: showToast } = useToasts({ placement: 'topRight' });
   const dataHolder = useRef<{
     editPost: any;
@@ -196,6 +197,16 @@ const BlogEditor = (props: IProps) => {
                       保存
                     </div>
                   </Popover.Item>
+                  <Popover.Item>
+                    <div
+                      onClick={() => {
+                        setShowPreview(!showPreview);
+                      }}
+                      className="w-full cursor-pointer text-center"
+                    >
+                      {showPreview ? '关闭预览' : '打开预览'}
+                    </div>
+                  </Popover.Item>
                   <Popover.Item line />
                   <Popover.Item>
                     <div className="w-full cursor-pointer text-center">
@@ -219,9 +230,11 @@ const BlogEditor = (props: IProps) => {
                   onMount={handleEditorMount}
                 />
               </div>
-              <div className="h-full w-full overflow-auto">
-                <MDXPreview MdxComp={mdxComp} />
-              </div>
+              {showPreview && (
+                <div className="h-full w-full overflow-auto">
+                  <MDXPreview MdxComp={mdxComp} />
+                </div>
+              )}
             </Splitter>
           </div>
         </div>
