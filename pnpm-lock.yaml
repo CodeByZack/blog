@@ -37,7 +37,7 @@ importers:
       next: 12.0.8
       next-auth: ^4.3.4
       next-mdx-remote: ^4.0.3
-      next-pwa: ^5.5.5
+      next-pwa: 5.5.4
       next-seo: ^5.4.0
       next-themes: ^0.2.0
       next-transpile-modules: 9.0.0
@@ -64,7 +64,7 @@ importers:
       next: 12.0.8_react-dom@17.0.2+react@17.0.2
       next-auth: 4.3.4_react-dom@17.0.2+react@17.0.2
       next-mdx-remote: 4.0.3_react-dom@17.0.2+react@17.0.2
-      next-pwa: 5.5.5_next@12.0.8
+      next-pwa: 5.5.4_next@12.0.8
       next-seo: 5.4.0_227e7fb4dbd28186517209bc65f02635
       next-themes: 0.2.0_227e7fb4dbd28186517209bc65f02635
       react: 17.0.2
@@ -186,6 +186,7 @@ packages:
     resolution: {integrity: sha512-Zt1yodBx1UcyiePMSkWnU4hPqhwq7hGi2nFL1LeA3EUl+q2LQx16MISgJ0+z7dnmgvP9QtIleuETGOiOH1RcIw==}
     dependencies:
       '@babel/highlight': 7.16.10
+    dev: true
 
   /@babel/code-frame/7.18.6:
     resolution: {integrity: sha512-TDCmlK5eOvH+eH7cdAFlNXeVJqWIQ7gW9tY1GJIpUtFb6CmjVyq2VM3u71bOyR8CRihcCgMUYoDNyLXao3+70Q==}
@@ -475,6 +476,7 @@ packages:
       '@babel/helper-validator-identifier': 7.16.7
       chalk: 2.4.2
       js-tokens: 4.0.0
+    dev: true
 
   /@babel/highlight/7.18.6:
     resolution: {integrity: sha512-u7stbOuYjaPezCuLj29hNW1v64M2Md2qupEKP1fHc7WdOA3DgLh37suiSrZYY7haUB7iBeQZ9P1uiRF359do3g==}
@@ -5433,8 +5435,8 @@ packages:
       - supports-color
     dev: false
 
-  /next-pwa/5.5.5_next@12.0.8:
-    resolution: {integrity: sha512-EdheDzxr3V7piAeW2qAeH0uJW5iouSt7s/Fzz6xuvkmRPgbyqQeRY/3ZOWbhfgbPBuzGjdbBWzVurWJPH8bY5w==}
+  /next-pwa/5.5.4_next@12.0.8:
+    resolution: {integrity: sha512-EgB2MQWGR8oZDzY6US+/D0LOCUhPZYCgeqRVBYDxQWNi0N6XfQOoZPw2COIrg/eMt/rB0M+/mquhAQACs5v4Ag==}
     peerDependencies:
       next: '>=9.0.0'
     dependencies:
@@ -6294,7 +6296,7 @@ packages:
     peerDependencies:
       rollup: ^2.0.0
     dependencies:
-      '@babel/code-frame': 7.12.11
+      '@babel/code-frame': 7.18.6
       jest-worker: 26.6.2
       rollup: 2.74.0
       serialize-javascript: 4.0.0
