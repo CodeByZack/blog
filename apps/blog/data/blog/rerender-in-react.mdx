@@ -1,7 +1,7 @@
 ---
 title: React 里引起 rernder 的几种情况
 publishedAt: '2022-08-02 13:35:45'
-updatedAt: '2022-08-03 14:50:51'
+updatedAt: '2022-08-03 14:53:43'
 summary: React 里引起 rernder 的几种情况
 ---
 
@@ -9,11 +9,16 @@ React 组件的生命周期大概是这样：
 
 `mount -> init-render -> re-render -> unmount`
 
-1. props 变动，引起的渲染
+在线demo。可对照着查看。
 
 <iframe src="https://stackblitz.com/edit/rerender-in-react?devToolsHeight=33&embed=1&file=child.tsx"></iframe>
 
-2. context 变动，引起的渲染
+
+## props 变动，引起的渲染
+
+此处省略。
+
+## context 变动，引起的渲染
 
 建议先通读一下官方文档 [React Context](https://reactjs.org/docs/context.html) 。
 
@@ -24,10 +29,10 @@ React 组件的生命周期大概是这样：
 - 传递给 provider 的 value 值,在两次渲染期间是浅对比，类似于 `Object.is` 的实现。
 - 传递给 value 的值, 即便浅对比变动了,是不会触发 React 的 render 的,需要通过其它方式来触发 render 。
 
-3. 父组件渲染引起的子组件重新渲染
+## 父组件渲染引起的子组件重新渲染
 
-4. 组件 unmount -> mount 引起的渲染
+## 组件 unmount -> mount 引起的渲染
 
-5. state 变动，引起的渲染
+## state 变动，引起的渲染
 
    自定义hook，三方状态管理
