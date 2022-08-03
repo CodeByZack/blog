@@ -1,7 +1,8 @@
+import dayjs from 'dayjs';
 import { NextSeo, ArticleJsonLd } from 'next-seo';
 
 const BlogSeo = ({ title, summary, publishedAt, url, image }) => {
-  const date = new Date(publishedAt).toISOString();
+  const date = dayjs(publishedAt).format("YYYY-MM-DD HH:mm");
   return (
     <>
       <NextSeo
