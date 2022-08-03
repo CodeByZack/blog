@@ -1,7 +1,7 @@
 ---
 title: React 里引起 rernder 的几种情况
 publishedAt: '2022-08-02 13:35:45'
-updatedAt: '2022-08-03 14:54:47'
+updatedAt: '2022-08-03 15:17:33'
 summary: React 里引起 rernder 的几种情况
 ---
 
@@ -22,14 +22,20 @@ React 组件的生命周期大概是这样：
 
 建议先通读一下官方文档 [React Context](https://reactjs.org/docs/context.html) 。
 
-简单来说, context 是用于组件嵌套过深时,避免一层层传递 props ,传递参数用的。
+简单来说， context 是用于组件嵌套过深时，避免一层层传递 props ，传递参数用的。
 
-使用 context , 需要注意的是：
+使用 context ， 需要注意的是：
 
-- 传递给 provider 的 value 值,在两次渲染期间是浅对比，类似于 `Object.is` 的实现。
-- 传递给 value 的值, 即便浅对比变动了,是不会触发 React 的 render 的,需要通过其它方式来触发 render 。
+- 传递给 provider 的 value 值，在两次渲染期间是浅对比，类似于 `Object.is` 的实现。
+- 传递给 value 的值， 即便浅对比变动了，是不会触发 React 的 render 的，需要通过其它方式来触发 render 。
 
 ## 3. 父组件渲染引起的子组件重新渲染
+
+这是平常开发中比较容易忽略的一点，前端现在都是组件嵌套组件，形成一个巨大的组件树， React 只要确认了组件需要 render ， 在其之下的所有子组件都会走一遍 render 。
+
+在如今动则上百个组件的页面里，很容易就会引起某些子组件额外的 render ，造成性能浪费。 
+
+React 提供了两个工具来给开发者手动进行这方面的优化。函数组件的 `React.memo` ， 类组件的 `shouldComponentUpdate` 。
 
 ## 4. 组件 unmount -> mount 引起的渲染
 
