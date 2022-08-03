@@ -1,7 +1,7 @@
 ---
 title: React 里引起 rernder 的几种情况
 publishedAt: '2022-08-02 13:35:45'
-updatedAt: '2022-08-03 14:12:13'
+updatedAt: '2022-08-03 14:50:51'
 summary: React 里引起 rernder 的几种情况
 ---
 
@@ -17,8 +17,12 @@ React 组件的生命周期大概是这样：
 
 建议先通读一下官方文档 [React Context](https://reactjs.org/docs/context.html) 。
 
-简单来说, context 是用于组件嵌套过深时,避免一层层传递 props , 传递参数用的。
+简单来说, context 是用于组件嵌套过深时,避免一层层传递 props ,传递参数用的。
 
+使用 context , 需要注意的是：
+
+- 传递给 provider 的 value 值,在两次渲染期间是浅对比，类似于 `Object.is` 的实现。
+- 传递给 value 的值, 即便浅对比变动了,是不会触发 React 的 render 的,需要通过其它方式来触发 render 。
 
 3. 父组件渲染引起的子组件重新渲染
 
