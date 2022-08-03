@@ -41,3 +41,8 @@ blockquote {
   border-left: 0.25em solid #30363d;
   margin: 0 0 0 0;
 }
+
+iframe {
+  width: 100%;
+  min-height: 400px;
+}
