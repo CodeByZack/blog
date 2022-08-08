@@ -1,7 +1,7 @@
 ---
 title: React 里引起 rernder 的几种情况
 publishedAt: '2022-08-02 13:35:45'
-updatedAt: '2022-08-08 09:31:34'
+updatedAt: '2022-08-08 10:46:08'
 summary: React 里引起 rernder 的几种情况
 ---
 
@@ -106,5 +106,18 @@ export const UnmountMountPaper3 = () => {
 因为 React 不是响应式的，你修改了值，你想把结果渲染到页面上，你就需要通知 React 走一次 render 过程，而这个通知的方法就是改变 state 。
 
 这也是个人比较喜欢 React 的原因，简洁，不复杂，纯粹。
+
+1. `setState` 会导致渲染，这个每个人都能理解。
+
+2. 因为自定义hook的出现，出现了很多不是那么直接的 `setState` 。
+
+    - 比如 demo 里的 forceUpdate 。
+
+3. Redux 触发更新的方式。
+
+    - Redux 并不直接触发 React 的渲染，触发渲染的是 react-redux 。
+    - react-redux 触发渲染，一个是 Connect 高阶组件，一个是 useSelector 自定义 hook 。
+
+
 
    自定义hook，三方状态管理
