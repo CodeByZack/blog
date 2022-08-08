@@ -1,7 +1,7 @@
 ---
 title: React 里引起 rernder 的几种情况
 publishedAt: '2022-08-02 13:35:45'
-updatedAt: '2022-08-08 10:46:08'
+updatedAt: '2022-08-08 12:00:36'
 summary: React 里引起 rernder 的几种情况
 ---
 
@@ -118,6 +118,28 @@ export const UnmountMountPaper3 = () => {
     - Redux 并不直接触发 React 的渲染，触发渲染的是 react-redux 。
     - react-redux 触发渲染，一个是 Connect 高阶组件，一个是 useSelector 自定义 hook 。
 
+以下摘自 react-redux 7.x 版本的代码: 
 
+Connect 最终触发 React 更新的[代码](https://github.com/reduxjs/react-redux/blob/7.x/src/components/connectAdvanced.js#L21)
 
-   自定义hook，三方状态管理
+```typescript
+
+function storeStateUpdatesReducer(state, action) {
+  const [, updateCount] = state
+  return [action.payload, updateCount + 1]
+}
+
+```
+
+useSelector 最终触发 React 更新的[代码](https://github.com/reduxjs/react-redux/blob/7.x/src/hooks/useSelector.js#L15)
+
+```typescript
+
+const [, forceRender] = useReducer((s) => s + 1, 0)
+
+```
+
+由上面代码可以看出来， redux 最终通知 React 进行一次渲染，就是通过state的改变来做的。
+
+4. Mobx 触发更新的方式
+
