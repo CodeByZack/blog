@@ -1,7 +1,7 @@
 ---
 title: React 里引起 rernder 的几种情况
 publishedAt: '2022-08-02 13:35:45'
-updatedAt: '2022-08-03 16:31:27'
+updatedAt: '2022-08-08 09:18:38'
 summary: React 里引起 rernder 的几种情况
 ---
 
@@ -53,12 +53,49 @@ React 提供了两个工具来给开发者手动进行这方面的优化。函�
 3. 组件的引用地址变动，导致 diff 时判定了 unmount，然而实际上也是同一个组件占了这个位置，继而马上 mount 。
 这种情况比较特别，目前只发现一种情况下会出现，即组件内部声明组件。如下：
 
-```jsx
+```javascript
+export const UnmountMountPaper3 = () => {
+  const forceUpdate = useForceRender();
+  useLogger('ParentNode');
 
+  const InnerChild = () => {
+    useLogger('InnerChild');
+    const [num, setNum] = React.useState(0);
 
+    return (
+      <div>
+        <div
+          onClick={() => {
+            forceUpdate();
+            setNum((n) => n + 1);
+          }}
+        >
+          click me : {num}
+        </div>
+        <Typography p={1} component="p">
+          InnerChild
+        </Typography>
+      </div>
+    );
+  };
 
+  return (
+    <Paper sx={{ m: 1, width: '100%' }}>
+      <InnerChild />
+      <Button
+        onClick={() => {
+          forceUpdate();
+        }}
+      >
+        触发组件更新
+      </Button>
+    </Paper>
+  );
+};
 ```
 
+这种情况容易出问题，比如上面例子中的 click me 按钮 ，点击了应该是把 num + 1 才对，可实际不管点击多少次都是0。
+这是因为 InnerChild 是 unmount -> mount -> render 这样一个过程。因为走了一遍 mount 过程， num 的值又被初始化为 0 了。
 
 
 ## 5. state 变动，引起的渲染
