@@ -19,6 +19,7 @@
     "@next/bundle-analyzer": "^12.1.6",
     "@unocss/reset": "^0.33.5",
     "dayjs": "^1.11.3",
+    "embla-carousel-react": "^7.0.0",
     "encoding": "^0.1.13",
     "gray-matter": "^4.0.3",
     "mdx-prism": "^0.3.4",
