@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { Thumb } from './thumb';
+import { NextButton, PrevButton } from './button';
 
 interface IProps {
   slides: string[];
@@ -16,6 +17,12 @@ const EmblaCarousel = (props: IProps) => {
     dragFree: true,
   });
 
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
+
+  const scrollPrev = useCallback(() => embla && embla.scrollPrev(), [embla]);
+  const scrollNext = useCallback(() => embla && embla.scrollNext(), [embla]);
+
   const onThumbClick = useCallback(
     (index) => {
       if (!embla || !emblaThumbs) return;
@@ -27,6 +34,8 @@ const EmblaCarousel = (props: IProps) => {
   const onSelect = useCallback(() => {
     if (!embla || !emblaThumbs) return;
     setSelectedIndex(embla.selectedScrollSnap());
+    setPrevBtnEnabled(embla.canScrollPrev());
+    setNextBtnEnabled(embla.canScrollNext());
     emblaThumbs.scrollTo(embla.selectedScrollSnap());
   }, [embla, emblaThumbs, setSelectedIndex]);
 
@@ -49,7 +58,9 @@ const EmblaCarousel = (props: IProps) => {
               </div>
             ))}
           </div>
-        </div>
+        </div>{' '}
+        <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
+        <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
       </div>
 
       <div className="embla embla--thumb">

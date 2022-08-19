@@ -17,21 +17,23 @@ export interface ITimeLineCardProps {
   renderContent?: (
     props: Omit<ITimeLineCardProps, 'renderContent' | 'type'>,
   ) => JSX.Element;
+  isFirst ?: boolean;
+  isLast ?: boolean;
 }
 
 const TimeLine = (props: IProps) => {
   const { slides } = props;
   return (
-    <div className="w-full m-4">
-      {slides.map((s) => {
-        return <TimeLineCard key={s.title} {...s} />;
+    <div className="w-full my-4">
+      {slides.map((s,i) => {
+        return <TimeLineCard key={s.title} {...s} isFirst={i===0} isLast={i===slides.length - 1} />;
       })}
     </div>
   );
 };
 
 const TimeLineCard = (props: ITimeLineCardProps) => {
-  const { renderContent, ...restProps } = props;
+  const { renderContent, isFirst, isLast, ...restProps } = props;
   const { title, date, subTitle, contentText, imageUrls, videoUrl } = restProps;
 
   // if(type === "custom" || typeof renderContent === "function"){
@@ -44,8 +46,8 @@ const TimeLineCard = (props: ITimeLineCardProps) => {
     ) : (
       <>
         <div className="my-4 font-bold text-xl sticky top-0 dark:text-gray-300">{title}</div>
-        <div className="rounded-1 bg-white dark:bg-black dark:border dark:border-[#333] min-h-[200px] p-4">
-          <div className="color-[#0070f3] font-bold pb-4 text-lg">
+        <div className="rounded-1 bg-white dark:bg-black border border-gray-3 dark:border-[#333] min-h-[200px] p-4">
+          <div className="color-[#3291ff] font-bold pb-4 text-lg">
             {subTitle}
           </div>
           <div className="pb-4 dark:color-coolgray">{contentText}</div>
@@ -78,11 +80,11 @@ const TimeLineCard = (props: ITimeLineCardProps) => {
 
   return (
     <div className="w-full flex items-stretch relative">
-      <div className="relative flex items-center justify-center w-[10%]">
-        <div className="absolute mx-auto w-[2px] bg-coolGray dark:bg-[#333] h-full"></div>
-        <div className="absolute top-0 w-[16px] h-[16px] rounded-[50%] bg-amber mt-6"></div>
+      <div className={`relative hidden md:flex items-center justify-center md:w-[10%] ${isFirst ? "pt-[50px]" : ""} ${isLast ? "pb-[50px]" : ""}`}>
+        <div className={`absolute mx-auto w-[2px] bg-gray-3 dark:bg-[#333] h-full `} ></div>
+        <div className="absolute top-0 w-[16px] h-[16px] rounded-[50%] bg-black dark:bg-gray-100 mt-6"></div>
       </div>
-      <div className="mb-4 box-border flex-1 relative">{cardJSX}</div>
+      <div className="mb-4 box-border flex-1 relative shadow-light">{cardJSX}</div>
     </div>
   );
 };
