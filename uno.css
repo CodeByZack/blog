@@ -26,6 +26,7 @@
 .mt-2{margin-top:0.5rem;}
 .mt-6{margin-top:1.5rem;}
 [mr~="\38 px"]{margin-right:8px;}
+[ms=""]{margin-inline-start:1rem;}
 .box-border{box-sizing:border-box;}
 .inline,
 [inline=""]{display:inline;}
@@ -52,6 +53,7 @@
 .w-4{width:1rem;}
 .w-5{width:1.25rem;}
 .w-64{width:16rem;}
+.w-80vw{width:80vw;}
 .w-full,
 [w~="\31 00\%"]{width:100%;}
 .w-screen{width:100vw;}
@@ -67,6 +69,7 @@
 .items-center,
 [items-center=""]{align-items:center;}
 .items-stretch{align-items:stretch;}
+.justify-start{justify-content:flex-start;}
 .justify-center,
 [justify-center=""]{justify-content:center;}
 .justify-between{justify-content:space-between;}
@@ -162,11 +165,13 @@
 }
 @media (min-width: 768px){
 .md\:my-0{margin-top:0rem;margin-bottom:0rem;}
+.md\:mt-0{margin-top:0rem;}
 .md\:w-\[10\%\]{width:10%;}
 .md\:flex,
 [md\:flex=""]{display:flex;}
 .md\:flex-row{flex-direction:row;}
 .md\:items-center{align-items:center;}
+.md\:justify-between{justify-content:space-between;}
 .md\:text-5xl{font-size:3rem;line-height:1;}
 .md\:text-xl{font-size:1.25rem;line-height:1.75rem;}
 }

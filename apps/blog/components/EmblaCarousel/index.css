@@ -39,7 +39,7 @@
 .embla__slide__inner {
   position: relative;
   overflow: hidden;
-  height: 250px;
+  height: 190px;
 }
 
 .embla__slide__img {
@@ -152,5 +152,13 @@
   }
   .embla__button{
     display: none;
+  }
+  .embla__slide__inner{
+    height: 250px;
+  }
+}
+@media (min-width: 640px) {
+  .embla__slide__inner{
+    height: 250px;
   }
 }
