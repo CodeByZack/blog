@@ -22,7 +22,7 @@ export interface IInjectProps {
  * @param Component
  * @returns 
  */
-const confirmable = (Component) =>
+const confirmable = (Component : React.ElementType<IInjectProps>) =>
   class ConfirmWrapper extends React.Component<{
     dispose: CB;
     reject: CB;

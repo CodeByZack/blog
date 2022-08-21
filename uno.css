@@ -8,6 +8,7 @@
 .relative,
 [relative=""]{position:relative;}
 .sticky{position:sticky;}
+.left-\[6px\]{left:6px;}
 .left-0{left:0rem;}
 .top-0{top:0rem;}
 .mx-auto,
@@ -167,6 +168,7 @@
 .md\:my-0{margin-top:0rem;margin-bottom:0rem;}
 .md\:mt-0{margin-top:0rem;}
 .md\:w-\[10\%\]{width:10%;}
+.md\:w-\[50px\]{width:50px;}
 .md\:flex,
 [md\:flex=""]{display:flex;}
 .md\:flex-row{flex-direction:row;}

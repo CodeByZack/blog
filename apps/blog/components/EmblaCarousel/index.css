@@ -153,12 +153,12 @@
   .embla__button{
     display: none;
   }
-  .embla__slide__inner{
+  .embla__slide__inner:not(button){
     height: 250px;
   }
 }
 @media (min-width: 640px) {
-  .embla__slide__inner{
+  .embla__slide__inner:not(button){
     height: 250px;
   }
 }

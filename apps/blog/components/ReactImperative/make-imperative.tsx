@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom';
  * @param unmountDelay 卸载延迟的时间 默认 1000ms
  * @returns 返回一个函数 签名如下 (props)=>Promise 
  */
-const makeImperative = (Component, mountingNode ?: any, unmountDelay = 1000, ) => {
+const makeImperative = (Component, mountingNode ?: HTMLElement, unmountDelay = 1000, ) => {
   return (props) => {
     const wrapper = (mountingNode || document.body).appendChild(document.createElement('div'));
     const promise = new Promise((resolve, reject) => {

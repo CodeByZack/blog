@@ -97,14 +97,14 @@ const TimeLineCard = (props: ITimeLineCardProps) => {
       className="w-full flex items-stretch relative"
     >
       <div
-        className={`relative hidden md:flex items-center justify-center md:w-[10%] ${
+        className={`relative hidden md:flex items-center justify-center md:w-[50px] ${
           isFirst ? 'pt-[50px]' : ''
         } ${isLast ? 'pb-[50px]' : ''}`}
       >
         <div
-          className={`absolute mx-auto w-[2px] bg-gray-3 dark:bg-[#333] h-full `}
+          className={`absolute mx-auto w-[2px] bg-gray-3 dark:bg-[#333] h-full left-[6px] `}
         ></div>
-        <div className="absolute top-0 w-[16px] h-[16px] rounded-[50%] bg-black dark:bg-gray-100 mt-6"></div>
+        <div className="absolute top-0 w-[16px] h-[16px] rounded-[50%] left-0 bg-black dark:bg-gray-100 mt-6"></div>
       </div>
       <div className="mb-4 box-border flex-1 relative shadow-light">
         {cardJSX}
