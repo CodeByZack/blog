@@ -32,7 +32,6 @@
 .mt-2{margin-top:0.5rem;}
 .mt-6{margin-top:1.5rem;}
 [mr~="\38 px"]{margin-right:8px;}
-[ms=""]{margin-inline-start:1rem;}
 .box-border{box-sizing:border-box;}
 .inline,
 [inline=""]{display:inline;}
@@ -43,7 +42,6 @@
 .h-\[16px\]{height:16px;}
 .h-\[38px\]{height:38px;}
 .h-\[40px\]{height:40px;}
-.h-\[70vh\]{height:70vh;}
 .h-4,
 [h4=""]{height:1rem;}
 .h-5{height:1.25rem;}
@@ -59,7 +57,6 @@
 .w-\[16px\]{width:16px;}
 .w-\[2px\]{width:2px;}
 .w-\[40px\]{width:40px;}
-.w-\[80vw\]{width:80vw;}
 .w-4{width:1rem;}
 .w-5{width:1.25rem;}
 .w-64{width:16rem;}
@@ -153,6 +150,7 @@
 .text-gray-900{--un-text-opacity:1;color:rgba(17,24,39,var(--un-text-opacity));}
 .text-slate-900{--un-text-opacity:1;color:rgba(15,23,42,var(--un-text-opacity));}
 [color~="\#5bbad5"]{--un-text-opacity:1;color:rgba(91,186,213,var(--un-text-opacity));}
+.opacity-70{opacity:0.7;}
 .shadow,
 [shadow=""]{--un-shadow-inset:var(--un-empty,/*!*/ /*!*/);--un-shadow:0 0 #0000;}
 .shadow,
@@ -162,6 +160,8 @@
 [filter=""]{--un-blur:var(--un-empty,/*!*/ /*!*/);--un-brightness:var(--un-empty,/*!*/ /*!*/);--un-contrast:var(--un-empty,/*!*/ /*!*/);--un-drop-shadow:var(--un-empty,/*!*/ /*!*/);--un-grayscale:var(--un-empty,/*!*/ /*!*/);--un-hue-rotate:var(--un-empty,/*!*/ /*!*/);--un-invert:var(--un-empty,/*!*/ /*!*/);--un-saturate:var(--un-empty,/*!*/ /*!*/);--un-sepia:var(--un-empty,/*!*/ /*!*/);--un-filter:var(--un-blur) var(--un-brightness) var(--un-contrast) var(--un-drop-shadow) var(--un-grayscale) var(--un-hue-rotate) var(--un-invert) var(--un-saturate) var(--un-sepia);}
 [filter=""]{filter:var(--un-filter);}
 .transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms;}
+.ease-in,
+[ease-in=""]{transition-timing-function:cubic-bezier(0.4, 0, 1, 1);}
 [content~="\#000000"]{content:"#000000";}
 [content~="行者、空山的博客，记录一些碎碎生活"]{content:"行者、空山的博客，记录一些碎碎生活";}
 [content~="行者、空山的博客"]{content:"行者、空山的博客";}

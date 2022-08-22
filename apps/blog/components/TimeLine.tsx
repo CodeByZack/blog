@@ -75,13 +75,15 @@ const TimeLineCard = (props: ITimeLineCardProps) => {
           {imageUrls && (
             <div className="rounded-2 overflow-hidden">
               {imageUrls?.length > 0 ? (
-                <EmblaCarousel onClick={(current, urls)=>{
-                  previewImages({ urls : [current] })
+                <EmblaCarousel onClick={(current, e)=>{
+                  console.log(e);
+                  previewImages({ urls : [current], dom : e.currentTarget })
                 }} slides={imageUrls} />
               ) : (
                 <img
-                  onClick={() => {
-                    previewImages({ urls : ["https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg"] });
+                  onClick={(e) => {
+                    console.log(e);
+                    previewImages({ urls : ["https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg"], dom : e.currentTarget });
                   }}
                   className="w-full object-cover"
                   src="https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg"

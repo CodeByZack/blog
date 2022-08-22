@@ -27,6 +27,7 @@ importers:
       '@unocss/reset': ^0.33.5
       '@unocss/transformer-directives': ^0.38.0
       '@unocss/webpack': ^0.33.5
+      animejs: ^3.2.1
       config: workspace:*
       dayjs: ^1.11.3
       embla-carousel-react: ^7.0.0
@@ -58,6 +59,7 @@ importers:
       '@monaco-editor/react': 4.4.5_66b714495a9e953b0598750a09f73ca1
       '@next/bundle-analyzer': 12.1.6
       '@unocss/reset': 0.33.5
+      animejs: 3.2.1
       dayjs: 1.11.3
       embla-carousel-react: 7.0.0_react@17.0.2
       encoding: 0.1.13
@@ -2452,6 +2454,10 @@ packages:
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
       uri-js: 4.4.1
+
+  /animejs/3.2.1:
+    resolution: {integrity: sha512-sWno3ugFryK5nhiDm/2BKeFCpZv7vzerWUcUPyAZLDhMek3+S/p418ldZJbJXo5ZUOpfm2kP2XRO4NJcULMy9A==}
+    dev: false
 
   /ansi-colors/4.1.1:
     resolution: {integrity: sha512-JoX0apGbHaUJBNl6yF+p6JAFYZ666/hhCGKN5t9QFjbJQKUU/g8MNbFDbvfrgKXvI1QpZplPOnwIo99lX/AAmA==}

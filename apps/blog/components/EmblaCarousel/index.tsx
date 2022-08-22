@@ -6,7 +6,7 @@ import { NextButton, PrevButton } from './button';
 
 interface IProps {
   slides: string[];
-  onClick: (current : string, imgUrls : string[])=>void;
+  onClick: (current : string, e :React.MouseEvent<HTMLImageElement, MouseEvent>)=>void;
 }
 
 const EmblaCarousel = (props: IProps) => {
@@ -54,7 +54,7 @@ const EmblaCarousel = (props: IProps) => {
             {slides.map((url, index) => (
               <div className="embla__slide" key={index}>
                 <div className="embla__slide__inner">
-                  <img onClick={()=>{ onClick(url,slides); }} className="embla__slide__img" src={url} alt={url} />
+                  <img onClick={(e)=>{ onClick(url,e); }} className="embla__slide__img" src={url} alt={url} />
                 </div>
               </div>
             ))}
