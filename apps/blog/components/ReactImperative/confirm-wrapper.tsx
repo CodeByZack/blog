@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { IInjectPropsByImperative } from './make-imperative';
 
 type CB = (value?: any) => void;
 
@@ -14,28 +15,26 @@ export interface IInjectProps {
 }
 
 /**
- * 
+ *
  * 桥接 make-imperative 与 react 组件
  * 1. 使 make-imperative 注入的属性更易读
  * 2. 维护一个 show 状态 方便调用 现有的 Dialog Toast 等声明式组件
- * 
+ *
  * @param Component
- * @returns 
+ * @returns
  */
-const confirmable = (Component : React.ElementType<IInjectProps>) =>
-  class ConfirmWrapper extends React.Component<{
-    dispose: CB;
-    reject: CB;
-    resolve: CB;
-  }> {
+const confirmable = <T,>(
+  Component: React.ComponentType<T>,
+): React.ComponentType<Omit<T,keyof IInjectProps>> =>
+  class ConfirmWrapper extends React.Component<T & IInjectPropsByImperative> {
     state: { show: true };
     constructor(props) {
       super(props);
       this.state = {
-          show : true
-      }
+        show: true,
+      };
     }
-    dismiss = ()=> {
+    dismiss = () => {
       this.setState(
         {
           show: false,
@@ -44,7 +43,7 @@ const confirmable = (Component : React.ElementType<IInjectProps>) =>
           this.props.dispose();
         },
       );
-    }
+    };
     cancel = (value) => {
       this.setState(
         {
@@ -54,7 +53,7 @@ const confirmable = (Component : React.ElementType<IInjectProps>) =>
           this.props.reject(value);
         },
       );
-    }
+    };
     proceed = (value) => {
       this.setState(
         {
@@ -64,7 +63,7 @@ const confirmable = (Component : React.ElementType<IInjectProps>) =>
           this.props.resolve(value);
         },
       );
-    }
+    };
     render() {
       return (
         <Component

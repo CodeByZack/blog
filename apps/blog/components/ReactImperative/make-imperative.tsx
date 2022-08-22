@@ -1,6 +1,13 @@
 import React  from 'react';
 import ReactDOM from 'react-dom';
 
+
+export interface IInjectPropsByImperative {
+  dispose : ()=>void;
+  reject : (value: unknown) => void;
+  resolve : (value: unknown) => void;
+};
+
 /**
  * 用于把 React 组件变成命令式的
  * 比如 showModal showToast 这种形式
@@ -11,8 +18,8 @@ import ReactDOM from 'react-dom';
  * @param unmountDelay 卸载延迟的时间 默认 1000ms
  * @returns 返回一个函数 签名如下 (props)=>Promise 
  */
-const makeImperative = (Component, mountingNode ?: HTMLElement, unmountDelay = 1000, ) => {
-  return (props) => {
+const makeImperative = <T,>(Component : React.ComponentType<T>, mountingNode ?: HTMLElement, unmountDelay = 1000, ) => {
+  return (props : T) => {
     const wrapper = (mountingNode || document.body).appendChild(document.createElement('div'));
     const promise = new Promise((resolve, reject) => {
       try {

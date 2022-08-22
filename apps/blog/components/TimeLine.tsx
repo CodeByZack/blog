@@ -75,9 +75,14 @@ const TimeLineCard = (props: ITimeLineCardProps) => {
           {imageUrls && (
             <div className="rounded-2 overflow-hidden">
               {imageUrls?.length > 0 ? (
-                <EmblaCarousel slides={imageUrls} />
+                <EmblaCarousel onClick={(current, urls)=>{
+                  previewImages({ urls : [current] })
+                }} slides={imageUrls} />
               ) : (
                 <img
+                  onClick={() => {
+                    previewImages({ urls : ["https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg"] });
+                  }}
                   className="w-full object-cover"
                   src="https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg"
                   alt="https://i2-prod.mirror.co.uk/incoming/article10847802.ece/ALTERNATES/s810/PAY-Dunkirk-in-colour.jpg"
@@ -90,12 +95,7 @@ const TimeLineCard = (props: ITimeLineCardProps) => {
     );
 
   return (
-    <div
-      onClick={() => {
-        previewImages({});
-      }}
-      className="w-full flex items-stretch relative"
-    >
+    <div className="w-full flex items-stretch relative">
       <div
         className={`relative hidden md:flex items-center justify-center md:w-[50px] ${
           isFirst ? 'pt-[50px]' : ''

@@ -6,10 +6,11 @@ import { NextButton, PrevButton } from './button';
 
 interface IProps {
   slides: string[];
+  onClick: (current : string, imgUrls : string[])=>void;
 }
 
 const EmblaCarousel = (props: IProps) => {
-  const { slides } = props;
+  const { slides, onClick } = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [mainViewportRef, embla] = useEmblaCarousel({ skipSnaps: false });
   const [thumbViewportRef, emblaThumbs] = useEmblaCarousel({
@@ -53,12 +54,12 @@ const EmblaCarousel = (props: IProps) => {
             {slides.map((url, index) => (
               <div className="embla__slide" key={index}>
                 <div className="embla__slide__inner">
-                  <img className="embla__slide__img" src={url} alt={url} />
+                  <img onClick={()=>{ onClick(url,slides); }} className="embla__slide__img" src={url} alt={url} />
                 </div>
               </div>
             ))}
           </div>
-        </div>{' '}
+        </div>
         <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
         <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
       </div>
