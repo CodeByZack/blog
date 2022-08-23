@@ -3,10 +3,13 @@ import { ITimeLineCardProps } from '../components/TimeLine';
 const timeLineData: ITimeLineCardProps[] = [
   {
     date: '2022-06-18',
-    title: '此处风景独好，辛得人间一见',
-    subTitle: '2022-19-09',
+    title: '董成宇小朋友出生了！！！😊',
+    // subTitle: '2022-06-18',
+    imageUrls: [
+      'https://zackdkblog.oss-cn-beijing.aliyuncs.com/images/timeline/IMG_2180.JPG',
+    ],
     contentText:
-      '露下碧梧秋满天，砧声不断思绵绵。北来风俗犹存古，南渡衣冠不后前。苜蓿总肥宛騕□[1]琵琶曾泣汉婵娟。人间俯仰成今古，何地他时始惘然。',
+      '清夜无尘，月色如银。酒斟时，须满十分。浮名浮利，虚苦劳神。叹隙中驹，石中火，梦中身。 虽抱文章，开口谁亲。且陶陶，乐尽天真，几时归去，作个闲人。对一张琴，一壶酒，一溪云',
   },
   {
     date: '2022-09-18',
@@ -22,6 +25,5 @@ const timeLineData: ITimeLineCardProps[] = [
     ],
   },
 ];
-
 
 export default timeLineData;
