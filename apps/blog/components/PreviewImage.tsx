@@ -61,7 +61,7 @@ const ImagePreview = (props: IProps) => {
         ref={ref}
         style={{
           ...style,
-          transition: 'width 0.2s ease-in,height 0.2s ease-in',
+          transition: 'width 0.2s ease-in,height 0.2s ease-in, top 0.2s ease-in, left 0.2s ease-in',
         }}
         className="absolute"
       >

@@ -10,6 +10,7 @@ import '../styles/code.css';
 import '../styles/index.css';
 import '../../../uno.css';
 import '../components/EmblaCarousel/index.css';
+import 'react-photo-view/dist/react-photo-view.css';
 import { MDXProvider } from '@mdx-js/react';
 import { BlogComponents } from 'ui';
 import { SessionProvider } from 'next-auth/react';

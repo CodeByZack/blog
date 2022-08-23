@@ -46,6 +46,7 @@ importers:
       react: 17.0.2
       react-dom: 17.0.2
       react-medium-image-zoom: ^5.0.1
+      react-photo-view: ^1.2.2
       tsconfig: workspace:*
       typescript: ^4.5.3
       ui: workspace:*
@@ -75,6 +76,7 @@ importers:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-medium-image-zoom: 5.0.1_react-dom@17.0.2+react@17.0.2
+      react-photo-view: 1.2.2_react-dom@17.0.2+react@17.0.2
       ui: link:../../packages/ui
       utils: link:../../packages/utils
     devDependencies:
@@ -6092,6 +6094,16 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: false
+
+  /react-photo-view/1.2.2_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-/xsOiDuiR23hKxpmF73EDKPvsBvcWogolXvnBhMZV4CUhd9tnXF91amjKnuQe9BmLaR9CbNxXDOI9SNKeXT5ew==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
     dependencies:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
