@@ -60,9 +60,9 @@ const Footer = () => {
         </ExternalLink>
       </div>
       <div className="space-x-3">
-        <Link href="/newsletter">
+        <Link href="/timeline">
           <a className="text-sm text-gray-500 hover:text-gray-600">
-            /newsletter
+            /timeline
           </a>
         </Link>
         <Link href="/snippets">
