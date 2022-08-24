@@ -16,7 +16,8 @@
     "tsup",
     "turborepo",
     "unocss",
-    "zackdkblog"
+    "zackdkblog",
+    "ZWSP"
   ],
   "eslint.workingDirectories": ["apps/blog"],
 }

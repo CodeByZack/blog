@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://zackdk.com/life/2022-reading-record</loc>
+  </url>
+
+  <url>
+    <loc>https://zackdk.com/life/after-reading-dune</loc>
+  </url>
+
+  <url>
     <loc>https://zackdk.com/blog/build-your-owen-react</loc>
   </url>
 
@@ -72,13 +80,5 @@
 
   <url>
     <loc>https://zackdk.com/blog/vscode-plugin-intro</loc>
-  </url>
-
-  <url>
-    <loc>https://zackdk.com/life/2022-reading-record</loc>
-  </url>
-
-  <url>
-    <loc>https://zackdk.com/life/after-reading-dune</loc>
   </url>
 </urlset>
