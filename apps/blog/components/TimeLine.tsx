@@ -90,12 +90,12 @@ const TimeLineCard = (props: ITimeLineCardProps) => {
       renderContent(restProps)
     ) : (
       <>
-        <div className="my-4 sticky top-0 dark:text-gray-300 flex flex-col justify-start md:flex-row md:justify-between md:items-center">
-          <span className="font-bold text-xl">{title}</span>
-          <span className="md:mt-0 mt-2">{date}</span>
+        <div className="my-4 sticky top-0 flex flex-col justify-start md:flex-row md:justify-between md:items-center">
+          <span className="font-bold text-xl color-[#3291ff]">{title}</span>
+          <span className="md:mt-0 mt-2 dark:text-gray-300">{date}</span>
         </div>
         <div className="rounded-1 bg-white dark:bg-black border border-gray-3 dark:border-[#333] min-h-[200px] p-4">
-          <div className="color-[#3291ff] font-bold pb-4 text-lg">
+          <div className=" dark:text-gray-300 font-bold pb-4 text-lg">
             {subTitle}
           </div>
           <div className="pb-4 dark:color-coolgray">{contentText}</div>
@@ -158,7 +158,7 @@ const TimeLineCard = (props: ITimeLineCardProps) => {
                 ) : (
                   <PhotoView key={imageUrls[0]} src={imageUrls[0]}>
                     <img
-                      className="w-full object-cover"
+                      className="w-full object-contain max-h-2xl"
                       src={imageUrls[0]}
                       alt={imageUrls[0]}
                     />

@@ -50,6 +50,7 @@
 [h-full=""]{height:100%;}
 .h-screen,
 [h-screen=""]{height:100vh;}
+.max-h-2xl{max-height:42rem;}
 .max-w-3xl{max-width:48rem;}
 .max-w-4xl{max-width:56rem;}
 .max-w-none{max-width:none;}
@@ -117,6 +118,7 @@
 [fill~="white"]{--un-fill-opacity:1;fill:rgba(255,255,255,var(--un-fill-opacity));}
 [fill~="none"]{fill:none;}
 .object-cover{object-fit:cover;}
+.object-contain{object-fit:contain;}
 .p-1{padding:0.25rem;}
 .p-3{padding:0.75rem;}
 .p-4{padding:1rem;}
