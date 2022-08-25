@@ -71,11 +71,11 @@ const getFileArrByPath = async (path: string) => {
   return files;
 };
 
-const deleteFileByPath: DeleteFileByPath = async (path) => {
+const deleteFileByPath: DeleteFileByPath = async (pathArr) => {
   if (!OSS_CLIENT)
     return { status: 'error', message: 'init oss first', data: null };
   try {
-    const deleteRes = await OSS_CLIENT.delete(path);
+    const deleteRes = await OSS_CLIENT.deleteMulti(pathArr.map(p=>p.replace(BASE_URL,"")));
     console.log(deleteRes);
     return {
       status: 'success',

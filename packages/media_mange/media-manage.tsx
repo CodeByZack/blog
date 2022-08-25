@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styles from './style.module.css';
 import {
   ChonkyActions,
@@ -16,18 +16,24 @@ import { FullFileBrowser } from 'chonky';
 import fileUtils from './file-utils';
 import fsHelper from './fs-helper';
 import zwsp from './zwsp';
+import useFileUtil from './hooks/useFileUtil';
 setChonkyDefaults({ iconComponent: ChonkyIconFA });
 
 interface IProps {
   path: string;
 }
 
+const useFileManage = ()=>{
+  
+
+};
+
 const MediaManage = (props: IProps) => {
   const { path = '' } = props;
 
-  const [utilsDone, setUtilsDone] = useState(false);
   const [files, setFiles] = useState<FileArray>([]);
   const [folderChain, setFolderChain] = useState<FileArray>([]);
+  const { contentJSX, fileUtils } = useFileUtil();
 
   const uploadFile = async () => {
     try {
@@ -55,6 +61,15 @@ const MediaManage = (props: IProps) => {
     }
   };
 
+  const deleteFile = async (file: Parameters<FileActionHandler>['0']) => {
+    const { state } = file;
+    const { selectedFilesForAction } = state;
+    const paths = selectedFilesForAction.map((s) => s.id);
+    await fileUtils.deleteFileByPath(paths);
+    const restFiles = files.filter((f) => !paths.includes(f?.id!));
+    setFiles(restFiles);
+  };
+
   const handleAction: FileActionHandler = (data) => {
     if (data.id === ChonkyActions.OpenFiles.id) {
       const { payload } = data;
@@ -73,7 +88,7 @@ const MediaManage = (props: IProps) => {
             ...folderChain,
             {
               id: file.id,
-              name: file.name.replace("/",""),
+              name: file.name.replace('/', ''),
               path: file.path,
               isDir: true,
               isPath: true,
@@ -86,7 +101,7 @@ const MediaManage = (props: IProps) => {
       if (files.includes(null)) return;
       uploadFile();
     } else if (data.id === ChonkyActions.DeleteFiles.id) {
-      console.log(data);
+      deleteFile(data);
     }
   };
 
@@ -96,44 +111,13 @@ const MediaManage = (props: IProps) => {
     setFiles(files);
   };
 
-  const saveConfigs = () => {
-    // @ts-ignore
-    const accessKeyIdValue = accessKeyId.value;
-    // @ts-ignore
-    const accessKeySecretValue = accessKeySecret.value;
-
-    if (!accessKeyIdValue || !accessKeySecretValue) {
-      alert('请填写后再保存！');
-      return;
-    }
-
-    localStorage.setItem(
-      'ALI_CONFIGS',
-      JSON.stringify({
-        accessKeyId: zwsp.encode(accessKeyIdValue),
-        accessKeySecret: zwsp.encode(accessKeySecretValue),
-      }),
-    );
-    location.reload();
-  };
-
   useEffect(() => {
-    // You now have access to `window`
-    const ALI_CONFIGS = JSON.parse(localStorage.getItem('ALI_CONFIGS') || '{}');
-    if(!ALI_CONFIGS.accessKeyId || !ALI_CONFIGS.accessKeySecret) return;
-    ALI_CONFIGS.accessKeyId = zwsp.decode(ALI_CONFIGS.accessKeyId);
-    ALI_CONFIGS.accessKeySecret = zwsp.decode(ALI_CONFIGS.accessKeySecret);
-    const status = fileUtils.init(ALI_CONFIGS);
-    setUtilsDone(status);
-  }, []);
-
-  useEffect(() => {
-    if (utilsDone) {
+    if (!contentJSX) {
       setFolderChain([
         { id: '.', path: '', name: '.', isDir: true, isPath: true },
       ]);
     }
-  }, [utilsDone]);
+  }, [contentJSX]);
 
   useEffect(() => {
     if (folderChain.length > 0) {
@@ -143,34 +127,7 @@ const MediaManage = (props: IProps) => {
     }
   }, [folderChain]);
 
-  if (!utilsDone) {
-    return (
-      <div className={styles.wrapper}>
-        <div className={styles.content}>
-          <div className={styles.fileBrowser}>
-            <div className={styles.noIdAndSecret}>
-              <h2 className={styles.tip}>配置你自己的阿里云 ID 和 Secret。</h2>
-              <div className={styles.inputArea}>
-                <div className={styles.inputItem}>
-                  <label>accessKeyId：</label>
-                  <input id="accessKeyId" placeholder="请输入" />
-                </div>
-                <div className={styles.inputItem}>
-                  <label>accessKeySecret：</label>
-                  <input id="accessKeySecret" placeholder="请输入" />
-                </div>
-              </div>
-              <button onClick={saveConfigs}>保存</button>
-              {/* <code>
-                localStorage.setItem("ALI_CONFIGS",
-                {` '{ "accessKeyId":"","accessKeySecret":""}'`});
-              </code> */}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  if (contentJSX) return contentJSX;
 
   return (
     <div className={styles.wrapper}>

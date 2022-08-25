@@ -24,7 +24,7 @@ export interface GetFileArrByPath {
   (path: string): Promise<IFileItem[]>;
 }
 export interface DeleteFileByPath {
-  (path: string): Promise<ResultWrapper<Boolean | null>>;
+  (pathArr: string[]): Promise<ResultWrapper<Boolean | null>>;
 }
 
 export interface UploadFile {
