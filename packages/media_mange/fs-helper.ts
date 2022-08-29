@@ -22,13 +22,14 @@
  *
  * @return {!Promise<FileSystemFileHandle>} Handle to the existing file.
  */
-const getFileHandle = () => {
+const getFileHandle = (opts ?: OpenFilePickerOptions) => {
   // For Chrome 86 and later...
   if ('showOpenFilePicker' in window) {
-    return window.showOpenFilePicker().then((handles) => handles[0]);
+    return window.showOpenFilePicker(opts);
   }
+  return null;
   // For Chrome 85 and earlier...
-  return window.chooseFileSystemEntries();
+  // return window.chooseFileSystemEntries();
 };
 
 /**

@@ -17,58 +17,20 @@ import fileUtils from './file-utils';
 import fsHelper from './fs-helper';
 import zwsp from './zwsp';
 import useFileUtil from './hooks/useFileUtil';
+import useMediaManage from './hooks/useMediaManage';
 setChonkyDefaults({ iconComponent: ChonkyIconFA });
 
 interface IProps {
   path: string;
 }
 
-const useFileManage = ()=>{
-  
-
-};
+const useFileManage = () => {};
 
 const MediaManage = (props: IProps) => {
   const { path = '' } = props;
-
-  const [files, setFiles] = useState<FileArray>([]);
-  const [folderChain, setFolderChain] = useState<FileArray>([]);
   const { contentJSX, fileUtils } = useFileUtil();
-
-  const uploadFile = async () => {
-    try {
-      const fileHandle = await fsHelper.getFileHandle();
-      const file = await fileHandle.getFile();
-      const _files: FileArray = [...files, null];
-      setFiles(_files);
-      const prefix = folderChain.map((f) => f?.path).join('');
-      console.log(prefix);
-      const uploadRes = await fileUtils.uploadFile(
-        `${prefix}${file.name}`,
-        file,
-      );
-      console.log(uploadRes);
-      const { data } = uploadRes;
-      const uploadFile: FileData = {
-        id: data?.fileUrl!,
-        name: data?.fileName!,
-        url: data?.fileUrl!,
-        thumbnailUrl: data?.fileUrl!,
-      };
-      setFiles([...files, uploadFile]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const deleteFile = async (file: Parameters<FileActionHandler>['0']) => {
-    const { state } = file;
-    const { selectedFilesForAction } = state;
-    const paths = selectedFilesForAction.map((s) => s.id);
-    await fileUtils.deleteFileByPath(paths);
-    const restFiles = files.filter((f) => !paths.includes(f?.id!));
-    setFiles(restFiles);
-  };
+  const { files, folderChain, setFolderChain, uploadFiles, deleteFiles } =
+    useMediaManage(fileUtils);
 
   const handleAction: FileActionHandler = (data) => {
     if (data.id === ChonkyActions.OpenFiles.id) {
@@ -99,33 +61,11 @@ const MediaManage = (props: IProps) => {
       }
     } else if (data.id === ChonkyActions.UploadFiles.id) {
       if (files.includes(null)) return;
-      uploadFile();
+      uploadFiles();
     } else if (data.id === ChonkyActions.DeleteFiles.id) {
-      deleteFile(data);
+      deleteFiles(data);
     }
   };
-
-  const getFiles = async (path: string) => {
-    const files = await fileUtils.getFileArrByPath(path);
-    console.log(files);
-    setFiles(files);
-  };
-
-  useEffect(() => {
-    if (!contentJSX) {
-      setFolderChain([
-        { id: '.', path: '', name: '.', isDir: true, isPath: true },
-      ]);
-    }
-  }, [contentJSX]);
-
-  useEffect(() => {
-    if (folderChain.length > 0) {
-      const path = folderChain.map((f) => f?.path).join('');
-      console.log(path);
-      getFiles(path);
-    }
-  }, [folderChain]);
 
   if (contentJSX) return contentJSX;
 

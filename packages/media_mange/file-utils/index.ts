@@ -23,20 +23,20 @@ export interface UploadResult {
 export interface GetFileArrByPath {
   (path: string): Promise<IFileItem[]>;
 }
-export interface DeleteFileByPath {
+export interface DeleteFileByPathArr {
   (pathArr: string[]): Promise<ResultWrapper<Boolean | null>>;
 }
 
-export interface UploadFile {
-  (ossPath: string, file: any): Promise<ResultWrapper<UploadResult | null>>;
+export interface UploadFiles {
+  (fileArr : { ossPath: string, file: any}[]): Promise<ResultWrapper<UploadResult[] | null>>;
 }
 
 export type OSS_TYPE = 'ali';
 
 export interface OssInstance {
-  uploadFile: UploadFile;
+  uploadFiles: UploadFiles;
   getFileArrByPath: GetFileArrByPath;
-  deleteFileByPath: DeleteFileByPath;
+  deleteFileByPathArr: DeleteFileByPathArr;
   init: (config: any) => boolean;
 }
 

@@ -1,5 +1,5 @@
 import ALI_OSS from 'ali-oss';
-import { DeleteFileByPath, IFileItem, OssInstance, UploadFile } from '.';
+import { DeleteFileByPathArr, IFileItem, OssInstance, UploadFiles } from '.';
 
 // const accessKeyId = process.env.NEXT_PUBLIC_ALI_OSS_ACCESS_KEY_ID;
 // const accessKeySecret = process.env.NEXT_PUBLIC_ALI_OSS_ACCESS_KEY_SECRET;
@@ -7,20 +7,26 @@ let OSS_CLIENT: ALI_OSS | null = null;
 
 const BASE_URL = 'http://zackdkblog.oss-cn-beijing.aliyuncs.com/';
 
-const uploadFile: UploadFile = async (ossPath: string, file: any) => {
+const uploadFiles: UploadFiles = async (fileArr) => {
   if (!OSS_CLIENT)
     return { status: 'error', message: 'init oss first', data: null };
   try {
-    const uploadRes = await OSS_CLIENT.put(ossPath, file);
-    console.log(uploadRes);
-    return {
-      status: 'success',
-      message: '上传成功！',
-      data: {
+    const resultArr = [];
+
+    for (const f of fileArr) {
+      const { ossPath, file } = f;
+      const uploadRes = await OSS_CLIENT.put(ossPath, file);
+      console.log(uploadRes);
+      resultArr.push({
         fileUrl: uploadRes.url,
         fileName: uploadRes.name,
         originalResult: uploadRes,
-      },
+      });
+    }
+    return {
+      status: 'success',
+      message: '上传成功！',
+      data: resultArr,
     };
   } catch (error) {
     console.log(error);
@@ -71,11 +77,13 @@ const getFileArrByPath = async (path: string) => {
   return files;
 };
 
-const deleteFileByPath: DeleteFileByPath = async (pathArr) => {
+const deleteFileByPathArr: DeleteFileByPathArr = async (pathArr) => {
   if (!OSS_CLIENT)
     return { status: 'error', message: 'init oss first', data: null };
   try {
-    const deleteRes = await OSS_CLIENT.deleteMulti(pathArr.map(p=>p.replace(BASE_URL,"")));
+    const deleteRes = await OSS_CLIENT.deleteMulti(
+      pathArr.map((p) => p.replace(BASE_URL, '')),
+    );
     console.log(deleteRes);
     return {
       status: 'success',
@@ -89,9 +97,9 @@ const deleteFileByPath: DeleteFileByPath = async (pathArr) => {
 };
 
 const AliInstance: OssInstance = {
-  uploadFile,
+  uploadFiles,
   getFileArrByPath,
-  deleteFileByPath,
+  deleteFileByPathArr,
   init,
 };
 
