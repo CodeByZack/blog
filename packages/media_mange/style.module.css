@@ -1,0 +1,78 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper .content {
+  min-width: 300px;
+  min-height: 200px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.wrapper .content .fileBrowser {
+  width: 100vw;
+  height: 100vh;
+}
+
+.wrapper .content .fileBrowser .noIdAndSecret {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 16px;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  text-align: center;
+}
+
+.wrapper .content .fileBrowser .noIdAndSecret .tip {
+  font-size: 20px;
+  font-weight: bolder;
+  margin-bottom: 16px;
+}
+
+.wrapper .content .fileBrowser .noIdAndSecret .inputArea {
+  text-align: left;
+}
+
+.wrapper .content .fileBrowser .noIdAndSecret .inputArea .inputItem {
+  margin-bottom: 8px;
+}
+
+.wrapper .content .fileBrowser .noIdAndSecret .inputArea label {
+  width: 150px;
+}
+
+.wrapper .content .fileBrowser .noIdAndSecret .inputArea input {
+  width: 90%;
+  border: 1px solid #5c7080;
+  border-radius: 4px;
+  height: 1.1876em;
+  margin: 0;
+  display: block;
+  padding: 6px;
+  min-width: 0;
+  background: none;
+  box-sizing: content-box;
+  margin-top: 8px;
+  animation-duration: 10ms;
+}
+
+.wrapper .content .fileBrowser .noIdAndSecret code {
+  display: block;
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 6px;
+  padding: 8px;
+  margin-top: 8px;
+  color: #000;
+}

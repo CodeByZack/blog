@@ -3,10 +3,10 @@
     "aliyuncs",
     "animejs",
     "Attributify",
-    "chrono",
+    "chonky",
     "Devbook",
     "devbookhq",
-    "embla",
+    "fontawesome",
     "heti",
     "importmap",
     "nextjs",
@@ -17,7 +17,8 @@
     "tsup",
     "turborepo",
     "unocss",
-    "zackdkblog"
+    "zackdkblog",
+    "ZWSP"
   ],
   "eslint.workingDirectories": ["apps/blog"],
 }

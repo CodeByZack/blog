@@ -1,0 +1,26 @@
+{
+  "name": "media-manage",
+  "version": "0.0.0",
+  "main": "./index.tsx",
+  "types": "./index.tsx",
+  "module": "./index.tsx",
+  "sideEffects": false,
+  "license": "MIT",
+  "devDependencies": {
+    "@types/ali-oss": "^6.16.4",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@types/wicg-file-system-access": "^2020.9.5",
+    "config": "workspace:*",
+    "next": "12.0.8",
+    "tsconfig": "workspace:*",
+    "tsup": "^5.12.8",
+    "typescript": "^4.5.3",
+    "utils": "workspace:*"
+  },
+  "dependencies": {
+    "ali-oss": "^6.17.1",
+    "chonky": "^2.3.2",
+    "chonky-icon-fontawesome": "^2.3.2"
+  }
+}

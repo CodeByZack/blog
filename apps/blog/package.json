@@ -36,6 +36,7 @@
     "react-medium-image-zoom": "^5.0.1",
     "react-photo-view": "^1.2.2",
     "ui": "workspace:*",
+    "media-manage": "workspace:*",
     "utils": "workspace:*"
   },
   "devDependencies": {
