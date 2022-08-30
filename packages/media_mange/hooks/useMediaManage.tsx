@@ -55,6 +55,20 @@ const useMediaManage = (fileUtils: OssInstance) => {
     setFiles(files);
   };
 
+  const createFolder = async () => {
+    const folderName = prompt('请输入文件夹名字');
+    if (!folderName) return;
+    const folder: FileData = {
+      id: folderName,
+      name: folderName,
+      path: `${folderName}/`,
+      isDir: true,
+      isPath: true,
+      isFront: true,
+    };
+    setFolderChain([...folderChain, folder]);
+  };
+
   useEffect(() => {
     if (!fileUtils) return;
 
@@ -75,6 +89,7 @@ const useMediaManage = (fileUtils: OssInstance) => {
     files,
     folderChain,
     setFolderChain,
+    createFolder
   };
 };
 

@@ -24,13 +24,17 @@ interface IProps {
   path: string;
 }
 
-const useFileManage = () => {};
-
 const MediaManage = (props: IProps) => {
   const { path = '' } = props;
   const { contentJSX, fileUtils } = useFileUtil();
-  const { files, folderChain, setFolderChain, uploadFiles, deleteFiles } =
-    useMediaManage(fileUtils);
+  const {
+    files,
+    folderChain,
+    setFolderChain,
+    uploadFiles,
+    createFolder,
+    deleteFiles,
+  } = useMediaManage(fileUtils);
 
   const handleAction: FileActionHandler = (data) => {
     if (data.id === ChonkyActions.OpenFiles.id) {
@@ -64,6 +68,8 @@ const MediaManage = (props: IProps) => {
       uploadFiles();
     } else if (data.id === ChonkyActions.DeleteFiles.id) {
       deleteFiles(data);
+    } else if (data.id === ChonkyActions.CreateFolder.id) {
+      createFolder();
     }
   };
 
@@ -81,6 +87,7 @@ const MediaManage = (props: IProps) => {
               ChonkyActions.EnableListView,
               ChonkyActions.EnableGridView,
               ChonkyActions.DeleteFiles,
+              ChonkyActions.CreateFolder,
             ]}
             folderChain={folderChain}
             onFileAction={handleAction}
