@@ -1,21 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react';
 import styles from './style.module.css';
 import {
   ChonkyActions,
-  ChonkyActionUnion,
-  ChonkyIconName,
-  defineFileAction,
   FileActionHandler,
-  FileArray,
-  FileData,
-  GenericFileActionHandler,
   setChonkyDefaults,
 } from 'chonky';
 import { ChonkyIconFA } from 'chonky-icon-fontawesome';
 import { FullFileBrowser } from 'chonky';
-import fileUtils from './file-utils';
-import fsHelper from './fs-helper';
-import zwsp from './zwsp';
 import useFileUtil from './hooks/useFileUtil';
 import useMediaManage from './hooks/useMediaManage';
 setChonkyDefaults({ iconComponent: ChonkyIconFA });
