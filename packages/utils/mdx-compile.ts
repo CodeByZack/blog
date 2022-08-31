@@ -7,9 +7,20 @@ import remarkSlug from 'remark-slug';
 import remarkGfm from 'remark-gfm';
 import remarkAutolinkHeadings from 'remark-autolink-headings';
 import { serialize } from 'next-mdx-remote/serialize';
+import * as esbuild from 'esbuild-wasm';
+
+let LoadEsbuildDown = false;
+
+esbuild
+  .initialize({
+    wasmURL: 'https://www.unpkg.com/esbuild-wasm@0.15.6/esbuild.wasm',
+  })
+  .then(() => {
+    LoadEsbuildDown = true;
+  });
 
 export const compileMdx = async (content: string) => {
-  if(!content) return null;
+  if (!content) return null;
   try {
     const res = await compile(content, {
       remarkPlugins: [
@@ -18,7 +29,9 @@ export const compileMdx = async (content: string) => {
         remarkCodeTitles,
         remarkGfm,
       ],
-      jsxRuntime: 'classic',
+      jsx: true,
+      providerImportSource: '@mdx-js/react',
+      // jsxRuntime: 'classic',
       rehypePlugins: [mdxPrism],
     });
     return res.value as string;
@@ -37,13 +50,20 @@ export const evaluateMdx = async (content: string, config: EvaluateOptions) => {
         remarkCodeTitles,
         remarkGfm,
       ],
-      useDynamicImport : true,
+      useDynamicImport: true,
       ...config,
     });
     return res;
   } catch (error) {
     console.log(error);
   }
+};
+
+export const compileReact = async (jsxStr: string) => {
+  if (!LoadEsbuildDown) return;
+
+  const res = await esbuild.transform(jsxStr, { jsx: 'automatic', loader: 'jsx' });
+  console.log(res);
 };
 
 export const compileMdx_node = async (content: string) => {
