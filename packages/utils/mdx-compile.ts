@@ -7,17 +7,6 @@ import remarkSlug from 'remark-slug';
 import remarkGfm from 'remark-gfm';
 import remarkAutolinkHeadings from 'remark-autolink-headings';
 import { serialize } from 'next-mdx-remote/serialize';
-import * as esbuild from 'esbuild-wasm';
-
-let LoadEsbuildDown = false;
-
-esbuild
-  .initialize({
-    wasmURL: 'https://www.unpkg.com/esbuild-wasm@0.15.6/esbuild.wasm',
-  })
-  .then(() => {
-    LoadEsbuildDown = true;
-  });
 
 export const compileMdx = async (content: string) => {
   if (!content) return null;
@@ -30,14 +19,14 @@ export const compileMdx = async (content: string) => {
         remarkGfm,
       ],
       jsx: true,
-      providerImportSource: '@mdx-js/react',
-      // jsxRuntime: 'classic',
+      // providerImportSource: '@mdx-js/react',
+      jsxRuntime: 'classic',
       rehypePlugins: [mdxPrism],
     });
-    return res.value as string;
-  } catch (error) {
-    console.log(error);
-    throw new Error(error as any);
+    return { result: res.value as string };
+  } catch (error: any) {
+    console.dir(error);
+    return { error: true, msg: error.reason };
   }
 };
 
@@ -59,13 +48,6 @@ export const evaluateMdx = async (content: string, config: EvaluateOptions) => {
   }
 };
 
-export const compileReact = async (jsxStr: string) => {
-  if (!LoadEsbuildDown) return;
-
-  const res = await esbuild.transform(jsxStr, { jsx: 'automatic', loader: 'jsx' });
-  console.log(res);
-};
-
 export const compileMdx_node = async (content: string) => {
   try {
     const res = await serialize(content, {
@@ -84,4 +66,17 @@ export const compileMdx_node = async (content: string) => {
     console.log(error);
     throw new Error(error as any);
   }
+};
+
+export const modifyCompileResult = (mdxStr: string) => {
+  /** 替换导出为 ReactDOM.render */
+  const modifyStr = mdxStr.replace(
+    'export default MDXContent;',
+    "ReactDOM.render(<MDXContent components={components} />,document.getElementById('app'))",
+  );
+  /** 添加固定的博客内的组件 */
+  const injectComponents = `import components from 'blog-components.js;'`;
+  const finalStr = `${injectComponents}\n${modifyStr}`;
+
+  return finalStr;
 };

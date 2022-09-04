@@ -22,8 +22,10 @@
     "dayjs": "^1.11.3",
     "embla-carousel-react": "^7.0.0",
     "encoding": "^0.1.13",
+    "esbuild-wasm": "^0.15.6",
     "gray-matter": "^4.0.3",
     "mdx-prism": "^0.3.4",
+    "media-manage": "workspace:*",
     "monaco-editor": "^0.33.0",
     "next": "12.0.8",
     "next-auth": "^4.3.4",
@@ -36,7 +38,6 @@
     "react-medium-image-zoom": "^5.0.1",
     "react-photo-view": "^1.2.2",
     "ui": "workspace:*",
-    "media-manage": "workspace:*",
     "utils": "workspace:*"
   },
   "devDependencies": {

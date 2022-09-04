@@ -22,7 +22,7 @@
  *
  * @return {!Promise<FileSystemFileHandle>} Handle to the existing file.
  */
-const getFileHandle = (opts ?: OpenFilePickerOptions) => {
+const getFileHandle = (opts?: OpenFilePickerOptions) => {
   // For Chrome 86 and later...
   if ('showOpenFilePicker' in window) {
     return window.showOpenFilePicker(opts);
@@ -61,7 +61,7 @@ const getNewFileHandle = () => {
       },
     ],
   };
-  return window.chooseFileSystemEntries(opts);
+  return window.chooseFileSystemEntries(opts as any);
 };
 
 /**
@@ -70,7 +70,7 @@ const getNewFileHandle = () => {
  * @param {File} file
  * @return {!Promise<string>} A promise that resolves to the parsed string.
  */
-const readFile = (file) => {
+const readFile = (file: File) => {
   // If the new .text() reader is available, use it.
   if (file.text) {
     return file.text();
@@ -86,11 +86,12 @@ const readFile = (file) => {
  * @param {File} file
  * @return {Promise<string>} A promise that resolves to the parsed string.
  */
-const _readFileLegacy = (file) => {
+const _readFileLegacy = (file: File) => {
   return new Promise((resolve) => {
     const reader = new FileReader();
     reader.addEventListener('loadend', (e) => {
-      const text = e.srcElement.result;
+      //@ts-ignore
+      const text = e.srcElement?.result;
       resolve(text);
     });
     reader.readAsText(file);
@@ -103,6 +104,8 @@ const _readFileLegacy = (file) => {
  * @param {FileSystemFileHandle} fileHandle File handle to write to.
  * @param {string} contents Contents to write.
  */
+//@ts-ignore
+
 const writeFile = async (fileHandle, contents) => {
   // Support for Chrome 82 and earlier.
   if (fileHandle.createWriter) {
@@ -131,8 +134,10 @@ const writeFile = async (fileHandle, contents) => {
  * @param {boolean} withWrite True if write permission should be checked.
  * @return {boolean} True if the user has granted read/write permission.
  */
+//@ts-ignore
+
 const verifyPermission = async (fileHandle, withWrite) => {
-  const opts : any = {};
+  const opts: any = {};
   if (withWrite) {
     opts.writable = true;
     // For Chrome 86 and later...
@@ -150,11 +155,10 @@ const verifyPermission = async (fileHandle, withWrite) => {
   return false;
 };
 
-
 export default {
   getFileHandle,
   getNewFileHandle,
   readFile,
   writeFile,
-  verifyPermission
-}
+  verifyPermission,
+};

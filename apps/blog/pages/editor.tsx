@@ -1,6 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { KEditor } from 'ui';
-import { evaluateMdx } from 'utils';
+import { ErrorOverlay, KEditor, KPreview } from 'ui';
+import {
+  compileMdx,
+  evaluateMdx,
+  FSloader,
+  modifyCompileResult,
+  OnlineBuilder,
+} from 'utils';
 import { MoreVertical } from '@geist-ui/icons';
 import {
   Avatar,
@@ -33,6 +39,7 @@ import showNewPostModal from '../components/NewPostModal';
 import dayjs from 'dayjs';
 
 interface IProps {}
+const externals = { react: 'React', 'react-dom': 'ReactDOM' };
 
 const templateValue = (data) => `---
 title: '${data.title}'
@@ -54,11 +61,14 @@ const BlogEditor = (props: IProps) => {
   const [loading, setLoading] = useState(false);
   const [editorReady, setEditorReady] = useState(false);
   const [showPreview, setShowPreview] = useState(true);
+  const [buildError, setBuildError] = useState<any>(null);
   const { setToast: showToast } = useToasts({ placement: 'topRight' });
+  const previewRef = useRef<HTMLIFrameElement>();
   const dataHolder = useRef<{
     editPost: any;
     editor: monaco.editor.IStandaloneCodeEditor;
     monaco: Monaco;
+    esbuild?: { fs: FSloader; builder: OnlineBuilder };
   }>({
     editPost: {},
     editor: null,
@@ -87,35 +97,56 @@ const BlogEditor = (props: IProps) => {
     }
   }, [path, session?.accessToken, editorReady]);
 
+  useEffect(() => {
+    if (dataHolder.current.esbuild) return;
+    const FSloaderInstance = new FSloader();
+    const OnlineBuilderInstance = new OnlineBuilder({
+      loader: FSloaderInstance.readFile,
+      externals,
+    });
+    const BuildOnline = {
+      fs: FSloaderInstance,
+      builder: OnlineBuilderInstance,
+    };
+    dataHolder.current.esbuild = BuildOnline;
+  }, []);
+
   const handleChange = useDebounceFn(async (v: string) => {
     const { data, content } = matter(v);
 
-    const isEmpty = (str: string) => !!str.replaceAll('\n', '');
+    // const isEmpty = (str: string) => !!str.replaceAll('\n', '');
 
-    const comp = await evaluateMdx(isEmpty(content) ? content : '请输入内容', {
-      ...runtime,
-      ...provider,
-    } as any);
+    // const comp = await evaluateMdx(isEmpty(content) ? content : '请输入内容', {
+    //   ...runtime,
+    //   ...provider,
+    // } as any);
 
-    console.log({ data, content, comp });
+    // setMdxComp({
+    //   comp: comp?.default,
+    //   postInfo: { ...data, readingTime: readingTime(content) },
+    // });
+    // console.log({ data, content });
 
-    setMdxComp({
-      comp: comp?.default,
-      postInfo: { ...data, readingTime: readingTime(content) },
-    });
+    const mdxResult = await compileMdx(content);
+    const { error, msg, result } = mdxResult;
 
-    // /**
-    //  * 下面这种方式
-    //  * 1. 运行时编译mdx。
-    //  * 2. 拿上一步的结果，拼凑完整的html
-    //  * 3. 在html里，使用 script module 引入 react react-dom 等库，以及样式
-    //  * 4. mdx中所使用的组件也需要通过script module形式引入
-    //  * 5. 上一步的难点在于 现在很多组件库都不支持script module引入，就算支持也很麻烦，如果没有依赖纯手写还可以。
-    //  * */
-    // const mdxStr = await compileMdx(valueRef.current);
-    // const htmlContent = createHtml({ mdxStr });
-    // console.log({ mdxStr, htmlContent });
-    // setSrcDoc(htmlContent);
+    if (error) {
+      setBuildError({ msg });
+      return;
+    }
+
+    const resultStr = modifyCompileResult(result);
+    if (dataHolder.current.esbuild) {
+      dataHolder.current.esbuild.fs.writeFile('/index.jsx', resultStr);
+      const text = await dataHolder.current.esbuild.builder.build({
+        entryPoints: ['index.jsx'],
+        outfile: 'out.js',
+      });
+      console.log({ text });
+      const html = `<div id="app"></div><script>${text}</script>`;
+      previewRef.current.contentWindow.postMessage({ html }, '*');
+    }
+    setBuildError(null);
   }, 1000);
 
   const handleEditorMount: OnMount = (editor, monaco) => {
@@ -231,8 +262,10 @@ const BlogEditor = (props: IProps) => {
                 />
               </div>
               {showPreview && (
-                <div className="h-full w-full overflow-auto">
-                  <MDXPreview MdxComp={mdxComp} />
+                <div className="h-full w-full overflow-auto relative">
+                  {/* <MDXPreview MdxComp={mdxComp} /> */}
+                  <KPreview ref={previewRef} />
+                  <ErrorOverlay error={buildError} />
                 </div>
               )}
             </Splitter>

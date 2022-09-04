@@ -10,12 +10,7 @@ import useFileUtil from './hooks/useFileUtil';
 import useMediaManage from './hooks/useMediaManage';
 setChonkyDefaults({ iconComponent: ChonkyIconFA });
 
-interface IProps {
-  path: string;
-}
-
-const MediaManage = (props: IProps) => {
-  const { path = '' } = props;
+const MediaManage = () => {
   const { contentJSX, fileUtils } = useFileUtil();
   const {
     files,
