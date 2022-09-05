@@ -52,8 +52,7 @@
 .h-\[16px\]{height:16px;}
 .h-\[38px\]{height:38px;}
 .h-\[40px\]{height:40px;}
-.h-4,
-[h4=""]{height:1rem;}
+.h-4{height:1rem;}
 .h-5{height:1.25rem;}
 .h-full,
 [h-full=""]{height:100%;}

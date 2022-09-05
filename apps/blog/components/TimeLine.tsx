@@ -104,7 +104,7 @@ const TimeLineCard = (props: ITimeLineCardProps) => {
               <video
                 className="w-full"
                 controls
-                src="https://media.w3.org/2010/05/sintel/trailer.mp4"
+                src={videoUrl}
               />
             </div>
           )}
