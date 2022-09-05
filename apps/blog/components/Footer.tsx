@@ -65,8 +65,8 @@ const Footer = () => {
             /timeline
           </a>
         </Link>
-        <Link href="/snippets">
-          <a className="text-sm text-gray-500 hover:text-gray-600">/snippets</a>
+        <Link href="/media-manage">
+          <a className="text-sm text-gray-500 hover:text-gray-600">/media-manage</a>
         </Link>
         <Link href="/sentence">
           <a className="text-sm text-gray-500 hover:text-gray-600">/sentence</a>

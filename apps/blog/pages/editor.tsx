@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { KEditor } from 'ui';
-import { evaluateMdx } from 'utils';
+import {
+  compileMdx,
+  FSloader,
+  modifyCompileResult,
+  OnlineBuilder,
+} from 'utils';
 import { MoreVertical } from '@geist-ui/icons';
 import {
   Avatar,
@@ -16,9 +20,6 @@ import {
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import useDebounceFn from '../hooks/useDebounceFn';
-import MDXPreview from '../components/MDXPreview';
-import * as runtime from 'react/jsx-runtime';
-import * as provider from '@mdx-js/react';
 import { MDXContent } from 'mdx/types';
 import { Splitter } from '../components/WrapperSplitter';
 import matter from 'gray-matter';
@@ -31,8 +32,14 @@ import { registerAutoCompletion } from '../utils/configEditor';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import showNewPostModal from '../components/NewPostModal';
 import dayjs from 'dayjs';
+import blogcss from '../styles/blogcss';
+import KPreview from '../components/KPreview';
+import ErrorOverlay from '../components/ErrorOverlay';
+import KEditor from '../components/KEditor';
+import { useTheme } from 'next-themes';
 
 interface IProps {}
+const externals = { react: 'React', 'react-dom': 'ReactDOM', dayjs: 'dayjs' };
 
 const templateValue = (data) => `---
 title: '${data.title}'
@@ -54,22 +61,20 @@ const BlogEditor = (props: IProps) => {
   const [loading, setLoading] = useState(false);
   const [editorReady, setEditorReady] = useState(false);
   const [showPreview, setShowPreview] = useState(true);
+  const [resizing, setResizing] = useState(false);
+  const [buildError, setBuildError] = useState<any>(null);
+  const { theme, setTheme } = useTheme();
   const { setToast: showToast } = useToasts({ placement: 'topRight' });
+  const previewRef = useRef<HTMLIFrameElement>();
   const dataHolder = useRef<{
     editPost: any;
     editor: monaco.editor.IStandaloneCodeEditor;
     monaco: Monaco;
+    esbuild?: { fs: FSloader; builder: OnlineBuilder };
   }>({
     editPost: {},
     editor: null,
     monaco: null,
-  });
-  const [mdxComp, setMdxComp] = useState<{
-    comp: MDXContent;
-    postInfo: Partial<IArticleDetail>;
-  }>({
-    comp: null,
-    postInfo: {},
   });
 
   const router = useRouter();
@@ -87,35 +92,56 @@ const BlogEditor = (props: IProps) => {
     }
   }, [path, session?.accessToken, editorReady]);
 
+  useEffect(() => {
+    if (dataHolder.current.esbuild) return;
+    const FSloaderInstance = new FSloader();
+    const OnlineBuilderInstance = new OnlineBuilder({
+      loader: FSloaderInstance.readFile,
+      externals,
+    });
+    const BuildOnline = {
+      fs: FSloaderInstance,
+      builder: OnlineBuilderInstance,
+    };
+    dataHolder.current.esbuild = BuildOnline;
+  }, []);
+
   const handleChange = useDebounceFn(async (v: string) => {
     const { data, content } = matter(v);
 
-    const isEmpty = (str: string) => !!str.replaceAll('\n', '');
+    // const isEmpty = (str: string) => !!str.replaceAll('\n', '');
 
-    const comp = await evaluateMdx(isEmpty(content) ? content : '请输入内容', {
-      ...runtime,
-      ...provider,
-    } as any);
+    // const comp = await evaluateMdx(isEmpty(content) ? content : '请输入内容', {
+    //   ...runtime,
+    //   ...provider,
+    // } as any);
 
-    console.log({ data, content, comp });
+    // setMdxComp({
+    //   comp: comp?.default,
+    //   postInfo: { ...data, readingTime: readingTime(content) },
+    // });
+    // console.log({ data, content });
 
-    setMdxComp({
-      comp: comp?.default,
-      postInfo: { ...data, readingTime: readingTime(content) },
-    });
+    const mdxResult = await compileMdx(content);
+    const { error, msg, result } = mdxResult;
 
-    // /**
-    //  * 下面这种方式
-    //  * 1. 运行时编译mdx。
-    //  * 2. 拿上一步的结果，拼凑完整的html
-    //  * 3. 在html里，使用 script module 引入 react react-dom 等库，以及样式
-    //  * 4. mdx中所使用的组件也需要通过script module形式引入
-    //  * 5. 上一步的难点在于 现在很多组件库都不支持script module引入，就算支持也很麻烦，如果没有依赖纯手写还可以。
-    //  * */
-    // const mdxStr = await compileMdx(valueRef.current);
-    // const htmlContent = createHtml({ mdxStr });
-    // console.log({ mdxStr, htmlContent });
-    // setSrcDoc(htmlContent);
+    if (error) {
+      setBuildError({ msg });
+      return;
+    }
+
+    const resultStr = modifyCompileResult(result, data);
+    if (dataHolder.current.esbuild) {
+      dataHolder.current.esbuild.fs.writeFile('/index.jsx', resultStr);
+      const text = await dataHolder.current.esbuild.builder.build({
+        entryPoints: ['index.jsx'],
+        outfile: 'out.js',
+      });
+      console.log({ text });
+      const html = `<div id="app"></div><script>${text}</script>`;
+      previewRef.current.contentWindow.postMessage({ html }, '*');
+    }
+    setBuildError(null);
   }, 1000);
 
   const handleEditorMount: OnMount = (editor, monaco) => {
@@ -136,6 +162,10 @@ const BlogEditor = (props: IProps) => {
       path: info.path,
       content,
     };
+  };
+
+  const afterIframeLoad = () => {
+    previewRef.current.contentWindow.postMessage({ css: blogcss }, '*');
   };
 
   const editPost = async (filePath: string) => {
@@ -169,14 +199,26 @@ const BlogEditor = (props: IProps) => {
     }
   };
 
+  const toggleTheme = () => {
+    const t = theme === 'dark' ? 'light' : 'dark';
+    setTheme(t);
+    previewRef.current.contentWindow.postMessage({ theme: t }, '*');
+  };
+
   return (
     <>
       <NextSeo title={`博客编辑器 – 行者、空山`} description={'博客编辑器'} />
-      <div className="w-screen h-screen bg-[#1e1e1e] overflow-hidden">
+      <div className="w-screen h-screen bg-[#fff] dark:bg-[#1e1e1e] overflow-hidden">
         <div className="h-full">
           <div className="flex items-center justify-between h-[38px] b-y-1 b-[#404040] p-1 box-border">
             <div className="flex items-center">
-              <Avatar w="25px" h="25px" text="K" mr="8px" />
+              <Avatar
+                w="25px"
+                h="25px"
+                text="K"
+                mr="8px"
+                onClick={toggleTheme}
+              />
               <Text margin={0} font="1rem" b>
                 Blog Editor
                 <Spacer inline w={1} />
@@ -220,19 +262,33 @@ const BlogEditor = (props: IProps) => {
             </Popover>
           </div>
           <div style={{ height: 'calc(100% - 38px)' }}>
-            <Splitter>
+            <Splitter
+              onResizeStarted={() => {
+                setResizing(true);
+              }}
+              onResizeFinished={() => {
+                setResizing(false);
+              }}
+            >
               <div className="h-full w-full">
                 <KEditor
                   onChange={(v) => {
                     valueRef.current = v;
                     handleChange(v);
                   }}
+                  theme={theme === 'light' ? 'light' : 'vs-dark'}
                   onMount={handleEditorMount}
                 />
               </div>
               {showPreview && (
-                <div className="h-full w-full overflow-auto">
-                  <MDXPreview MdxComp={mdxComp} />
+                <div className="h-full w-full overflow-auto relative">
+                  {/* <MDXPreview MdxComp={mdxComp} /> */}
+                  <KPreview
+                    resizing={resizing}
+                    ref={previewRef}
+                    onLoad={afterIframeLoad}
+                  />
+                  <ErrorOverlay error={buildError} />
                 </div>
               )}
             </Splitter>

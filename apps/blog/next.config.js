@@ -1,4 +1,4 @@
-const withTM = require('next-transpile-modules')(['ui', 'utils', 'media-manage']);
+const withTM = require('next-transpile-modules')(['utils', 'media-manage']);
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: false,
 });

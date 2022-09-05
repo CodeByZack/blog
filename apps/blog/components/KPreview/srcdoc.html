@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html class="dark" style="color-scheme: dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style id="_style"></style>
+    <script
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"
+      crossorigin
+    ></script>
+    <script>
+      var hasHtml = false;
+      var hasCss = false;
+      var visible = false;
+      window.addEventListener('message', (e) => {
+        console.log(e.data);
+        if(typeof e.data.theme !== "undefined"){
+          setTheme(e.data.theme);
+          return;
+        }
+        if (typeof e.data.print !== 'undefined') {
+          document.title = e.data.title;
+          window.print();
+          return;
+        }
+        if (typeof e.data.clear !== 'undefined') {
+          setHtml();
+          setCss();
+          checkVisibility();
+          return;
+        }
+        if (typeof e.data.css !== 'undefined') {
+          setCss(e.data.css);
+        }
+        if (typeof e.data.html !== 'undefined') {
+          setHtml(e.data.html);
+          if (e.data.scrollEnd) {
+            window.scrollTo({
+              top: 999,
+              left: 0,
+              behavior: 'smooth',
+            });
+          }
+        }
+        if (typeof e.data.script !== 'undefined') {
+          setHtml(e.data.html);
+          if (e.data.scrollEnd) {
+            window.scrollTo({
+              top: 999,
+              left: 0,
+              behavior: 'smooth',
+            });
+          }
+        }
+        checkVisibility();
+      });
+      function checkVisibility() {
+        if (!visible && hasHtml && hasCss) {
+          visible = true;
+          document.body.style.display = '';
+        } else if (visible && (!hasHtml || !hasCss)) {
+          visible = false;
+          document.body.style.display = 'none';
+        }
+      }
+      function setHtml(html) {
+        if (typeof html === 'undefined') {
+          document.body.innerHTML = '';
+          hasHtml = false;
+        } else {
+          document.body.innerHTML = html;
+          Array.from(document.body.querySelectorAll('script')).forEach(
+            (oldScript) => {
+              const newScript = document.createElement('script');
+              Array.from(oldScript.attributes).forEach((attr) =>
+                newScript.setAttribute(attr.name, attr.value),
+              );
+              newScript.appendChild(
+                document.createTextNode(oldScript.innerHTML),
+              );
+              oldScript.parentNode.replaceChild(newScript, oldScript);
+            },
+          );
+          hasHtml = true;
+        }
+      }
+      function setCss(css) {
+        const style = document.getElementById('_style');
+        const newStyle = document.createElement('style');
+        newStyle.id = '_style';
+        newStyle.innerHTML = typeof css === 'undefined' ? '' : css;
+        style.parentNode.replaceChild(newStyle, style);
+        hasCss = typeof css === 'undefined' ? false : true;
+      }
+      function setTheme(theme) {
+        const html = document.querySelector('html');
+        html.className = 'theme';
+        html.style = `color-scheme: ${theme};`;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>

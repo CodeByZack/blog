@@ -12,9 +12,9 @@ import '../../../uno.css';
 import '../components/EmblaCarousel/index.css';
 import 'react-photo-view/dist/react-photo-view.css';
 import { MDXProvider } from '@mdx-js/react';
-import { BlogComponents } from 'ui';
 import { SessionProvider } from 'next-auth/react';
-import { CssBaseline, GeistProvider } from '@geist-ui/core';
+import { GeistProvider } from '@geist-ui/core';
+import BlogComponents from '../components/BlogComponents';
 
 const PWA_HEAD_INFO = (
   <>

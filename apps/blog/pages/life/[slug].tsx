@@ -2,7 +2,7 @@ import { MDXRemote } from 'next-mdx-remote';
 import BlogLayout from '../../components/BlogLayout';
 import { getFileBySlug, getFiles } from '../../utils/mdx';
 import { IArticleDetail } from '../../type';
-import { BlogComponents } from 'ui';
+import BlogComponents from '../../components/BlogComponents';
 
 interface IBlogProps {
   post: IArticleDetail;
