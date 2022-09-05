@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="dark" style="color-scheme: dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,7 +22,10 @@
       var visible = false;
       window.addEventListener('message', (e) => {
         console.log(e.data);
-
+        if(typeof e.data.theme !== "undefined"){
+          setTheme(e.data.theme);
+          return;
+        }
         if (typeof e.data.print !== 'undefined') {
           document.title = e.data.title;
           window.print();
@@ -74,14 +77,18 @@
           hasHtml = false;
         } else {
           document.body.innerHTML = html;
-          Array.from(document.body.querySelectorAll('script')).forEach((oldScript) => {
-            const newScript = document.createElement('script');
-            Array.from(oldScript.attributes).forEach((attr) =>
-              newScript.setAttribute(attr.name, attr.value),
-            );
-            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
-            oldScript.parentNode.replaceChild(newScript, oldScript);
-          });
+          Array.from(document.body.querySelectorAll('script')).forEach(
+            (oldScript) => {
+              const newScript = document.createElement('script');
+              Array.from(oldScript.attributes).forEach((attr) =>
+                newScript.setAttribute(attr.name, attr.value),
+              );
+              newScript.appendChild(
+                document.createTextNode(oldScript.innerHTML),
+              );
+              oldScript.parentNode.replaceChild(newScript, oldScript);
+            },
+          );
           hasHtml = true;
         }
       }
@@ -92,6 +99,11 @@
         newStyle.innerHTML = typeof css === 'undefined' ? '' : css;
         style.parentNode.replaceChild(newStyle, style);
         hasCss = typeof css === 'undefined' ? false : true;
+      }
+      function setTheme(theme) {
+        const html = document.querySelector('html');
+        html.className = 'theme';
+        html.style = `color-scheme: ${theme};`;
       }
     </script>
   </head>

@@ -1,16 +1,18 @@
 import styles from './style.module.css';
-import {
-  ChonkyActions,
-  FileActionHandler,
-  setChonkyDefaults,
-} from 'chonky';
+import { ChonkyActions, FileActionHandler, setChonkyDefaults } from 'chonky';
 import { ChonkyIconFA } from 'chonky-icon-fontawesome';
 import { FullFileBrowser } from 'chonky';
 import useFileUtil from './hooks/useFileUtil';
 import useMediaManage from './hooks/useMediaManage';
+import copyToClipboard from './copy';
 setChonkyDefaults({ iconComponent: ChonkyIconFA });
 
-const MediaManage = () => {
+interface IProps {
+  showToast?: (msg: string) => void;
+}
+
+const MediaManage = (props: IProps) => {
+  const { showToast = alert } = props;
   const { contentJSX, fileUtils } = useFileUtil();
   const {
     files,
@@ -55,6 +57,10 @@ const MediaManage = () => {
       deleteFiles(data);
     } else if (data.id === ChonkyActions.CreateFolder.id) {
       createFolder();
+    } else if (data.id === ChonkyActions.CopyFiles.id) {
+      const url = data.state.selectedFilesForAction[0].thumbnailUrl;
+      copyToClipboard(url!);
+      showToast(`复制成功:${url}`);
     }
   };
 
@@ -73,6 +79,7 @@ const MediaManage = () => {
               ChonkyActions.EnableGridView,
               ChonkyActions.DeleteFiles,
               ChonkyActions.CreateFolder,
+              ChonkyActions.CopyFiles,
             ]}
             folderChain={folderChain}
             onFileAction={handleAction}

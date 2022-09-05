@@ -36,6 +36,7 @@ import blogcss from '../styles/blogcss';
 import KPreview from '../components/KPreview';
 import ErrorOverlay from '../components/ErrorOverlay';
 import KEditor from '../components/KEditor';
+import { useTheme } from 'next-themes';
 
 interface IProps {}
 const externals = { react: 'React', 'react-dom': 'ReactDOM', dayjs: 'dayjs' };
@@ -62,6 +63,7 @@ const BlogEditor = (props: IProps) => {
   const [showPreview, setShowPreview] = useState(true);
   const [resizing, setResizing] = useState(false);
   const [buildError, setBuildError] = useState<any>(null);
+  const { theme, setTheme } = useTheme();
   const { setToast: showToast } = useToasts({ placement: 'topRight' });
   const previewRef = useRef<HTMLIFrameElement>();
   const dataHolder = useRef<{
@@ -197,14 +199,26 @@ const BlogEditor = (props: IProps) => {
     }
   };
 
+  const toggleTheme = () => {
+    const t = theme === 'dark' ? 'light' : 'dark';
+    setTheme(t);
+    previewRef.current.contentWindow.postMessage({ theme: t }, '*');
+  };
+
   return (
     <>
       <NextSeo title={`博客编辑器 – 行者、空山`} description={'博客编辑器'} />
-      <div className="w-screen h-screen bg-[#1e1e1e] overflow-hidden">
+      <div className="w-screen h-screen bg-[#fff] dark:bg-[#1e1e1e] overflow-hidden">
         <div className="h-full">
           <div className="flex items-center justify-between h-[38px] b-y-1 b-[#404040] p-1 box-border">
             <div className="flex items-center">
-              <Avatar w="25px" h="25px" text="K" mr="8px" />
+              <Avatar
+                w="25px"
+                h="25px"
+                text="K"
+                mr="8px"
+                onClick={toggleTheme}
+              />
               <Text margin={0} font="1rem" b>
                 Blog Editor
                 <Spacer inline w={1} />
@@ -262,6 +276,7 @@ const BlogEditor = (props: IProps) => {
                     valueRef.current = v;
                     handleChange(v);
                   }}
+                  theme={theme === 'light' ? 'light' : 'vs-dark'}
                   onMount={handleEditorMount}
                 />
               </div>
