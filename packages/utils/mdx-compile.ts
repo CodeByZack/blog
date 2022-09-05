@@ -30,7 +30,7 @@ export const compileMdx = async (content: string) => {
   }
 };
 
-export const evaluateMdx = async (content: string, config: EvaluateOptions) => {
+export const evaluateMdx:any = async (content: string, config: EvaluateOptions) => {
   try {
     const res = await evaluate(content, {
       remarkPlugins: [

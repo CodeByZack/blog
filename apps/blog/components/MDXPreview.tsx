@@ -1,9 +1,9 @@
 import React from 'react';
-import { MDXContent } from 'mdx/types';
+// import { MDXContent } from 'mdx/types';
 import { IArticleDetail } from '../type';
 import { BlogTitle } from './BlogLayout';
 interface IProps {
-  MdxComp: { comp: MDXContent; postInfo: Partial<IArticleDetail> };
+  MdxComp: { comp: any; postInfo: Partial<IArticleDetail> };
 }
 
 const MDXPreview = (props: IProps) => {

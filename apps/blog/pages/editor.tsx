@@ -20,10 +20,8 @@ import {
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import useDebounceFn from '../hooks/useDebounceFn';
-import { MDXContent } from 'mdx/types';
 import { Splitter } from '../components/WrapperSplitter';
 import matter from 'gray-matter';
-import { IArticleDetail } from '../type';
 import { signIn, useSession } from 'next-auth/react';
 import readingTime from '../utils/read-time';
 import repoUtil from 'utils/github-utils';
