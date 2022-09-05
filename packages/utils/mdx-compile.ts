@@ -68,15 +68,19 @@ export const compileMdx_node = async (content: string) => {
   }
 };
 
-export const modifyCompileResult = (mdxStr: string) => {
-  /** 替换导出为 ReactDOM.render */
-  const modifyStr = mdxStr.replace(
-    'export default MDXContent;',
-    "ReactDOM.render(<MDXContent components={components} />,document.getElementById('app'))",
-  );
-  /** 添加固定的博客内的组件 */
-  const injectComponents = `import components from 'blog-components.js;'`;
-  const finalStr = `${injectComponents}\n${modifyStr}`;
+export const modifyCompileResult = (mdxStr: string, data: any) => {
+  /** 删除默认的导出 */
+  const modifyStr = mdxStr.replace('export default MDXContent;', '');
 
+  const template = `const App = ()=>(<article className="heti heti--sans box-border px-8 flex flex-col justify-center items-start max-w-3xl mx-auto mb-16 w-full">
+  <BlogTitle post={${JSON.stringify(data)}} />
+  <MDXContent components={components} />
+</article>)
+ReactDOM.render(<App/>,document.getElementById('app'))
+`;
+
+  /** 添加固定的博客内的组件 */
+  const injectComponents = `import components from 'BlogComponents.mjs;'`;
+  const finalStr = `${injectComponents}\n${modifyStr}\n const { BlogTitle } = components;\n${template}`;
   return finalStr;
 };

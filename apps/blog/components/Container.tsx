@@ -1,8 +1,8 @@
 import { useTheme } from 'next-themes';
 import NextLink from 'next/link';
 import React, { PropsWithChildren } from 'react';
-import { ThemeIcon } from 'ui';
 import Footer from './Footer';
+import ThemeIcon from './ThemeIcon';
 
 interface IProps {}
 

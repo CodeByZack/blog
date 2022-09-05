@@ -1,5 +1,4 @@
-import { forwardRef, useEffect, useRef } from 'react';
-import clsx from 'clsx';
+import { forwardRef, useRef } from 'react';
 //@ts-ignore
 import srcdoc from '!!raw-loader!./srcdoc.html';
 
@@ -13,15 +12,17 @@ const KPreview = forwardRef<HTMLIFrameElement, IProps>(
   ({ onLoad, iframeClassName = '', resizing }, ref) => {
     const containerRef = useRef<HTMLDivElement>(null);
 
+    const cn = `${iframeClassName} w-full h-full ${
+      resizing ? 'pointer-events-none select-none' : ''
+    }`;
+
     return (
       <div className="w-full h-full" ref={containerRef}>
         <iframe
           ref={ref}
           title="Preview"
           onLoad={onLoad}
-          className={clsx(iframeClassName, 'w-full h-full bg-white', {
-            'pointer-events-none select-none': resizing,
-          })}
+          className={cn}
           srcDoc={srcdoc}
         />
       </div>
@@ -29,4 +30,5 @@ const KPreview = forwardRef<HTMLIFrameElement, IProps>(
   },
 );
 
+KPreview.displayName = 'KPreview';
 export default KPreview;

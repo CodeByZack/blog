@@ -2,7 +2,7 @@ import DevbookSplit, {
     SplitDirection as DevbookSplitDirection,
     GutterTheme as DevbookGutterTheme,
   } from "@devbookhq/splitter";
-  import { FunctionComponent, useState, useCallback } from "react";
+  import { FunctionComponent, useState, useCallback, useRef } from "react";
   
   interface SplitterProps {
     direction?: keyof typeof DevbookSplitDirection;
@@ -25,16 +25,23 @@ import DevbookSplit, {
     gutterTheme = "dark",
     children,
     initialSizes,
+    onResizeFinished,
     ...props
   }) => {
     // Capture the splitter sizes and store them in a state to avoid https://github.com/DevbookHQ/splitter/issues/11
     const [persistentSizes, setPersistentSizes] = useState<number[] | undefined>(
       initialSizes
     );
+
+    const fnRef = useRef({ onResizeFinished });
+    fnRef.current.onResizeFinished = onResizeFinished;
   
     const handleResizeFinished = useCallback((_, newSizes) => {
+      if(typeof fnRef.current.onResizeFinished === 'function'){
+        fnRef.current.onResizeFinished(_,newSizes);
+      };
       setPersistentSizes(newSizes);
-    }, []);
+    }, [fnRef]);
   
     return (
       <DevbookSplit

@@ -43,27 +43,24 @@ export class OnlineBuilder {
     this.memoMap = new Map();
     this.loadFromPath = loader;
 
-    if (!this.loadPromise) {
-      this.loadPromise = new Promise(async (resolve, reject) => {
-        try {
-          await esbuild.initialize({
-            wasmURL,
-          });
-          resolve();
-        } catch (error) {
-          reject(error);
-        }
-      });
-    }
+    this.loadPromise = new Promise(async (resolve, reject) => {
+      try {
+        await esbuild.initialize({
+          wasmURL,
+        });
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   public async build(options: esbuild.BuildOptions) {
     await this.loadPromise;
 
     const { entryPoints } = options;
-    const entry = entryPoints[0].startsWith('/')
-      ? entryPoints[0].slice(1)
-      : entryPoints[0];
+    // @ts-ignore
+    const entry = entryPoints[0].replace('/', '');
 
     const result = await esbuild.build({
       entryPoints: [entry],
@@ -131,7 +128,7 @@ export class OnlineBuilder {
         ? 'ts'
         : extname === '.tsx'
         ? 'tsx'
-        : extname === '.js'
+        : extname === '.js' || extname === '.mjs'
         ? 'js'
         : extname === '.jsx'
         ? 'jsx'

@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ErrorOverlay, KEditor, KPreview } from 'ui';
 import {
   compileMdx,
-  evaluateMdx,
   FSloader,
   modifyCompileResult,
   OnlineBuilder,
@@ -22,9 +20,6 @@ import {
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import useDebounceFn from '../hooks/useDebounceFn';
-import MDXPreview from '../components/MDXPreview';
-import * as runtime from 'react/jsx-runtime';
-import * as provider from '@mdx-js/react';
 import { MDXContent } from 'mdx/types';
 import { Splitter } from '../components/WrapperSplitter';
 import matter from 'gray-matter';
@@ -37,9 +32,13 @@ import { registerAutoCompletion } from '../utils/configEditor';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import showNewPostModal from '../components/NewPostModal';
 import dayjs from 'dayjs';
+import blogcss from '../styles/blogcss';
+import KPreview from '../components/KPreview';
+import ErrorOverlay from '../components/ErrorOverlay';
+import KEditor from '../components/KEditor';
 
 interface IProps {}
-const externals = { react: 'React', 'react-dom': 'ReactDOM' };
+const externals = { react: 'React', 'react-dom': 'ReactDOM', dayjs: 'dayjs' };
 
 const templateValue = (data) => `---
 title: '${data.title}'
@@ -61,6 +60,7 @@ const BlogEditor = (props: IProps) => {
   const [loading, setLoading] = useState(false);
   const [editorReady, setEditorReady] = useState(false);
   const [showPreview, setShowPreview] = useState(true);
+  const [resizing, setResizing] = useState(false);
   const [buildError, setBuildError] = useState<any>(null);
   const { setToast: showToast } = useToasts({ placement: 'topRight' });
   const previewRef = useRef<HTMLIFrameElement>();
@@ -73,13 +73,6 @@ const BlogEditor = (props: IProps) => {
     editPost: {},
     editor: null,
     monaco: null,
-  });
-  const [mdxComp, setMdxComp] = useState<{
-    comp: MDXContent;
-    postInfo: Partial<IArticleDetail>;
-  }>({
-    comp: null,
-    postInfo: {},
   });
 
   const router = useRouter();
@@ -135,7 +128,7 @@ const BlogEditor = (props: IProps) => {
       return;
     }
 
-    const resultStr = modifyCompileResult(result);
+    const resultStr = modifyCompileResult(result, data);
     if (dataHolder.current.esbuild) {
       dataHolder.current.esbuild.fs.writeFile('/index.jsx', resultStr);
       const text = await dataHolder.current.esbuild.builder.build({
@@ -167,6 +160,10 @@ const BlogEditor = (props: IProps) => {
       path: info.path,
       content,
     };
+  };
+
+  const afterIframeLoad = () => {
+    previewRef.current.contentWindow.postMessage({ css: blogcss }, '*');
   };
 
   const editPost = async (filePath: string) => {
@@ -251,7 +248,14 @@ const BlogEditor = (props: IProps) => {
             </Popover>
           </div>
           <div style={{ height: 'calc(100% - 38px)' }}>
-            <Splitter>
+            <Splitter
+              onResizeStarted={() => {
+                setResizing(true);
+              }}
+              onResizeFinished={() => {
+                setResizing(false);
+              }}
+            >
               <div className="h-full w-full">
                 <KEditor
                   onChange={(v) => {
@@ -264,7 +268,11 @@ const BlogEditor = (props: IProps) => {
               {showPreview && (
                 <div className="h-full w-full overflow-auto relative">
                   {/* <MDXPreview MdxComp={mdxComp} /> */}
-                  <KPreview ref={previewRef} />
+                  <KPreview
+                    resizing={resizing}
+                    ref={previewRef}
+                    onLoad={afterIframeLoad}
+                  />
                   <ErrorOverlay error={buildError} />
                 </div>
               )}
