@@ -1,0 +1,28 @@
+---
+title: 使用 esbuild 在浏览器内编译 React
+publishedAt: '2022-09-05 14:10:45'
+updatedAt: '2022-09-05 14:32:54'
+summary: 使用 esbuild 在浏览器内编译 React
+---
+
+
+## 为什么要在浏览器内编译 React ?
+
+博客编写时需要实时预览，使用的 MDX 需要经过编译，预览则采用了 iframe 进行预览，所以我需要把 MDX 编译成 JavaScript ，放到 iframe 里。
+
+## esbuild 怎么跑在浏览器内的 ?
+
+esbuild 提供了 wasm 版本，是支持在浏览器内运行的，具体可以参考[官网](https://esbuild.github.io/api/#running-in-the-browser)。
+
+## esbuild 在浏览器内运行，有啥问题么 ?
+
+有的，浏览器内没有文件系统，所以你会看到如下的错误：
+
+`error todo`
+
+但可以通过 esbuild 提供的插件机制来解决。
+
+## 亲手尝试一下在浏览器内使用 esbuild 编译
+
+
+
