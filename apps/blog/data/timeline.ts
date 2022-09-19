@@ -2,7 +2,7 @@ import { ITimeLineCardProps } from '../components/TimeLine';
 
 const timeLineData: ITimeLineCardProps[] = [
   {
-    date: "2022-09-05",
+    date: "2022-09-19",
     title: "想只有问题，做才有办法！",
   },
   {
