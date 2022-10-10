@@ -23,7 +23,6 @@ import useDebounceFn from '../hooks/useDebounceFn';
 import { Splitter } from '../components/WrapperSplitter';
 import matter from 'gray-matter';
 import { signIn, useSession } from 'next-auth/react';
-import readingTime from '../utils/read-time';
 import repoUtil from 'utils/github-utils';
 import { Monaco, OnMount } from '@monaco-editor/react';
 import { registerAutoCompletion } from '../utils/configEditor';
@@ -88,6 +87,7 @@ const BlogEditor = (props: IProps) => {
     } else {
       newAdd();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path, session?.accessToken, editorReady]);
 
   useEffect(() => {
