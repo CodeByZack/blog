@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next export",
+    "build": "next build && next export",
     "bc-dev": "tsup --watch",
     "bc-build": "tsup",
     "export": "next build && next export",
