@@ -3,6 +3,7 @@ import BlogLayout from '../../components/BlogLayout';
 import { getFileBySlug, getFiles } from '../../utils/mdx';
 import { IArticleDetail } from '../../type';
 import BlogComponents from '../../components/BlogComponents';
+import CommentsBox from '../../components/CommentsBox';
 
 interface IBlogProps {
   post: IArticleDetail;
@@ -14,6 +15,11 @@ const Blog = (props: IBlogProps) => {
   return (
     <BlogLayout type="blog" post={post}>
       <MDXRemote {...post.mdxSource} components={BlogComponents} />
+      <CommentsBox
+        id={post.slug}
+        url={`https://zackdk.com/blog/${post.slug}`}
+        title={post.title}
+      />
     </BlogLayout>
   );
 };
