@@ -1,7 +1,7 @@
 ---
 title: React 世界里的数据
 publishedAt: '2022-11-29 10:11:37'
-updatedAt: '2022-11-29 15:09:29'
+updatedAt: '2022-11-29 15:37:47'
 summary: React 经常听说的状态管理，组件内部状态，还有 React 专有的 state ，其实都是数据，那它们有什么区别呢？
 ---
 
@@ -14,12 +14,37 @@ summary: React 经常听说的状态管理，组件内部状态，还有 React �
 
 我们这里聊的就是这个公式里的 `data` ，也就是数据。
 
+如果用 JavaScript 的方式，数据就是一个普通对象。
+
+然后结合上面那个公式，整个工作思路大概就类似下面这般，当然细节上肯定不是这样。
+
+```js
+// 声明数据对象
+const data = { key : 'value' };
+
+// 传递给 React 渲染出 UI
+const UI = React(data);
+
+// 修改数据对象
+data.key = "hello world";
+
+// 修改数据后，再次调用 React 渲染出 UI
+const newUI = React(data);
+```
+
+其实我们平时编写的 React 代码，就是在编写 data 和 UI 之间的映射关系。
+这样带来的最大好处是，这个映射关系确定后，我们就只需要关注数据了，数据变化了调用函数再次渲染就行了。
+这种模式是十分简单而且符合直觉的。这可能也是我喜欢使用 React 的原因之一。
+
+但在使用 React 这么多年后，上面这个公式其实过于理想化了，适用范围有限。
+
 ## React 把数据放在什么地方的
 
 先抛开各种状态管理库，我们看一下 React 本身是把数据放在哪里的。
 
 ### useState
 
+抛开 Class 组件，React 存放数据的地方有且只有 hook 这种方式，其中最常用的就是 `useState` 。
 
 
 ### Context
