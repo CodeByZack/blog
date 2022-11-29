@@ -1,7 +1,31 @@
 ---
 title: React 世界里的数据
 publishedAt: '2022-11-29 10:11:37'
-updatedAt: '2022-11-29 10:11:47'
+updatedAt: '2022-11-29 15:09:29'
 summary: React 经常听说的状态管理，组件内部状态，还有 React 专有的 state ，其实都是数据，那它们有什么区别呢？
 ---
 
+## 数据是什么
+
+刚接触 React 的时候，有看到这样一个公式 `UI = fn(Data)` 。当时就觉得这个简洁，易懂。但是后面翻了很久官方文档，也没找到这个公式，
+唯一有点关系的是 [Think In React](https://reactjs.org/docs/thinking-in-react.html) 这篇文章里提到的单向数据流。
+
+>The component at the top of the hierarchy will take your data model as a prop. If you make a change to your underlying data model and call root.render() again, the UI will be updated. You can see how your UI is updated and where to make changes. React’s one-way data flow (also called one-way binding) keeps everything modular and fast.
+
+我们这里聊的就是这个公式里的 `data` ，也就是数据。
+
+## React 把数据放在什么地方的
+
+先抛开各种状态管理库，我们看一下 React 本身是把数据放在哪里的。
+
+### useState
+
+
+
+### Context
+
+
+## 外部状态管理库中的数据
+
+
+## 触发渲染的数据，不触发渲染的数据
