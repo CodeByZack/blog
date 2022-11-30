@@ -1,7 +1,7 @@
 ---
 title: React 世界里的数据
 publishedAt: '2022-11-29 10:11:37'
-updatedAt: '2022-11-30 11:28:56'
+updatedAt: '2022-11-30 14:44:05'
 summary: React 经常听说的状态管理，组件内部状态，还有 React 专有的 state ，其实都是数据，那它们有什么区别呢？
 ---
 
@@ -65,6 +65,37 @@ const UI = React(data); // JS & React
 
 ### Context
 
+React 里还有个比较特殊的 `Context` 。我们虽然经常从它里面取数据出来，但其实它并不是存放数据的地方。
+它只是提供了一种在组件树层级过多的时候，一种方便获取数据的方法。如果不使用 Context ，我们就只能通过 props 一层层往下传递数据，那是相当烦人的。
+
+
+```js
+
+const ShareContext = React.createContext();
+
+const SubChildren = ()=>{
+    const context = React.useContext(ShareContext);
+    return <div>{context}</div>
+};
+
+const Children = ()=>{
+    return (<SubChildren/>);
+};
+
+const App = ()=>{
+    return (
+        <ShareContext.Provider value="value from context">
+            <Children />
+        </ShareContext.Provider>
+    );
+};
+
+
+```
+
+之所以说它不是存放数据的地方，是因为 `Provider` 上的 `value` 可以是任何值，普通的 JS 对象， React 的 `useState` 里的数据等等。。。
+
+`Context` 只是提供了存放他们，并方便跨层级获取它们的方式。
 
 
 ## 外部状态管理库中的数据
