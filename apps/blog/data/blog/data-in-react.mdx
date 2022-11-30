@@ -1,7 +1,7 @@
 ---
 title: React 世界里的数据
 publishedAt: '2022-11-29 10:11:37'
-updatedAt: '2022-11-29 15:56:36'
+updatedAt: '2022-11-30 11:28:56'
 summary: React 经常听说的状态管理，组件内部状态，还有 React 专有的 state ，其实都是数据，那它们有什么区别呢？
 ---
 
@@ -40,19 +40,31 @@ const newUI = React(data);
 
 在功能唯一、简单的组件里，或者说页面完全是静态的内容，很少或者没有交互。完全适用于上面这种模式去理解。
 
-但现在的 web 应用都越来越复杂了，逻辑也越来越多了。交互也越来越多，越发复杂。随之而来的数据量是巨大的，随之而来的也就是各种数据管理的库。
+但现在的 web 应用都越来越复杂了，逻辑也越来越多了。交互也越来越多，越发复杂。随之而来的数据量是巨大的，随之而来的也就是各种数据管理的库，那是后话了。
 
 
 ## React 把数据放在什么地方的
 
-先抛开各种状态管理库，我们看一下 React 本身是把数据放在哪里的。
+抛开 Class 组件，React 存放数据最常用的就是 `useState` hook 。对比一下纯 JS 的方式：
 
-### useState
+```js
+// 声明数据
+const data = { key : 'value' }; // JS
+const [data,setData] = useState({ key: 'value' }); // React
 
-抛开 Class 组件，React 存放数据的地方有且只有 hook 这种方式，其中最常用的就是 `useState` 。
+// 修改数据
+data.key = "hello world"; // JS
+setData({ key : "hello world" }); // React
 
+// 使用数据，都是直接使用 data 就行了
+const UI = React(data); // JS & React
+```
+
+以上主要的区别是，使用 `useState` 声明的数据，需要使用专用的函数去修改，不能直接修改。这是为什么呢，因为如果你直接修改数据，修改完了就完了，React 并不会知道数据已经修改了，不会主动去渲染。
+我们需要通过一个方式去告知 React 数据以及修改了，需要重新渲染了。使用专用的函数去修改数据，就是这个目的。
 
 ### Context
+
 
 
 ## 外部状态管理库中的数据
