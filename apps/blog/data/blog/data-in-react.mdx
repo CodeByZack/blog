@@ -1,7 +1,7 @@
 ---
 title: React 世界里的数据
 publishedAt: '2022-11-29 10:11:37'
-updatedAt: '2022-11-30 15:49:11'
+updatedAt: '2022-11-30 15:52:02'
 summary: React 经常听说的状态管理，组件内部状态，还有 React 专有的 state ，其实都是数据，那它们有什么区别呢？
 ---
 
@@ -74,7 +74,6 @@ React 里还有个比较特殊的 `Context` 。我们虽然经常从它里面取
 
 
 ```js
-
 const ShareContext = React.createContext();
 
 const SubChildren = ()=>{
@@ -93,8 +92,6 @@ const App = ()=>{
         </ShareContext.Provider>
     );
 };
-
-
 ```
 
 之所以说它不是存放数据的地方，是因为 `Provider` 上的 `value` 可以是任何值，普通的 JS 对象， React 的 `useState` 里的数据等等。。。
