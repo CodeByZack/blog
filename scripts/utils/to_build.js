@@ -9,7 +9,7 @@ const map = {};
 
 export default async (originalPath) => {
   let filename = map[originalPath];
-  if (!filename) {
+  if (!filename || !fs.exist(`${directory.BUILD}/${originalPath}`)) {
     const data = await fs.readFile(originalPath);
     const dataMd5 = md5(data);
     filename = `${dataMd5}${path.parse(originalPath).ext}`;
