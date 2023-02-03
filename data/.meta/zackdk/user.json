@@ -1,0 +1,18 @@
+{
+  "id": 284138,
+  "type": "User",
+  "space_id": 0,
+  "account_id": 144286,
+  "login": "zackdk",
+  "name": "行一度空山",
+  "avatar_url": "https://cdn.nlark.com/yuque/0/2019/jpeg/anonymous/1551934932702-d412771d-8d33-4694-9186-a749a3b4e05b.jpeg",
+  "books_count": 2,
+  "public_books_count": 1,
+  "followers_count": 5,
+  "following_count": 0,
+  "public": 1,
+  "description": null,
+  "created_at": "2019-03-07T05:02:38.000Z",
+  "updated_at": "2023-02-01T12:18:25.000Z",
+  "_serializer": "v2.user_detail"
+}

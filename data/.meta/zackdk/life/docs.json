@@ -1,0 +1,43 @@
+[
+  {
+    "id": 110294210,
+    "slug": "aih2db8gtmnzpmod",
+    "title": "2022-阅读书单",
+    "description": "阅读计划为自己定制一个阅读计划已读完《与拉玛相会》《神们自己》《永恒的终结》《遥远的救世主》《在细雨中呼喊》《四棵杨》《战国纵横：鬼谷子的局》《Unix 编程艺术》《你一定爱读的极简欧洲史》《时间的形状》《上帝掷骰子吗》《星丛》《“活着”三部曲》--- 王晋康《接触》阅读书单使用“画册”，清晰...",
+    "user_id": 284138,
+    "book_id": 35680393,
+    "format": "lake",
+    "public": 0,
+    "status": 1,
+    "view_status": 0,
+    "read_status": 1,
+    "likes_count": 0,
+    "read_count": 0,
+    "comments_count": 0,
+    "content_updated_at": "2023-01-31T01:15:21.000Z",
+    "created_at": "2022-12-27T09:16:50.000Z",
+    "updated_at": "2023-01-31T01:18:34.000Z",
+    "published_at": "2023-01-31T01:15:21.000Z",
+    "first_published_at": "2022-12-27T09:17:17.914Z",
+    "draft_version": 25,
+    "last_editor_id": 284138,
+    "word_count": 3088,
+    "cover": null,
+    "custom_description": null,
+    "last_editor": {
+      "id": 284138,
+      "type": "User",
+      "login": "zackdk",
+      "name": "行一度空山",
+      "description": null,
+      "avatar_url": "https://cdn.nlark.com/yuque/0/2019/jpeg/anonymous/1551934932702-d412771d-8d33-4694-9186-a749a3b4e05b.jpeg",
+      "followers_count": 5,
+      "following_count": 0,
+      "created_at": "2019-03-07T05:02:38.000Z",
+      "updated_at": "2023-02-01T12:18:25.000Z",
+      "_serializer": "v2.user"
+    },
+    "book": null,
+    "_serializer": "v2.doc"
+  }
+]

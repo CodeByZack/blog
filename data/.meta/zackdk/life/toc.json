@@ -1,0 +1,73 @@
+[
+  {
+    "type": "META",
+    "count": 4,
+    "display_level": 1,
+    "tail_type": "UPDATED_AT",
+    "base_version_id": 273162955,
+    "published": true,
+    "max_level": 1,
+    "last_updated_at": "2022-12-28T09:42:47.255Z",
+    "version_id": 273163116
+  },
+  {
+    "type": "TITLE",
+    "title": "日常",
+    "uuid": "MXycH4uoilxn6jyC",
+    "url": "",
+    "prev_uuid": "",
+    "sibling_uuid": "zI4cwb8DM19KZ4fg",
+    "child_uuid": "",
+    "parent_uuid": "",
+    "doc_id": "",
+    "level": 0,
+    "id": "",
+    "open_window": 1,
+    "visible": 1
+  },
+  {
+    "type": "TITLE",
+    "title": "阅读",
+    "uuid": "zI4cwb8DM19KZ4fg",
+    "url": "",
+    "prev_uuid": "MXycH4uoilxn6jyC",
+    "sibling_uuid": "B98Hgpa60mw_GkgL",
+    "child_uuid": "9CYc6JtKbCKgfmcF",
+    "parent_uuid": "",
+    "doc_id": "",
+    "level": 0,
+    "id": "",
+    "open_window": 1,
+    "visible": 1
+  },
+  {
+    "type": "DOC",
+    "title": "2022-阅读书单",
+    "uuid": "9CYc6JtKbCKgfmcF",
+    "url": "aih2db8gtmnzpmod",
+    "prev_uuid": "zI4cwb8DM19KZ4fg",
+    "sibling_uuid": "",
+    "child_uuid": "",
+    "parent_uuid": "zI4cwb8DM19KZ4fg",
+    "doc_id": 110294210,
+    "level": 1,
+    "id": 110294210,
+    "open_window": 1,
+    "visible": 1
+  },
+  {
+    "type": "TITLE",
+    "title": "食谱",
+    "uuid": "B98Hgpa60mw_GkgL",
+    "url": "",
+    "prev_uuid": "zI4cwb8DM19KZ4fg",
+    "sibling_uuid": "",
+    "child_uuid": "",
+    "parent_uuid": "",
+    "doc_id": "",
+    "level": 0,
+    "id": "",
+    "open_window": 1,
+    "visible": 1
+  }
+]

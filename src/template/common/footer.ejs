@@ -1,0 +1,35 @@
+<style>
+.page-footer {
+  font-size: 12px;
+  max-width: var(--content-max-width);
+  margin: 40px auto;
+  padding: 0 30px;
+  color: var(--secondary-color);
+}
+
+.page-footer > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* .page-footer > a > img{
+  user-select: none;
+  width: 12px;
+  height: 12px;
+} */
+
+.page-footer > .author {
+  text-decoration: underline;
+}
+
+.page-footer > a:hover {
+  color: var(--primary-color);
+}
+</style>
+
+<footer class="page-footer">
+  <a href="<%= config.github_repository %>/blob/master/LICENSE">&copy;</a> <%= new Date().getFullYear() %>
+  <a class="author" href="<%= config.author_site %>"><%= config.author.toUpperCase() %></a>
+  <!-- <a class="author" href="<%= config.public_path %>/rss.xml"><img src="/rss.png" alt="rss" /></a>
+  <a class="author" href="<%= config.github_repository %>"><img src="/github.png" alt="github" /></a> -->
+</footer>

@@ -1,28 +1,37 @@
 {
-  "name": "turborepo-basic-shared",
-  "version": "0.0.0",
+  "name": "animal-photosynthesis",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "type": "module",
+  "author": {
+    "name": "mebtte",
+    "email": "hi@mebtte.com",
+    "url": "https://mebtte.com"
+  },
   "scripts": {
-    "build": "npm run b-css && turbo run build",
-    "dev": "npm run w-css & turbo run dev --parallel",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "w-css": "unocss \"{apps,packages}/**/*.tsx\" --watch",
-    "b-css": "unocss \"{apps,packages}/**/*.tsx\""
+    "watch": "node scripts/watch.js",
+    "build": "node scripts/build.js",
+    "http-server": "http-server build -p 8000 -c=0",
+    "preview": "npm run build && npm run http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mebtte/animal-photosynthesis.git"
   },
   "devDependencies": {
-    "@unocss/cli": "^0.33.5",
-    "prettier": "^2.5.1",
-    "turbo": "latest",
-    "unocss": "^0.33.5"
+    "cheerio": "^1.0.0-rc.6",
+    "ejs": "^3.1.6",
+    "fontmin": "^0.9.8",
+    "front-matter": "^4.0.2",
+    "fs-extra": "^10.0.0",
+    "http-server": "^0.12.3",
+    "md5": "^2.3.0",
+    "ora": "^5.1.0",
+    "prettier": "^2.2.1",
+    "showdown": "^1.9.1",
+    "yargs": "^17.0.1"
   },
-  "engines": {
-    "npm": ">=7.0.0",
-    "node": ">=14.0.0"
-  },
-  "packageManager": "pnpm@6.19.0"
+  "dependencies": {
+    "dayjs": "^1.11.7",
+    "gray-matter": "^4.0.3"
+  }
 }
