@@ -5,24 +5,20 @@ created_at: '2023-01-31 09:55'
 updated_at: '2023-01-31 09:57'
 ---
 
-***
-
 React 组件的生命周期大概是这样：
 
 `mount -> init-render -> re-render -> unmount`
 
 在线demo。可对照着查看。
-[rerender-in-react](https://stackblitz.com/edit/rerender-in-react)
+
+<iframe src="https://stackblitz.com/edit/rerender-in-react?embed=1&file=App.tsx&hideNavigation=1" ></iframe>
+
 
 由于很久不用类组件了，以下都只针对函数式组件。
-
-<a name="3a752774"></a>
 
 ## 1. props 变动，引起的渲染
 
 此处省略。
-
-<a name="838b6c0c"></a>
 
 ## 2. context 变动，引起的渲染
 
@@ -35,8 +31,6 @@ React 组件的生命周期大概是这样：
 - 传递给 provider 的 value 值，在两次渲染期间是浅对比，类似于 `Object.is` 的实现。
 - 传递给 value 的值， 即便浅对比变动了，是不会触发 React 的 render 的，需要通过其它方式来触发 render 。
 
-<a name="adaf08b6"></a>
-
 ## 3. 父组件渲染引起的子组件重新渲染
 
 这是平常开发中比较容易忽略的一点，前端现在都是组件嵌套组件，形成一个巨大的组件树， React 只要确认了组件需要 render ， 在其之下的所有子组件都会走一遍 render 。
@@ -45,7 +39,6 @@ React 组件的生命周期大概是这样：
 
 React 提供了两个工具来给开发者手动进行这方面的优化。函数组件的 `React.memo` ， 类组件的 `shouldComponentUpdate` 。
 
-<a name="370f0ed1"></a>
 
 ## 4. 组件 unmount -> mount 引起的渲染
 
@@ -103,8 +96,6 @@ export const UnmountMountPaper3 = () => {
 
 这种情况容易出问题，比如上面例子中的 click me 按钮 ，点击了应该是把 num + 1 才对，可实际不管点击多少次都是0。
 这是因为 InnerChild 是 unmount -> mount -> render 这样一个过程。因为走了一遍 mount 过程， num 的值又被初始化为 0 了。
-
-<a name="677e6608"></a>
 
 ## 5. state 变动，引起的渲染
 

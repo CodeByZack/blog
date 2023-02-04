@@ -5,21 +5,13 @@ created_at: '2023-01-31 09:51'
 updated_at: '2023-01-31 09:53'
 ---
 
-***
-
-<a name="32429250"></a>
-
 ## 为什么要在浏览器内编译 React ?
 
 博客编写时需要实时预览，使用的 MDX 需要经过编译，预览则采用了 iframe 进行预览，所以我需要把 MDX 编译成 JavaScript ，放到 iframe 里。
 
-<a name="89269a88"></a>
-
 ## esbuild 怎么跑在浏览器内的 ?
 
 esbuild 提供了 wasm 版本，是支持在浏览器内运行的，具体可以参考[官网](https://esbuild.github.io/api/#running-in-the-browser)。
-
-<a name="bac5e51d"></a>
 
 ## esbuild 在浏览器内运行，有啥问题么 ?
 
@@ -33,8 +25,6 @@ error: Could not resolve "index.jsx"
 ```
 
 但可以通过 esbuild 提供的插件机制来解决。
-
-<a name="5eb14931"></a>
 
 ## 亲手尝试一下在浏览器内使用 esbuild 编译
 
@@ -211,8 +201,6 @@ const decoder = new TextDecoder();
 const text = decoder.decode(contents);
 ```
 
-<a name="72d84f85"></a>
-
 ## 以上最终代码的集合
 
-[use-esbuild-in-browser](https://stackblitz.com/edit/web-platform-tqkzwj?file=index.html)
+<iframe src="https://stackblitz.com/edit/web-platform-tqkzwj?embed=1&file=index.html&hideExplorer=1" />
