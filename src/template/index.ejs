@@ -39,11 +39,31 @@
       font-size: 12px;
       color: var(--secondary-color);
     }
+    .web-title{
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      margin-bottom: 40px;
+      padding: 0 30px;
+    }
+    .web-title > h1{
+      font-size: 38px;
+      margin-top: 0;
+    }
+
+    .web-title > h4{
+      color: var(--secondary-color);
+    }
+
   </style>
 </head>
 
 <body>
   <%- include('common/header.ejs', { reverse: false }) %>
+  <div class="web-title">
+    <h1><%= config.title %></h1>
+    <h4><%= config.aphorisms %></h4>
+    <hr/>
+  </div>
   <ul class="article-list">
     <% articleList.forEach(article => { %>
       <li class="article-item">

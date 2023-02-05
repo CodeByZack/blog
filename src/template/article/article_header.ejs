@@ -1,7 +1,8 @@
 <style>
 .article-header {
   max-width: var(--content-max-width);
-  margin: 40px auto;
+  margin: 0 auto;
+  margin-bottom: 40px;
   padding: 0 30px;
 }
 
@@ -23,11 +24,41 @@
   font-size: 14px;
   font-family: common_font;
 }
+
+.article-info_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin-top: 20px;
+}
+
+.article-info_box > .article-info{
+  display: flex;
+  align-items: center;
+}
+
+.article-info_box > .article-info > img{
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
 </style>
 
 <section class="article-header">
   <h1 class="article-title">
     <a href="<%= config.public_path %>/<%= id %>"><%= title %></a>
   </h1>
-  <time class="article-publish-time"><%= publishTime %></time>
+  <div class="article-info_box">
+    <div class="article-info">
+      <img src="<%= config.public_path %>/logo.png" alt="logo">
+      <span><%= config.author %>/<%= publishTime %></span>
+    </div>
+    <div class="article-readtime">
+      14 min read
+    </div>
+  </div>
 </section>
