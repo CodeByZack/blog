@@ -1,6 +1,5 @@
 ---
-title: Redux其实很简单
-url: 'https://www.yuque.com/zackdk/web/prqfud'
+title: 自己动手简单实现一个简单版本的 Redux
 created_at: '2020-09-28 16:58'
 updated_at: '2020-12-07 18:05'
 ---
