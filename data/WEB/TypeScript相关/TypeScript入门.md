@@ -1,15 +1,10 @@
 ---
-title: TypeScript入门
-url: 'https://www.yuque.com/zackdk/web/fdgzy3'
+title: TypeScript入门-基础类型
 created_at: '2021-06-15 20:13'
 updated_at: '2023-02-01 20:16'
 ---
 
-<a name="28672e27"></a>
-
 ## 基础类型
-
-<a name="5e44db3d"></a>
 
 ### 原始值类型
 
@@ -24,8 +19,6 @@ const c: boolean = true;
 ```
 
 需要注意的是：String, Number, Boolean 在 TS 里都是有效值，但平时使用中几乎不会用到。
-
-<a name="f45a735a"></a>
 
 ### 数组类型
 
@@ -42,8 +35,6 @@ const numArr: Arrary<number> = [1, 2, 3];
 const strArr: Arrary<string> = ['1', '2', '3'];
 const booleanArr: Arrary<boolean> = [true, false];
 ```
-
-<a name="25009be8"></a>
 
 ### 函数类型
 
@@ -71,8 +62,6 @@ export type identify3Type = typeof arrowFunc;
 
 todo-函数重载
 
-<a name="1e767357"></a>
-
 ### 对象类型
 
 最常用的类型，使用 ?: 可以让某个属性可选。
@@ -88,8 +77,6 @@ const obj: {
   c: '',
 };
 ```
-
-<a name="0359e3b7"></a>
 
 ### 联合类型（Union Types）
 
@@ -129,8 +116,6 @@ const printId = (id: number | string) => {
 };
 ```
 
-<a name="0733e651"></a>
-
 ### 类型别名（Type Aliases）
 
 上面都是直接在变量后面追加类型定义，很方便，但是不方便复用。这个时候你就可以考虑类型别名。
@@ -145,8 +130,6 @@ type Point = {
 // 联合类型 别名ID
 type ID = string | number;
 ```
-
-<a name="d1ef6fc6"></a>
 
 ### 接口类型（Interfaces）
 
@@ -182,8 +165,6 @@ export type D<T> = {
 };
 ```
 
-<a name="89a8faee"></a>
-
 ### 类型断言
 
 有些时候，typescript 并不能推断出具体的类型。
@@ -199,8 +180,6 @@ typescript 只能推断出它属于`HTMLElement`类型，但你是明确知道�
 ```typescript
 const myCanvas = document.getElementById('main_canvas') as HTMLCanvasElement;
 ```
-
-<a name="7d4bfe47"></a>
 
 ### 字面量类型
 
@@ -247,8 +226,6 @@ interface {
 const req = { url: "https://example.com", method: "GET" } as const;
 ```
 
-<a name="741a5868"></a>
-
 ### null、undefined
 
 `JavaScript`有两个特殊的类型`null`和`undefined`用于代表不存在或者未初始化。
@@ -275,8 +252,6 @@ function liveDangerously(x?: number | null) {
   console.log(x!.toFixed());
 }
 ```
-
-<a name="enum"></a>
 
 ### enum
 

@@ -1,6 +1,5 @@
 ---
 title: HTTP强缓存 协商缓存
-url: 'https://www.yuque.com/zackdk/web/pb4bb7'
 created_at: '2020-02-18 16:26'
 updated_at: '2020-09-07 14:34'
 ---
@@ -19,16 +18,13 @@ updated_at: '2020-09-07 14:34'
 
 | 强缓存 | [**Expires**](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Expires) | [**Cache-Control**](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cache-Control) |
 | --- | --- | --- |
-| 协商缓存 | [**Last-modified/If-Modified-Since**](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Last-Modified) | [**Etag/If-None-Match**](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/ETag)
-** |
+| 协商缓存 | [**Last-modified/If-Modified-Since**](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Last-Modified) | [**Etag/If-None-Match**](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/ETag) |
 
-<a name="Ao96G"></a>
 
 ## 强缓存
 
 强缓存最大的特点是：如果缓存判定没有过期，则不会请求服务器，直接从缓存拿数据。
 
-<a name="tOPUe"></a>
 
 ### Expires
 
@@ -38,7 +34,6 @@ updated_at: '2020-09-07 14:34'
 Expires: Wed, 21 Oct 2015 07:28:00 GMT
 ```
 
-<a name="AkwiO"></a>
 
 ### Cache-Control
 
@@ -66,7 +61,6 @@ Cache-Control: no-cache//强制对缓存进行有效性检验（协商缓存？�
 Cache-Control: max-age=0//代表收到请求资源就已过期，需要验证缓存有效性（协商缓存？）。
 ```
 
-<a name="Ph6sg"></a>
 
 ## 协商缓存
 
@@ -76,7 +70,6 @@ Cache-Control: max-age=0//代表收到请求资源就已过期，需要验证缓
 
 协商缓存如其名，需要客户端和服务器协商。协商是靠[Etag](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/ETag)和[Last-modified](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Last-Modified)来进行的。
 
-<a name="K5qfl"></a>
 
 ### Last-modified/If-Modified-Since
 
@@ -97,7 +90,6 @@ If-Modified-Since: Wed, 21 Oct 2015 07:28:00 GMT
 
 该指令只能精确到秒。所有有了后面精确度更高的Etag的出现。
 
-<a name="F3ukX"></a>
 
 ### Etag/If-None-Match
 
@@ -116,25 +108,21 @@ If-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
 
 这样一来一去，服务器收到验证请求的时候，拿这个if-none-match的值去对比服务器上文件的etag值，如果不一致，就返回新的资源，否则就返回304状态码。浏览器则继续使用当前缓存。
 
-<a name="bbvAy"></a>
 
 ## 缓存的流程
 
 还是看图片比较清楚，虽然我是偷的。下面的图来自[链接](https://www.cnblogs.com/leftJS/p/11082777.html)
 
-<a name="y9taF"></a>
 
 ### 第一次请求资源的时候
 
 ![](../assets/pb4bb7/1582640123545-d65336fa-0135-44b8-842a-951a205159b2.png)
 
-<a name="gooAU"></a>
 
 ### 后续请求资源的时候
 
 ![](../assets/pb4bb7/1582640112044-a2da9ec8-099d-4169-b929-e15b2d5de851.png)
 
-<a name="MQYCi"></a>
 
 ## 缓存实际中的使用场景
 
@@ -142,7 +130,6 @@ If-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
 感觉这个说的还不错，可以参考参考。
 [大公司里怎样开发和部署前端代码？](https://www.zhihu.com/question/20790576)
 
-<a name="91Zil"></a>
 
 ## 参考
 
