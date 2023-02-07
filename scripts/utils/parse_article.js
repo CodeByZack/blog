@@ -2,16 +2,18 @@ import * as path from 'path';
 
 import frontMatter from 'front-matter';
 import cheerio from 'cheerio';
-import {micromark} from 'micromark'
+import {micromark} from 'micromark';
 import {
   gfmTaskListItem,
   gfmTaskListItemHtml
-} from 'micromark-extension-gfm-task-list-item'
+} from 'micromark-extension-gfm-task-list-item';
+import {gfmTable, gfmTableHtml} from 'micromark-extension-gfm-table';
 
 import fs from './fs.js';
 import directory from './directory.js';
 import toBuild from './to_build.js';
 import config from '../config.js';
+import readingTime from './read_time.js';
 
 export default async (id) => {
   const mdPath = `${directory.ARTICLES}/${id}`;
@@ -25,9 +27,11 @@ export default async (id) => {
   }
   const { attributes, body: mdBody } = frontMatter(mdText);
 
+  const readTimeStr = readingTime(mdBody).text;
+
   const html = micromark(mdBody, {
-    extensions: [gfmTaskListItem],
-    htmlExtensions: [gfmTaskListItemHtml],
+    extensions: [gfmTaskListItem,gfmTable],
+    htmlExtensions: [gfmTaskListItemHtml,gfmTableHtml],
     allowDangerousHtml: true
   })
 
@@ -132,5 +136,6 @@ export default async (id) => {
     hidden: attributes.hidden || false,
     content: $.html(),
     mdText,
+    readTimeStr
   };
 };

@@ -8,8 +8,12 @@
   }
 
   article a {
-    color: var(--normal-color);
-    text-decoration-color: var(--primary-color);
+    color: var(--link-color);
+    text-decoration: none;
+    /* text-decoration-color: var(--primary-color); */
+  }
+  article a:hover{
+    text-decoration: underline;
   }
 
   article h2, article h3, article h4, article h5, article h6 {
@@ -47,21 +51,16 @@
 
   article p {
     max-width: var(--content-max-width);
-
     margin: 15px auto;
     padding: 0 30px;
-
-    font-size: 16px;
-    line-height: 1.8;
     color: var(--normal-color);
-    word-break: break-word;
   }
 
   article p code, article ul code {
     padding: 0 4px;
     /* border-radius: var(--border-radius); */
     /* background: rgba(237, 106, 94, 0.3); */
-    color: #f81ce5;
+    color: var(--accent-color);
   }
 
   article pre {
@@ -234,10 +233,6 @@
     border-radius: var(--border-radius);
   }
 
-  strong {
-    font-weight: normal;
-    text-decoration: underline;
-  }
 </style>
 
 <section>

@@ -18,7 +18,7 @@ updated_at: '2020-09-07 14:34'
 
 | 强缓存 | [**Expires**](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Expires) | [**Cache-Control**](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cache-Control) |
 | --- | --- | --- |
-| 协商缓存 | [**Last-modified/If-Modified-Since**](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Last-Modified) | [**Etag/If-None-Match**](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/ETag) |
+| 协商缓存 | [Last-modified/If-Modified-Since](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Last-Modified) | [Etag/If-None-Match](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/ETag) |
 
 
 ## 强缓存

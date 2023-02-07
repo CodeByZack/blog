@@ -1,16 +1,13 @@
 ---
 title: JS里继承相关的东西
-url: 'https://www.yuque.com/zackdk/web/qh9ysf'
 created_at: '2019-03-18 14:40'
 updated_at: '2022-01-26 10:16'
 ---
 
  
-一直没去看es6的class关键字，按理来说从java转过来的应该更习惯于class这种语法糖的。但深入了解JavaScript过后，发现js里的类和java里的类是有本质差异的。所以更倾向于使用es5，更能理解js这种语言背后的东西。 <a name="d41d8cd9"></a>
+一直没去看es6的class关键字，按理来说从java转过来的应该更习惯于class这种语法糖的。但深入了解JavaScript过后，发现js里的类和java里的类是有本质差异的。所以更倾向于使用es5，更能理解js这种语言背后的东西。
 
-##
 
-<a name="bfe64229"></a>
 
 ## ES5的类和继承
 

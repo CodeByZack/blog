@@ -1,6 +1,5 @@
 ---
-title: 【转载】Webpack入门
-url: 'https://www.yuque.com/zackdk/web/omnvf8'
+title: 前端打包工具 Webpack 入门教程
 created_at: '2019-04-02 10:42'
 updated_at: '2023-02-02 17:07'
 ---

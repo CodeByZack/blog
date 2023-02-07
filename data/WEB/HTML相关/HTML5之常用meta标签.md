@@ -5,13 +5,11 @@ created_at: '2019-03-07 15:35'
 updated_at: '2023-02-02 17:07'
 ---
 
-<a name="charset"></a>
-
 ## **charset**
 
 示意：
 
-作用： 声明文档使用的字符编码 <a name="http-equiv"></a>
+作用： 声明文档使用的字符编码
 
 ## **http-equiv**
 
@@ -19,7 +17,9 @@ updated_at: '2023-02-02 17:07'
 
 格式：
 
-    <meta http-equiv="属性值" content="http-equiv属性值的内容">
+```html
+<meta http-equiv="属性值" content="http-equiv属性值的内容">
+```
 
 使用：
 
@@ -30,15 +30,15 @@ updated_at: '2023-02-02 17:07'
 | content-type | text/html;charset=utf-8 | 不知道 | 定义该文档的 MIME type，不要使用该指令因为它已过时。. 使用 元素的charset 属性 代替。 |
 | refresh | 5 | 3;url=https://baidu.com | 5秒后刷新页面/3秒后跳转到百度页面 |
 
-<a name="name"></a>
-
 ## **name**
 
 通常和content一起使用，（我理解就是键值对一样的东西）
 
 格式：
 
-    <meta name="属性值" content="name属性值的内容">
+```html
+<meta name="属性值" content="name属性值的内容">
+```
 
 使用：
 
