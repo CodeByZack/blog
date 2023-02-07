@@ -34,7 +34,7 @@ export default async (html) => {
       resource = $resourceNode.attr(RESOURCE_TYPE.SRC);
       type = RESOURCE_TYPE.SRC;
     }
-    if (resource[0] !== '/' || !path.parse(resource).ext) {
+    if (resource?.[0] !== '/' || !path.parse(resource).ext) {
       continue;
     }
     const aPath = `${directory.STATIC}${resource}`;
@@ -43,7 +43,7 @@ export default async (html) => {
       continue;
     }
     const filename = await toBuild(aPath);
-    $resourceNode.attr(type, `${config.public_path}/${filename}`);
+    $resourceNode.attr(type, `${config.public_path}/static/${filename}`);
   }
   return $.html();
 };

@@ -19,7 +19,7 @@ export default async (originalPath) => {
     const data = await fs.readFile(originalPath);
     const dataMd5 = md5(data);
     filename = `${dataMd5}${path.parse(originalPath).ext}`;
-    await fs.writeFile(`${directory.BUILD}/${filename}`, data);
+    await fs.writeFile(`${directory.BUILD}/static/${filename}`, data);
     map[originalPath] = filename;
   }
   return filename;

@@ -1,8 +1,12 @@
 import * as path from 'path';
 
-import showdown from 'showdown';
 import frontMatter from 'front-matter';
 import cheerio from 'cheerio';
+import {micromark} from 'micromark'
+import {
+  gfmTaskListItem,
+  gfmTaskListItemHtml
+} from 'micromark-extension-gfm-task-list-item'
 
 import fs from './fs.js';
 import directory from './directory.js';
@@ -11,7 +15,6 @@ import config from '../config.js';
 
 export default async (id) => {
   const mdPath = `${directory.ARTICLES}/${id}`;
-  // const mdPath = `${articleDir}/index.md`;
   const exist = await fs.exist(mdPath);
   if (!exist) {
     return null;
@@ -21,8 +24,13 @@ export default async (id) => {
     return null;
   }
   const { attributes, body: mdBody } = frontMatter(mdText);
-  const mdParser = new showdown.Converter({ tables: true });
-  const html = mdParser.makeHtml(mdBody);
+
+  const html = micromark(mdBody, {
+    extensions: [gfmTaskListItem],
+    htmlExtensions: [gfmTaskListItemHtml],
+    allowDangerousHtml: true
+  })
+
   const $ = cheerio.load(html);
 
   const buildLocalResource = async (type) => {
@@ -37,7 +45,7 @@ export default async (id) => {
       const filename = await toBuild(localPath);
       $(resourceNode).attr(
         type,
-        `${config.public_path}/${filename}`,
+        `${config.public_path}/static/${filename}`,
       );
     }
   };

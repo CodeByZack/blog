@@ -1,29 +1,21 @@
 ---
 title: JS知识点之数据类型一览
-url: 'https://www.yuque.com/zackdk/web/fg3ebe'
 created_at: '2019-03-07 14:33'
 updated_at: '2022-07-28 13:28'
 ---
 
-<a name="c3d82e50"></a>
-
 ## JavaScript中的变量类型有哪些？
-
-<a name="191f3446"></a>
 
 ### 值类型：
 
 字符串（string）、数值（number）、布尔值（boolean）、undefined
 
-<a name="1f7f3778"></a>
 
 ### 引用类型：
 
-对象（Object）、数组（Array）、函数（Function） <a name="9bdefb03"></a>
+对象（Object）、数组（Array）、函数（Function） 
 
 ## 标题值类型和引用类型的区别
-
-<a name="416c5736"></a>
 
 ### 值类型（基本类型）：
 
@@ -51,7 +43,7 @@ typeof(null) //"object"
 typeof(function(){}) //"function"
 ```
 
-<a name="4d06aabf"></a>
+
 
 ### 引用类型（Object）：
 
@@ -83,7 +75,7 @@ a instanceof study//true
 a.__proto__ == study.prototype//true
 ```
 
-<a name="f46f571c"></a>
+
 
 ## 使用tostring方法检测类型
 
