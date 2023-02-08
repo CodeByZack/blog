@@ -1,0 +1,626 @@
+<!DOCTYPE html><html lang="zh-cn"><head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="行者、空山">
+<meta name="keywords" content="HTML,CSS,JavaScript,Web,React,Life">
+
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YT4Q3D1PMY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YT4Q3D1PMY');
+</script>
+
+<!-- open graph -->
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/535460b8cc6a91e6a240fa069c326796.png">
+
+<script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+<link rel="shortcut icon" type="image/png" href="/static/535460b8cc6a91e6a240fa069c326796.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body { 
+    --content-max-width: 48rem;
+
+    --primary-color: #616161;
+    --accent-color:  #ee0290;
+    --normal-color: #333;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --tertiary-color: #ddd;
+    --backgroud: rgb(255 255 255);
+
+    --btn-background: #e5e7eb;
+
+    --border-radius: 2px;
+    --transition-duration: 0.3s;
+
+    background-color: var(--backgroud);
+    transition: background-color var(--transition-duration);
+
+    font-family: Helvetica Neue,helvetica,arial,Heti Hei,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  html.dark > body{
+    background-color: #000;
+    --primary-color: #616161;
+    --accent-color:  #79ffe1;
+    --normal-color: #9ca3af;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --btn-background: #1f2937;
+    --tertiary-color: #ddd;
+    --backgroud: rgb(0 0 0);
+  }
+</style>
+
+
+  <title>质数因子 - 行一度空山</title>
+  <meta name="description" content="<a name=&quot;C36aa&quot;></a>  ## 定义  **质数** 是一个比 `1` 大的整数，且 **不能**由其它整数相乘得出。前几个质数是: `2`, `3`, `5`, `7`, `11`, `13`, `17`, `19`,依此类推。  如果我们**能**通过其它整数相乘得出，我们则称......">
+  <meta property="og:description" content="<a name=&quot;C36aa&quot;></a>  ## 定义  **质数** 是一个比 `1` 大的整数，且 **不能**由其它整数相乘得出。前几个质数是: `2`, `3`, `5`, `7`, `11`, `13`, `17`, `19`,依此类推。  如果我们**能**通过其它整数相乘得出，我们则称......">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
+  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+</head>
+
+<body>
+  <style>
+  .page-header {
+    max-width: calc( var(--content-max-width) + 160px);
+    margin: 0 auto;
+    padding: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .page-header_button{
+    width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background-color: var(--btn-background);
+    border: none;
+    border-radius: 4px;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+
+  .page-header_button .theme-light{
+    display: initial;
+  }
+
+  .page-header_button .theme-dark{
+    display: none;
+  }
+
+  .dark .page-header_button .theme-dark{
+    display: initial;
+
+  }
+  .dark .page-header_button .theme-light{
+    display: none;
+  }
+
+  .page-header_theme{
+    width: 16px;
+    height: 16px;
+    color: var(--normal-color);
+  }
+
+  .page-header_nav > a{
+    color: var(--normal-color);
+    text-decoration: none;
+  }
+
+  .page-header_nav > a:hover{
+    color: var(--accent-color);
+    text-decoration: underline;
+
+  }
+
+  .page-header_nav > a + a{
+    margin-left: 8px;
+  }
+
+  .sticky-header{
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    transition: background-color .1 ease-in-out;
+  }
+
+
+
+</style>
+
+<header class="page-header sticky-header">
+  <button class="page-header_button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-light"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-dark"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+  </button>
+
+  <div class="page-header_nav">
+    <a href="/rss.xml">RSS</a>
+    <a href="https://github.com/codebyzack/blog">Github</a>
+    <a href="/">首页</a>
+  </div>
+
+</header>
+
+  <article>
+    <style>
+.article-header {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding: 0 30px;
+}
+
+.article-title {
+  color: var(--normal-color);
+  font-size: 32px;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.article-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-publish-time {
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-family: common_font;
+}
+
+.article-info_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin-top: 20px;
+}
+
+.article-info_box > .article-info{
+  display: flex;
+  align-items: center;
+}
+
+.article-info_box > .article-info > img{
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+</style>
+
+<section class="article-header">
+  <h1 class="article-title">
+    <a href="//WEB/JavaScript算法学习/质数因子.md">质数因子</a>
+  </h1>
+  <div class="article-info_box">
+    <div class="article-info">
+      <img src="/static/535460b8cc6a91e6a240fa069c326796.png" alt="logo">
+      <span>行者、空山/2020-12-25 16:54</span>
+    </div>
+    <div class="article-readtime">
+      9 min read 
+    </div>
+  </div>
+</section>
+
+    <style>
+  code {
+    font-family: 'Fira Code' !important;
+  }
+
+  article {
+    --article-space: 30px;
+  }
+
+  article a {
+    color: var(--link-color);
+    text-decoration: none;
+    /* text-decoration-color: var(--primary-color); */
+  }
+  article a:hover{
+    text-decoration: underline;
+  }
+
+  article h2, article h3, article h4, article h5, article h6 {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 0 auto;
+    line-height: 1.5;
+    color: var(--normal-color);
+  }
+
+  article h2 {
+    margin-top: 28px;
+    font-size: 28px;
+  }
+
+  article h3 {
+    margin-top: 26px;
+    font-size: 25px;
+  }
+
+  article h4 {
+    margin-top: 24px;
+    font-size: 22px;
+  }
+
+  article h5 {
+    margin-top: 22px;
+    font-size: 19px;
+  }
+
+  article h6 {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  article p {
+    max-width: var(--content-max-width);
+    margin: 15px auto;
+    padding: 0 30px;
+    color: var(--normal-color);
+  }
+
+  article p code, article ul code {
+    padding: 0 4px;
+    /* border-radius: var(--border-radius); */
+    /* background: rgba(237, 106, 94, 0.3); */
+    color: var(--accent-color);
+  }
+
+  article pre {
+    max-width: var(--content-max-width) !important;
+    margin: 15px auto !important;
+    font-size: 14px !important;
+    box-sizing: border-box;
+    border-radius: var(--border-radius) !important;
+    tab-size: 2 !important;
+    padding: 0 !important;
+  }
+
+  article pre code {
+    display: block;
+    margin: 20px 30px !important;
+    overflow: auto !important;
+    font-size: inherit !important;
+  }
+
+  article hr {
+    max-width: var(--content-max-width);
+    margin: 40px auto;
+    padding: 0 var(--article-space);
+    border: none;
+  }
+
+  article hr::after{
+    content: '';
+    display: block;
+    height: 1px;
+    background-color:var(--tertiary-color);
+  }
+
+  article blockquote {
+    max-width: var(--content-max-width);
+    padding: 0 var(--article-space);
+    margin: 15px auto;
+    position: relative;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--secondary-color);
+  }
+
+  .table-container {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .table-container table {
+    border-collapse: collapse;
+  }
+
+  .table-container th, .table-container td {
+    font-size: 14px;
+    color: var(--normal-color);
+    border: 1px solid var(--tertiary-color);
+    padding: 10px;
+    text-align: left;
+  }
+
+  .table-container th {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  article blockquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary-color);
+  }
+
+  article blockquote p {
+    font-size: 16px;
+    color: inherit;
+    max-width: unset;
+    padding: 0;
+    margin: 0 0 0 30px;
+  }
+
+  article ul,
+  article ol {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+    color: var(--normal-color);
+    line-height: 1.5;
+  }
+
+  article ol {
+    counter-reset: li-count;
+  }
+  
+  article ul li, article ol li {
+    display: block;
+    margin: 5px 0;
+    position: relative;
+  }
+
+  article ol li {
+    counter-increment: li-count;
+  }
+
+  article ul li::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+
+    margin-right: 10px;
+
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+  }
+
+  article ol li::before {
+    content: counter( li-count) '. ';
+    color: var(--primary-color);
+  }
+
+  article figcaption {
+    font-size: 12px;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  .figure-img {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-img img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+  }
+  
+  .figure-video {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-video video {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .figure-iframe {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .figure-iframe iframe {
+    display: block;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    height: 640px;
+    border: 1px solid var(--tertiary-color);
+    border-radius: var(--border-radius);
+  }
+
+</style>
+
+<section>
+  <p><a name="C36aa"></a></p>
+<h2>定义</h2>
+<p><strong>质数</strong> 是一个比 <code>1</code> 大的整数，且 <strong>不能</strong>由其它整数相乘得出。前几个质数是: <code>2</code>, <code>3</code>, <code>5</code>, <code>7</code>, <code>11</code>, <code>13</code>, <code>17</code>, <code>19</code>,依此类推。</p>
+<p>如果我们<strong>能</strong>通过其它整数相乘得出，我们则称它为<strong>合数</strong></p>
+
+      <figure class="figure-img">
+        <a href="/static/46c514159fedcb1e06baca2c004df938.svg" target="_blank">
+          <img src="/static/46c514159fedcb1e06baca2c004df938.svg" alt="" title="" loading="lazy">
+        </a>
+        
+      </figure>
+    
+<p><em>Image source: <a href="https://www.mathsisfun.com/prime-factorization.html">Math is Fun</a></em></p>
+<p><strong>质数因子</strong>是那些相乘得到原始数的<a href="https://en.wikipedia.org/wiki/Prime_number">质数</a>。例如<code>39</code>的质数因子是<code>3</code>和<code>13</code>，<code>15</code>的质数因子是<code>3</code>和<code>5</code>。</p>
+
+      <figure class="figure-img">
+        <a href="/static/a2e13d888407232ae0ffedac0b27f4f4.svg" target="_blank">
+          <img src="/static/a2e13d888407232ae0ffedac0b27f4f4.svg" alt="" title="" loading="lazy">
+        </a>
+        
+      </figure>
+    
+<p><em>Image source: <a href="https://www.mathsisfun.com/prime-factorization.html">Math is Fun</a></em></p>
+<p><a name="2fa66895"></a></p>
+<h2>正确计算所有的质数因子及其数量</h2>
+<p>这个方法将自然数<code>n</code>从<code>i = 2</code>除到<code>i = n</code>（仅按质数索引）。且每次循环后<code>n</code>的值被<code>(n / i)</code>的值替换。</p>
+<p>在最坏的情况下，即循环从<code>i = 2</code>执行到 <code>i = n</code>，上述方法的时间复杂度为<code>O(n)</code>。时间复杂度其实可以从<code>O(n)</code>减少到<code>O(sqrt(n))</code>，通过减少循环的执行次数，从<code>i = 2</code>执行到 <code>i = sqrt(n)</code>。因为可以确认，当<code>i</code>大于<code>sqrt(n)</code>时，除了<code>n</code>本身，再没有数可以被整除了。</p>
+<pre><code class="language-javascript">const primeFactors = (n)=&gt;{
+  let nn = n;
+  const factors = [];
+  for (let factor = 2; factor &lt;= Math.sqrt(nn); factor += 1) {
+    while (nn % factor === 0) {
+      nn /= factor;
+      factors.push(factor);
+    }
+  }
+
+  if (nn !== 1) {
+    factors.push(nn);
+  }
+
+  return factors;
+}
+</code></pre>
+<p><a name="9bef63f9"></a></p>
+<h2>Hardy-Ramanujan公式用于计算质数因子的个数</h2>
+<p>1917年，G.H Hardy和Srinivasa Ramanujan提出了一个定理，该定理指出，自然数 <code>n</code> 的不同素数的数 <code>ω(n)</code> 的正态次序是<code>log(log(n))</code>。
+粗略地讲，这意味着大多数数字具有这个数量的质数因子。</p>
+<pre><code class="language-javascript">const hardyRamanujan = (n) =&gt; {
+  return Math.log(Math.log(n));
+}
+</code></pre>
+<p><a name="References"></a></p>
+<h2>References</h2>
+<ul>
+<li><a href="https://www.mathsisfun.com/prime-factorization.html">Prime numbers on Math is Fun</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Prime_number">Prime numbers on Wikipedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hardy%E2%80%93Ramanujan_theorem">Hardy–Ramanujan theorem on Wikipedia</a></li>
+<li><a href="https://www.youtube.com/watch?v=6PDtgHhpCHo&amp;list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&amp;index=82">Prime factorization of a number on Youtube</a></li>
+</ul>
+
+</section>
+
+    
+  </article>
+  
+<style>
+  .article-actions {
+    max-width: var(--content-max-width);
+
+    display: flex;
+    align-items: center;
+
+    margin: 40px auto;
+    padding: 0 30px;
+
+    font-family: common_font;
+    color: var(--normal-color);
+  }
+
+  .article-actions_action:not(:last-child)::after {
+    content: '·\00a0';
+  }
+
+  .article-actions_action > a {
+    color: inherit;
+    text-decoration-color: var(--primary-color);
+  }
+
+  @media (max-width: 520px) {
+    .article-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .article-actions_action::before {
+      content: '·';
+    }
+
+    .article-actions_action:not(:last-child)::after {
+      content: '';
+    }
+  }
+</style>
+
+<div class="article-actions">
+  <span class="article-actions_action">
+    使用 <a href="https://github.com/codebyzack/blog/discussions">Discussions</a> 讨论
+  </span>
+  <span class="article-actions_action">
+    在 <a href="https://github.com/codebyzack/blog/edit/master/articles//WEB/JavaScript算法学习/质数因子.md/index.md">Github</a> 上编辑
+  </span>
+</div>
+
+  <style>
+.page-footer {
+  font-size: 12px;
+  max-width: var(--content-max-width);
+  margin: 40px auto;
+  padding: 0 30px;
+  color: var(--secondary-color);
+}
+
+.page-footer > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* .page-footer > a > img{
+  user-select: none;
+  width: 12px;
+  height: 12px;
+} */
+
+.page-footer > .author {
+  text-decoration: underline;
+}
+
+.page-footer > a:hover {
+  color: var(--primary-color);
+}
+</style>
+
+<footer class="page-footer">
+  <a href="https://github.com/codebyzack/blog/blob/master/LICENSE">©</a> 2023
+  <a class="author" href="https://zackdk.com">行者、空山</a>
+  <!-- <a class="author" href="/rss.xml"><img src="/rss.png" alt="rss" /></a>
+  <a class="author" href="https://github.com/codebyzack/blog"><img src="/github.png" alt="github" /></a> -->
+</footer>
+
+
+  <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
+
+
+
+</body></html>

@@ -1,0 +1,1015 @@
+<!DOCTYPE html><html lang="zh-cn"><head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="行者、空山">
+<meta name="keywords" content="HTML,CSS,JavaScript,Web,React,Life">
+
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YT4Q3D1PMY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YT4Q3D1PMY');
+</script>
+
+<!-- open graph -->
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/535460b8cc6a91e6a240fa069c326796.png">
+
+<script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+<link rel="shortcut icon" type="image/png" href="/static/535460b8cc6a91e6a240fa069c326796.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body { 
+    --content-max-width: 48rem;
+
+    --primary-color: #616161;
+    --accent-color:  #ee0290;
+    --normal-color: #333;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --tertiary-color: #ddd;
+    --backgroud: rgb(255 255 255);
+
+    --btn-background: #e5e7eb;
+
+    --border-radius: 2px;
+    --transition-duration: 0.3s;
+
+    background-color: var(--backgroud);
+    transition: background-color var(--transition-duration);
+
+    font-family: Helvetica Neue,helvetica,arial,Heti Hei,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  html.dark > body{
+    background-color: #000;
+    --primary-color: #616161;
+    --accent-color:  #79ffe1;
+    --normal-color: #9ca3af;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --btn-background: #1f2937;
+    --tertiary-color: #ddd;
+    --backgroud: rgb(0 0 0);
+  }
+</style>
+
+
+  <title>深入Fiber，全面了解React中新的算法Reconciliation - 行一度空山</title>
+  <meta name="description" content="翻译仅供自己参考，请阅读原文 原文链接：<https://indepth.dev/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react/>  ![](../assets/gm1iad/159823578......">
+  <meta property="og:description" content="翻译仅供自己参考，请阅读原文 原文链接：<https://indepth.dev/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react/>  ![](../assets/gm1iad/159823578......">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
+  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+</head>
+
+<body>
+  <style>
+  .page-header {
+    max-width: calc( var(--content-max-width) + 160px);
+    margin: 0 auto;
+    padding: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .page-header_button{
+    width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background-color: var(--btn-background);
+    border: none;
+    border-radius: 4px;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+
+  .page-header_button .theme-light{
+    display: initial;
+  }
+
+  .page-header_button .theme-dark{
+    display: none;
+  }
+
+  .dark .page-header_button .theme-dark{
+    display: initial;
+
+  }
+  .dark .page-header_button .theme-light{
+    display: none;
+  }
+
+  .page-header_theme{
+    width: 16px;
+    height: 16px;
+    color: var(--normal-color);
+  }
+
+  .page-header_nav > a{
+    color: var(--normal-color);
+    text-decoration: none;
+  }
+
+  .page-header_nav > a:hover{
+    color: var(--accent-color);
+    text-decoration: underline;
+
+  }
+
+  .page-header_nav > a + a{
+    margin-left: 8px;
+  }
+
+  .sticky-header{
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    transition: background-color .1 ease-in-out;
+  }
+
+
+
+</style>
+
+<header class="page-header sticky-header">
+  <button class="page-header_button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-light"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-dark"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+  </button>
+
+  <div class="page-header_nav">
+    <a href="/rss.xml">RSS</a>
+    <a href="https://github.com/codebyzack/blog">Github</a>
+    <a href="/">首页</a>
+  </div>
+
+</header>
+
+  <article>
+    <style>
+.article-header {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding: 0 30px;
+}
+
+.article-title {
+  color: var(--normal-color);
+  font-size: 32px;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.article-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-publish-time {
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-family: common_font;
+}
+
+.article-info_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin-top: 20px;
+}
+
+.article-info_box > .article-info{
+  display: flex;
+  align-items: center;
+}
+
+.article-info_box > .article-info > img{
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+</style>
+
+<section class="article-header">
+  <h1 class="article-title">
+    <a href="//WEB/React相关/深入Fiber，全面了解React中新的算法Reconciliation.md">深入Fiber，全面了解React中新的算法Reconciliation</a>
+  </h1>
+  <div class="article-info_box">
+    <div class="article-info">
+      <img src="/static/535460b8cc6a91e6a240fa069c326796.png" alt="logo">
+      <span>行者、空山/2020-08-24 10:21</span>
+    </div>
+    <div class="article-readtime">
+      102 min read 
+    </div>
+  </div>
+</section>
+
+    <style>
+  code {
+    font-family: 'Fira Code' !important;
+  }
+
+  article {
+    --article-space: 30px;
+  }
+
+  article a {
+    color: var(--link-color);
+    text-decoration: none;
+    /* text-decoration-color: var(--primary-color); */
+  }
+  article a:hover{
+    text-decoration: underline;
+  }
+
+  article h2, article h3, article h4, article h5, article h6 {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 0 auto;
+    line-height: 1.5;
+    color: var(--normal-color);
+  }
+
+  article h2 {
+    margin-top: 28px;
+    font-size: 28px;
+  }
+
+  article h3 {
+    margin-top: 26px;
+    font-size: 25px;
+  }
+
+  article h4 {
+    margin-top: 24px;
+    font-size: 22px;
+  }
+
+  article h5 {
+    margin-top: 22px;
+    font-size: 19px;
+  }
+
+  article h6 {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  article p {
+    max-width: var(--content-max-width);
+    margin: 15px auto;
+    padding: 0 30px;
+    color: var(--normal-color);
+  }
+
+  article p code, article ul code {
+    padding: 0 4px;
+    /* border-radius: var(--border-radius); */
+    /* background: rgba(237, 106, 94, 0.3); */
+    color: var(--accent-color);
+  }
+
+  article pre {
+    max-width: var(--content-max-width) !important;
+    margin: 15px auto !important;
+    font-size: 14px !important;
+    box-sizing: border-box;
+    border-radius: var(--border-radius) !important;
+    tab-size: 2 !important;
+    padding: 0 !important;
+  }
+
+  article pre code {
+    display: block;
+    margin: 20px 30px !important;
+    overflow: auto !important;
+    font-size: inherit !important;
+  }
+
+  article hr {
+    max-width: var(--content-max-width);
+    margin: 40px auto;
+    padding: 0 var(--article-space);
+    border: none;
+  }
+
+  article hr::after{
+    content: '';
+    display: block;
+    height: 1px;
+    background-color:var(--tertiary-color);
+  }
+
+  article blockquote {
+    max-width: var(--content-max-width);
+    padding: 0 var(--article-space);
+    margin: 15px auto;
+    position: relative;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--secondary-color);
+  }
+
+  .table-container {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .table-container table {
+    border-collapse: collapse;
+  }
+
+  .table-container th, .table-container td {
+    font-size: 14px;
+    color: var(--normal-color);
+    border: 1px solid var(--tertiary-color);
+    padding: 10px;
+    text-align: left;
+  }
+
+  .table-container th {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  article blockquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary-color);
+  }
+
+  article blockquote p {
+    font-size: 16px;
+    color: inherit;
+    max-width: unset;
+    padding: 0;
+    margin: 0 0 0 30px;
+  }
+
+  article ul,
+  article ol {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+    color: var(--normal-color);
+    line-height: 1.5;
+  }
+
+  article ol {
+    counter-reset: li-count;
+  }
+  
+  article ul li, article ol li {
+    display: block;
+    margin: 5px 0;
+    position: relative;
+  }
+
+  article ol li {
+    counter-increment: li-count;
+  }
+
+  article ul li::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+
+    margin-right: 10px;
+
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+  }
+
+  article ol li::before {
+    content: counter( li-count) '. ';
+    color: var(--primary-color);
+  }
+
+  article figcaption {
+    font-size: 12px;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  .figure-img {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-img img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+  }
+  
+  .figure-video {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-video video {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .figure-iframe {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .figure-iframe iframe {
+    display: block;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    height: 640px;
+    border: 1px solid var(--tertiary-color);
+    border-radius: var(--border-radius);
+  }
+
+</style>
+
+<section>
+  <p>翻译仅供自己参考，请阅读原文
+原文链接：<a href="https://indepth.dev/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react/">https://indepth.dev/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react/</a></p>
+
+      <figure class="figure-img">
+        <a href="/static/b0ebc3d46b4cf70980708fadb30e73ea.png" target="_blank">
+          <img src="/static/b0ebc3d46b4cf70980708fadb30e73ea.png" alt="" title="" loading="lazy">
+        </a>
+        
+      </figure>
+    
+<p>React是一个用于构建用户界面的JavaScript库。React的<a href="https://indepth.dev/what-every-front-end-developer-should-know-about-change-detection-in-angular-and-react/">核心机制</a>是检测组件和项目中的状态更改并将更改同步更新到屏幕上。
+React中这一部分流程称之为**reconciliation。**当调用setState方法，React就开始检测state或者props是否有更改，然后重新渲染这个组件到UI上。</p>
+<p>React的<a href="https://reactjs.org/docs/reconciliation.html">文档</a>对该机制进行了一个高级的概述：React元素的角色，生命周期方法，render方法，以及运用到组件子元素上的diff算法。
+通常，从React的render方法返回的不可变的React元素树被称为“虚拟DOM”。这个术语是为了在早些时候向人们解释React，但是它也十分容易引起误解，所以React文档里不再使用“虚拟DOM”这个词。在这篇文章里，我会坚持称其为React elements tree 元素树。</p>
+<p>除了明显的React elements tree元素树，在React内部，始终具有一个用于保持状态的内部实例树（组件实例，dom节点等）。从版本16开始，React推出了一个新的内部实例树和管理它的算法Fiber。要了解更多Fiber架构带来的优势，可以看看<a href="https://indepth.dev/the-how-and-why-on-reacts-usage-of-linked-list-in-fiber-to-walk-the-components-tree/">The how and why on React’s usage of linked list in Fiber</a>。</p>
+<p>这是该系列的第一篇文章，旨在帮助你理解React的内部体系结构。在该篇文章中，我给你提供了一个与算法有关的重要概念和数据结构的深入概述。一旦我们了解了足够的背景知识，我们将继续探索用于遍和历处理Firber tree的主要算法和函数。
+本系列的下一篇文章将演示React如何使用该算法执行初始渲染和处理state和props带来的更新。然后我们会讨论继续讨论scheduler，子元素的reconciliation过程，以及构建effects list的机制。</p>
+<p>我将为你提供一些非常高级的知识？我鼓励您阅读它以了解Concurrent React内部原理背后的魔术。或者如果您打算开始为React做出贡献，那么这一系列文章也将为您提供很好的指导。我是<a href="https://indepth.dev/level-up-your-reverse-engineering-skills/">a strong believer in reverse-engineering</a>，因此会有很多指向最新版本16.6.0的资源的链接。</p>
+<p>要想理解内部原理是要花费大量时间和精力的，如果阅读过程中有什么不理解的地方，不必过于焦虑。只要明白在这上面花费的时间都是值得的。不过请注意，您无需了解本文的任何内容即可使用React。本文主要是关于React的内部工作原理的。</p>
+<p><a name="setting-the-background"></a></p>
+<h2>Setting the background</h2>
+<p>在本系列的文章中，我都将使用下面这个简单DEMO，Counter，点击一次就+1。</p>
+
+      <figure class="figure-img">
+        <a href="/static/daf7cf0d25910aba3f7f4344d477cc67.gif" target="_blank">
+          <img src="/static/daf7cf0d25910aba3f7f4344d477cc67.gif" alt="" title="" loading="lazy">
+        </a>
+        
+      </figure>
+    
+<pre><code class="language-javascript">class ClickCounter extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {count: 0};
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.setState((state) =&gt; {
+            return {count: state.count + 1};
+        });
+    }
+
+
+    render() {
+        return [
+            &lt;button key="1" onClick={this.handleClick}&gt;Update counter&lt;/button&gt;,
+            &lt;span key="2"&gt;{this.state.count}&lt;/span&gt;
+        ]
+    }
+}
+</code></pre>
+<p>在 **reconciliation **期间，React会进行一系列的操作。比如，以下是我们的例子在React进行初始渲染和后续更新中执行的（原文为 high-level operations）操作：</p>
+<ul>
+<li>更新ClickCounter的state中的count属性</li>
+<li>找到并对比ClickCounter的子元素以及它们的props</li>
+<li>更新span元素的props属性</li>
+</ul>
+<p>在<strong>reconciliation</strong>期间，还有其它操作，比如调用生命周期函数，或者更新refs。<strong>所有这些操作在Fiber体系结构中统称为“work”</strong>。“work”的类型通常取决于React元素的类型。</p>
+<p>比如，class组件，React需要创建类的实例，但是在函数组件中并不需要。React中拥有许多种类的元素，class组件/functional 组件/host组件（dom节点）/portals 等，React元素的类型由函数<a href="https://github.com/facebook/react/blob/b87aabdfe1b7461e7331abb3601d9e6bb27544bc/packages/react/src/ReactElement.js#L171">createElement</a>的第一个参数所定义。这个函数通常用于render方法中创建元素。</p>
+<p>在开始探索Fiber算法以及那些内部操作过程前，让我们先熟悉下React内部使用的数据结构。</p>
+<p><a name="from-react-elements-to-fiber-nodes"></a></p>
+<h2>From React Elements to Fiber nodes</h2>
+<p>React组件都会有一个代表UI的对象，我们通常叫做view或者template。这个对象通常是由组件的render方法返回的，函数组件就是函数的返回值。（其实就是JSX）。</p>
+<p>针对我们示例中的Counter组件，template则是下面这样：</p>
+<pre><code class="language-javascript">&lt;button key="1" onClick={this.onClick}&gt;Update counter&lt;/button&gt;
+&lt;span key="2"&gt;{this.state.count}&lt;/span&gt;
+</code></pre>
+<p><a name="react-elements"></a></p>
+<h3>React Elements</h3>
+<p>template会经过JSX编译器的处理，然后返回React elements。React elements是组件render的方法真正返回的东西，而不是HTML。如果我们不使用JSX，示例中的render函数看起来会像这样：</p>
+<pre><code class="language-javascript">class ClickCounter {
+    ...
+    render() {
+        return [
+            React.createElement(
+                'button',
+                {
+                    key: '1',
+                    onClick: this.onClick
+                },
+                'Update counter'
+            ),
+            React.createElement(
+                'span',
+                {
+                    key: '2'
+                },
+                this.state.count
+            )
+        ]
+    }
+}
+</code></pre>
+<p>React.createElement函数会创建如下的数据结构：</p>
+<pre><code class="language-javascript">[
+    {
+        $$typeof: Symbol(react.element),
+        type: 'button',
+        key: "1",
+        props: {
+            children: 'Update counter',
+            onClick: () =&gt; { ... }
+        }
+    },
+    {
+        $$typeof: Symbol(react.element),
+        type: 'span',
+        key: "2",
+        props: {
+            children: 0
+        }
+    }
+]
+</code></pre>
+<p>您可以看到React将<code>[$$typeof](https://overreacted.io/why-do-react-elements-have-typeof-property/)</code>属性添加到这些对象中，以唯一地将它们标识为React元素。然后其它属性<code>type</code>，<code>key</code>，和<code>props</code>用于描述这个元素。他们的值都取自你传递给<code>React.createElement</code>的参数。</p>
+<p>需要注意下，props中是如何表示文本内容，和click handler的。React元素上还有其他属性（例如ref属性）这些属性不在本文讨论范围之内。</p>
+<p>代表ClickCounter的React元素没有任何key或props：</p>
+<pre><code class="language-javascript">{
+    $$typeof: Symbol(react.element),
+    key: null,
+    props: {},
+    ref: null,
+    type: ClickCounter
+}
+</code></pre>
+<p><a name="fiber-nodes"></a></p>
+<h3>Fiber nodes</h3>
+<p>在 **reconciliation **期间，React元素的 <code>render</code> 函数返回的数据都会被更新到 Fiber tree 里。每个 React 元素都对应一个 Fiber 节点。和 React 元素不一样，Fiber不一定每次渲染时都会重建。Fiber tree 是可变的数据结构，保存了组件的 state 和 DOM 。</p>
+<p>上文说过，根据 React 元素的 type 不同，需要进行不同的操作。</p>
+<p>在我们上面的例子中，对于 <code>ClickCounter</code> 这个类组件，需要调用各种生命周期方法，和 render 方法，然而对于 <code>span</code> 这种host组件（ DOM 节点），它只是需要 DOM 更新。因此，每个 React 元素都会转换为<a href="https://github.com/facebook/react/blob/769b1f270e1251d9dbdce0fcbd9e92e502d059b8/packages/shared/ReactWorkTags.js">相应类型</a>的 Fiber节点，类型代表了这个元素需要进行哪些操作（work）。</p>
+<p><strong>你可以认为 Fiber 是一个代表了有待做 work 的数据结构，或者换句话说，Fiber是一个工作单元（a unit of work）。此外 Fiber 体系结构还非常便于追踪，调度，暂停和中止 work。</strong></p>
+<p>当 React 元素第一次转换为 Fiber 节点的时候，React 使用元素内部的数据通过<a href="https://github.com/facebook/react/blob/769b1f270e1251d9dbdce0fcbd9e92e502d059b8/packages/react-reconciler/src/ReactFiber.js#L414">createFiberFromTypeAndProps</a>函数来创建 Fiber 。在后续更新中，React 重用了 Fiber 节点，并只更新那些需要更新的属性。</p>
+<p>React 可能需要根据 key 属性，来操作节点的层级变化，或者 render 方法不再返回有效 element 的时候，将其删除。</p>
+<blockquote>
+<p><strong>在<a href="https://github.com/facebook/react/blob/95a313ec0b957f71798a69d8e83408f40e76765b/packages/react-reconciler/src/ReactChildFiber.js#L239">ChildReconciler</a>函数中，你可以找到所有当前存在的Fiber所关联的操作类型列表以及函数实现。</strong></p>
+</blockquote>
+<p>React 会为每个 React元素 创建一个 Fiber 节点，由于 React 元素本身就是一颗树形结构，所以我们也会有一颗 Fiber tree。我们的示例Demo中的 Fiber tree 看起来像下面这样：</p>
+
+      <figure class="figure-img">
+        <a href="/static/bfbd2ff925c9a500a62543eaf00d3bfd.png" target="_blank">
+          <img src="/static/bfbd2ff925c9a500a62543eaf00d3bfd.png" alt="" title="" loading="lazy">
+        </a>
+        
+      </figure>
+    
+<p>从图中可以看出,所有的 Fiber 节点都由 child，sibling，return 属性连接起来。至于为什么要采用这种形式，你可以参考&nbsp;<a href="https://medium.com/dailyjs/the-how-and-why-on-reacts-usage-of-linked-list-in-fiber-67f1014d0eb7">The how and why on React’s usage of linked list in Fiber</a>。</p>
+<p><a name="current-and-work-in-progress-trees"></a></p>
+<h3>Current and work in progress trees</h3>
+<p>在第一次渲染结束后，React 内部会有一个 Fiber tree，代表了已经渲染到屏幕的上的UI状态。这个 Fiber tree 在代码里叫做 <strong>current</strong>。
+当React处理更新的时候，还会生成一个叫做 <code>workInProgress</code> 的 Fiber tree，代表着即将要渲染到屏幕上的UI状态更新。</p>
+<p>所有被执行的 work ，都是 <code>workInProgress</code> 上的 Fiber 节点的 work。当 React 遍历 current 树，每个已存在的 Fiber，都会创建一个替代的 Fiber ，用来组成  <code>workInProgress tree</code> 。新创建的 Fiber 同样使用 <code>render</code>**&nbsp;<strong>方法返回的 React 元素来构建。
+一旦更新相关的所有工作都完成了，React 就会有一个代表即将渲染到屏幕上的更新，新的 Fiber tree，叫做<code>workInProgress tree</code>。
+一旦<code>workInProgress tree</code></strong>&nbsp;<strong>渲染到了屏幕上，它就又变成了<code>current tree</code></strong>&nbsp;**。</p>
+<p>React 的核心原则之一是一致性（consistency）。React 总是一次性渲染所有DOM更新，不会一部分一部分的渲染。<code>workInProgress tree</code> 像一份对用户不可见的“草稿”，所以React可以先完成所有必要的 work，然后再一次性提交更新结果到屏幕上。</p>
+<p>每个 Fiber 节点，都有一个 **alternate **属性，指向另一个 tree 上与它对应的 Fiber。 <code>current tree</code>&nbsp; 上的 Fiber 指向 <code>workInProgress tree</code>&nbsp; 上对应的 Fiber ，反之亦然。</p>
+<p><a name="side-effects"></a></p>
+<h3>Side-effects</h3>
+<p>我们可以认为 React 组件 就是一个利用 state 和 props 计算UI状态的函数。其它的像改变DOM，调用生命周期方法之类的行为通通被考虑为 side-effect(副作用)，或者简单称为 effect(作用)。Effects 的相关内容在<a href="https://reactjs.org/docs/hooks-overview.html#%EF%B8%8F-effect-hook">文档</a>里有提到 。</p>
+<p>你可能在react 组件里 执行过数据获取，事件订阅，更改DOM等操作。我们称这些操作为“side effects”（或者简单称为“effects”）。因为这些操作可能影响其它组件，而且并不能在 rendering 期间完成。</p>
+<p>事实上大多数state和props更新都会导致副作用。而且正因为执行副作用（applying effects）在React里也是一种work的类型，所以 Fiber 也是除开update外的一种便利的机制去追踪 effects 。每个Fiber都可能有与之关联的 effects ，它们被保存在<code>effectTag</code> 属性上。</p>
+<p>简单来讲，Fiber 的 effects 定义了当元素实例更新完成后需要完成的其它 <a href="https://github.com/facebook/react/blob/b87aabdfe1b7461e7331abb3601d9e6bb27544bc/packages/shared/ReactSideEffectTags.js">work</a>。
+对于host components（DOM elements），就是新增，更新，删除等操作。
+对于class components，可能需要更新 refs，调用 componentDidMount/Update 生命周期。
+当然还有其它一些 effects 定义了其它 Fiber 类型对应的 work 。</p>
+<p><a name="effects-list"></a></p>
+<h3>Effects list</h3>
+<p>React的更新过程是非常快的，为了做到那种程度的快，React使用了一些有趣的技术手段。<strong>其中一个就是对拥有 effects 的 Fiber 构建一个线性表来进行快速迭代</strong>。因为迭代线性表肯定比迭代树结构快多了，另外确实也没必要迭代那些没有 side-effect 的 Fiber 节点。</p>
+<p>线性表的目的就是标记那些拥有像更新 DOM 之类的 side effect 的 Fiber。这个线性表是 <code>finishedWork tree</code> 的一个子集，使用 <code>nextEffect</code> 来进行连接。不像之前的 <code>current</code> 和 <code>workInProgress</code> tree 使用 child 来连接。</p>
+<p><a href="https://medium.com/u/a3a8af6addc1?source=post_page---------------------------">Dan Abramov</a> offered an analogy for an effects list. He likes to think of it as a Christmas tree, with “Christmas lights” binding all effectful nodes together. （大概意思 Dan Abramov 提供了一个类比，想象一颗圣诞树，然后上面发出的灯光连成了一条线，把所有的拥有effect的节点连接起来了。）</p>
+<p>为了更加直观，可以看图中黄色标记的 Fiber 节点，那代表着仍有一些 work 需要处理。比如说，更新操作导致了<code>c2</code>被插入DOM，<code>d2</code>和<code>c1</code>改变了属性，然后<code>b2</code>需要调用生命周期函数。这些都会被线性表 也就是 effect list 连接起来，所以当 React 要开始执行 effect 的时候 ，就可以直接跳过没有 side effect 的节点了。</p>
+
+      <figure class="figure-img">
+        <a href="/static/9e3c05fd0352f40773533aeffb90dd80.png" target="_blank">
+          <img src="/static/9e3c05fd0352f40773533aeffb90dd80.png" alt="" title="" loading="lazy">
+        </a>
+        
+      </figure>
+    
+<p>上图中 你可以看到 effects 是怎么连接起来的。当开始遍历节点时，React使用 firstEffect 指向线性表的头部。所以上面这副图可以简化成下面这样的线性表：</p>
+
+      <figure class="figure-img">
+        <a href="/static/0519df0cd9077bfca05fcc3c2d9a2bbd.png" target="_blank">
+          <img src="/static/0519df0cd9077bfca05fcc3c2d9a2bbd.png" alt="" title="" loading="lazy">
+        </a>
+        
+      </figure>
+    
+<p><a name="root-of-the-fiber-tree"></a></p>
+<h3>Root of the fiber tree</h3>
+<p><a name="RYPAw"></a></p>
+<h3>
+</h3>
+<p>每个React应用都至少有一个扮演Container的DOM节点。在我们的示例中，就是ID为container的div元素。</p>
+<pre><code class="language-javascript">const domContainer = document.querySelector('#container');
+ReactDOM.render(React.createElement(ClickCounter), domContainer);
+</code></pre>
+<p>React为每个container创建了一个 <a href="https://github.com/facebook/react/blob/0dc0ddc1ef5f90fe48b58f1a1ba753757961fc74/packages/react-reconciler/src/ReactFiberRoot.js#L31">fiber root</a> 的对象。你可以通过container元素的引用访问到这个fiber root：</p>
+<pre><code class="language-javascript">const fiberRoot = query('#container')._reactRootContainer._internalRoot
+</code></pre>
+<p>fiber root 对象中的 current 属性保存了对 fiber tree 的引用：</p>
+<pre><code class="language-javascript">const hostRootFiberNode = fiberRoot.current
+</code></pre>
+<p>fiber tree 最顶层是一个特殊的fiber类型 <a href="https://github.com/facebook/react/blob/cbbc2b6c4d0d8519145560bd8183ecde55168b12/packages/shared/ReactWorkTags.js#L34">HostRoot</a>，代表着你顶层元素的父节点。<code>HostRoot</code>节点拥有一个<code>stateNode</code>属性指回<code>FiberRoot</code>：</p>
+<pre><code class="language-javascript">fiberRoot.current.stateNode === fiberRoot; // true
+</code></pre>
+<p>你可以从<code>HostRoot</code> （fiber tree/current tree 的顶层节点）开始探索每一个 Fiber 节点。或者你也可以直接从组件实例访问一个单独的Fiber节点。像这样：</p>
+<pre><code class="language-javascript">compInstance._reactInternalFiber
+</code></pre>
+<p><a name="fiber-node-structure"></a></p>
+<h3>Fiber node structure</h3>
+<p>我们现在看看示例中ClickCounter组件的Fiber节点的结构：</p>
+<pre><code class="language-javascript">{
+    stateNode: new ClickCounter,
+    type: ClickCounter,
+    alternate: null,
+    key: null,
+    updateQueue: null,
+    memoizedState: {count: 0},
+    pendingProps: {},
+    memoizedProps: {},
+    tag: 1,
+    effectTag: 0,
+    nextEffect: null
+}
+</code></pre>
+<p>然后span的Fiber节点结构：</p>
+<pre><code class="language-javascript">{
+    stateNode: new HTMLSpanElement,
+    type: "span",
+    alternate: null,
+    key: "2",
+    updateQueue: null,
+    memoizedState: null,
+    pendingProps: {children: 0},
+    memoizedProps: {children: 0},
+    tag: 5,
+    effectTag: 0,
+    nextEffect: null
+}
+</code></pre>
+<p>Fiber 结构有大量的属性。之前已经提到过了<code>alternate</code>，<code>effectTag</code>，<code>nextEffect</code>的作用。接着看看其它属性。</p>
+<p><a name="statenode"></a></p>
+<h3>stateNode</h3>
+<p>保存class组件的实例，或者真实的DOM节点，或者 Fiber 对应的其它 React 元素类型。一般来说，我们可以认为这个属性保存了 Fiber 的本地状态。</p>
+<p><a name="type"></a></p>
+<h3>type</h3>
+<p>定义了 Fiber 相关的 class 或者函数。对于 class 组件，指向了构造函数，对于DOM 元素，它指明了HTML tag。我经常用这个属性来确定 Fiber 与那些元素相关。</p>
+<p><a name="tag"></a></p>
+<h3>tag</h3>
+<p>定义了 Fiber 的<a href="https://github.com/facebook/react/blob/769b1f270e1251d9dbdce0fcbd9e92e502d059b8/packages/shared/ReactWorkTags.js">类型</a>。用于 reconciliation 算法中，检测需要进行那种类型的 work 。之前提到过，work 的类型是随着 React 元素类型变化的。
+函数<a href="https://github.com/facebook/react/blob/769b1f270e1251d9dbdce0fcbd9e92e502d059b8/packages/react-reconciler/src/ReactFiber.js#L414">createFiberFromTypeAndProps</a>把 React 元素对应到正确的 Fiber 节点类型。在我们的示例中，ClickCounter组件的tag值是1，代表这是一个<code>ClassComponent</code>，span 元素的 tag 值是5，代表这是一个<code>HostComponent</code>。</p>
+<p><a name="updatequeue"></a></p>
+<h3>updateQueue</h3>
+<p>一个队列，存放state更新，回调函数，和DOM更新操作。</p>
+<p><a name="VqXFK"></a></p>
+<h3>memoizedState</h3>
+<p>State of the fiber that was used to create the output. When processing updates it reflects the state that’s currently rendered on the screen.
+（存放了state属性，当进行更新的时候，代表了之前一次的state。） <a name="memoizedprops"></a></p>
+<h3>memoizedProps</h3>
+<p>Props of the fiber that were used to create the output during the previous render.
+（存放上次用来渲染的props属性） <a name="pendingprops"></a></p>
+<h3>pendingProps</h3>
+<p>Props that have been updated from new data in React elements and need to be applied to child components or DOM elements.
+（当前用来更新组件的props属性） <a name="key"></a></p>
+<h3>key</h3>
+<p>元素的唯一标识符，帮助React识别同一级元素列表中，那些元素改变了，新增了，或者被移除了。它与React文档中的 <a href="https://reactjs.org/docs/lists-and-keys.html#keys">“lists and keys”</a> 有关。</p>
+<p>你可以在<a href="https://github.com/facebook/react/blob/6e4f7c788603dac7fccd227a4852c110b072fe16/packages/react-reconciler/src/ReactFiber.js#L78">这里</a>看到 Fiber node 的完整结构。我在上面的解释中省略了大量属性。特别是，我跳过了<code>child</code>，<code>sibling</code> ，<code>return</code> ，这些构成了我<a href="https://indepth.dev/the-how-and-why-on-reacts-usage-of-linked-list-in-fiber-to-walk-the-components-tree/">上篇文章</a>中的提到过的树形数据结构。其它一些诸如<code>expirationTime</code>，<code>childExpirationTime</code>**&nbsp;**和 <code>mode</code> 属性，则是和<code>Scheduler</code>相关的。</p>
+<p><a name="general-algorithm"></a></p>
+<h2>General algorithm</h2>
+<p>React内部运作主要分为两个阶段：**render **和 <strong>commit</strong>。</p>
+<p>在<code>render</code>阶段，React 组件会应用通过<code>setState</code>或者 <code>React.render</code> 安排的更新，找出UI上需要更新的内容。如果是首次渲染，React 会为每个 render 函数返回的元素创建一个新的 Fiber。在后续更新中，现有的 React元素对应的 Fiber 会被重复利用和更新。</p>
+<p><strong>render 阶段完成后， 会得到一颗带有 side-effects 的 Fiber node tree</strong>。effects 描述了在<code>commit</code>阶段需要完成的work。在<code>commit</code>阶段，React遍历这颗带有 effects 的 Fiber tree，并把更改应用到实例上。然后再遍历 effects list，执行DOM更新，和其它更改。并使之对用户可见。</p>
+<p><strong>需要明白，render阶段是可能会是异步执行的</strong>。React 根据可用的时间，可能会处理一个或者多个 Fiber ，然后就会暂存当前已完成的work，让浏览器去处理某些事件，当有空余时间后，它又会从上次停下的地方继续处理。但有些时候，它可能放弃已经完成的 work，然后从头开始。</p>
+<p>因为<strong>render</strong>阶段的工作不会导致任何用户可见的更改（如DOM更新），才使得暂停 work 的行为变得可以接受。</p>
+<p><strong>作为对比，接下来的commit阶段，总是同步的</strong>。这是因为这个阶段的工作始终会导致用户可见的更改（如DOM更新）。所以React要一次性完成这个阶段。</p>
+<p>调用生命周期方法是 React 中的一种 work 类型。其中一些方法在<strong>render</strong>阶段调用，另一些在<strong>commit</strong>阶段调用。以下的方法在<strong>render</strong>阶段被调用：</p>
+<ul>
+<li>[UNSAFE_]componentWillMount (deprecated)</li>
+<li>[UNSAFE_]componentWillReceiveProps (deprecated)</li>
+<li>getDerivedStateFromProps</li>
+<li>shouldComponentUpdate</li>
+<li>[UNSAFE_]componentWillUpdate (deprecated)</li>
+<li>render</li>
+</ul>
+<p>如你所看到的，从React 16.3开始，在<strong>render</strong>阶段执行的一些遗留的生命周期方法被标记为<code>UNSAFE</code>的。现在这些方法在文档被称为遗留的生命周期。它们将在未来的16.x版本中被弃用，而不带<code>UNSAFE</code>前缀的对应版本将在17.0中被删除。你可以从文档中了解<a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html">更多</a>。</p>
+<p>那么这么做的目的是什么？</p>
+<p>我们刚才了解到，<strong>render</strong>阶段不会产生像DOM更新那样的 side-effect ，React可以异步的去处理组件更新(甚至可以在多个线程中处理)。然而，被<code>UNSAFE</code>标记的生命周期经常被误解和滥用。开发者倾向于在这些方法里执行带有 side-effects 的代码，但是这在新的异步渲染模式（Concurrent&nbsp; Mode）中可能会出现问题。尽管只有不带 <code>UNSAFE</code>&nbsp;前缀的方法会被移除，但在即将到来的 Concurrent Mode（你也可以选择不用异步渲染） 中，带有<code>UNSAFE</code> 的生命周期仍然可能会出现问题。</p>
+<p>以下是会在<code>commit</code>阶段执行的生命周期：</p>
+<ul>
+<li>getSnapshotBeforeUpdate</li>
+<li>componentDidMount</li>
+<li>componentDidUpdate</li>
+<li>componentWillUnmount</li>
+</ul>
+<p>因为这些方法在同步的commit阶段执行，所以他们可能包含side-effects或者操作dom。</p>
+<p>好的，现在我们拥有了足够的背景知识来看看用于遍历树结构和执行 work 的通用算法。让我们继续。。。</p>
+<p><a name="CaD22"></a></p>
+<h2>Render phase</h2>
+<p>reconciliation 算法使用 <a href="https://github.com/facebook/react/blob/95a313ec0b957f71798a69d8e83408f40e76765b/packages/react-reconciler/src/ReactFiberScheduler.js#L1132">renderRoot</a> 方法，从顶层的<code>HostRoot</code>开始遍历。然而，React会跳过已处理过的 Fiber，直到找到未完成 work 的 Fiber。举个例子，假如你在组件树深处某个组件内部调用了<code>setState</code> ，React会从树顶部开始遍历，但是迅速跳过父级组件，直到找到调用了<code>setState</code> 方法的组件。</p>
+<p><a name="PvWn0"></a></p>
+<h3>Main steps of the work loop</h3>
+<p>所有的 Fiber 节点都在一个work loop中执行。下面是这个loop同步部分的实现：</p>
+<pre><code class="language-javascript">function workLoop(isYieldy) {
+  if (!isYieldy) {
+    while (nextUnitOfWork !== null) {
+      nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
+    }
+  } else {...}
+}
+</code></pre>
+<p>在上面的代码中，<code>nextUnitOfWork</code>持有一个 workInProgress tree 上 Fiber 节点的引用，且该节点有 work 需要做 。当 React 遍历 Fiber tree 时，它也使用这个变量来判断是否还有未完成的 work 。在当前 Fiber 完成后，该变量会指向 tree 上的另外一个 需要处理的 Fiber 节点 或者 null。当指向null时，意味着React退出当前的 work loop，然后准备进行下一个<strong>commit</strong> 阶段。</p>
+<p>遍历 Fiber tree 和初始，完成 work 用到的四个主要方法：</p>
+<ul>
+<li><a href="https://github.com/facebook/react/blob/95a313ec0b957f71798a69d8e83408f40e76765b/packages/react-reconciler/src/ReactFiberScheduler.js#L1056">performUnitOfWork</a></li>
+<li><a href="https://github.com/facebook/react/blob/cbbc2b6c4d0d8519145560bd8183ecde55168b12/packages/react-reconciler/src/ReactFiberBeginWork.js#L1489">beginWork</a></li>
+<li><a href="https://github.com/facebook/react/blob/95a313ec0b957f71798a69d8e83408f40e76765b/packages/react-reconciler/src/ReactFiberScheduler.js#L879">completeUnitOfWork</a></li>
+<li><a href="https://github.com/facebook/react/blob/cbbc2b6c4d0d8519145560bd8183ecde55168b12/packages/react-reconciler/src/ReactFiberCompleteWork.js#L532">completeWork</a></li>
+</ul>
+<p>为了演示如何使用它们，请看下面的动态演示。我在演示中使用了这些函数的简化实现。每个函数都接受一个 Fiber node 进行处理，随着 React 往树深处遍历，你可以看到当前激活的 Fiber 发生改变。你可以清楚的看到这个算法是怎么从一个分支到另一个分支的。它首先完成子节点的工作，然后再完成父元素的工作。</p>
+
+      <figure class="figure-img">
+        <a href="/static/4d6d43020835a41fd20492f29aea1a41.gif" target="_blank">
+          <img src="/static/4d6d43020835a41fd20492f29aea1a41.gif" alt="" title="" loading="lazy">
+        </a>
+        
+      </figure>
+    
+<p>注意，直线垂直链接表示sibling节点，而弯曲的连接表示子节点。例如b1没有子节点，而b2有一个子节点c1。</p>
+<p>这里是视频的<a href="https://vimeo.com/302222454">链接</a>，你可以随时暂停来看看到底是怎么回事。从概念上讲，你可以认为“开始”就是进入一个组件，“完成”就是跳出一个组件。你也可以在这个<a href="https://stackblitz.com/edit/js-ntqfil?file=index.js">代码库</a>体验一下。</p>
+<p>我们先看看 performUnitOfWork 和 beginWork 这两个方法:</p>
+<pre><code class="language-javascript">function performUnitOfWork(workInProgress) {
+    let next = beginWork(workInProgress);
+    if (next === null) {
+        next = completeUnitOfWork(workInProgress);
+    }
+    return next;
+}
+
+function beginWork(workInProgress) {
+    console.log('work performed for ' + workInProgress.name);
+    return workInProgress.child;
+}
+</code></pre>
+<p><code>performUnitOfWork</code> 从<code>workInProgress</code> 接收一个 Fiber，然后调用<code>beginWork</code>**&nbsp;**函数启动work。这个函数会执行当前 Fiber 所需要所有任务。出于演示的目的，示例中只是简单的打印出 Fiber 的名字，来表明 work 已完成。<strong>函数<code>beginWork</code> 总是返回下一个要处理的子节点的指针或者null</strong>。</p>
+<p>如果存在下一个子节点，则会被赋值给 <code>workLoop</code>函数中的 <code>nextUnitOfWork</code> 变量。当没有子节点的时候，React则知道它达到了这个分支的底部，所以它可以完成当前这个节点。<strong>一旦节点的work完成了，它将处理同级节点的work，并在此之后回溯到父节点</strong>。这是在 <code>completeUnitOfWork</code>&nbsp;函数中完成的：</p>
+<pre><code class="language-javascript">function completeUnitOfWork(workInProgress) {
+    while (true) {
+        let returnFiber = workInProgress.return;
+        let siblingFiber = workInProgress.sibling;
+
+        nextUnitOfWork = completeWork(workInProgress);
+
+        if (siblingFiber !== null) {
+            // If there is a sibling, return it
+            // to perform work for this sibling
+            return siblingFiber;
+        } else if (returnFiber !== null) {
+            // If there's no more work in this returnFiber,
+            // continue the loop to complete the parent.
+            workInProgress = returnFiber;
+            continue;
+        } else {
+            // We've reached the root.
+            return null;
+        }
+    }
+}
+
+function completeWork(workInProgress) {
+    console.log('work completed for ' + workInProgress.name);
+    return null;
+}
+</code></pre>
+<p>你可以看到上面这个代码片段是一个大的while循环。当<code>workInProgress</code> 节点没有子节点的时候，React会进入该函数。当完成当前 Fiber 的 work，它会检查这里是否有sibling节点。如果有，React退出当前函数，返回这个sibling节点。它会被赋值给<code>nextUnitOfWork</code> ，然后 React 开始执行这个分支相关的工作。重要的是要了解，此时此刻，React只完成了先前的sibling节点的work，并没有完成父节点的work。<strong>只有当以子节点开始的所有分支都完成了自己的工作，它才会完成父节点和回溯的工作</strong>。</p>
+<p>从实现中可以看到，<code>performUnitOfWork</code>和<code>completeUnitOfWork</code> 主要用于迭代目的。而<code>beginWork</code> 和<code>completeWork</code> 函数用于处理work的开始和完成。在该系列后续文章中，我们会了解，当进入<code>beginWork</code> 和<code>completeWork</code> ，<code>ClickCounter</code> 组件会发生些什么。</p>
+<p><a name="commit-phase"></a></p>
+<h2>Commit phase</h2>
+<p>这个阶段从函数 <code>completeRoot</code>&nbsp;开始。This is where React updates the DOM and calls pre and post mutation lifecycle methods.（这就是React更新DOM并执行可以带有副作用生命周期方法的地方）</p>
+<p>当 React 进入这个阶段，内部有两颗 Fiber 树 和 一个 effcts list 。第一颗Fiber树（ <code>current</code>&nbsp;）代表着上次渲染到屏幕上的状态。另外一颗树是在render阶段新产生的一颗备用的树，在源码里叫做<code>finishedWork</code> 或者<code>workInProgress</code> ，代表即将要刷新到屏幕上的状态。This alternate tree is linked similarly to the current tree through the <code>child</code> and <code>sibling</code> pointers.(用于替换的树，拥有和current一样的结构，使用child，sibling属性链接)</p>
+<p>另外，这还有一个effects列表，是<code>finishedWork</code>  树的子集，通过 <code>nextEffect</code> 属性连接起来的。记住，effects list 是在 **render **阶段生成的。**render **阶段的主要目的就是检测出哪些节点需要增加，删除，更新，哪些组件需要调用他们的生命周期函数。这就是 effect list 存在的意义。effect list 也是 commit 阶段需要遍历的节点集合。</p>
+<p>出于调试的目的，current tree 可以通过 Fiber root 的current属性来访问。finishedWork tree 可以通过 current tree中的HostFiber node的alternate 属性访问。</p>
+<p>commit 阶段执行的主要函数是<a href="https://github.com/facebook/react/blob/95a313ec0b957f71798a69d8e83408f40e76765b/packages/react-reconciler/src/ReactFiberScheduler.js#L523">commitRoot</a>，简单来讲，它做了以下这些事：</p>
+<ul>
+<li>在标记为<code>Snapshot</code> effect 的节点上，执行<code>getSnapshotBeforeUpdate </code>生命周期方法。</li>
+<li>在标记为<code>Deletion</code> effect 的节点上，，调用<code>componentWillUnmount</code>生命周期方法。</li>
+<li>执行所有DOM的插入，更新，删除。</li>
+<li>把<code>finishedWork</code>**&nbsp;**设置为current。</li>
+<li>在标记为<code>Placement</code> effect 的节点上，调用<code>componentDidMoun</code>生命周期方法。</li>
+<li>在标记为<code>Update</code> effect 的节点上，调用<code>componentDidUpdate</code>生命周期方法。</li>
+</ul>
+<p>在调用 pre-mutation 方法 <code>getSnapshotBeforeUpdate </code> 后，React提交所有的effect。分为两步，第一步，执行所有的DOM新增，更新，删除和ref卸载，然后React把<code>finishedWork</code> 赋值给<code>FiberRoot</code> ，将<code>workInProgress</code> 标记为<code>current</code>**&nbsp;**。所以在<code>componentWillUnmount</code>中，current 指向之前渲染到屏幕上的Fiber tree。然而在第二步中执行的<code>componentDidMount**/**Update</code> 生命周期中，current 指向就已经是 <code>finishedWork</code>&nbsp; 了。在第二步中，React调用了所有剩下的生命周期函数和 ref 回调。这些方法作为单独的过程执行，这样整颗树中的所有放置、更新和删除都已被调用。</p>
+<p>下面是上面描述的代码片段:</p>
+<pre><code class="language-javascript">function commitRoot(root, finishedWork) {
+    commitBeforeMutationLifecycles()
+    commitAllHostEffects();
+    root.current = finishedWork;
+    commitAllLifeCycles();
+}&lt;&gt;
+</code></pre>
+<p>这些子函数中的每一个子函数都实现一个循环，循环遍历效果effect list。当它发现与函数的目的相关的effect时，它就会执行它。</p>
+<p><a name="pre-mutation-lifecycle-methods"></a></p>
+<h3>Pre-mutation lifecycle methods</h3>
+<p>Here is, for example, the code that iterates over an effects tree and checks if a node has the 
+<code>Snapshot</code>**&nbsp;**effect:</p>
+<p>例如，下面的代码是在检查节点中是否有 <code>Snapshot</code>**&nbsp;**effect:</p>
+<pre><code class="language-javascript">function commitBeforeMutationLifecycles() {
+    while (nextEffect !== null) {
+        const effectTag = nextEffect.effectTag;
+        if (effectTag &amp; Snapshot) {
+            const current = nextEffect.alternate;
+            commitBeforeMutationLifeCycles(current, nextEffect);
+        }
+        nextEffect = nextEffect.nextEffect;
+    }
+}&lt;&gt;
+</code></pre>
+<p>对于一个class 组件，这个effect意味着调用<code>getSnapshotBeforeUpdate</code>**&nbsp;**生命周期方法。</p>
+<p><a name="dom-updates"></a></p>
+<h3>DOM updates</h3>
+<p><a href="https://github.com/facebook/react/blob/95a313ec0b957f71798a69d8e83408f40e76765b/packages/react-reconciler/src/ReactFiberScheduler.js#L376">commitAllHostEffects</a>是React执行DOM更新的地方，该函数定义了节点需要执行的操作类型，然后执行它：</p>
+<pre><code class="language-javascript">function commitAllHostEffects() {
+    switch (primaryEffectTag) {
+        case Placement: {
+            commitPlacement(nextEffect);
+            ...
+        }
+        case PlacementAndUpdate: {
+            commitPlacement(nextEffect);
+            commitWork(current, nextEffect);
+            ...
+        }
+        case Update: {
+            commitWork(current, nextEffect);
+            ...
+        }
+        case Deletion: {
+            commitDeletion(nextEffect);
+            ...
+        }
+    }
+}&lt;&gt;
+</code></pre>
+<p>有趣的是，React在<code>commitDeletion</code> 内调用了<code>componentWillUnmount</code>**&nbsp;**。</p>
+<p><a name="post-mutation-lifecycle-methods"></a></p>
+<h3>Post-mutation lifecycle methods</h3>
+<p>commitAllLifecycles 里会调用所有剩下的生命周期方法，包括<code>componentDidUpdate/Mount</code>**&nbsp;**。</p>
+<p>原文链接：<a href="https://indepth.dev/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react/">https://indepth.dev/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react</a>。
+原文系列下一篇文章的连接：<a href="https://indepth.dev/in-depth-explanation-of-state-and-props-update-in-react/">In-depth explanation of state and props update in React</a>。</p>
+
+</section>
+
+    
+  </article>
+  
+<style>
+  .article-actions {
+    max-width: var(--content-max-width);
+
+    display: flex;
+    align-items: center;
+
+    margin: 40px auto;
+    padding: 0 30px;
+
+    font-family: common_font;
+    color: var(--normal-color);
+  }
+
+  .article-actions_action:not(:last-child)::after {
+    content: '·\00a0';
+  }
+
+  .article-actions_action > a {
+    color: inherit;
+    text-decoration-color: var(--primary-color);
+  }
+
+  @media (max-width: 520px) {
+    .article-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .article-actions_action::before {
+      content: '·';
+    }
+
+    .article-actions_action:not(:last-child)::after {
+      content: '';
+    }
+  }
+</style>
+
+<div class="article-actions">
+  <span class="article-actions_action">
+    使用 <a href="https://github.com/codebyzack/blog/discussions">Discussions</a> 讨论
+  </span>
+  <span class="article-actions_action">
+    在 <a href="https://github.com/codebyzack/blog/edit/master/articles//WEB/React相关/深入Fiber，全面了解React中新的算法Reconciliation.md/index.md">Github</a> 上编辑
+  </span>
+</div>
+
+  <style>
+.page-footer {
+  font-size: 12px;
+  max-width: var(--content-max-width);
+  margin: 40px auto;
+  padding: 0 30px;
+  color: var(--secondary-color);
+}
+
+.page-footer > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* .page-footer > a > img{
+  user-select: none;
+  width: 12px;
+  height: 12px;
+} */
+
+.page-footer > .author {
+  text-decoration: underline;
+}
+
+.page-footer > a:hover {
+  color: var(--primary-color);
+}
+</style>
+
+<footer class="page-footer">
+  <a href="https://github.com/codebyzack/blog/blob/master/LICENSE">©</a> 2023
+  <a class="author" href="https://zackdk.com">行者、空山</a>
+  <!-- <a class="author" href="/rss.xml"><img src="/rss.png" alt="rss" /></a>
+  <a class="author" href="https://github.com/codebyzack/blog"><img src="/github.png" alt="github" /></a> -->
+</footer>
+
+
+  <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
+
+
+
+</body></html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html><html lang="zh-cn"><head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="行者、空山">
+<meta name="keywords" content="HTML,CSS,JavaScript,Web,React,Life">
+
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YT4Q3D1PMY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YT4Q3D1PMY');
+</script>
+
+<!-- open graph -->
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/535460b8cc6a91e6a240fa069c326796.png">
+
+<script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+<link rel="shortcut icon" type="image/png" href="/static/535460b8cc6a91e6a240fa069c326796.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body { 
+    --content-max-width: 48rem;
+
+    --primary-color: #616161;
+    --accent-color:  #ee0290;
+    --normal-color: #333;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --tertiary-color: #ddd;
+    --backgroud: rgb(255 255 255);
+
+    --btn-background: #e5e7eb;
+
+    --border-radius: 2px;
+    --transition-duration: 0.3s;
+
+    background-color: var(--backgroud);
+    transition: background-color var(--transition-duration);
+
+    font-family: Helvetica Neue,helvetica,arial,Heti Hei,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  html.dark > body{
+    background-color: #000;
+    --primary-color: #616161;
+    --accent-color:  #79ffe1;
+    --normal-color: #9ca3af;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --btn-background: #1f2937;
+    --tertiary-color: #ddd;
+    --backgroud: rgb(0 0 0);
+  }
+</style>
+
+
+  <title>JS知识点之原型/原型链那些事儿 - 行一度空山</title>
+  <meta name="description" content="<a name=&quot;53582bdc&quot;></a>  ## 原型（prototype）是什么？  原型并不神秘，它实际也就是一个对象或者是null。  JavaScript里每个对象都有一个与之相关连的原型，你可以通过访问对象的`__proto__`属性，或者使用`Object.getPrototype......">
+  <meta property="og:description" content="<a name=&quot;53582bdc&quot;></a>  ## 原型（prototype）是什么？  原型并不神秘，它实际也就是一个对象或者是null。  JavaScript里每个对象都有一个与之相关连的原型，你可以通过访问对象的`__proto__`属性，或者使用`Object.getPrototype......">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
+  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+</head>
+
+<body>
+  <style>
+  .page-header {
+    max-width: calc( var(--content-max-width) + 160px);
+    margin: 0 auto;
+    padding: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .page-header_button{
+    width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background-color: var(--btn-background);
+    border: none;
+    border-radius: 4px;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+
+  .page-header_button .theme-light{
+    display: initial;
+  }
+
+  .page-header_button .theme-dark{
+    display: none;
+  }
+
+  .dark .page-header_button .theme-dark{
+    display: initial;
+
+  }
+  .dark .page-header_button .theme-light{
+    display: none;
+  }
+
+  .page-header_theme{
+    width: 16px;
+    height: 16px;
+    color: var(--normal-color);
+  }
+
+  .page-header_nav > a{
+    color: var(--normal-color);
+    text-decoration: none;
+  }
+
+  .page-header_nav > a:hover{
+    color: var(--accent-color);
+    text-decoration: underline;
+
+  }
+
+  .page-header_nav > a + a{
+    margin-left: 8px;
+  }
+
+  .sticky-header{
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    transition: background-color .1 ease-in-out;
+  }
+
+
+
+</style>
+
+<header class="page-header sticky-header">
+  <button class="page-header_button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-light"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-dark"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+  </button>
+
+  <div class="page-header_nav">
+    <a href="/rss.xml">RSS</a>
+    <a href="https://github.com/codebyzack/blog">Github</a>
+    <a href="/">首页</a>
+  </div>
+
+</header>
+
+  <article>
+    <style>
+.article-header {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding: 0 30px;
+}
+
+.article-title {
+  color: var(--normal-color);
+  font-size: 32px;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.article-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-publish-time {
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-family: common_font;
+}
+
+.article-info_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin-top: 20px;
+}
+
+.article-info_box > .article-info{
+  display: flex;
+  align-items: center;
+}
+
+.article-info_box > .article-info > img{
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+</style>
+
+<section class="article-header">
+  <h1 class="article-title">
+    <a href="//WEB/JavaScript相关/JS知识点之原型_原型链那些事儿.md">JS知识点之原型/原型链那些事儿</a>
+  </h1>
+  <div class="article-info_box">
+    <div class="article-info">
+      <img src="/static/535460b8cc6a91e6a240fa069c326796.png" alt="logo">
+      <span>行者、空山/2000-01-01</span>
+    </div>
+    <div class="article-readtime">
+      16 min read 
+    </div>
+  </div>
+</section>
+
+    <style>
+  code {
+    font-family: 'Fira Code' !important;
+  }
+
+  article {
+    --article-space: 30px;
+  }
+
+  article a {
+    color: var(--link-color);
+    text-decoration: none;
+    /* text-decoration-color: var(--primary-color); */
+  }
+  article a:hover{
+    text-decoration: underline;
+  }
+
+  article h2, article h3, article h4, article h5, article h6 {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 0 auto;
+    line-height: 1.5;
+    color: var(--normal-color);
+  }
+
+  article h2 {
+    margin-top: 28px;
+    font-size: 28px;
+  }
+
+  article h3 {
+    margin-top: 26px;
+    font-size: 25px;
+  }
+
+  article h4 {
+    margin-top: 24px;
+    font-size: 22px;
+  }
+
+  article h5 {
+    margin-top: 22px;
+    font-size: 19px;
+  }
+
+  article h6 {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  article p {
+    max-width: var(--content-max-width);
+    margin: 15px auto;
+    padding: 0 30px;
+    color: var(--normal-color);
+  }
+
+  article p code, article ul code {
+    padding: 0 4px;
+    /* border-radius: var(--border-radius); */
+    /* background: rgba(237, 106, 94, 0.3); */
+    color: var(--accent-color);
+  }
+
+  article pre {
+    max-width: var(--content-max-width) !important;
+    margin: 15px auto !important;
+    font-size: 14px !important;
+    box-sizing: border-box;
+    border-radius: var(--border-radius) !important;
+    tab-size: 2 !important;
+    padding: 0 !important;
+  }
+
+  article pre code {
+    display: block;
+    margin: 20px 30px !important;
+    overflow: auto !important;
+    font-size: inherit !important;
+  }
+
+  article hr {
+    max-width: var(--content-max-width);
+    margin: 40px auto;
+    padding: 0 var(--article-space);
+    border: none;
+  }
+
+  article hr::after{
+    content: '';
+    display: block;
+    height: 1px;
+    background-color:var(--tertiary-color);
+  }
+
+  article blockquote {
+    max-width: var(--content-max-width);
+    padding: 0 var(--article-space);
+    margin: 15px auto;
+    position: relative;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--secondary-color);
+  }
+
+  .table-container {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .table-container table {
+    border-collapse: collapse;
+  }
+
+  .table-container th, .table-container td {
+    font-size: 14px;
+    color: var(--normal-color);
+    border: 1px solid var(--tertiary-color);
+    padding: 10px;
+    text-align: left;
+  }
+
+  .table-container th {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  article blockquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary-color);
+  }
+
+  article blockquote p {
+    font-size: 16px;
+    color: inherit;
+    max-width: unset;
+    padding: 0;
+    margin: 0 0 0 30px;
+  }
+
+  article ul,
+  article ol {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+    color: var(--normal-color);
+    line-height: 1.5;
+  }
+
+  article ol {
+    counter-reset: li-count;
+  }
+  
+  article ul li, article ol li {
+    display: block;
+    margin: 5px 0;
+    position: relative;
+  }
+
+  article ol li {
+    counter-increment: li-count;
+  }
+
+  article ul li::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+
+    margin-right: 10px;
+
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+  }
+
+  article ol li::before {
+    content: counter( li-count) '. ';
+    color: var(--primary-color);
+  }
+
+  article figcaption {
+    font-size: 12px;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  .figure-img {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-img img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+  }
+  
+  .figure-video {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-video video {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .figure-iframe {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .figure-iframe iframe {
+    display: block;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    height: 640px;
+    border: 1px solid var(--tertiary-color);
+    border-radius: var(--border-radius);
+  }
+
+</style>
+
+<section>
+  <p><a name="53582bdc"></a></p>
+<h2>原型（prototype）是什么？</h2>
+<p>原型并不神秘，它实际也就是一个对象或者是null。</p>
+<p>JavaScript里每个对象都有一个与之相关连的原型，你可以通过访问对象的<code>__proto__</code>属性，或者使用<code>Object.getPrototypeOf</code>来找到它。</p>
+<p>你可以使用<code>Object.setPrototypeOf</code>显示去修改一个对象的原型指向。</p>
+<p>但需要注意的是，原型有可能为不存在，即值为<code>null</code>，代表着这个对象没有原型了。</p>
+<pre><code class="language-javascript">//获取原型
+const a = {};
+a.__proto__ === Object.getPrototypeOf(a);
+
+//修改原型指向
+Object.setPrototypeOf(a,null);
+
+//原型为 null
+Object.__proto__.__proto__.__proto__ === null;
+
+Object.getPrototypeOf(a) === null;
+</code></pre>
+<p><a name="dp9QS"></a></p>
+<h2>原型链是什么？</h2>
+<p>假设A对象的<code>__proto__</code>属性，指向的为B对象，则B对象就是A对象的原型。</p>
+<p>B本身也是对象，则也拥有一个<code>__proto__</code>属性，指向另一个对象。</p>
+<p>这样一层套一层，就形成了一个链条。直到原型链顶端<code>__proto__</code>属性指向<code>null</code>。原型链结束。</p>
+<p>JS中原型默认指向<code>null</code>的对象为数不多，<code>Object.prototype</code>就是其中的一个，既<code>Object.prototype.__proto__ === null</code>。</p>
+<p><a name="66b6b632"></a></p>
+<h2>原型指向是如何确定的？</h2>
+<p><code>__proto__</code>指向的对象是如何确定的？</p>
+<p>要确定这件事，我们得看看JavaScript里是怎么生成对象的：</p>
+<p><a name="9181f2f5"></a></p>
+<h3>1.通过new操作符生成对象</h3>
+<p>JavaScript里new操作符，不过是使用特定的方式去调用一个函数。</p>
+<p>JavaScript里通过new调用的函数，称之为构造函数。</p>
+<p>JavaScript里函数都带有一个<code>prototype</code>属性，你可以随时更改它的指向。</p>
+<p>JavaScript里函数默认的<code>prototype</code>属性，拥有一个<code>constructor</code>属性，指向函数自己。</p>
+<p>通过new操作符调用构造函数，生成对象。该对象的<strong>原型</strong>指向了<strong>构造函数的<code>prototype</code>属性</strong>。</p>
+<pre><code class="language-javascript">
+function temp(){};
+
+const a = new temp();
+
+temp.prototype === a.__proto__;
+
+temp.prototype.constructor === temp;
+</code></pre>
+<p><a name="02c6fe0b"></a></p>
+<h3>2.对象字面量</h3>
+<p>对象字面量即常用的写一对大括号，里面是key-value形式的键值对。该种方式声明对象的原型指向<code>Object.prototype</code>。</p>
+<p>或者换种说法，字面量声明对象，默认是使用<code>Object</code>去构造的,即<code>new Object()</code>。</p>
+<pre><code class="language-javascript">
+a = { b:1 };
+
+b = new Object();
+
+a.__proto__ === b.__proto__
+
+a.__proto__ === Object.prototype
+</code></pre>
+<p><a name="d49ecf0a"></a></p>
+<h3>3.使用Object.create创建对象</h3>
+<p>调用<code>Object.create</code>后会产生一个新的对象，传入<code>Object.create</code>的参数即为新对象的原型。</p>
+<pre><code class="language-javascript">
+a = { b:1 };
+
+b = Object.create(a);
+
+b.__proto__ === a;
+</code></pre>
+<p>总结一下，使用new调用构造函数生成新对象，新对象原型指向了构造函数的<code>prototype</code>属性、使用对象字面量的形式创建的对象，原型默认指向了<code>Object.prototype</code>、使用<code>Object.create</code>创建的对象的原型指向了你传入的第一个参数。</p>
+<p><a name="b5a146f5"></a></p>
+<h2>一张关于原型的经典的图</h2>
+
+      <figure class="figure-img">
+        <a href="/static/5d1d4cb4efee381c30cec84010a56922.png" target="_blank">
+          <img src="/static/5d1d4cb4efee381c30cec84010a56922.png" alt="" title="" loading="lazy">
+        </a>
+        
+      </figure>
+    
+<p>这里存在一个的问题，众所周知JS里函数也是对象，那么函数是由谁构造的呢？那么函数的<code>__proto__</code>指向谁呢？</p>
+<p>先看图中中间一部分，声明了三个函数，Foo函数，Object函数，Function函数。</p>
+<p>然后从上到下一个一个说，</p>
+<p><a name="d2cb3dfb"></a></p>
+<h3>1.Foo函数</h3>
+<p>Foo函数有它的<code>prototype</code>属性，且<code>prototype.constructor</code>指回了Foo函数本身。</p>
+<p>f1/f2 是通过<code>new Foo()</code>生成的新对象，它俩的<code>__proto__</code>属性都指向了<code>Foo.prototype</code>。</p>
+<p><code>Foo.prototype</code>只是一个对象，所以它也有自己的原型，即<code>__proto__</code>属性，在你没修改情况下，指向了<code>Object.prototype</code>。</p>
+<p>Foo函数本身也是一个对象，意味着它有自己的原型<code>__proto__</code>，指向了<code>Function.prototype</code>，这条线意味着，<strong>函数都是通过内置的<code>Function</code>函数构造出来的</strong>。</p>
+<p>至此图中所有指向都明晰了。</p>
+<p><a name="e160e5ca"></a></p>
+<h3>2.Object函数</h3>
+<p>Object函数基本上和Foo函数的指向是一样的，毕竟他们都是函数，只不过Object是内置的，Foo是你写的，还有一点不同在他们的<code>prototype</code>属性上。</p>
+<p>Object函数有自己的<code>prototype</code>属性，且<code>prototype.constructor</code>指回了Object函数本身。</p>
+<p>f1/f2 是通过<code>new Object()</code>生成的新对象，它俩的<code>__proto__</code>属性都指向了<code>Object.prototype</code>。</p>
+<p><code>Object.prototype</code>只是一个对象，所以它也有自己的原型，即<code>__proto__</code>属性，Object函数不同点就在于此，<code>Object.prototype.__proto__</code>值为<code>null</code>。即原型链在此终结。</p>
+<p>Object函数本身也是一个对象，意味着它有自己的原型<code>__proto__</code>，指向了<code>Function.prototype</code>，这条线意味着，<strong>函数都是通过内置的<code>Function</code>函数构造出来的</strong>。</p>
+<p><a name="cf908962"></a></p>
+<h3>3.Function函数</h3>
+<p>Function函数也是内置的，且所有函数都是通过它构造出来的，包括它自己。所以，你可以说，<strong>默认情况下，所有函数的__proto__属性都指向Function.prototype</strong>。</p>
+<p>所以上图中，<code>Foo.__proto__</code>、<code>Object.__proto__</code>、<code>Function.__proto__</code> 都指向了<code>Function.prototype</code>。</p>
+<p>其它指向不出其外。</p>
+<p>Function函数有自己的<code>prototype</code>属性，且<code>prototype.constructor</code>指回了Function函数本身。</p>
+<p><code>Function.prototype</code>只是一个对象，所以它也有自己的原型，即<code>__proto__</code>属性，在你没修改情况下，指向了<code>Object.prototype</code>。</p>
+
+</section>
+
+    
+  </article>
+  
+<style>
+  .article-actions {
+    max-width: var(--content-max-width);
+
+    display: flex;
+    align-items: center;
+
+    margin: 40px auto;
+    padding: 0 30px;
+
+    font-family: common_font;
+    color: var(--normal-color);
+  }
+
+  .article-actions_action:not(:last-child)::after {
+    content: '·\00a0';
+  }
+
+  .article-actions_action > a {
+    color: inherit;
+    text-decoration-color: var(--primary-color);
+  }
+
+  @media (max-width: 520px) {
+    .article-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .article-actions_action::before {
+      content: '·';
+    }
+
+    .article-actions_action:not(:last-child)::after {
+      content: '';
+    }
+  }
+</style>
+
+<div class="article-actions">
+  <span class="article-actions_action">
+    使用 <a href="https://github.com/codebyzack/blog/discussions">Discussions</a> 讨论
+  </span>
+  <span class="article-actions_action">
+    在 <a href="https://github.com/codebyzack/blog/edit/master/articles//WEB/JavaScript相关/JS知识点之原型_原型链那些事儿.md/index.md">Github</a> 上编辑
+  </span>
+</div>
+
+  <style>
+.page-footer {
+  font-size: 12px;
+  max-width: var(--content-max-width);
+  margin: 40px auto;
+  padding: 0 30px;
+  color: var(--secondary-color);
+}
+
+.page-footer > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* .page-footer > a > img{
+  user-select: none;
+  width: 12px;
+  height: 12px;
+} */
+
+.page-footer > .author {
+  text-decoration: underline;
+}
+
+.page-footer > a:hover {
+  color: var(--primary-color);
+}
+</style>
+
+<footer class="page-footer">
+  <a href="https://github.com/codebyzack/blog/blob/master/LICENSE">©</a> 2023
+  <a class="author" href="https://zackdk.com">行者、空山</a>
+  <!-- <a class="author" href="/rss.xml"><img src="/rss.png" alt="rss" /></a>
+  <a class="author" href="https://github.com/codebyzack/blog"><img src="/github.png" alt="github" /></a> -->
+</footer>
+
+
+  <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
+
+
+
+</body></html>

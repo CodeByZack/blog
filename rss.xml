@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  version="2.0"
+>
+  <channel>
+    <title>
+      <![CDATA[行一度空山]]>
+    </title>
+    <description>
+      <![CDATA[zackdk 的个人写作.]]>
+    </description>
+    <link>https://zackdk.com</link>
+    <lastBuildDate>2023-02-08T06:03:53.194Z</lastBuildDate>
+    
+      <item>
+        <title>
+          <![CDATA[NAS-内网穿透的最终解决方案]]>
+        </title>
+        <description>
+          <![CDATA[## 起因  之前入手了台黑群晖 NAS ，折腾了一段时间，影视/相册/音乐都搭建好了服务，还有 docker 可以尝试各种服务，家里内网下使用还是很爽的，至少没了烦人的广告了。现在想在外网也能使用某些 NAS 上的服务，然后就折腾起了内网穿透这一块的东西。  心理路程如下：  1. **公网 IP...]]>
+        </description>
+        <link>https://zackdk.com/WEB/NAS相关/NAS-内网穿透的最终解决方案</link>
+        <guid isPermaLink="false">WEB/NAS相关/NAS-内网穿透的最终解决方案</guid>
+        <pubDate>2023-01-31T10:00:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[React 里引起 rernder 的几种情况]]>
+        </title>
+        <description>
+          <![CDATA[React 组件的生命周期大概是这样：  `mount -&gt; init-render -&gt; re-render -&gt; unmount`  在线demo。可对照着查看。  &lt;iframe src=&#34;https://stackblitz.com/edit/rerender-in-react?embed=...]]>
+        </description>
+        <link>https://zackdk.com/WEB/React相关/React 里引起 rernder 的几种情况</link>
+        <guid isPermaLink="false">WEB/React相关/React 里引起 rernder 的几种情况</guid>
+        <pubDate>2023-01-31T09:55:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[使用 Esbuild 在浏览器内编译 React]]>
+        </title>
+        <description>
+          <![CDATA[## 为什么要在浏览器内编译 React ?  博客编写时需要实时预览，使用的 MDX 需要经过编译，预览则采用了 iframe 进行预览，所以我需要把 MDX 编译成 JavaScript ，放到 iframe 里。  ## esbuild 怎么跑在浏览器内的 ?  esbuild 提供了 was...]]>
+        </description>
+        <link>https://zackdk.com/WEB/React相关/使用 Esbuild 在浏览器内编译 React</link>
+        <guid isPermaLink="false">WEB/React相关/使用 Esbuild 在浏览器内编译 React</guid>
+        <pubDate>2023-01-31T09:51:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[2022-阅读书单]]>
+        </title>
+        <description>
+          <![CDATA[## 阅读书单  - [x] [《与拉玛相会》](https://zh.wikipedia.org/wiki/%E8%88%87%E6%8B%89%E7%91%AA%E7%9B%B8%E6%9C%83) - [x] [《神们自己》](https://book.douban.com/subject/2...]]>
+        </description>
+        <link>https://zackdk.com/LIFE/阅读/2022-阅读书单</link>
+        <guid isPermaLink="false">LIFE/阅读/2022-阅读书单</guid>
+        <pubDate>2022-04-02T10:42:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[TypeScript入门-基础类型]]>
+        </title>
+        <description>
+          <![CDATA[## 基础类型  ### 原始值类型  原始值类型，ts 会自动推导出来。  类型语法：string，number，boolean  ```typescript const a: string = &#39;hello ts&#39;; const b: number = 2; const c: boolean =...]]>
+        </description>
+        <link>https://zackdk.com/WEB/TypeScript相关/TypeScript入门</link>
+        <guid isPermaLink="false">WEB/TypeScript相关/TypeScript入门</guid>
+        <pubDate>2021-06-15T20:13:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[质数因子]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;C36aa&#34;&gt;&lt;/a&gt;  ## 定义  **质数** 是一个比 `1` 大的整数，且 **不能**由其它整数相乘得出。前几个质数是: `2`, `3`, `5`, `7`, `11`, `13`, `17`, `19`,依此类推。  如果我们**能**通过其它整数相乘得出，我们则称...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript算法学习/质数因子</link>
+        <guid isPermaLink="false">WEB/JavaScript算法学习/质数因子</guid>
+        <pubDate>2020-12-25T16:54:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[斐波那契数列]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;TauCK&#34;&gt;&lt;/a&gt;  ## 定义  在数学中，斐波那契数是以下整数序列（称为斐波那契数列）中的数字，其特征在于前两个数字之后的每个数字都是前两个数字的和：  `0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...`  边长为连续斐波...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript算法学习/斐波那契数列</link>
+        <guid isPermaLink="false">WEB/JavaScript算法学习/斐波那契数列</guid>
+        <pubDate>2020-12-25T16:33:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[位运算]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;0c23827b&#34;&gt;&lt;/a&gt;  #### Get Bit  该方法向右移动目标位到最右边，即位数组的第0个位置上。然后在该数上与形如 `0001`的二进制形式的数进行`ADD`操作。这会清理掉除了目标位的所有其它位的数据。如果目标位是1，那么结果就是`1`，反之，结果是`0`;  ...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript算法学习/位运算</link>
+        <guid isPermaLink="false">WEB/JavaScript算法学习/位运算</guid>
+        <pubDate>2020-12-25T15:50:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[CSS布局之弹性布局 FLEX]]>
+        </title>
+        <description>
+          <![CDATA[flex容器有两条轴一条叫**主轴**，另一条叫**交叉轴**，与**主轴**垂直。主轴要么横向，要么纵向，可以用**flex-direction**来切换。  ![](../assets/zyeezs/1608169716977-42be2cc6-309b-4051-97a1-19423f8dee...]]>
+        </description>
+        <link>https://zackdk.com/WEB/CSS相关/CSS布局之FLEX</link>
+        <guid isPermaLink="false">WEB/CSS相关/CSS布局之FLEX</guid>
+        <pubDate>2020-12-16T17:41:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[自己动手简单实现一个简单版本的 Redux]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;1OYaY&#34;&gt;&lt;/a&gt;  ## 基本使用  基本使用一般有以下几个步骤：  1. 使用createStore创建一个store 2. 使用subscribe订阅store的更新 3. 在订阅更新的callback中：  a. 使用getState获取当前state b. 从完整的s...]]>
+        </description>
+        <link>https://zackdk.com/WEB/React相关/自己动手简单实现一个简单版本的 Redux</link>
+        <guid isPermaLink="false">WEB/React相关/自己动手简单实现一个简单版本的 Redux</guid>
+        <pubDate>2020-09-28T16:58:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[深入Fiber，全面了解React中新的算法Reconciliation]]>
+        </title>
+        <description>
+          <![CDATA[翻译仅供自己参考，请阅读原文 原文链接：&lt;https://indepth.dev/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react/&gt;  ![](../assets/gm1iad/159823578...]]>
+        </description>
+        <link>https://zackdk.com/WEB/React相关/深入Fiber，全面了解React中新的算法Reconciliation</link>
+        <guid isPermaLink="false">WEB/React相关/深入Fiber，全面了解React中新的算法Reconciliation</guid>
+        <pubDate>2020-08-24T10:21:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[虚拟DOM的一些概念]]>
+        </title>
+        <description>
+          <![CDATA[## 虚拟dom的由来  虚拟dom最开始是出现在react里的，因为当时facebook想把后端的模板迁移到js里，然后就有了jsx。但是在处理更新的时候需要手动去操作dom（把模板翻译成真实dom），传统 DOM API 细节又太多，操作复杂，所以就很容易出现 Bug，而且代码难以维护。 然后就...]]>
+        </description>
+        <link>https://zackdk.com/WEB/React相关/虚拟DOM的一些概念</link>
+        <guid isPermaLink="false">WEB/React相关/虚拟DOM的一些概念</guid>
+        <pubDate>2020-08-18T16:22:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[HTTP强缓存 协商缓存]]>
+        </title>
+        <description>
+          <![CDATA[缓存，首先肯定是在第一次访问之后的事。  第一次访问网页，要显示完整的网页需要加载很多 诸如css/js/html/图片等资源文件。每一个文件都需要经过你的电脑然后各种各样的中间服务器到达最后的资源服务器，不用说也知道这是需要花费一定时间的，加上资源文件这么多，所以第一次打开网页，你需要等一段时间才...]]>
+        </description>
+        <link>https://zackdk.com/WEB/HTTP相关/HTTP强缓存 协商缓存</link>
+        <guid isPermaLink="false">WEB/HTTP相关/HTTP强缓存 协商缓存</guid>
+        <pubDate>2020-02-18T16:26:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[打造你自己的React（翻译）]]>
+        </title>
+        <description>
+          <![CDATA[特别声明：该翻译仅供自己参考。如有兴趣请阅读原文。[原文地址](https://pomb.us/build-your-own-react/)  我们将依照React的架构，构造一个精简版的React，主要包括下面的内容：  1. createElement函数 2. render函数 3. Conc...]]>
+        </description>
+        <link>https://zackdk.com/WEB/React相关/打造你自己的React（翻译）</link>
+        <guid isPermaLink="false">WEB/React相关/打造你自己的React（翻译）</guid>
+        <pubDate>2020-01-02T09:18:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[从源头理解JavaScript中的闭包问题]]>
+        </title>
+        <description>
+          <![CDATA[## 1.定义  &gt; 函数与对其状态即**词法环境**（**lexical environment**）的引用共同构成**闭包**（**closure**）。[mdn](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures)...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript相关/JS知识点之神奇的闭包</link>
+        <guid isPermaLink="false">WEB/JavaScript相关/JS知识点之神奇的闭包</guid>
+        <pubDate>2019-12-30T13:48:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[前端路由History/Hash原理初窥]]>
+        </title>
+        <description>
+          <![CDATA[在传统的多页面时代，网页都是请求一个url，然后后端生成一个完整的html文档，返回给前端。 每次url改变都意味着页面刷新，重新加载新的html文档。这个时候所有路由都是后端控制的。  随着前端技术的发展，前端可以用ajax请求后端数据，便出现了单页面应用。所谓单页面应用，就是只在开始加载一次ht...]]>
+        </description>
+        <link>https://zackdk.com/WEB/杂项/前端路由</link>
+        <guid isPermaLink="false">WEB/杂项/前端路由</guid>
+        <pubDate>2019-11-11T10:22:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[浏览器端的的事件流]]>
+        </title>
+        <description>
+          <![CDATA[### 事件传递的方向  **冒泡阶段 和 捕获阶段**  事件最开始由window接收到，从顶层往下传递，一层一层直到传递到事件的触发元素，这一阶段称之为捕获阶段。  然后从子元素开始冒泡事件，然后传递给父元素，一层一层往外传。传回到window,这一阶段称之为冒泡阶段。  ![image.png...]]>
+        </description>
+        <link>https://zackdk.com/WEB/HTML相关/浏览器端的的事件流</link>
+        <guid isPermaLink="false">WEB/HTML相关/浏览器端的的事件流</guid>
+        <pubDate>2019-08-07T09:56:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[JS知识点之Generator执行异步任务]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;c8ff2c48&#34;&gt;&lt;/a&gt;  ### Generator基本的语法  ```javascript function* a(){  console.log(&#39;hello generator&#39;); } var a1 = a();//这里不会执行函数内部任何代码，只会返回一个迭代器 a...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript相关/JS知识点之Generator执行异步任务</link>
+        <guid isPermaLink="false">WEB/JavaScript相关/JS知识点之Generator执行异步任务</guid>
+        <pubDate>2019-07-03T09:38:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[Vue响应式原理]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;JNKp2&#34;&gt;&lt;/a&gt;  ## 先看看vue的响应式  vue的响应式是指，当数据发生改变的时候，会自动去通知使用到该数据的代码。比如View，然后View就可以自动更新了。像下面这样：  ```vue &lt;div id=&#34;root&#34;&gt;{{text}}&lt;/div&gt;  &lt;script&gt;...]]>
+        </description>
+        <link>https://zackdk.com/WEB/Vue相关/Vue响应式原理</link>
+        <guid isPermaLink="false">WEB/Vue相关/Vue响应式原理</guid>
+        <pubDate>2019-07-02T09:39:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[JS中Promise的使用问题]]>
+        </title>
+        <description>
+          <![CDATA[这里只是记录对promise的一些疑惑点，不会具体说promise是什么东西，或者怎么使用。  &lt;a name=&#34;Qhswp&#34;&gt;&lt;/a&gt;  ## Promise的then的两个参数。  then有两个入参，为两个函数，如果你传其它类型的值进去，会被忽略掉。 比如 `promise.then(1,2)...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript相关/JS中Promise的使用问题</link>
+        <guid isPermaLink="false">WEB/JavaScript相关/JS中Promise的使用问题</guid>
+        <pubDate>2019-06-04T08:45:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[前端打包工具 Webpack 入门教程]]>
+        </title>
+        <description>
+          <![CDATA[![](../assets/omnvf8/1554173071570-3d99c43c-f0b9-4f16-ade0-de832a7fba5f.png)  &lt;a name=&#34;4e20f1f8&#34;&gt;&lt;/a&gt;  ### 什么是 webpack  webpack 可以看做是模块打包机：他做的事情是，分析你的...]]>
+        </description>
+        <link>https://zackdk.com/WEB/开发环境相关/【转载】Webpack入门</link>
+        <guid isPermaLink="false">WEB/开发环境相关/【转载】Webpack入门</guid>
+        <pubDate>2019-04-02T10:42:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[JS里继承相关的东西]]>
+        </title>
+        <description>
+          <![CDATA[一直没去看es6的class关键字，按理来说从java转过来的应该更习惯于class这种语法糖的。但深入了解JavaScript过后，发现js里的类和java里的类是有本质差异的。所以更倾向于使用es5，更能理解js这种语言背后的东西。    ## ES5的类和继承  JavaScript里是没有其...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript相关/JS里继承相关的东西</link>
+        <guid isPermaLink="false">WEB/JavaScript相关/JS里继承相关的东西</guid>
+        <pubDate>2019-03-18T14:40:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[CSS我不知道的技巧]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;2889328f&#34;&gt;&lt;/a&gt;  ## 宽不定，宽高比固定 的图片  ```css .img-container{  position:relative;   height:0;   padding-bottom:100%;//控制高度和宽度一样 1：1   .img{    pos...]]>
+        </description>
+        <link>https://zackdk.com/WEB/CSS相关/CSS我不知道的技巧</link>
+        <guid isPermaLink="false">WEB/CSS相关/CSS我不知道的技巧</guid>
+        <pubDate>2019-03-15T15:08:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[VUE之自定义指令（Vue.directive）]]>
+        </title>
+        <description>
+          <![CDATA[vue有许多内部指令，比如v-on,v-bind,v-model。 当内部指令不能满足我们时，我们也可以定义一些属于自己的指令。 &lt;a name=&#34;39e43c78&#34;&gt;&lt;/a&gt;  ### 如何定义      // 注册一个全局自定义指令 `v-empty`     Vue.directive(&#39;em...]]>
+        </description>
+        <link>https://zackdk.com/WEB/Vue相关/VUE之自定义指令（Vue.directive）</link>
+        <guid isPermaLink="false">WEB/Vue相关/VUE之自定义指令（Vue.directive）</guid>
+        <pubDate>2019-03-13T11:02:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[HTML5之常用meta标签]]>
+        </title>
+        <description>
+          <![CDATA[## **charset**  示意：  作用： 声明文档使用的字符编码  ## **http-equiv**  通常和content一起使用，（我理解就是键值对一样的东西）  格式：  ```html &lt;meta http-equiv=&#34;属性值&#34; content=&#34;http-equiv属性值的内容...]]>
+        </description>
+        <link>https://zackdk.com/WEB/HTML相关/HTML5之常用meta标签</link>
+        <guid isPermaLink="false">WEB/HTML相关/HTML5之常用meta标签</guid>
+        <pubDate>2019-03-07T15:35:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[CSS之选择器权重]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;5dca4ecb&#34;&gt;&lt;/a&gt;  ## 选择器的种类  - !important;（覆盖所有样式） - 行内样式; - id选择器; - class,属性选择器（a\[href]）和伪类选择器（a:hover）; - 标签选择器和伪元素选择器（:before）;  除开importa...]]>
+        </description>
+        <link>https://zackdk.com/WEB/CSS相关/CSS之选择器权重</link>
+        <guid isPermaLink="false">WEB/CSS相关/CSS之选择器权重</guid>
+        <pubDate>2019-03-07T15:28:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[CSS之BFC]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;e4db8e92&#34;&gt;&lt;/a&gt;  ## BFC 概念  BFC 是什么呢？  BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于我们常说的普通流。  具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元...]]>
+        </description>
+        <link>https://zackdk.com/WEB/CSS相关/CSS之BFC</link>
+        <guid isPermaLink="false">WEB/CSS相关/CSS之BFC</guid>
+        <pubDate>2019-03-07T15:03:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[JavaScript之作用域]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;4705b884&#34;&gt;&lt;/a&gt;  ## 作用域  作用域（scope），程序设计概念，通常来说，一段程序代码中所用到的名字并不总是有效/可用的，而限定这个名字的可用性的代码范围就是这个名字的作用域。（来自百度百科）。  ***  &lt;a name=&#34;74835e2c&#34;&gt;&lt;/a&gt;  ##...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript相关/JavaScript之作用域</link>
+        <guid isPermaLink="false">WEB/JavaScript相关/JavaScript之作用域</guid>
+        <pubDate>2019-03-07T14:37:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[JS知识点之数据类型一览]]>
+        </title>
+        <description>
+          <![CDATA[## JavaScript中的变量类型有哪些？  ### 值类型：  字符串（string）、数值（number）、布尔值（boolean）、undefined   ### 引用类型：  对象（Object）、数组（Array）、函数（Function）   ## 标题值类型和引用类型的区别  ##...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript相关/JS知识点之数据类型一览</link>
+        <guid isPermaLink="false">WEB/JavaScript相关/JS知识点之数据类型一览</guid>
+        <pubDate>2019-03-07T14:33:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[react/vue 的差异]]>
+        </title>
+        <description>
+          <![CDATA[经常被问，react和vue的差异。其实最大差异在官网的自我介绍中，就已经很明显了。  &gt; React: A JavaScript library for building user interfaces.  &lt;a name=&#34;Xu24j&#34;&gt;&lt;/a&gt;  ##  &gt; Vue: The Progress...]]>
+        </description>
+        <link>https://zackdk.com/WEB/面试题记录/react_vue 的差异</link>
+        <guid isPermaLink="false">WEB/面试题记录/react_vue 的差异</guid>
+        <pubDate>2019-03-07T14:27:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[面试题记录]]>
+        </title>
+        <description>
+          <![CDATA[## 1.href 和 src的 区别  #### src是引入，用于替换当前元素；  src表示外部资源引入，用于替换当前元素，用在img，script，iframe等元素上，src是页面内容不可缺少的一部分。 在遇到src时浏览器会等待这一部分下载运行结束才会继续处理下面的网页，这也是为什么`&lt;...]]>
+        </description>
+        <link>https://zackdk.com/WEB/面试题记录/面试题记录</link>
+        <guid isPermaLink="false">WEB/面试题记录/面试题记录</guid>
+        <pubDate>2019-03-07T14:27:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[JS里各种循环总结]]>
+        </title>
+        <description>
+          <![CDATA[这篇文章起源于一道面试题，找出一个字符串中，出现次数最多的字符。面试题不难,正常思路是遍历字符串，统计下字符个数，再排个序，找出最大的。 可是可是，好久没手写代码的我，写不来for循环了，平时太依赖自动提示了，依赖调试工具了，都是写错了，然后看报错信息然后改就行。所以所以有了这篇文章。 &lt;a nam...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript相关/JS里各种循环总结</link>
+        <guid isPermaLink="false">WEB/JavaScript相关/JS里各种循环总结</guid>
+        <pubDate>2019-03-07T14:19:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[JS我不知道的技巧]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;5da89314&#34;&gt;&lt;/a&gt;  ## 最大值  ```javascript Math.max(10,2,33,55); //55 //针对数组 Math.max(...[10,2,33,55]); ```  &lt;a name=&#34;d93a8b48&#34;&gt;&lt;/a&gt;  ## 数组，字符串去重 ...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript相关/JS我不知道的技巧</link>
+        <guid isPermaLink="false">WEB/JavaScript相关/JS我不知道的技巧</guid>
+        <pubDate>2019-03-07T13:55:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[ES6之数组的扩展]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;0dd83c39&#34;&gt;&lt;/a&gt;  ### Array.from()  Array.from方法用于将两类对象转为真正的数组：类似数组的对象（array-like object）和可遍历（iterable）的对象（包括ES6新增的数据结构Set和Map）。      //类数组对象，即...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript相关/ES6之数组的扩展</link>
+        <guid isPermaLink="false">WEB/JavaScript相关/ES6之数组的扩展</guid>
+        <pubDate>2019-03-07T13:44:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[ES6之变量的解构赋值]]>
+        </title>
+        <description>
+          <![CDATA[解构赋值（Destructuring）：从数组和对象中提取值，对变量进行赋值。 &lt;a name=&#34;47f40e55&#34;&gt;&lt;/a&gt;  ## 数组的解构赋值  &lt;a name=&#34;704f29e0&#34;&gt;&lt;/a&gt;  ### 基本用法  ```javascript //基本用法 let [a, b, c] = [...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript相关/ES6之变量的解构赋值</link>
+        <guid isPermaLink="false">WEB/JavaScript相关/ES6之变量的解构赋值</guid>
+        <pubDate>2019-03-07T13:21:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[ES6之let const]]>
+        </title>
+        <description>
+          <![CDATA[在ES6之前，js只有全局作用域和函数作用域，声明变量一般用var，否则就是全局变量。 ES6，新增了块级作用域，声明变量多了两个关键字let,const。 &lt;a name=&#34;0665242f&#34;&gt;&lt;/a&gt;  ## 块级作用域  对于从安卓转到前端的我来说，ES5没有块级作用域，还是很容易造成代码理解...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript相关/ES6之let const</link>
+        <guid isPermaLink="false">WEB/JavaScript相关/ES6之let const</guid>
+        <pubDate>2019-03-07T13:14:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[重新使用Vuex]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;b8361951&#34;&gt;&lt;/a&gt;  ## Vuex是什么  **官方说法：**Vuex 是一个专为 Vue.js 应用程序开发的**状态管理模式**。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。 **状态管理模式：**把组件的共享状态抽取...]]>
+        </description>
+        <link>https://zackdk.com/WEB/Vue相关/重新使用Vuex</link>
+        <guid isPermaLink="false">WEB/Vue相关/重新使用Vuex</guid>
+        <pubDate>2019-03-07T13:05:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[JS知识点之作用域/执行上下文]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;r5OpT&#34;&gt;&lt;/a&gt;  ## 作用域（Scope）  &gt; 作用域（scope，或译作有效范围）是名字（name）与实体（entity）的绑定（binding）保持有效的那部分计算机程序。（[维基百科](https://zh.wikipedia.org/wiki/%E4%BD%9C...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript相关/JS知识点之作用域_执行上下文</link>
+        <guid isPermaLink="false">WEB/JavaScript相关/JS知识点之作用域_执行上下文</guid>
+        <pubDate>2000-01-01T00:00:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[JS知识点之原型/原型链那些事儿]]>
+        </title>
+        <description>
+          <![CDATA[&lt;a name=&#34;53582bdc&#34;&gt;&lt;/a&gt;  ## 原型（prototype）是什么？  原型并不神秘，它实际也就是一个对象或者是null。  JavaScript里每个对象都有一个与之相关连的原型，你可以通过访问对象的`__proto__`属性，或者使用`Object.getPrototype...]]>
+        </description>
+        <link>https://zackdk.com/WEB/JavaScript相关/JS知识点之原型_原型链那些事儿</link>
+        <guid isPermaLink="false">WEB/JavaScript相关/JS知识点之原型_原型链那些事儿</guid>
+        <pubDate>2000-01-01T00:00:00.000Z</pubDate>
+      </item>
+    
+      <item>
+        <title>
+          <![CDATA[React生命周期/及class对比hook组件]]>
+        </title>
+        <description>
+          <![CDATA[面试的时候突然被问到，我一时半会想不起系统的了。 后来去翻了翻官方文档。  感觉看这个图足够了。 &lt;http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/&gt;  看完图，还可以看看官方对每个周期的描述 &lt;https://react.d...]]>
+        </description>
+        <link>https://zackdk.com/WEB/React相关/React生命周期_及class对比hook组件</link>
+        <guid isPermaLink="false">WEB/React相关/React生命周期_及class对比hook组件</guid>
+        <pubDate>2000-01-01T00:00:00.000Z</pubDate>
+      </item>
+    
+  </channel>
+</rss>

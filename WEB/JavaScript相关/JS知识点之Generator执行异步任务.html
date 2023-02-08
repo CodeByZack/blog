@@ -1,0 +1,816 @@
+<!DOCTYPE html><html lang="zh-cn"><head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="行者、空山">
+<meta name="keywords" content="HTML,CSS,JavaScript,Web,React,Life">
+
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YT4Q3D1PMY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YT4Q3D1PMY');
+</script>
+
+<!-- open graph -->
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/535460b8cc6a91e6a240fa069c326796.png">
+
+<script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+<link rel="shortcut icon" type="image/png" href="/static/535460b8cc6a91e6a240fa069c326796.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body { 
+    --content-max-width: 48rem;
+
+    --primary-color: #616161;
+    --accent-color:  #ee0290;
+    --normal-color: #333;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --tertiary-color: #ddd;
+    --backgroud: rgb(255 255 255);
+
+    --btn-background: #e5e7eb;
+
+    --border-radius: 2px;
+    --transition-duration: 0.3s;
+
+    background-color: var(--backgroud);
+    transition: background-color var(--transition-duration);
+
+    font-family: Helvetica Neue,helvetica,arial,Heti Hei,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  html.dark > body{
+    background-color: #000;
+    --primary-color: #616161;
+    --accent-color:  #79ffe1;
+    --normal-color: #9ca3af;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --btn-background: #1f2937;
+    --tertiary-color: #ddd;
+    --backgroud: rgb(0 0 0);
+  }
+</style>
+
+
+  <title>JS知识点之Generator执行异步任务 - 行一度空山</title>
+  <meta name="description" content="<a name=&quot;c8ff2c48&quot;></a>  ### Generator基本的语法  ```javascript function* a(){  console.log('hello generator'); } var a1 = a();//这里不会执行函数内部任何代码，只会返回一个迭代器 a......">
+  <meta property="og:description" content="<a name=&quot;c8ff2c48&quot;></a>  ### Generator基本的语法  ```javascript function* a(){  console.log('hello generator'); } var a1 = a();//这里不会执行函数内部任何代码，只会返回一个迭代器 a......">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
+  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+</head>
+
+<body>
+  <style>
+  .page-header {
+    max-width: calc( var(--content-max-width) + 160px);
+    margin: 0 auto;
+    padding: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .page-header_button{
+    width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background-color: var(--btn-background);
+    border: none;
+    border-radius: 4px;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+
+  .page-header_button .theme-light{
+    display: initial;
+  }
+
+  .page-header_button .theme-dark{
+    display: none;
+  }
+
+  .dark .page-header_button .theme-dark{
+    display: initial;
+
+  }
+  .dark .page-header_button .theme-light{
+    display: none;
+  }
+
+  .page-header_theme{
+    width: 16px;
+    height: 16px;
+    color: var(--normal-color);
+  }
+
+  .page-header_nav > a{
+    color: var(--normal-color);
+    text-decoration: none;
+  }
+
+  .page-header_nav > a:hover{
+    color: var(--accent-color);
+    text-decoration: underline;
+
+  }
+
+  .page-header_nav > a + a{
+    margin-left: 8px;
+  }
+
+  .sticky-header{
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    transition: background-color .1 ease-in-out;
+  }
+
+
+
+</style>
+
+<header class="page-header sticky-header">
+  <button class="page-header_button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-light"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-dark"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+  </button>
+
+  <div class="page-header_nav">
+    <a href="/rss.xml">RSS</a>
+    <a href="https://github.com/codebyzack/blog">Github</a>
+    <a href="/">首页</a>
+  </div>
+
+</header>
+
+  <article>
+    <style>
+.article-header {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding: 0 30px;
+}
+
+.article-title {
+  color: var(--normal-color);
+  font-size: 32px;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.article-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-publish-time {
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-family: common_font;
+}
+
+.article-info_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin-top: 20px;
+}
+
+.article-info_box > .article-info{
+  display: flex;
+  align-items: center;
+}
+
+.article-info_box > .article-info > img{
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+</style>
+
+<section class="article-header">
+  <h1 class="article-title">
+    <a href="//WEB/JavaScript相关/JS知识点之Generator执行异步任务.md">JS知识点之Generator执行异步任务</a>
+  </h1>
+  <div class="article-info_box">
+    <div class="article-info">
+      <img src="/static/535460b8cc6a91e6a240fa069c326796.png" alt="logo">
+      <span>行者、空山/2019-07-03 09:38</span>
+    </div>
+    <div class="article-readtime">
+      27 min read 
+    </div>
+  </div>
+</section>
+
+    <style>
+  code {
+    font-family: 'Fira Code' !important;
+  }
+
+  article {
+    --article-space: 30px;
+  }
+
+  article a {
+    color: var(--link-color);
+    text-decoration: none;
+    /* text-decoration-color: var(--primary-color); */
+  }
+  article a:hover{
+    text-decoration: underline;
+  }
+
+  article h2, article h3, article h4, article h5, article h6 {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 0 auto;
+    line-height: 1.5;
+    color: var(--normal-color);
+  }
+
+  article h2 {
+    margin-top: 28px;
+    font-size: 28px;
+  }
+
+  article h3 {
+    margin-top: 26px;
+    font-size: 25px;
+  }
+
+  article h4 {
+    margin-top: 24px;
+    font-size: 22px;
+  }
+
+  article h5 {
+    margin-top: 22px;
+    font-size: 19px;
+  }
+
+  article h6 {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  article p {
+    max-width: var(--content-max-width);
+    margin: 15px auto;
+    padding: 0 30px;
+    color: var(--normal-color);
+  }
+
+  article p code, article ul code {
+    padding: 0 4px;
+    /* border-radius: var(--border-radius); */
+    /* background: rgba(237, 106, 94, 0.3); */
+    color: var(--accent-color);
+  }
+
+  article pre {
+    max-width: var(--content-max-width) !important;
+    margin: 15px auto !important;
+    font-size: 14px !important;
+    box-sizing: border-box;
+    border-radius: var(--border-radius) !important;
+    tab-size: 2 !important;
+    padding: 0 !important;
+  }
+
+  article pre code {
+    display: block;
+    margin: 20px 30px !important;
+    overflow: auto !important;
+    font-size: inherit !important;
+  }
+
+  article hr {
+    max-width: var(--content-max-width);
+    margin: 40px auto;
+    padding: 0 var(--article-space);
+    border: none;
+  }
+
+  article hr::after{
+    content: '';
+    display: block;
+    height: 1px;
+    background-color:var(--tertiary-color);
+  }
+
+  article blockquote {
+    max-width: var(--content-max-width);
+    padding: 0 var(--article-space);
+    margin: 15px auto;
+    position: relative;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--secondary-color);
+  }
+
+  .table-container {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .table-container table {
+    border-collapse: collapse;
+  }
+
+  .table-container th, .table-container td {
+    font-size: 14px;
+    color: var(--normal-color);
+    border: 1px solid var(--tertiary-color);
+    padding: 10px;
+    text-align: left;
+  }
+
+  .table-container th {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  article blockquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary-color);
+  }
+
+  article blockquote p {
+    font-size: 16px;
+    color: inherit;
+    max-width: unset;
+    padding: 0;
+    margin: 0 0 0 30px;
+  }
+
+  article ul,
+  article ol {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+    color: var(--normal-color);
+    line-height: 1.5;
+  }
+
+  article ol {
+    counter-reset: li-count;
+  }
+  
+  article ul li, article ol li {
+    display: block;
+    margin: 5px 0;
+    position: relative;
+  }
+
+  article ol li {
+    counter-increment: li-count;
+  }
+
+  article ul li::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+
+    margin-right: 10px;
+
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+  }
+
+  article ol li::before {
+    content: counter( li-count) '. ';
+    color: var(--primary-color);
+  }
+
+  article figcaption {
+    font-size: 12px;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  .figure-img {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-img img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+  }
+  
+  .figure-video {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-video video {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .figure-iframe {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .figure-iframe iframe {
+    display: block;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    height: 640px;
+    border: 1px solid var(--tertiary-color);
+    border-radius: var(--border-radius);
+  }
+
+</style>
+
+<section>
+  <p><a name="c8ff2c48"></a></p>
+<h3>Generator基本的语法</h3>
+<pre><code class="language-javascript">function* a(){
+	console.log('hello generator');
+}
+var a1 = a();//这里不会执行函数内部任何代码，只会返回一个迭代器
+a1.next();//这里会打印hello generator，返回值为{value:undefined,done:true}
+function* b(){
+    yield 1;
+    yield 2;
+    return 3;
+}
+var b1 = b();
+b1.next();//{value:1,done:false}
+b1.next();//{value:2,done:false}
+b1.next();//{value:3,done:true}
+</code></pre>
+<p><a name="9fdc86c9"></a></p>
+<h4>generator可以向外输出数据</h4>
+<pre><code class="language-javascript">function* b(){
+    yield 1;
+    yield 2;
+    return 3;
+}
+var b1 = b();
+b1.next();//{value:1,done:false}
+b1.next();//{value:2,done:false}
+b1.next();//{value:3,done:true}
+</code></pre>
+<p>其中value的值 有几种情况。</p>
+<ol>
+<li>遇到yield ：value为 yield后表达式的值，done为false。</li>
+<li>遇到return ：value为 return 后表达式的值，done为true。</li>
+<li>函数执行完毕，没有return ： value为undfined，done为true。</li>
+</ol>
+<p><a name="a53b1d21"></a></p>
+<h4>generator可以接受外部的输入数据</h4>
+<p>yield本身并没有返回值，但next可以接收一个参数。
+该参数会被当作上一个yield的返回值。</p>
+<pre><code class="language-javascript">function* c(){
+    let a = yield 1;
+    let b = yield a;
+	return b;
+}
+var c1 = c();
+c1.next();//{value:1,done:false}
+c1.next(2);//{value:2,done:false}
+c1.next(3);//{value:3,done:true}
+</code></pre>
+<p><a name="d3cb8f20"></a></p>
+<h4>generator特别的地方</h4>
+<ol>
+<li>可控制代片段的暂停与执行，遇到yield暂停执行代码，外部手动调用next恢复执行。</li>
+<li>对于每一个代码段，你可以通过next函数的返回值获得代码段的输出，通过next函数传参，向代码段输入参数。</li>
+<li>generator函数调用后，返回的是一个迭代器，迭代器每一次迭代都是执行某段代码片段，获得返回值。</li>
+</ol>
+<p><a name="ceed1589"></a></p>
+<h3>generator的执行器</h3>
+<p>generator遇到yield后回暂停执行，并不会自动恢复执行，恢复执行必须手动调用next。像下面这样。</p>
+<pre><code class="language-javascript">function *main(){
+    let a = yield 1 + 2;
+    let b = yield 3 + a;
+    let c = yield 7 + b;
+	console.log(c);
+}
+//这里生成迭代器，并不会执行任何函数内的代码
+let m = main();
+//执行到第一个yield表达式
+let resObj = m.next();//{value:3,done:false}
+//执行到第二个yield表达式,并把上一个yield获得的值传入，作为yield的返回值
+resObj = m.next(resObj.value);//{value:6,done:false}
+resObj = m.next(resObj.value);//{value:13,done:false}
+</code></pre>
+<p>观察上面的表达式，可以看到，手动调用next，显得很繁琐，而且其中有重复的逻辑。
+把next获得的返回值作为下一次next的入参，传进generator内部。</p>
+<p><a name="adeca386"></a></p>
+<h4>同步任务的自动执行</h4>
+<p>所以可以写一个自动执行器，像下面这样</p>
+<pre><code class="language-javascript">function makeCall(num){
+    console.log(`${num} 进行*2操作`)
+    return num * 2
+}
+function run(generator){
+    let it = generator();
+    let resObj = it.next();
+    while(!resObj.done){
+        resObj = it.next(resObj.value);
+    }
+}
+function *main(){
+    let a = yield makeCall(2);
+    let b = yield makeCall(a);
+    let c = yield makeCall(b);
+	console.log(c);
+}
+run(main);
+</code></pre>
+<p>因为每一次判断还可以迭代的时候，是立马执行下一个it.next()的。所以这个执行器是只能执行同步的任务。假如任务是异步的，是没法一个接一个的执行的。</p>
+<p><a name="c3846e8c"></a></p>
+<h4>异步任务的自动执行</h4>
+<p>异步任务，简单理解就是，发请求，请求回来过后会有一个callback来处理返回结果。
+有些时候下一个异步任务需要依赖于上一个异步任务的返回值。这样的依赖一多，就会形成callback hell了。</p>
+<pre><code class="language-javascript">function makeCall(arg,callback){
+    console.log(`${arg} 进行*2操作,并在1s后通知操作完成`)
+	setTimeout(()=&gt;{callback(arg*2)},1000);
+}
+//经典的callback形式
+makeCall(111,(arg)=&gt;{
+	console.log(arg)
+});
+//经典的回掉地狱
+makeCall(111,(res)=&gt;{
+	console.log(res)
+	makeCall(res,(res2)=&gt;{
+    	console.log(res2);
+	})
+});
+</code></pre>
+<p><strong>利用thunk结合generator处理异步任务：</strong>
+原有的makeCall函数，callback是作为函数参数传入的，异步的请求和返回结果处理在一个函数，没有分开。在结合yield时候很不方便，或者说复杂。
+所以这里需要对callback形式做一些改变，引入thunk，thunk函数介绍<a href="http://es6.ruanyifeng.com/#docs/generator-async#Thunk-%E5%87%BD%E6%95%B0">链接</a></p>
+<pre><code class="language-javascript">function makeCall(arg,callback){
+    console.log(`${arg} 进行*2操作,并在1s后通知操作完成`)
+	setTimeout(()=&gt;{callback(arg*2)},1000);
+}
+//改造makeCall为thunk形式
+function makeCallThunk (arg) {
+    return function (callback) {
+        return makeCall(arg, callback);
+    };
+};
+//调用应该像下面这样
+makeCallThunk(arg)(cb);
+</code></pre>
+<p>函数thunk化后，如果需要发起请求，需要调用两次。
+第一次调用返回的是函数
+第二次调用才会真正发起请求
+有了thunk函数，写一个针对异步操作的自动执行器就容易多了</p>
+<pre><code class="language-javascript">//thunk版本的自动执行器
+function run(fn) {
+    let it = fn();
+    function next(data) {
+        var resObj = it.next(data);
+        if (resObj.done) return;
+        resObj.value(next);
+    }
+    next();
+}
+//可以仔细看下面这个代码，和执行同步任务的时候并没有什么差别。
+function *makeCallGenerator(){
+    let res = yield makeCallThunk(2);
+    let res2 = yield makeCallThunk(res);
+    let res3 = yield makeCallThunk(res2);
+    console.log(res3)
+}
+run(makeCallGenerator)
+</code></pre>
+<p><strong>利用promise结合generator处理异步任务：</strong>
+promise都比较熟悉了，先给makeCall包装一层promise。</p>
+<pre><code class="language-javascript">function makeCall(arg,callback){
+    console.log(`${arg} 进行*2操作,并在1s后通知操作完成`)
+setTimeout(()=&gt;{callback(arg*2)},1000);
+}
+//makeCall 包装一层promise
+function makeCallPromise(arg){
+	return new Promise((resolve,reject)=&gt;{
+		makeCall(arg,(res)=&gt;{
+			if(res&gt;1000){reject(res);}else{resolve(res);}
+		});
+	})
+}
+//promise形式调用。
+makeCallPromise(111)
+	.then((res)=&gt;{console.log(res)});
+//promise让回调减少了一些层级，好看一些了。
+makeCallPromise(111)
+	.then((res)=&gt;makeCallPromise(222))
+	.then((res)=&gt;console.log(res));
+</code></pre>
+<p>promise版本的执行器</p>
+<pre><code class="language-javascript">function* makeCallGenerator(){
+let res = yield makeCallPromise(2);
+    let res2 = yield makeCallPromise(res);
+    let res3 = yield makeCallPromise(res2);
+    console.log(res3)
+}
+//执行器
+function run(gen){
+	let it = gen();
+	function next(data){
+    	let resObj = it.next(data);
+        if(resObj.done)return;
+        resObj.value.then((res)=&gt;next(res));
+	}
+    next();
+}
+run(makeCallGenerator)
+</code></pre>
+<p><a name="23abcbd1"></a></p>
+<h3>两个问题</h3>
+<ol>
+<li><strong>使用generator执行异步操作的好处。</strong></li>
+<li><strong>与async，await的差异。</strong></li>
+</ol>
+<p><a name="04b6391b"></a></p>
+<h4>使用generator执行异步操作的好处。</h4>
+<pre><code class="language-javascript">//异步任务
+function* makeCallGenerator(){
+	let res = yield makeCallPromise(2);
+    let res2 = yield makeCallPromise(res);
+    let res3 = yield makeCallPromise(res2);
+    console.log(res3)
+}
+run(makeCallGenerator)
+console.log(1);
+//同步任务
+function *main(){
+    let a = yield makeCall(2);
+    let b = yield makeCall(a);
+    let c = yield makeCall(b);
+	console.log(c);
+}
+run(main);
+console.log(1);
+</code></pre>
+<p>抛开generator的执行器不看，异步任务和同步任务的写法几乎一模一样。</p>
+<p><a name="923a5f2b"></a></p>
+<h4>与async，await的差异。</h4>
+<pre><code class="language-javascript">//generator
+function* makeCallGenerator(){
+	let res = yield makeCallPromise(2);
+    let res2 = yield makeCallPromise(res);
+    let res3 = yield makeCallPromise(res2);
+    console.log(res3)
+}
+run(makeCallGenerator)
+//async await
+async function makeCallCopy(){
+    let res = await makeCallPromise(2);
+    let res2 = await makeCallPromise(res);
+    let res3 = await makeCallPromise(res2);
+    console.log(res3)
+}
+makeCallCopy();
+</code></pre>
+<p>写法几乎一模一样，只不过 * 号变成了 async，yield 变成了 await。
+但async/await执行器是自带的，generator执行器需要自己去手写，但也意味着更多可能。
+另外 async/await 默认是 使用的 generator + promise的形式执行异步任务，是这个模式之上的语法糖，能很好的解决异步任务。
+但generator除了结合promise 和可以结合类似thunk之类的去执行异步任务。 <a name="end"></a></p>
+<h1></h1>
+
+</section>
+
+    
+  </article>
+  
+<style>
+  .article-actions {
+    max-width: var(--content-max-width);
+
+    display: flex;
+    align-items: center;
+
+    margin: 40px auto;
+    padding: 0 30px;
+
+    font-family: common_font;
+    color: var(--normal-color);
+  }
+
+  .article-actions_action:not(:last-child)::after {
+    content: '·\00a0';
+  }
+
+  .article-actions_action > a {
+    color: inherit;
+    text-decoration-color: var(--primary-color);
+  }
+
+  @media (max-width: 520px) {
+    .article-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .article-actions_action::before {
+      content: '·';
+    }
+
+    .article-actions_action:not(:last-child)::after {
+      content: '';
+    }
+  }
+</style>
+
+<div class="article-actions">
+  <span class="article-actions_action">
+    使用 <a href="https://github.com/codebyzack/blog/discussions">Discussions</a> 讨论
+  </span>
+  <span class="article-actions_action">
+    在 <a href="https://github.com/codebyzack/blog/edit/master/articles//WEB/JavaScript相关/JS知识点之Generator执行异步任务.md/index.md">Github</a> 上编辑
+  </span>
+</div>
+
+  <style>
+.page-footer {
+  font-size: 12px;
+  max-width: var(--content-max-width);
+  margin: 40px auto;
+  padding: 0 30px;
+  color: var(--secondary-color);
+}
+
+.page-footer > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* .page-footer > a > img{
+  user-select: none;
+  width: 12px;
+  height: 12px;
+} */
+
+.page-footer > .author {
+  text-decoration: underline;
+}
+
+.page-footer > a:hover {
+  color: var(--primary-color);
+}
+</style>
+
+<footer class="page-footer">
+  <a href="https://github.com/codebyzack/blog/blob/master/LICENSE">©</a> 2023
+  <a class="author" href="https://zackdk.com">行者、空山</a>
+  <!-- <a class="author" href="/rss.xml"><img src="/rss.png" alt="rss" /></a>
+  <a class="author" href="https://github.com/codebyzack/blog"><img src="/github.png" alt="github" /></a> -->
+</footer>
+
+
+  <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
+
+
+
+</body></html>

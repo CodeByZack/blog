@@ -1,0 +1,668 @@
+<!DOCTYPE html><html lang="zh-cn"><head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="行者、空山">
+<meta name="keywords" content="HTML,CSS,JavaScript,Web,React,Life">
+
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YT4Q3D1PMY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YT4Q3D1PMY');
+</script>
+
+<!-- open graph -->
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/535460b8cc6a91e6a240fa069c326796.png">
+
+<script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+<link rel="shortcut icon" type="image/png" href="/static/535460b8cc6a91e6a240fa069c326796.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body { 
+    --content-max-width: 48rem;
+
+    --primary-color: #616161;
+    --accent-color:  #ee0290;
+    --normal-color: #333;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --tertiary-color: #ddd;
+    --backgroud: rgb(255 255 255);
+
+    --btn-background: #e5e7eb;
+
+    --border-radius: 2px;
+    --transition-duration: 0.3s;
+
+    background-color: var(--backgroud);
+    transition: background-color var(--transition-duration);
+
+    font-family: Helvetica Neue,helvetica,arial,Heti Hei,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  html.dark > body{
+    background-color: #000;
+    --primary-color: #616161;
+    --accent-color:  #79ffe1;
+    --normal-color: #9ca3af;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --btn-background: #1f2937;
+    --tertiary-color: #ddd;
+    --backgroud: rgb(0 0 0);
+  }
+</style>
+
+
+  <title>JS知识点之作用域/执行上下文 - 行一度空山</title>
+  <meta name="description" content="<a name=&quot;r5OpT&quot;></a>  ## 作用域（Scope）  > 作用域（scope，或译作有效范围）是名字（name）与实体（entity）的绑定（binding）保持有效的那部分计算机程序。（[维基百科](https://zh.wikipedia.org/wiki/%E4%BD%9C......">
+  <meta property="og:description" content="<a name=&quot;r5OpT&quot;></a>  ## 作用域（Scope）  > 作用域（scope，或译作有效范围）是名字（name）与实体（entity）的绑定（binding）保持有效的那部分计算机程序。（[维基百科](https://zh.wikipedia.org/wiki/%E4%BD%9C......">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
+  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+</head>
+
+<body>
+  <style>
+  .page-header {
+    max-width: calc( var(--content-max-width) + 160px);
+    margin: 0 auto;
+    padding: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .page-header_button{
+    width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background-color: var(--btn-background);
+    border: none;
+    border-radius: 4px;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+
+  .page-header_button .theme-light{
+    display: initial;
+  }
+
+  .page-header_button .theme-dark{
+    display: none;
+  }
+
+  .dark .page-header_button .theme-dark{
+    display: initial;
+
+  }
+  .dark .page-header_button .theme-light{
+    display: none;
+  }
+
+  .page-header_theme{
+    width: 16px;
+    height: 16px;
+    color: var(--normal-color);
+  }
+
+  .page-header_nav > a{
+    color: var(--normal-color);
+    text-decoration: none;
+  }
+
+  .page-header_nav > a:hover{
+    color: var(--accent-color);
+    text-decoration: underline;
+
+  }
+
+  .page-header_nav > a + a{
+    margin-left: 8px;
+  }
+
+  .sticky-header{
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    transition: background-color .1 ease-in-out;
+  }
+
+
+
+</style>
+
+<header class="page-header sticky-header">
+  <button class="page-header_button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-light"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-dark"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+  </button>
+
+  <div class="page-header_nav">
+    <a href="/rss.xml">RSS</a>
+    <a href="https://github.com/codebyzack/blog">Github</a>
+    <a href="/">首页</a>
+  </div>
+
+</header>
+
+  <article>
+    <style>
+.article-header {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding: 0 30px;
+}
+
+.article-title {
+  color: var(--normal-color);
+  font-size: 32px;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.article-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-publish-time {
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-family: common_font;
+}
+
+.article-info_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin-top: 20px;
+}
+
+.article-info_box > .article-info{
+  display: flex;
+  align-items: center;
+}
+
+.article-info_box > .article-info > img{
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+</style>
+
+<section class="article-header">
+  <h1 class="article-title">
+    <a href="//WEB/JavaScript相关/JS知识点之作用域_执行上下文.md">JS知识点之作用域/执行上下文</a>
+  </h1>
+  <div class="article-info_box">
+    <div class="article-info">
+      <img src="/static/535460b8cc6a91e6a240fa069c326796.png" alt="logo">
+      <span>行者、空山/2000-01-01</span>
+    </div>
+    <div class="article-readtime">
+      21 min read 
+    </div>
+  </div>
+</section>
+
+    <style>
+  code {
+    font-family: 'Fira Code' !important;
+  }
+
+  article {
+    --article-space: 30px;
+  }
+
+  article a {
+    color: var(--link-color);
+    text-decoration: none;
+    /* text-decoration-color: var(--primary-color); */
+  }
+  article a:hover{
+    text-decoration: underline;
+  }
+
+  article h2, article h3, article h4, article h5, article h6 {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 0 auto;
+    line-height: 1.5;
+    color: var(--normal-color);
+  }
+
+  article h2 {
+    margin-top: 28px;
+    font-size: 28px;
+  }
+
+  article h3 {
+    margin-top: 26px;
+    font-size: 25px;
+  }
+
+  article h4 {
+    margin-top: 24px;
+    font-size: 22px;
+  }
+
+  article h5 {
+    margin-top: 22px;
+    font-size: 19px;
+  }
+
+  article h6 {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  article p {
+    max-width: var(--content-max-width);
+    margin: 15px auto;
+    padding: 0 30px;
+    color: var(--normal-color);
+  }
+
+  article p code, article ul code {
+    padding: 0 4px;
+    /* border-radius: var(--border-radius); */
+    /* background: rgba(237, 106, 94, 0.3); */
+    color: var(--accent-color);
+  }
+
+  article pre {
+    max-width: var(--content-max-width) !important;
+    margin: 15px auto !important;
+    font-size: 14px !important;
+    box-sizing: border-box;
+    border-radius: var(--border-radius) !important;
+    tab-size: 2 !important;
+    padding: 0 !important;
+  }
+
+  article pre code {
+    display: block;
+    margin: 20px 30px !important;
+    overflow: auto !important;
+    font-size: inherit !important;
+  }
+
+  article hr {
+    max-width: var(--content-max-width);
+    margin: 40px auto;
+    padding: 0 var(--article-space);
+    border: none;
+  }
+
+  article hr::after{
+    content: '';
+    display: block;
+    height: 1px;
+    background-color:var(--tertiary-color);
+  }
+
+  article blockquote {
+    max-width: var(--content-max-width);
+    padding: 0 var(--article-space);
+    margin: 15px auto;
+    position: relative;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--secondary-color);
+  }
+
+  .table-container {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .table-container table {
+    border-collapse: collapse;
+  }
+
+  .table-container th, .table-container td {
+    font-size: 14px;
+    color: var(--normal-color);
+    border: 1px solid var(--tertiary-color);
+    padding: 10px;
+    text-align: left;
+  }
+
+  .table-container th {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  article blockquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary-color);
+  }
+
+  article blockquote p {
+    font-size: 16px;
+    color: inherit;
+    max-width: unset;
+    padding: 0;
+    margin: 0 0 0 30px;
+  }
+
+  article ul,
+  article ol {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+    color: var(--normal-color);
+    line-height: 1.5;
+  }
+
+  article ol {
+    counter-reset: li-count;
+  }
+  
+  article ul li, article ol li {
+    display: block;
+    margin: 5px 0;
+    position: relative;
+  }
+
+  article ol li {
+    counter-increment: li-count;
+  }
+
+  article ul li::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+
+    margin-right: 10px;
+
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+  }
+
+  article ol li::before {
+    content: counter( li-count) '. ';
+    color: var(--primary-color);
+  }
+
+  article figcaption {
+    font-size: 12px;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  .figure-img {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-img img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+  }
+  
+  .figure-video {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-video video {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .figure-iframe {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .figure-iframe iframe {
+    display: block;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    height: 640px;
+    border: 1px solid var(--tertiary-color);
+    border-radius: var(--border-radius);
+  }
+
+</style>
+
+<section>
+  <p><a name="r5OpT"></a></p>
+<h2>作用域（Scope）</h2>
+<blockquote>
+<p>作用域（scope，或译作有效范围）是名字（name）与实体（entity）的绑定（binding）保持有效的那部分计算机程序。（<a href="https://zh.wikipedia.org/wiki/%E4%BD%9C%E7%94%A8%E5%9F%9F">维基百科</a>）</p>
+<p>Typically, scope is used to manage the visibility and accessibility of variables from different parts of a program.(<a href="http://dmitrysoshnikov.com/ecmascript/es5-chapter-3-1-lexical-environments-common-theory/#scope">链接</a>)</p>
+<p>Scope is an enclosing context in which a variable is associated with a value.(<a href="http://dmitrysoshnikov.com/ecmascript/es5-chapter-3-1-lexical-environments-common-theory/#scope">链接</a>)</p>
+</blockquote>
+<p>简单点说，作用域限定了变量的寻址范围。</p>
+<p>作用域还分动态作用域和静态作用域。具体区别参考<a href="JavaScript%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F.md">链接</a>。
+JS采用的是静态作用域，也叫词法作用域。</p>
+<p>JS里ES6之前，只有两种作用域，全局作用域，和函数作用域。</p>
+<p><a name="O50lt"></a></p>
+<h3>全局作用域</h3>
+<p>全局作用域，声明的变量任何地方都可以访问得到。</p>
+<p><a name="CB8lj"></a></p>
+<h3>函数作用域</h3>
+<p>顾名思义，定义一个函数就会生成函数作用域。在函数外部，是没法访问到，函数内部定义的变量的。</p>
+<pre><code class="language-javascript">function a (){
+	var b = 'inner function!';
+}
+
+console.log(b);//ReferenceError
+</code></pre>
+<p><a name="aSUqk"></a></p>
+<h3>块级作用域</h3>
+<p>todo。</p>
+<p><a name="S1mEw"></a></p>
+<h2>执行上下文（<a href="https://www.ecma-international.org/ecma-262/11.0/index.html#sec-execution-contexts">Execution Contexts</a>）</h2>
+<p>可以简单理解为代码执行时所在的环境。具体到JS来说，一开始执行代码时，就有一个全局的执行上下文，然后是各个函数执行时，会生成新的执行上下文。ES使用  <a href="https://zh.wikipedia.org/wiki/%E5%A0%86%E6%A0%88"><code>stack</code></a>&nbsp;管理这些执行上下文。</p>
+<p>&nbsp;另外值得一提的是，处于栈顶的执行上下文，称之为 <code>running execution context</code>&nbsp;，即当前正在被执行的代码所属的上下文，同一时刻，有且只有一个 <code>running execution context  </code> 。</p>
+<p>看下面这段代码：</p>
+<pre><code class="language-javascript">var a = "coffe"; //1.进入全局执行上下文
+function out() {
+    var b = "18";
+    function inner() {
+        var c = "91";
+        console.log(a+b+c);
+    }
+    inner(); //3.进入inner函数的执行上下文
+}
+out(); //2.进入out函数的执行上下文
+</code></pre>
+<ol>
+<li>一开始执行，就有一个全局的执行上下文。</li>
+<li>调用out的时候，生成out函数的执行上下文。</li>
+<li>out函数内部调用inner的时候，生成inner函数的执行上下文。</li>
+<li>当inner函数执行完，inner函数的执行上下文出栈。</li>
+<li>随后out函数执行完，out函数的执行上下文出栈。</li>
+<li>全局的执行上下文，会一直保持，直到整个JS脚本退出（标签页关闭）。</li>
+</ol>
+
+      <figure class="figure-img">
+        <a href="/static/d770f4863837916540d4a46602f6554f.png" target="_blank">
+          <img src="/static/d770f4863837916540d4a46602f6554f.png" alt="" title="" loading="lazy">
+        </a>
+        
+      </figure>
+    
+<p><a name="gDdJ1"></a></p>
+<h3>Execution Context的结构</h3>
+<p>emmmm，或许说到执行上下文，你听过vo(变量对象)，ao（激活对象），scope chain（作用域链）等概念。可能看起来就像下面这样</p>
+
+      <figure class="figure-img">
+        <a href="/static/fffbec5e1bc089272ea6e27748df0e36.png" target="_blank">
+          <img src="/static/fffbec5e1bc089272ea6e27748df0e36.png" alt="" title="" loading="lazy">
+        </a>
+        
+      </figure>
+    
+<p>当执行上下文开始执行代码的时候，vo就变成ao了。没错我一直一来也是这么理解，因为网上大部分文章都这样说。直到有一天有位大佬给我说这些概念过时了。然后几番周折，我确认了的确过时了。而且过时很久了。自ES5的时候，标准已经没有上述概念了。</p>
+<p>过程之中找到一些非常值得一读的文章，具体可以参考该文章<a href="http://dmitrysoshnikov.com/">http://dmitrysoshnikov.com/</a>，是一些列解读JS内部实现的文章。</p>
+<p>忽略其它我们不需要在意的，最新的结构如下：</p>
+
+      <figure class="figure-img">
+        <a href="/static/f2177e9fd7fdf0b5b5d5f3a16d01c247.png" target="_blank">
+          <img src="/static/f2177e9fd7fdf0b5b5d5f3a16d01c247.png" alt="" title="" loading="lazy">
+        </a>
+        
+      </figure>
+    
+<p><strong>为了避免混淆，下文都用简写 <code>LE</code>&nbsp;代替 <code>Lexical Environments</code>&nbsp;类型。</strong></p>
+<p>如图所示 LE 由一个 <code>Environment Record</code>&nbsp;和 一个指向外部 LE 的 引用（可能为null）构成。
+<code>Environment Record</code>  则记录了出现在该上下文中所有变量的指向。（大概记录了 函数参数、函数内部声明的变量、this这几个东西）</p>
+<p>至于<a href="https://www.ecma-international.org/ecma-262/11.0/index.html#table-23"><code>LexicalEnvironment</code> </a>和 <a href="https://www.ecma-international.org/ecma-262/11.0/index.html#table-23"><code>VariableEnvironment</code> </a>的差异，暂时不能确定。摘抄标准中的两段话：</p>
+<blockquote>
+<p>LexicalEnvironment，Identifies the&nbsp;<a href="https://www.ecma-international.org/ecma-262/11.0/index.html#sec-lexical-environments">Lexical Environment</a>&nbsp;used to resolve identifier references made by code within this&nbsp;<a href="https://www.ecma-international.org/ecma-262/11.0/index.html#sec-execution-contexts">execution context</a>.</p>
+<p>VariableEnvironment，Identifies the&nbsp;<a href="https://www.ecma-international.org/ecma-262/11.0/index.html#sec-lexical-environments">Lexical Environment</a>&nbsp;whose&nbsp;<a href="https://www.ecma-international.org/ecma-262/11.0/index.html#sec-lexical-environments">EnvironmentRecord</a>&nbsp;holds bindings created by&nbsp;<a href="https://www.ecma-international.org/ecma-262/11.0/index.html#prod-VariableStatement">VariableStatement</a>s within this&nbsp;<a href="https://www.ecma-international.org/ecma-262/11.0/index.html#sec-execution-contexts">execution context</a>.</p>
+</blockquote>
+<p>另外在<a href="http://dmitrysoshnikov.com/ecmascript/es5-chapter-3-2-lexical-environments-ecmascript-implementation/#variable-environment">ECMA-262-5 in detail. Chapter 3.2. Lexical environments: ECMAScript implementation.</a>也提到了这两者之间的差异。</p>
+<p>todo 弄明白两者之间的差异</p>
+<p><a name="hkakX"></a></p>
+<h3>Environment Record的类型</h3>
+<p><a name="93Sdw"></a></p>
+<h4>Declarative Environment Records</h4>
+<p><a name="1LN1r"></a></p>
+<h4>Object Environment Records</h4>
+<p><a name="xIvk4"></a></p>
+<h4>Function Environment Records</h4>
+<p><a name="i51fx"></a></p>
+<h4>Global Environment Records</h4>
+<p><a name="IY7bn"></a></p>
+<h4>Module Environment Records</h4>
+
+</section>
+
+    
+  </article>
+  
+<style>
+  .article-actions {
+    max-width: var(--content-max-width);
+
+    display: flex;
+    align-items: center;
+
+    margin: 40px auto;
+    padding: 0 30px;
+
+    font-family: common_font;
+    color: var(--normal-color);
+  }
+
+  .article-actions_action:not(:last-child)::after {
+    content: '·\00a0';
+  }
+
+  .article-actions_action > a {
+    color: inherit;
+    text-decoration-color: var(--primary-color);
+  }
+
+  @media (max-width: 520px) {
+    .article-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .article-actions_action::before {
+      content: '·';
+    }
+
+    .article-actions_action:not(:last-child)::after {
+      content: '';
+    }
+  }
+</style>
+
+<div class="article-actions">
+  <span class="article-actions_action">
+    使用 <a href="https://github.com/codebyzack/blog/discussions">Discussions</a> 讨论
+  </span>
+  <span class="article-actions_action">
+    在 <a href="https://github.com/codebyzack/blog/edit/master/articles//WEB/JavaScript相关/JS知识点之作用域_执行上下文.md/index.md">Github</a> 上编辑
+  </span>
+</div>
+
+  <style>
+.page-footer {
+  font-size: 12px;
+  max-width: var(--content-max-width);
+  margin: 40px auto;
+  padding: 0 30px;
+  color: var(--secondary-color);
+}
+
+.page-footer > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* .page-footer > a > img{
+  user-select: none;
+  width: 12px;
+  height: 12px;
+} */
+
+.page-footer > .author {
+  text-decoration: underline;
+}
+
+.page-footer > a:hover {
+  color: var(--primary-color);
+}
+</style>
+
+<footer class="page-footer">
+  <a href="https://github.com/codebyzack/blog/blob/master/LICENSE">©</a> 2023
+  <a class="author" href="https://zackdk.com">行者、空山</a>
+  <!-- <a class="author" href="/rss.xml"><img src="/rss.png" alt="rss" /></a>
+  <a class="author" href="https://github.com/codebyzack/blog"><img src="/github.png" alt="github" /></a> -->
+</footer>
+
+
+  <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
+
+
+
+</body></html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html><html lang="zh-cn"><head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="行者、空山">
+<meta name="keywords" content="HTML,CSS,JavaScript,Web,React,Life">
+
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YT4Q3D1PMY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YT4Q3D1PMY');
+</script>
+
+<!-- open graph -->
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/535460b8cc6a91e6a240fa069c326796.png">
+
+<script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+<link rel="shortcut icon" type="image/png" href="/static/535460b8cc6a91e6a240fa069c326796.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body { 
+    --content-max-width: 48rem;
+
+    --primary-color: #616161;
+    --accent-color:  #ee0290;
+    --normal-color: #333;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --tertiary-color: #ddd;
+    --backgroud: rgb(255 255 255);
+
+    --btn-background: #e5e7eb;
+
+    --border-radius: 2px;
+    --transition-duration: 0.3s;
+
+    background-color: var(--backgroud);
+    transition: background-color var(--transition-duration);
+
+    font-family: Helvetica Neue,helvetica,arial,Heti Hei,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  html.dark > body{
+    background-color: #000;
+    --primary-color: #616161;
+    --accent-color:  #79ffe1;
+    --normal-color: #9ca3af;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --btn-background: #1f2937;
+    --tertiary-color: #ddd;
+    --backgroud: rgb(0 0 0);
+  }
+</style>
+
+
+  <title>行一度空山</title>
+  <meta name="description" content="zackdk 的个人写作.">
+
+  <style>
+    .article-list {
+      max-width: var(--content-max-width);
+      margin: 40px auto;
+      padding: 0 30px;
+    }
+    .article-item {
+      list-style: none;
+      display: block;
+      margin: 15px 0;
+    }
+    .article-title {
+      display: inline;
+      font-weight: normal;
+      margin: 0 10px 0 0;
+      padding: 0;
+      color: var(--normal-color);
+      font-size: 20px;
+    }
+    .article-title > a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .article-title > a:hover {
+      text-decoration: underline;
+    }
+    .article-time {
+      display: inline-block;
+      font-size: 14px;
+      color: var(--secondary-color);
+    }
+    .web-title{
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      margin-bottom: 40px;
+      padding: 0 30px;
+      font-family: KaiTi;
+    }
+    .web-title > h1{
+      font-size: 42px;
+      margin-top: 0;
+      color: var(--normal-color);
+    }
+
+    .web-title > h4{
+      color: var(--secondary-color);
+      font-size: 20px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <style>
+  .page-header {
+    max-width: calc( var(--content-max-width) + 160px);
+    margin: 0 auto;
+    padding: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .page-header_button{
+    width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background-color: var(--btn-background);
+    border: none;
+    border-radius: 4px;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+
+  .page-header_button .theme-light{
+    display: initial;
+  }
+
+  .page-header_button .theme-dark{
+    display: none;
+  }
+
+  .dark .page-header_button .theme-dark{
+    display: initial;
+
+  }
+  .dark .page-header_button .theme-light{
+    display: none;
+  }
+
+  .page-header_theme{
+    width: 16px;
+    height: 16px;
+    color: var(--normal-color);
+  }
+
+  .page-header_nav > a{
+    color: var(--normal-color);
+    text-decoration: none;
+  }
+
+  .page-header_nav > a:hover{
+    color: var(--accent-color);
+    text-decoration: underline;
+
+  }
+
+  .page-header_nav > a + a{
+    margin-left: 8px;
+  }
+
+  .sticky-header{
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    transition: background-color .1 ease-in-out;
+  }
+
+
+
+</style>
+
+<header class="page-header sticky-header">
+  <button class="page-header_button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-light"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-dark"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+  </button>
+
+  <div class="page-header_nav">
+    <a href="/rss.xml">RSS</a>
+    <a href="https://github.com/codebyzack/blog">Github</a>
+    <a href="/">首页</a>
+  </div>
+
+</header>
+
+  <div class="web-title">
+    <h1>行一度空山</h1>
+    <h4>今天花谢，风云浓烈，我在时光里做梦，梦见了你的脸...</h4>
+    <hr>
+  </div>
+  <ul class="article-list">
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/NAS相关/NAS-内网穿透的最终解决方案">NAS-内网穿透的最终解决方案</a>
+        </h2>
+        <time class="article-time">2023-01-31 10:00</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/React相关/React 里引起 rernder 的几种情况">React 里引起 rernder 的几种情况</a>
+        </h2>
+        <time class="article-time">2023-01-31 09:55</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/React相关/使用 Esbuild 在浏览器内编译 React">使用 Esbuild 在浏览器内编译 React</a>
+        </h2>
+        <time class="article-time">2023-01-31 09:51</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/LIFE/阅读/2022-阅读书单">2022-阅读书单</a>
+        </h2>
+        <time class="article-time">2022-04-02 10:42</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/TypeScript相关/TypeScript入门">TypeScript入门-基础类型</a>
+        </h2>
+        <time class="article-time">2021-06-15 20:13</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript算法学习/质数因子">质数因子</a>
+        </h2>
+        <time class="article-time">2020-12-25 16:54</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript算法学习/斐波那契数列">斐波那契数列</a>
+        </h2>
+        <time class="article-time">2020-12-25 16:33</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript算法学习/位运算">位运算</a>
+        </h2>
+        <time class="article-time">2020-12-25 15:50</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/CSS相关/CSS布局之FLEX">CSS布局之弹性布局 FLEX</a>
+        </h2>
+        <time class="article-time">2020-12-16 17:41</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/React相关/自己动手简单实现一个简单版本的 Redux">自己动手简单实现一个简单版本的 Redux</a>
+        </h2>
+        <time class="article-time">2020-09-28 16:58</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/React相关/深入Fiber，全面了解React中新的算法Reconciliation">深入Fiber，全面了解React中新的算法Reconciliation</a>
+        </h2>
+        <time class="article-time">2020-08-24 10:21</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/React相关/虚拟DOM的一些概念">虚拟DOM的一些概念</a>
+        </h2>
+        <time class="article-time">2020-08-18 16:22</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/HTTP相关/HTTP强缓存 协商缓存">HTTP强缓存 协商缓存</a>
+        </h2>
+        <time class="article-time">2020-02-18 16:26</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/React相关/打造你自己的React（翻译）">打造你自己的React（翻译）</a>
+        </h2>
+        <time class="article-time">2020-01-02 09:18</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript相关/JS知识点之神奇的闭包">从源头理解JavaScript中的闭包问题</a>
+        </h2>
+        <time class="article-time">2019-12-30 13:48</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/杂项/前端路由">前端路由History/Hash原理初窥</a>
+        </h2>
+        <time class="article-time">2019-11-11 10:22</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/HTML相关/浏览器端的的事件流">浏览器端的的事件流</a>
+        </h2>
+        <time class="article-time">2019-08-07 09:56</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript相关/JS知识点之Generator执行异步任务">JS知识点之Generator执行异步任务</a>
+        </h2>
+        <time class="article-time">2019-07-03 09:38</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/Vue相关/Vue响应式原理">Vue响应式原理</a>
+        </h2>
+        <time class="article-time">2019-07-02 09:39</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript相关/JS中Promise的使用问题">JS中Promise的使用问题</a>
+        </h2>
+        <time class="article-time">2019-06-04 08:45</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/开发环境相关/【转载】Webpack入门">前端打包工具 Webpack 入门教程</a>
+        </h2>
+        <time class="article-time">2019-04-02 10:42</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript相关/JS里继承相关的东西">JS里继承相关的东西</a>
+        </h2>
+        <time class="article-time">2019-03-18 14:40</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/CSS相关/CSS我不知道的技巧">CSS我不知道的技巧</a>
+        </h2>
+        <time class="article-time">2019-03-15 15:08</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/Vue相关/VUE之自定义指令（Vue.directive）">VUE之自定义指令（Vue.directive）</a>
+        </h2>
+        <time class="article-time">2019-03-13 11:02</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/HTML相关/HTML5之常用meta标签">HTML5之常用meta标签</a>
+        </h2>
+        <time class="article-time">2019-03-07 15:35</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/CSS相关/CSS之选择器权重">CSS之选择器权重</a>
+        </h2>
+        <time class="article-time">2019-03-07 15:28</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/CSS相关/CSS之BFC">CSS之BFC</a>
+        </h2>
+        <time class="article-time">2019-03-07 15:03</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript相关/JavaScript之作用域">JavaScript之作用域</a>
+        </h2>
+        <time class="article-time">2019-03-07 14:37</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript相关/JS知识点之数据类型一览">JS知识点之数据类型一览</a>
+        </h2>
+        <time class="article-time">2019-03-07 14:33</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/面试题记录/react_vue 的差异">react/vue 的差异</a>
+        </h2>
+        <time class="article-time">2019-03-07 14:27</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/面试题记录/面试题记录">面试题记录</a>
+        </h2>
+        <time class="article-time">2019-03-07 14:27</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript相关/JS里各种循环总结">JS里各种循环总结</a>
+        </h2>
+        <time class="article-time">2019-03-07 14:19</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript相关/JS我不知道的技巧">JS我不知道的技巧</a>
+        </h2>
+        <time class="article-time">2019-03-07 13:55</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript相关/ES6之数组的扩展">ES6之数组的扩展</a>
+        </h2>
+        <time class="article-time">2019-03-07 13:44</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript相关/ES6之变量的解构赋值">ES6之变量的解构赋值</a>
+        </h2>
+        <time class="article-time">2019-03-07 13:21</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript相关/ES6之let const">ES6之let const</a>
+        </h2>
+        <time class="article-time">2019-03-07 13:14</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/Vue相关/重新使用Vuex">重新使用Vuex</a>
+        </h2>
+        <time class="article-time">2019-03-07 13:05</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript相关/JS知识点之作用域_执行上下文">JS知识点之作用域/执行上下文</a>
+        </h2>
+        <time class="article-time">2000-01-01</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/JavaScript相关/JS知识点之原型_原型链那些事儿">JS知识点之原型/原型链那些事儿</a>
+        </h2>
+        <time class="article-time">2000-01-01</time>
+      </li>
+    
+      <li class="article-item">
+        <h2 class="article-title">
+          <a href="/WEB/React相关/React生命周期_及class对比hook组件">React生命周期/及class对比hook组件</a>
+        </h2>
+        <time class="article-time">2000-01-01</time>
+      </li>
+    
+  </ul>
+  <style>
+.page-footer {
+  font-size: 12px;
+  max-width: var(--content-max-width);
+  margin: 40px auto;
+  padding: 0 30px;
+  color: var(--secondary-color);
+}
+
+.page-footer > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* .page-footer > a > img{
+  user-select: none;
+  width: 12px;
+  height: 12px;
+} */
+
+.page-footer > .author {
+  text-decoration: underline;
+}
+
+.page-footer > a:hover {
+  color: var(--primary-color);
+}
+</style>
+
+<footer class="page-footer">
+  <a href="https://github.com/codebyzack/blog/blob/master/LICENSE">©</a> 2023
+  <a class="author" href="https://zackdk.com">行者、空山</a>
+  <!-- <a class="author" href="/rss.xml"><img src="/rss.png" alt="rss" /></a>
+  <a class="author" href="https://github.com/codebyzack/blog"><img src="/github.png" alt="github" /></a> -->
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,702 @@
+<!DOCTYPE html><html lang="zh-cn"><head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="行者、空山">
+<meta name="keywords" content="HTML,CSS,JavaScript,Web,React,Life">
+
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YT4Q3D1PMY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YT4Q3D1PMY');
+</script>
+
+<!-- open graph -->
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/535460b8cc6a91e6a240fa069c326796.png">
+
+<script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+<link rel="shortcut icon" type="image/png" href="/static/535460b8cc6a91e6a240fa069c326796.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body { 
+    --content-max-width: 48rem;
+
+    --primary-color: #616161;
+    --accent-color:  #ee0290;
+    --normal-color: #333;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --tertiary-color: #ddd;
+    --backgroud: rgb(255 255 255);
+
+    --btn-background: #e5e7eb;
+
+    --border-radius: 2px;
+    --transition-duration: 0.3s;
+
+    background-color: var(--backgroud);
+    transition: background-color var(--transition-duration);
+
+    font-family: Helvetica Neue,helvetica,arial,Heti Hei,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  html.dark > body{
+    background-color: #000;
+    --primary-color: #616161;
+    --accent-color:  #79ffe1;
+    --normal-color: #9ca3af;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --btn-background: #1f2937;
+    --tertiary-color: #ddd;
+    --backgroud: rgb(0 0 0);
+  }
+</style>
+
+
+  <title>HTTP强缓存 协商缓存 - 行一度空山</title>
+  <meta name="description" content="缓存，首先肯定是在第一次访问之后的事。  第一次访问网页，要显示完整的网页需要加载很多 诸如css/js/html/图片等资源文件。每一个文件都需要经过你的电脑然后各种各样的中间服务器到达最后的资源服务器，不用说也知道这是需要花费一定时间的，加上资源文件这么多，所以第一次打开网页，你需要等一段时间才......">
+  <meta property="og:description" content="缓存，首先肯定是在第一次访问之后的事。  第一次访问网页，要显示完整的网页需要加载很多 诸如css/js/html/图片等资源文件。每一个文件都需要经过你的电脑然后各种各样的中间服务器到达最后的资源服务器，不用说也知道这是需要花费一定时间的，加上资源文件这么多，所以第一次打开网页，你需要等一段时间才......">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
+  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+</head>
+
+<body>
+  <style>
+  .page-header {
+    max-width: calc( var(--content-max-width) + 160px);
+    margin: 0 auto;
+    padding: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .page-header_button{
+    width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background-color: var(--btn-background);
+    border: none;
+    border-radius: 4px;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+
+  .page-header_button .theme-light{
+    display: initial;
+  }
+
+  .page-header_button .theme-dark{
+    display: none;
+  }
+
+  .dark .page-header_button .theme-dark{
+    display: initial;
+
+  }
+  .dark .page-header_button .theme-light{
+    display: none;
+  }
+
+  .page-header_theme{
+    width: 16px;
+    height: 16px;
+    color: var(--normal-color);
+  }
+
+  .page-header_nav > a{
+    color: var(--normal-color);
+    text-decoration: none;
+  }
+
+  .page-header_nav > a:hover{
+    color: var(--accent-color);
+    text-decoration: underline;
+
+  }
+
+  .page-header_nav > a + a{
+    margin-left: 8px;
+  }
+
+  .sticky-header{
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    transition: background-color .1 ease-in-out;
+  }
+
+
+
+</style>
+
+<header class="page-header sticky-header">
+  <button class="page-header_button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-light"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-dark"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+  </button>
+
+  <div class="page-header_nav">
+    <a href="/rss.xml">RSS</a>
+    <a href="https://github.com/codebyzack/blog">Github</a>
+    <a href="/">首页</a>
+  </div>
+
+</header>
+
+  <article>
+    <style>
+.article-header {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding: 0 30px;
+}
+
+.article-title {
+  color: var(--normal-color);
+  font-size: 32px;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.article-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-publish-time {
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-family: common_font;
+}
+
+.article-info_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin-top: 20px;
+}
+
+.article-info_box > .article-info{
+  display: flex;
+  align-items: center;
+}
+
+.article-info_box > .article-info > img{
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+</style>
+
+<section class="article-header">
+  <h1 class="article-title">
+    <a href="//WEB/HTTP相关/HTTP强缓存 协商缓存.md">HTTP强缓存 协商缓存</a>
+  </h1>
+  <div class="article-info_box">
+    <div class="article-info">
+      <img src="/static/535460b8cc6a91e6a240fa069c326796.png" alt="logo">
+      <span>行者、空山/2020-02-18 16:26</span>
+    </div>
+    <div class="article-readtime">
+      18 min read 
+    </div>
+  </div>
+</section>
+
+    <style>
+  code {
+    font-family: 'Fira Code' !important;
+  }
+
+  article {
+    --article-space: 30px;
+  }
+
+  article a {
+    color: var(--link-color);
+    text-decoration: none;
+    /* text-decoration-color: var(--primary-color); */
+  }
+  article a:hover{
+    text-decoration: underline;
+  }
+
+  article h2, article h3, article h4, article h5, article h6 {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 0 auto;
+    line-height: 1.5;
+    color: var(--normal-color);
+  }
+
+  article h2 {
+    margin-top: 28px;
+    font-size: 28px;
+  }
+
+  article h3 {
+    margin-top: 26px;
+    font-size: 25px;
+  }
+
+  article h4 {
+    margin-top: 24px;
+    font-size: 22px;
+  }
+
+  article h5 {
+    margin-top: 22px;
+    font-size: 19px;
+  }
+
+  article h6 {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  article p {
+    max-width: var(--content-max-width);
+    margin: 15px auto;
+    padding: 0 30px;
+    color: var(--normal-color);
+  }
+
+  article p code, article ul code {
+    padding: 0 4px;
+    /* border-radius: var(--border-radius); */
+    /* background: rgba(237, 106, 94, 0.3); */
+    color: var(--accent-color);
+  }
+
+  article pre {
+    max-width: var(--content-max-width) !important;
+    margin: 15px auto !important;
+    font-size: 14px !important;
+    box-sizing: border-box;
+    border-radius: var(--border-radius) !important;
+    tab-size: 2 !important;
+    padding: 0 !important;
+  }
+
+  article pre code {
+    display: block;
+    margin: 20px 30px !important;
+    overflow: auto !important;
+    font-size: inherit !important;
+  }
+
+  article hr {
+    max-width: var(--content-max-width);
+    margin: 40px auto;
+    padding: 0 var(--article-space);
+    border: none;
+  }
+
+  article hr::after{
+    content: '';
+    display: block;
+    height: 1px;
+    background-color:var(--tertiary-color);
+  }
+
+  article blockquote {
+    max-width: var(--content-max-width);
+    padding: 0 var(--article-space);
+    margin: 15px auto;
+    position: relative;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--secondary-color);
+  }
+
+  .table-container {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .table-container table {
+    border-collapse: collapse;
+  }
+
+  .table-container th, .table-container td {
+    font-size: 14px;
+    color: var(--normal-color);
+    border: 1px solid var(--tertiary-color);
+    padding: 10px;
+    text-align: left;
+  }
+
+  .table-container th {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  article blockquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary-color);
+  }
+
+  article blockquote p {
+    font-size: 16px;
+    color: inherit;
+    max-width: unset;
+    padding: 0;
+    margin: 0 0 0 30px;
+  }
+
+  article ul,
+  article ol {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+    color: var(--normal-color);
+    line-height: 1.5;
+  }
+
+  article ol {
+    counter-reset: li-count;
+  }
+  
+  article ul li, article ol li {
+    display: block;
+    margin: 5px 0;
+    position: relative;
+  }
+
+  article ol li {
+    counter-increment: li-count;
+  }
+
+  article ul li::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+
+    margin-right: 10px;
+
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+  }
+
+  article ol li::before {
+    content: counter( li-count) '. ';
+    color: var(--primary-color);
+  }
+
+  article figcaption {
+    font-size: 12px;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  .figure-img {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-img img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+  }
+  
+  .figure-video {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-video video {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .figure-iframe {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .figure-iframe iframe {
+    display: block;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    height: 640px;
+    border: 1px solid var(--tertiary-color);
+    border-radius: var(--border-radius);
+  }
+
+</style>
+
+<section>
+  <p>缓存，首先肯定是在第一次访问之后的事。</p>
+<p>第一次访问网页，要显示完整的网页需要加载很多 诸如css/js/html/图片等资源文件。每一个文件都需要经过你的电脑然后各种各样的中间服务器到达最后的资源服务器，不用说也知道这是需要花费一定时间的，加上资源文件这么多，所以第一次打开网页，你需要等一段时间才能看到完整的网页。
+相比之下，第二次访问就会好很多，这正是由于浏览器做了缓存的缘故，浏览器把所有的资源都缓存下来了，当你再次请求的时候，就不会再去资源服务器上下载了，而是直接从你本地的缓存里拿，那当然快很多了。</p>
+<p>从实际上来说，这些资源文件，比如图片，在很长一段时间内，都不会变动，应该都是同一个文件。如果每次请求都重新下载一次。不仅增加服务器压力（网页中这些资源文件请求频率是很高的），还浪费用户流量。
+但这些资源文件，毕竟不是永远不变的，一旦发生改变，就应该马上使用新的，这样用户才能看到最新的。所以我们需要某种机制来确认，当前缓存的资源是否与服务器的资源是一致的。</p>
+<p>言归正传。上面一大堆我只是想说，缓存真的是很有必要的。</p>
+<p>缓存，是靠http头部字段，来控制的。一般分了强缓存和协商缓存。涉及到的字段有：</p>
+
+      <div class="table-container">
+        <table>
+          
+<thead>
+<tr>
+<th>强缓存</th>
+<th><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Expires"><strong>Expires</strong></a></th>
+<th><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cache-Control"><strong>Cache-Control</strong></a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>协商缓存</td>
+<td><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Last-Modified">Last-modified/If-Modified-Since</a></td>
+<td><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/ETag">Etag/If-None-Match</a></td>
+</tr>
+</tbody>
+
+        </table>
+      </div>
+    
+<h2>强缓存</h2>
+<p>强缓存最大的特点是：如果缓存判定没有过期，则不会请求服务器，直接从缓存拿数据。</p>
+<h3>Expires</h3>
+<p>和单词字面意思一样，过期时间。后面跟的是一个时间字符串，过了这个时间，代表缓存过期了。需要走下面的步骤（协商缓存，或者重新获取资源）。但有明显的问题，客户端和服务器时间存在不一致，导致判定过期或者不过期。</p>
+<pre><code class="language-http">Expires: Wed, 21 Oct 2015 07:28:00 GMT
+</code></pre>
+<h3>Cache-Control</h3>
+<p>首先第一点，cache-control的优先级比expires高；
+然后和expires不同，这个后面可以跟多个指令。常见的有代表，</p>
+<p>是否可缓存？ public，private，no-cache，nostore</p>
+
+      <div class="table-container">
+        <table>
+          
+<thead>
+<tr>
+<th>指令名字</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>public</td>
+<td>可以被任意对象缓存，包括代理服务器</td>
+</tr>
+<tr>
+<td>private</td>
+<td>只能被客户端缓存，代理服务器之类的不能缓存。</td>
+</tr>
+<tr>
+<td>no-cache</td>
+<td>客户端使用缓存之前，必须把请求发到服务器，进行验证。（走协商缓存?）</td>
+</tr>
+<tr>
+<td>no-store</td>
+<td>不允许任何对象对请求或者响应进行缓存。</td>
+</tr>
+</tbody>
+
+        </table>
+      </div>
+    
+<p>到期时间的相关。max-age最常用。其它请参考MDN。
+<strong>max-age=<seconds></seconds></strong>
+max-age后面跟秒数，代表客户端拿到这个请求，多少秒后会过期。这个就避免了expires的客户端服务器时间不一致的问题了。</p>
+<pre><code class="language-http">Cache-Control: no-store//关闭缓存
+Cache-Control:public, max-age=31536000//对于长久不变的资源文件，缓存时间很长。
+
+Cache-Control: no-cache//强制对缓存进行有效性检验（协商缓存？）
+Cache-Control: max-age=0//代表收到请求资源就已过期，需要验证缓存有效性（协商缓存？）。
+</code></pre>
+<h2>协商缓存</h2>
+<p>当强缓存判断过期了，或者cache-control设置为no-cache时，需要去验证资源是否有效。这时候就走协商缓存了。</p>
+<p>协商缓存，会像服务器发请求，然后服务器判断资源是否还有效，有效就返回304状态码，带上最新的头信息。没有body内容。如果无效，就正常返回新的资源内容。</p>
+<p>协商缓存如其名，需要客户端和服务器协商。协商是靠<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/ETag">Etag</a>和<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Last-Modified">Last-modified</a>来进行的。</p>
+<h3>Last-modified/If-Modified-Since</h3>
+<p>指令后面跟的值都是GMT的标准时间字符串。</p>
+<pre><code class="language-http">//出现在响应头中
+Last-Modified: Wed, 21 Oct 2015 07:28:00 GMT 
+
+//出现在请求头中
+If-Modified-Since: Wed, 21 Oct 2015 07:28:00 GMT
+</code></pre>
+<p>其中last-modified是响应头字段，即客户端像服务器请求某个资源，服务器响应回来的头字段里会包含该字段。标记此文件在服务期端最后被修改的时间
+然后if-modified-since是请求头字段，即需要验证资源有效的时候，像服务器发送的请求会带这个字段，值为响应头的last-modified的值。</p>
+<p>这样一来一去，服务器收到验证请求的时候，拿这个if-modified-since的值去对比资源修改的时间，如果资源在那之后有过修改，就返回新的资源，否则就返回304状态码。浏览器则继续使用当前缓存。</p>
+<p>该指令只能精确到秒。所有有了后面精确度更高的Etag的出现。</p>
+<h3>Etag/If-None-Match</h3>
+<p>etag原理和last-modified差不多。但etag优先级更高。
+但etag的值一般使用文件内容或者文件最后修改日期的hash值。代表该资源的唯一标识符，一旦文件改变，该标识就会改变。</p>
+<pre><code class="language-http">//出现在响应头中
+ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4
+//出现在请求头中
+If-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
+</code></pre>
+<p>其中ETag是响应头字段，即客户端像服务器请求某个资源，服务器响应回来的头字段里会包含该字段。代表此文件的唯一标识。
+然后if-none-match是请求头字段，即需要验证资源有效的时候，像服务器发送的请求会带这个字段，值为响应头的ETag的值。t</p>
+<p>这样一来一去，服务器收到验证请求的时候，拿这个if-none-match的值去对比服务器上文件的etag值，如果不一致，就返回新的资源，否则就返回304状态码。浏览器则继续使用当前缓存。</p>
+<h2>缓存的流程</h2>
+<p>还是看图片比较清楚，虽然我是偷的。下面的图来自<a href="https://www.cnblogs.com/leftJS/p/11082777.html">链接</a></p>
+<h3>第一次请求资源的时候</h3>
+
+      <figure class="figure-img">
+        <a href="/static/fbcc778238ffe6afd9abfefba537afe0.png" target="_blank">
+          <img src="/static/fbcc778238ffe6afd9abfefba537afe0.png" alt="" title="" loading="lazy">
+        </a>
+        
+      </figure>
+    
+<h3>后续请求资源的时候</h3>
+
+      <figure class="figure-img">
+        <a href="/static/ea529e608d36ac1f16bbb72bb3bdff8c.png" target="_blank">
+          <img src="/static/ea529e608d36ac1f16bbb72bb3bdff8c.png" alt="" title="" loading="lazy">
+        </a>
+        
+      </figure>
+    
+<h2>缓存实际中的使用场景</h2>
+<p>由于现在基本上没折腾过这些，所以我也木知啊。
+感觉这个说的还不错，可以参考参考。
+<a href="https://www.zhihu.com/question/20790576">大公司里怎样开发和部署前端代码？</a></p>
+<h2>参考</h2>
+<ol>
+<li><a href="https://www.cnblogs.com/leftJS/p/11082777.html">200（强缓存）和304（协商缓存）的区别</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers">MDN headers相关章节</a></li>
+</ol>
+
+</section>
+
+    
+  </article>
+  
+<style>
+  .article-actions {
+    max-width: var(--content-max-width);
+
+    display: flex;
+    align-items: center;
+
+    margin: 40px auto;
+    padding: 0 30px;
+
+    font-family: common_font;
+    color: var(--normal-color);
+  }
+
+  .article-actions_action:not(:last-child)::after {
+    content: '·\00a0';
+  }
+
+  .article-actions_action > a {
+    color: inherit;
+    text-decoration-color: var(--primary-color);
+  }
+
+  @media (max-width: 520px) {
+    .article-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .article-actions_action::before {
+      content: '·';
+    }
+
+    .article-actions_action:not(:last-child)::after {
+      content: '';
+    }
+  }
+</style>
+
+<div class="article-actions">
+  <span class="article-actions_action">
+    使用 <a href="https://github.com/codebyzack/blog/discussions">Discussions</a> 讨论
+  </span>
+  <span class="article-actions_action">
+    在 <a href="https://github.com/codebyzack/blog/edit/master/articles//WEB/HTTP相关/HTTP强缓存 协商缓存.md/index.md">Github</a> 上编辑
+  </span>
+</div>
+
+  <style>
+.page-footer {
+  font-size: 12px;
+  max-width: var(--content-max-width);
+  margin: 40px auto;
+  padding: 0 30px;
+  color: var(--secondary-color);
+}
+
+.page-footer > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* .page-footer > a > img{
+  user-select: none;
+  width: 12px;
+  height: 12px;
+} */
+
+.page-footer > .author {
+  text-decoration: underline;
+}
+
+.page-footer > a:hover {
+  color: var(--primary-color);
+}
+</style>
+
+<footer class="page-footer">
+  <a href="https://github.com/codebyzack/blog/blob/master/LICENSE">©</a> 2023
+  <a class="author" href="https://zackdk.com">行者、空山</a>
+  <!-- <a class="author" href="/rss.xml"><img src="/rss.png" alt="rss" /></a>
+  <a class="author" href="https://github.com/codebyzack/blog"><img src="/github.png" alt="github" /></a> -->
+</footer>
+
+
+  <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
+
+
+
+</body></html>

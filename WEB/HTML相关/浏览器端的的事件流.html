@@ -1,0 +1,924 @@
+<!DOCTYPE html><html lang="zh-cn"><head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="行者、空山">
+<meta name="keywords" content="HTML,CSS,JavaScript,Web,React,Life">
+
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YT4Q3D1PMY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YT4Q3D1PMY');
+</script>
+
+<!-- open graph -->
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/535460b8cc6a91e6a240fa069c326796.png">
+
+<script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+<link rel="shortcut icon" type="image/png" href="/static/535460b8cc6a91e6a240fa069c326796.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body { 
+    --content-max-width: 48rem;
+
+    --primary-color: #616161;
+    --accent-color:  #ee0290;
+    --normal-color: #333;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --tertiary-color: #ddd;
+    --backgroud: rgb(255 255 255);
+
+    --btn-background: #e5e7eb;
+
+    --border-radius: 2px;
+    --transition-duration: 0.3s;
+
+    background-color: var(--backgroud);
+    transition: background-color var(--transition-duration);
+
+    font-family: Helvetica Neue,helvetica,arial,Heti Hei,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  html.dark > body{
+    background-color: #000;
+    --primary-color: #616161;
+    --accent-color:  #79ffe1;
+    --normal-color: #9ca3af;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --btn-background: #1f2937;
+    --tertiary-color: #ddd;
+    --backgroud: rgb(0 0 0);
+  }
+</style>
+
+
+  <title>浏览器端的的事件流 - 行一度空山</title>
+  <meta name="description" content="### 事件传递的方向  **冒泡阶段 和 捕获阶段**  事件最开始由window接收到，从顶层往下传递，一层一层直到传递到事件的触发元素，这一阶段称之为捕获阶段。  然后从子元素开始冒泡事件，然后传递给父元素，一层一层往外传。传回到window,这一阶段称之为冒泡阶段。  ![image.png......">
+  <meta property="og:description" content="### 事件传递的方向  **冒泡阶段 和 捕获阶段**  事件最开始由window接收到，从顶层往下传递，一层一层直到传递到事件的触发元素，这一阶段称之为捕获阶段。  然后从子元素开始冒泡事件，然后传递给父元素，一层一层往外传。传回到window,这一阶段称之为冒泡阶段。  ![image.png......">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
+  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+</head>
+
+<body>
+  <style>
+  .page-header {
+    max-width: calc( var(--content-max-width) + 160px);
+    margin: 0 auto;
+    padding: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .page-header_button{
+    width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background-color: var(--btn-background);
+    border: none;
+    border-radius: 4px;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+
+  .page-header_button .theme-light{
+    display: initial;
+  }
+
+  .page-header_button .theme-dark{
+    display: none;
+  }
+
+  .dark .page-header_button .theme-dark{
+    display: initial;
+
+  }
+  .dark .page-header_button .theme-light{
+    display: none;
+  }
+
+  .page-header_theme{
+    width: 16px;
+    height: 16px;
+    color: var(--normal-color);
+  }
+
+  .page-header_nav > a{
+    color: var(--normal-color);
+    text-decoration: none;
+  }
+
+  .page-header_nav > a:hover{
+    color: var(--accent-color);
+    text-decoration: underline;
+
+  }
+
+  .page-header_nav > a + a{
+    margin-left: 8px;
+  }
+
+  .sticky-header{
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    transition: background-color .1 ease-in-out;
+  }
+
+
+
+</style>
+
+<header class="page-header sticky-header">
+  <button class="page-header_button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-light"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-dark"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+  </button>
+
+  <div class="page-header_nav">
+    <a href="/rss.xml">RSS</a>
+    <a href="https://github.com/codebyzack/blog">Github</a>
+    <a href="/">首页</a>
+  </div>
+
+</header>
+
+  <article>
+    <style>
+.article-header {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding: 0 30px;
+}
+
+.article-title {
+  color: var(--normal-color);
+  font-size: 32px;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.article-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-publish-time {
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-family: common_font;
+}
+
+.article-info_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin-top: 20px;
+}
+
+.article-info_box > .article-info{
+  display: flex;
+  align-items: center;
+}
+
+.article-info_box > .article-info > img{
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+</style>
+
+<section class="article-header">
+  <h1 class="article-title">
+    <a href="//WEB/HTML相关/浏览器端的的事件流.md">浏览器端的的事件流</a>
+  </h1>
+  <div class="article-info_box">
+    <div class="article-info">
+      <img src="/static/535460b8cc6a91e6a240fa069c326796.png" alt="logo">
+      <span>行者、空山/2019-08-07 09:56</span>
+    </div>
+    <div class="article-readtime">
+      23 min read 
+    </div>
+  </div>
+</section>
+
+    <style>
+  code {
+    font-family: 'Fira Code' !important;
+  }
+
+  article {
+    --article-space: 30px;
+  }
+
+  article a {
+    color: var(--link-color);
+    text-decoration: none;
+    /* text-decoration-color: var(--primary-color); */
+  }
+  article a:hover{
+    text-decoration: underline;
+  }
+
+  article h2, article h3, article h4, article h5, article h6 {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 0 auto;
+    line-height: 1.5;
+    color: var(--normal-color);
+  }
+
+  article h2 {
+    margin-top: 28px;
+    font-size: 28px;
+  }
+
+  article h3 {
+    margin-top: 26px;
+    font-size: 25px;
+  }
+
+  article h4 {
+    margin-top: 24px;
+    font-size: 22px;
+  }
+
+  article h5 {
+    margin-top: 22px;
+    font-size: 19px;
+  }
+
+  article h6 {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  article p {
+    max-width: var(--content-max-width);
+    margin: 15px auto;
+    padding: 0 30px;
+    color: var(--normal-color);
+  }
+
+  article p code, article ul code {
+    padding: 0 4px;
+    /* border-radius: var(--border-radius); */
+    /* background: rgba(237, 106, 94, 0.3); */
+    color: var(--accent-color);
+  }
+
+  article pre {
+    max-width: var(--content-max-width) !important;
+    margin: 15px auto !important;
+    font-size: 14px !important;
+    box-sizing: border-box;
+    border-radius: var(--border-radius) !important;
+    tab-size: 2 !important;
+    padding: 0 !important;
+  }
+
+  article pre code {
+    display: block;
+    margin: 20px 30px !important;
+    overflow: auto !important;
+    font-size: inherit !important;
+  }
+
+  article hr {
+    max-width: var(--content-max-width);
+    margin: 40px auto;
+    padding: 0 var(--article-space);
+    border: none;
+  }
+
+  article hr::after{
+    content: '';
+    display: block;
+    height: 1px;
+    background-color:var(--tertiary-color);
+  }
+
+  article blockquote {
+    max-width: var(--content-max-width);
+    padding: 0 var(--article-space);
+    margin: 15px auto;
+    position: relative;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--secondary-color);
+  }
+
+  .table-container {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .table-container table {
+    border-collapse: collapse;
+  }
+
+  .table-container th, .table-container td {
+    font-size: 14px;
+    color: var(--normal-color);
+    border: 1px solid var(--tertiary-color);
+    padding: 10px;
+    text-align: left;
+  }
+
+  .table-container th {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  article blockquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary-color);
+  }
+
+  article blockquote p {
+    font-size: 16px;
+    color: inherit;
+    max-width: unset;
+    padding: 0;
+    margin: 0 0 0 30px;
+  }
+
+  article ul,
+  article ol {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+    color: var(--normal-color);
+    line-height: 1.5;
+  }
+
+  article ol {
+    counter-reset: li-count;
+  }
+  
+  article ul li, article ol li {
+    display: block;
+    margin: 5px 0;
+    position: relative;
+  }
+
+  article ol li {
+    counter-increment: li-count;
+  }
+
+  article ul li::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+
+    margin-right: 10px;
+
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+  }
+
+  article ol li::before {
+    content: counter( li-count) '. ';
+    color: var(--primary-color);
+  }
+
+  article figcaption {
+    font-size: 12px;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  .figure-img {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-img img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+  }
+  
+  .figure-video {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-video video {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .figure-iframe {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .figure-iframe iframe {
+    display: block;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    height: 640px;
+    border: 1px solid var(--tertiary-color);
+    border-radius: var(--border-radius);
+  }
+
+</style>
+
+<section>
+  <h3>事件传递的方向</h3>
+<p><strong>冒泡阶段 和 捕获阶段</strong></p>
+<p>事件最开始由window接收到，从顶层往下传递，一层一层直到传递到事件的触发元素，这一阶段称之为捕获阶段。</p>
+<p>然后从子元素开始冒泡事件，然后传递给父元素，一层一层往外传。传回到window,这一阶段称之为冒泡阶段。</p>
+
+      <figure class="figure-img">
+        <a href="/static/947f93c599b844fdc87f30773540603d.png" target="_blank">
+          <img src="/static/947f93c599b844fdc87f30773540603d.png" alt="image.png" title="image.png" loading="lazy">
+        </a>
+        <figcaption>image.png</figcaption>
+      </figure>
+    
+
+      <figure class="figure-img">
+        <a href="/static/5908c023240bd7ec4d39f4c40bcd427f.png" target="_blank">
+          <img src="/static/5908c023240bd7ec4d39f4c40bcd427f.png" alt="image.png" title="image.png" loading="lazy">
+        </a>
+        <figcaption>image.png</figcaption>
+      </figure>
+    
+<p>**阻止事件的传递&nbsp;**</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Event/stopPropagation"><code>event.stopPropagation()</code></a>&nbsp;
+阻止捕获和冒泡阶段中当前事件的进一步传播。
+当你调用该函数过后，事件不再传递，不管是处于冒泡阶段还是捕获阶段。</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Event/stopImmediatePropagation"><code>event.stopImmediatePropagation()</code></a>
+阻止事件冒泡并且阻止相同事件的其他侦听器被调用。
+效果和stopPropagation一样，然而还能阻止剩余相同事件的监听器的回调调用。</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Event/preventDefault"><code>event.preventDefault</code></a>
+如果此事件没有被显式处理，那么它默认的动作也不要做（因为默认是要做的）。此事件还是继续传播，除非碰到事件侦听器调用<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Event/stopPropagation">stopPropagation()</a>&nbsp;或<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Event/stopImmediatePropagation">stopImmediatePropagation()</a>，才停止传播。</p>
+<p>阻止默认动作，一些控件是有默认事件处理器的（如input[type=checkbox],...），这个可以用来阻止默认事件。但不会影响事件传播。</p>
+<h3>事件的大体分类</h3>
+<h4>windos事件</h4>
+
+      <div class="table-container">
+        <table>
+          
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onafterprint.asp">onafterprint</a></td>
+<td align="left">script</td>
+<td align="left">文档打印之后运行的脚本。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onbeforeprint.asp">onbeforeprint</a></td>
+<td align="left">script</td>
+<td align="left">文档打印之前运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">onbeforeunload</td>
+<td align="left">script</td>
+<td align="left">文档卸载之前运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">onerror</td>
+<td align="left">script</td>
+<td align="left">在错误发生时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">onhaschange</td>
+<td align="left">script</td>
+<td align="left">当文档已改变时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onload.asp">onload</a></td>
+<td align="left">script</td>
+<td align="left">页面结束加载之后触发。</td>
+</tr>
+<tr>
+<td align="left">onmessage</td>
+<td align="left">script</td>
+<td align="left">在消息被触发时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">onoffline</td>
+<td align="left">script</td>
+<td align="left">当文档离线时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">ononline</td>
+<td align="left">script</td>
+<td align="left">当文档上线时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">onpagehide</td>
+<td align="left">script</td>
+<td align="left">当窗口隐藏时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">onpageshow</td>
+<td align="left">script</td>
+<td align="left">当窗口成为可见时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">onpopstate</td>
+<td align="left">script</td>
+<td align="left">当窗口历史记录改变时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">onredo</td>
+<td align="left">script</td>
+<td align="left">当文档执行撤销（redo）时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onresize.asp">onresize</a></td>
+<td align="left">script</td>
+<td align="left">当浏览器窗口被调整大小时触发。</td>
+</tr>
+<tr>
+<td align="left">onstorage</td>
+<td align="left">script</td>
+<td align="left">在 Web Storage 区域更新后运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">onundo</td>
+<td align="left">script</td>
+<td align="left">在文档执行 undo 时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onunload.asp">onunload</a></td>
+<td align="left">script</td>
+<td align="left">一旦页面已下载时触发（或者浏览器窗口已被关闭）。</td>
+</tr>
+</tbody>
+
+        </table>
+      </div>
+    
+<h4>form事件</h4>
+
+      <div class="table-container">
+        <table>
+          
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onblur.asp">onblur</a></td>
+<td align="left">script</td>
+<td align="left">元素失去焦点时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onchange.asp">onchange</a></td>
+<td align="left">script</td>
+<td align="left">在元素值被改变时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">oncontextmenu</td>
+<td align="left">script</td>
+<td align="left">当上下文菜单被触发时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onfocus.asp">onfocus</a></td>
+<td align="left">script</td>
+<td align="left">当元素获得焦点时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">onformchange</td>
+<td align="left">script</td>
+<td align="left">在表单改变时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">onforminput</td>
+<td align="left">script</td>
+<td align="left">当表单获得用户输入时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">oninput</td>
+<td align="left">script</td>
+<td align="left">当元素获得用户输入时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">oninvalid</td>
+<td align="left">script</td>
+<td align="left">当元素无效时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">onreset</td>
+<td align="left">script</td>
+<td align="left">当表单中的重置按钮被点击时触发。HTML5 中不支持。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onselect.asp">onselect</a></td>
+<td align="left">script</td>
+<td align="left">在元素中文本被选中后触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onsubmit.asp">onsubmit</a></td>
+<td align="left">script</td>
+<td align="left">在提交表单时触发。</td>
+</tr>
+</tbody>
+
+        </table>
+      </div>
+    
+<h4>keyboard事件</h4>
+
+      <div class="table-container">
+        <table>
+          
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onkeydown.asp">onkeydown</a></td>
+<td align="left">script</td>
+<td align="left">在用户按下按键时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onkeypress.asp">onkeypress</a></td>
+<td align="left">script</td>
+<td align="left">在用户敲击按钮时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onkeyup.asp">onkeyup</a></td>
+<td align="left">script</td>
+<td align="left">当用户释放按键时触发。</td>
+</tr>
+</tbody>
+
+        </table>
+      </div>
+    
+<h4>鼠标事件</h4>
+
+      <div class="table-container">
+        <table>
+          
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onclick.asp">onclick</a></td>
+<td align="left">script</td>
+<td align="left">元素上发生鼠标点击时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_ondblclick.asp">ondblclick</a></td>
+<td align="left">script</td>
+<td align="left">元素上发生鼠标双击时触发。</td>
+</tr>
+<tr>
+<td align="left">ondrag</td>
+<td align="left">script</td>
+<td align="left">元素被拖动时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">ondragend</td>
+<td align="left">script</td>
+<td align="left">在拖动操作末端运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">ondragenter</td>
+<td align="left">script</td>
+<td align="left">当元素元素已被拖动到有效拖放区域时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">ondragleave</td>
+<td align="left">script</td>
+<td align="left">当元素离开有效拖放目标时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">ondragover</td>
+<td align="left">script</td>
+<td align="left">当元素在有效拖放目标上正在被拖动时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">ondragstart</td>
+<td align="left">script</td>
+<td align="left">在拖动操作开端运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">ondrop</td>
+<td align="left">script</td>
+<td align="left">当被拖元素正在被拖放时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onmousedown.asp">onmousedown</a></td>
+<td align="left">script</td>
+<td align="left">当元素上按下鼠标按钮时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onmousemove.asp">onmousemove</a></td>
+<td align="left">script</td>
+<td align="left">当鼠标指针移动到元素上时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onmouseout.asp">onmouseout</a></td>
+<td align="left">script</td>
+<td align="left">当鼠标指针移出元素时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onmouseover.asp">onmouseover</a></td>
+<td align="left">script</td>
+<td align="left">当鼠标指针移动到元素上时触发。</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3school.com.cn/tags/event_onmouseup.asp">onmouseup</a></td>
+<td align="left">script</td>
+<td align="left">当在元素上释放鼠标按钮时触发。</td>
+</tr>
+<tr>
+<td align="left">onmousewheel</td>
+<td align="left">script</td>
+<td align="left">当鼠标滚轮正在被滚动时运行的脚本。</td>
+</tr>
+<tr>
+<td align="left">onscroll</td>
+<td align="left">script</td>
+<td align="left">当元素滚动条被滚动时运行的脚本。</td>
+</tr>
+</tbody>
+
+        </table>
+      </div>
+    
+<h3>事件涉及到的坐标体系</h3>
+<p><strong>鼠标事件中一些坐标</strong></p>
+<p>鼠标事件中，传递给回调函数的参数是一个event。
+有两个是常用的和坐标相关的属性。</p>
+<p>event.clientX
+event.clientY</p>
+<p>解释摘自mdn。即这连个值是指浏览器可是区域的坐标。
+<code>"clientX"</code>，<code>long</code>&nbsp;型可选，默认为&nbsp;<code>0</code>，设置鼠标事件时相对于客户端窗口的水平坐标位置；该操作并不会改变真实鼠标的位置。
+<code>"clientY"</code>，<code>long</code>&nbsp;型可选，默认为&nbsp;<code>0</code>，设置鼠标事件时相对于客户端窗口的垂直坐标位置；该操作并不会改变真实鼠标的位置。</p>
+<p><strong>dom元素中的一些坐标</strong></p>
+<p><strong>Element.getBoundingClientRect()</strong>
+方法返回元素的大小及其相对于视口的位置</p>
+
+      <figure class="figure-img">
+        <a href="/static/d3cc58b6ae1f156552745b925a733529.png" target="_blank">
+          <img src="/static/d3cc58b6ae1f156552745b925a733529.png" alt="image.png" title="image.png" loading="lazy">
+        </a>
+        <figcaption>image.png</figcaption>
+      </figure>
+    
+
+</section>
+
+    
+  </article>
+  
+<style>
+  .article-actions {
+    max-width: var(--content-max-width);
+
+    display: flex;
+    align-items: center;
+
+    margin: 40px auto;
+    padding: 0 30px;
+
+    font-family: common_font;
+    color: var(--normal-color);
+  }
+
+  .article-actions_action:not(:last-child)::after {
+    content: '·\00a0';
+  }
+
+  .article-actions_action > a {
+    color: inherit;
+    text-decoration-color: var(--primary-color);
+  }
+
+  @media (max-width: 520px) {
+    .article-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .article-actions_action::before {
+      content: '·';
+    }
+
+    .article-actions_action:not(:last-child)::after {
+      content: '';
+    }
+  }
+</style>
+
+<div class="article-actions">
+  <span class="article-actions_action">
+    使用 <a href="https://github.com/codebyzack/blog/discussions">Discussions</a> 讨论
+  </span>
+  <span class="article-actions_action">
+    在 <a href="https://github.com/codebyzack/blog/edit/master/articles//WEB/HTML相关/浏览器端的的事件流.md/index.md">Github</a> 上编辑
+  </span>
+</div>
+
+  <style>
+.page-footer {
+  font-size: 12px;
+  max-width: var(--content-max-width);
+  margin: 40px auto;
+  padding: 0 30px;
+  color: var(--secondary-color);
+}
+
+.page-footer > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* .page-footer > a > img{
+  user-select: none;
+  width: 12px;
+  height: 12px;
+} */
+
+.page-footer > .author {
+  text-decoration: underline;
+}
+
+.page-footer > a:hover {
+  color: var(--primary-color);
+}
+</style>
+
+<footer class="page-footer">
+  <a href="https://github.com/codebyzack/blog/blob/master/LICENSE">©</a> 2023
+  <a class="author" href="https://zackdk.com">行者、空山</a>
+  <!-- <a class="author" href="/rss.xml"><img src="/rss.png" alt="rss" /></a>
+  <a class="author" href="https://github.com/codebyzack/blog"><img src="/github.png" alt="github" /></a> -->
+</footer>
+
+
+  <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
+
+
+
+</body></html>

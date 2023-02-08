@@ -1,0 +1,839 @@
+<!DOCTYPE html><html lang="zh-cn"><head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="行者、空山">
+<meta name="keywords" content="HTML,CSS,JavaScript,Web,React,Life">
+
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YT4Q3D1PMY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YT4Q3D1PMY');
+</script>
+
+<!-- open graph -->
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/535460b8cc6a91e6a240fa069c326796.png">
+
+<script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+<link rel="shortcut icon" type="image/png" href="/static/535460b8cc6a91e6a240fa069c326796.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body { 
+    --content-max-width: 48rem;
+
+    --primary-color: #616161;
+    --accent-color:  #ee0290;
+    --normal-color: #333;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --tertiary-color: #ddd;
+    --backgroud: rgb(255 255 255);
+
+    --btn-background: #e5e7eb;
+
+    --border-radius: 2px;
+    --transition-duration: 0.3s;
+
+    background-color: var(--backgroud);
+    transition: background-color var(--transition-duration);
+
+    font-family: Helvetica Neue,helvetica,arial,Heti Hei,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  html.dark > body{
+    background-color: #000;
+    --primary-color: #616161;
+    --accent-color:  #79ffe1;
+    --normal-color: #9ca3af;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --btn-background: #1f2937;
+    --tertiary-color: #ddd;
+    --backgroud: rgb(0 0 0);
+  }
+</style>
+
+
+  <title>JS里继承相关的东西 - 行一度空山</title>
+  <meta name="description" content="一直没去看es6的class关键字，按理来说从java转过来的应该更习惯于class这种语法糖的。但深入了解JavaScript过后，发现js里的类和java里的类是有本质差异的。所以更倾向于使用es5，更能理解js这种语言背后的东西。    ## ES5的类和继承  JavaScript里是没有其......">
+  <meta property="og:description" content="一直没去看es6的class关键字，按理来说从java转过来的应该更习惯于class这种语法糖的。但深入了解JavaScript过后，发现js里的类和java里的类是有本质差异的。所以更倾向于使用es5，更能理解js这种语言背后的东西。    ## ES5的类和继承  JavaScript里是没有其......">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
+  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+</head>
+
+<body>
+  <style>
+  .page-header {
+    max-width: calc( var(--content-max-width) + 160px);
+    margin: 0 auto;
+    padding: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .page-header_button{
+    width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background-color: var(--btn-background);
+    border: none;
+    border-radius: 4px;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+
+  .page-header_button .theme-light{
+    display: initial;
+  }
+
+  .page-header_button .theme-dark{
+    display: none;
+  }
+
+  .dark .page-header_button .theme-dark{
+    display: initial;
+
+  }
+  .dark .page-header_button .theme-light{
+    display: none;
+  }
+
+  .page-header_theme{
+    width: 16px;
+    height: 16px;
+    color: var(--normal-color);
+  }
+
+  .page-header_nav > a{
+    color: var(--normal-color);
+    text-decoration: none;
+  }
+
+  .page-header_nav > a:hover{
+    color: var(--accent-color);
+    text-decoration: underline;
+
+  }
+
+  .page-header_nav > a + a{
+    margin-left: 8px;
+  }
+
+  .sticky-header{
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    transition: background-color .1 ease-in-out;
+  }
+
+
+
+</style>
+
+<header class="page-header sticky-header">
+  <button class="page-header_button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-light"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-dark"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+  </button>
+
+  <div class="page-header_nav">
+    <a href="/rss.xml">RSS</a>
+    <a href="https://github.com/codebyzack/blog">Github</a>
+    <a href="/">首页</a>
+  </div>
+
+</header>
+
+  <article>
+    <style>
+.article-header {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding: 0 30px;
+}
+
+.article-title {
+  color: var(--normal-color);
+  font-size: 32px;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.article-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-publish-time {
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-family: common_font;
+}
+
+.article-info_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin-top: 20px;
+}
+
+.article-info_box > .article-info{
+  display: flex;
+  align-items: center;
+}
+
+.article-info_box > .article-info > img{
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+</style>
+
+<section class="article-header">
+  <h1 class="article-title">
+    <a href="//WEB/JavaScript相关/JS里继承相关的东西.md">JS里继承相关的东西</a>
+  </h1>
+  <div class="article-info_box">
+    <div class="article-info">
+      <img src="/static/535460b8cc6a91e6a240fa069c326796.png" alt="logo">
+      <span>行者、空山/2019-03-18 14:40</span>
+    </div>
+    <div class="article-readtime">
+      28 min read 
+    </div>
+  </div>
+</section>
+
+    <style>
+  code {
+    font-family: 'Fira Code' !important;
+  }
+
+  article {
+    --article-space: 30px;
+  }
+
+  article a {
+    color: var(--link-color);
+    text-decoration: none;
+    /* text-decoration-color: var(--primary-color); */
+  }
+  article a:hover{
+    text-decoration: underline;
+  }
+
+  article h2, article h3, article h4, article h5, article h6 {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 0 auto;
+    line-height: 1.5;
+    color: var(--normal-color);
+  }
+
+  article h2 {
+    margin-top: 28px;
+    font-size: 28px;
+  }
+
+  article h3 {
+    margin-top: 26px;
+    font-size: 25px;
+  }
+
+  article h4 {
+    margin-top: 24px;
+    font-size: 22px;
+  }
+
+  article h5 {
+    margin-top: 22px;
+    font-size: 19px;
+  }
+
+  article h6 {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  article p {
+    max-width: var(--content-max-width);
+    margin: 15px auto;
+    padding: 0 30px;
+    color: var(--normal-color);
+  }
+
+  article p code, article ul code {
+    padding: 0 4px;
+    /* border-radius: var(--border-radius); */
+    /* background: rgba(237, 106, 94, 0.3); */
+    color: var(--accent-color);
+  }
+
+  article pre {
+    max-width: var(--content-max-width) !important;
+    margin: 15px auto !important;
+    font-size: 14px !important;
+    box-sizing: border-box;
+    border-radius: var(--border-radius) !important;
+    tab-size: 2 !important;
+    padding: 0 !important;
+  }
+
+  article pre code {
+    display: block;
+    margin: 20px 30px !important;
+    overflow: auto !important;
+    font-size: inherit !important;
+  }
+
+  article hr {
+    max-width: var(--content-max-width);
+    margin: 40px auto;
+    padding: 0 var(--article-space);
+    border: none;
+  }
+
+  article hr::after{
+    content: '';
+    display: block;
+    height: 1px;
+    background-color:var(--tertiary-color);
+  }
+
+  article blockquote {
+    max-width: var(--content-max-width);
+    padding: 0 var(--article-space);
+    margin: 15px auto;
+    position: relative;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--secondary-color);
+  }
+
+  .table-container {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .table-container table {
+    border-collapse: collapse;
+  }
+
+  .table-container th, .table-container td {
+    font-size: 14px;
+    color: var(--normal-color);
+    border: 1px solid var(--tertiary-color);
+    padding: 10px;
+    text-align: left;
+  }
+
+  .table-container th {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  article blockquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary-color);
+  }
+
+  article blockquote p {
+    font-size: 16px;
+    color: inherit;
+    max-width: unset;
+    padding: 0;
+    margin: 0 0 0 30px;
+  }
+
+  article ul,
+  article ol {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+    color: var(--normal-color);
+    line-height: 1.5;
+  }
+
+  article ol {
+    counter-reset: li-count;
+  }
+  
+  article ul li, article ol li {
+    display: block;
+    margin: 5px 0;
+    position: relative;
+  }
+
+  article ol li {
+    counter-increment: li-count;
+  }
+
+  article ul li::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+
+    margin-right: 10px;
+
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+  }
+
+  article ol li::before {
+    content: counter( li-count) '. ';
+    color: var(--primary-color);
+  }
+
+  article figcaption {
+    font-size: 12px;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  .figure-img {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-img img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+  }
+  
+  .figure-video {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-video video {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .figure-iframe {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .figure-iframe iframe {
+    display: block;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    height: 640px;
+    border: 1px solid var(--tertiary-color);
+    border-radius: var(--border-radius);
+  }
+
+</style>
+
+<section>
+  <p>一直没去看es6的class关键字，按理来说从java转过来的应该更习惯于class这种语法糖的。但深入了解JavaScript过后，发现js里的类和java里的类是有本质差异的。所以更倾向于使用es5，更能理解js这种语言背后的东西。</p>
+<h2>ES5的类和继承</h2>
+<p>JavaScript里是没有其它语言里的类的，真的没有。
+类是一种模板，通过这个模板生成对象。
+模板不可操作调用，真正可操作的是生成的对象。</p>
+<p>JS里，实现对象的手段简单来说利用了this，利用了原型链。
+this的运行时绑定特性实现了给新建对象添加自己的属性或者方法。
+原型链则让生成的对象和构造函数相互关联上，以便模拟类的继承，公用方法，等特性。</p>
+<p>不同点：
+js没有模板（类），相对应的就是函数，函数本身是可以操作调用的。
+js生成对象的过程其实就是函数的构造方式调用（按照一定规则执行函数，并返回一个新对象）。
+js继承是基于原型链的，本质上是一种关联模式。和从类模板生成一个全新的对象有本质差异。</p>
+<p><a name="704f29e0"></a></p>
+<h3>基本用法</h3>
+<pre><code class="language-javascript">function Dog(name){
+  //使用new调用Dog时,this会指向新生成的对象,所以以下就是在新对象上添加属性了.
+	this.name = name;
+  this.barking = function(){
+		console.log("名字："+this.name);
+  }
+}
+
+//goHome函数是定义在Dog.protype上的一个属性
+//而通过new 生成的新对象,原型会委托到这个protype上。
+Dog.protytpe.goHome = function(){
+  //这里的this能访问到新对象的name属性,主要是因为调用方式,让this绑定到了新对象上.
+	console.log(this.name + " is go home!");
+}
+
+let dog1 = new Dog("汪汪");
+dog1.barking();
+//名字：汪汪
+dog1.goHome();
+//汪汪 is go home！
+
+
+//补充
+//构造函数也是对象，也可以添加属性，通常这种用来放一下所谓静态变量，常量等。
+Dog.HOME = "地球";
+
+
+</code></pre>
+<p>其实js模拟类的行为就这些东西，一个this，一个protype。
+至于继承这些，也是通过this，protype来模拟，没有更多东西了。</p>
+<p>看看这个new到底是怎么创造新对象的。</p>
+<pre><code class="language-javascript">function createObj(func) {
+		//创建新函数
+    var obj = new Object(),
+        
+    Constructor = func;
+		//让新对象的原型委托到构造函数的protytpe上
+    obj.__proto__ = Constructor.prototype;
+		
+  	//执行构造函数，并显示改变this指向
+    var ret = Constructor.apply(obj, arguments);
+		
+  	//这里是判断构造函数是否返回了一个对象，是的话直接返回构造函数返回的对象，否则返回这里创建的新对象
+    return typeof ret === 'object' ? ret : obj;
+};
+</code></pre>
+<p>大概就这么个流程了，细节可能还有些差异，但大体没跑的，委托原型，绑定this执行函数。
+所以js是没有类的，这和从类模板生成一个全新的对象，有本质的差异。
+但为什么有这个new操作符，估计得去问js的创造者了。
+但猜测一下的话，类这种设计模式，还有面向对象这种思维太流行了，为了避免其它稀奇古怪的模仿，干脆出了一个new语法糖，统一下模仿类的行为。</p>
+<p><a name="M1WEv"></a></p>
+<h3>组合继承</h3>
+<p>组合继承就是原型链继承，和借用构造函数继承组合在一起。</p>
+<p><a name="Oa9rB"></a></p>
+<h4>借用构造函数继承</h4>
+<pre><code class="language-javascript">function Animal(name){
+	this.name = name;
+  this.barking = function(){
+		console.log("名字："+this.name);
+  }
+}
+Animal.prototype.goHome = function(){
+	console.log(this.name + " is go home!");
+}
+
+//2.借用构造函数动态改变this指向，为作用域添加属性。
+function Dog2(){
+	Animal.call(this);
+}
+//dog2只能访问到name,barking属性，且这个属性是dog2本身上的属性。
+//访问不到goHome,借用构造函数只添加了属性，而失去了和Animal.prototype的关联。
+let dog2 = new Dog2();
+
+//个人看法：丢了（没有关联上）父类protype上的属性。
+//其实这样只是把属性全部拷贝到了子类上而已，每个子类都是独一份。
+</code></pre>
+<p><a name="tEwVp"></a></p>
+<h4>原型链继承</h4>
+<pre><code class="language-javascript">function Animal(name){
+	this.name = name;
+  this.barking = function(){
+		console.log("名字："+this.name);
+  }
+}
+Animal.prototype.goHome = function(){
+	console.log(this.name + " is go home!");
+}
+
+
+//1.直接关联原型,将父类的实列对象关联到子类的原型上。
+function Dog(){}
+
+//把Dog的prototype 关联到 由Animal函数构造的新对象上.
+let obj = new Animal();
+Dog.prototype = obj;
+
+//dog1就能访问到name,barking,goHome 这些属性了.
+//此时原型链的指向关系 
+//dog1.__proto__ --&gt; obj
+//obj.__proto__ --&gt; Animal.prototype
+let dog1 = new Dog();
+
+//个人看法：很别扭吧  明明就是一个对象通过属性值关联到另一个对象上，强行说成是继承。
+//最大的缺点是，所有构造出来的实列共享一个原型对象（obj）上的属性。一个实列去改了，所有都改了。
+</code></pre>
+<p><a name="2BDVp"></a></p>
+<h4>组合一下</h4>
+<pre><code class="language-javascript">function Animal(name){
+	this.name = name;
+  this.barking = function(){
+		console.log("名字："+this.name);
+  }
+}
+Animal.prototype.goHome = function(){
+	console.log(this.name + " is go home!");
+}
+
+function Dog3(){
+	//借用构造函数
+  Animal.call(this);
+}
+
+//关联原型
+Dog3.prototype = new Animal();
+
+//修复constructor,之前一直没提过这个，这里简单一句话介绍下。
+//function本身带了一个prototype属性，是一个对象，只有一个属性constructor指向函数本身。
+//不把事情搞复杂了，详情请自行查询，其实就是一个容器，提供给子类存放公共函数之类的东西。
+Dog3.prototype.constructor = Dog3;
+
+//看起来没啥问题了，每个子类都有一份单独的属性，且父类上的公共方法也能关联到了。
+let dog3 = new Dog3();
+
+
+//个人看法：已经很好了，就一点需要注意，在关联原型时执行了一次父类构造函数，所有原型上也有一份父类属性。
+//生成子类时，借用了构造函数，也生成了一份属性，所以时重复了的。
+//访问的时候由于先访问到子类上的属性，所以原型上的那份属性永远不会被用到。有一点浪费。
+//当然你可以想办法把它干掉，很容易。这里就不继续写了，已经差不多了。继承就这么些东西。
+//============================
+</code></pre>
+<p><a name="fskil"></a></p>
+<h3>寄生继承</h3>
+<p>寄生继承，可以解决上面组合继承的一个问题。可以解决子类实例上那份浪费的原型属性。
+其实也就是间接等同于拿父类的prototype直接作为子类的prototype。
+寄生继承，看起来是下面这样的。</p>
+<pre><code class="language-javascript">//这个函数现在可以用Object.create代替
+function object(o) {
+  function F() {};
+  F.prototype = o;
+  return new F();
+}
+
+function Animal(name){
+	this.name = name;
+  this.barking = function(){
+		console.log("名字："+this.name);
+  }
+}
+
+Animal.prototype.goHome = function(){
+	console.log(this.name + " is go home!");
+}
+function Dog4(){
+	//借用构造函数
+  var that = object(Animal.prototype);
+  //可以对that添加属性。
+  that.name = "xxx";
+  return that;
+}
+
+var dog4 = new Dog4();
+
+console.log(dog4);
+</code></pre>
+<p><a name="huQYv"></a></p>
+<h3>组合寄生继承</h3>
+<p>顾名思义，组合和寄生再二次组合。
+至于为什么要组合，就是寄生继承能解决，组合产生的那份冗余属性。
+看代码吧。</p>
+<pre><code class="language-javascript">function Animal(name){
+	this.name = name;
+  this.barking = function(){
+		console.log("名字："+this.name);
+  }
+}
+Animal.prototype.goHome = function(){
+	console.log(this.name + " is go home!");
+}
+
+function Dog3(){
+	//借用构造函数
+  Animal.call(this);
+}
+
+//关联原型
+Dog3.prototype = Object.create(Animal.prototype);
+//其实如果不介意constructor指向混乱，你完全可以直接赋值
+//Dog3.prototype = Animal.prototype;
+
+//修复constructor
+Dog3.prototype.constructor = Dog3;
+
+//看起来没啥问题了，每个子类都有一份单独的属性，且父类上的公共方法也能关联到了。
+let dog3 = new Dog3();
+
+//============================
+</code></pre>
+<p><a name="399c08f4"></a></p>
+<h2>ES6的class</h2>
+<p>其实理解了js的类，class其实也就是语法糖而已，更统一规范了js里面向对象的写法用法。
+这里只列出了我关心的两点，更多请参考阮一峰的Class<a href="http://es6.ruanyifeng.com/#docs/class">链接</a>。 <a name="704f29e0-1"></a></p>
+<h3>基本用法</h3>
+<pre><code class="language-javascript">class Dog{
+	constructor(name){
+    //this的调用同样会添加到新生成的对象上。
+  	this.name = name;
+    this.barking = function(){
+    	console.log("姓名：" + this.name);
+    }
+  }
+  //这样写的函数会挂载到protype上。
+  goHome(){
+  	console.log(this.name + " is go home!");
+  }
+  //静态变量，会挂载到DOG对象上
+  static HOME = "地球";
+}
+
+//用法一样
+let dog1 = new Dog("汪汪");
+dog1.barking();
+//名字：汪汪
+dog1.goHome();
+//汪汪 is go home！
+</code></pre>
+<p><a name="2dde3029-1"></a></p>
+<h3>继承（待补充）</h3>
+<p>不得不说，es6 class里的继承，东西其实有点多。想要详细了解还是得看看阮一峰的Class继承<a href="http://es6.ruanyifeng.com/#docs/class">链接</a>。
+这里先简单总结一下：</p>
+<ol>
+<li>多了静态变量，静态方法的说法。即在class内部使用static声明函数和变量，这样声明的属性会挂载在构造函数这个对象上。</li>
+<li>继承存在两条链，一条是 <strong>子类构造函数</strong>的 <strong>原型对象</strong>会关联到 <strong>父类构造函数。<strong>另一条是</strong>子类构造函数</strong>的<strong>prototype</strong>属性的<strong>原型对象</strong>会关联到<strong>父类构造函数</strong>的prototype属性。</li>
+<li>还有超级强大<strong>super</strong>关键字。
+<ul>
+<li>子类构造函数里可以当作函数使用。</li>
+<li>普通方法里可以当作对象，指向父类的prototype属性。</li>
+<li>静态方法里可以当作对象，指向父类自己。</li>
+</ul>
+</li>
+</ol>
+<p>例子就不举了，实际用到的时候再来补充。</p>
+<p><a name="ab2470fa"></a></p>
+<h2>一些参考。</h2>
+<p>闭包是解决函数式语言的一个问题的一种技术，这个问题就是如何保证将函数当做值创造并传来传去的时候函数仍能正确运行。<a href="https://www.cnblogs.com/yyrdl/p/5330274.html">链接</a></p>
+<p>闭包使得函数可以继续访问定义时的 词法作用域。</p>
+<p>需要明确的是，事实上 JavaScript 并不具有动态作用域。它只有词法作用域，简单明了。 但是 this 机制某种程度上很像动态作用域。
+主要区别：词法作用域是在写代码或者说定义时确定的，而动态作用域是在运行时确定 的。（this 也是！）词法作用域关注函数在何处声明，而动态作用域关注函数从何处调用。</p>
+<p>需要明确的是，this 在任何情况下都不指向函数的词法作用域。</p>
+<p>在 JavaScript 中，构造函数只是一些 使用 new 操作符时被调用的函数。</p>
+
+</section>
+
+    
+  </article>
+  
+<style>
+  .article-actions {
+    max-width: var(--content-max-width);
+
+    display: flex;
+    align-items: center;
+
+    margin: 40px auto;
+    padding: 0 30px;
+
+    font-family: common_font;
+    color: var(--normal-color);
+  }
+
+  .article-actions_action:not(:last-child)::after {
+    content: '·\00a0';
+  }
+
+  .article-actions_action > a {
+    color: inherit;
+    text-decoration-color: var(--primary-color);
+  }
+
+  @media (max-width: 520px) {
+    .article-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .article-actions_action::before {
+      content: '·';
+    }
+
+    .article-actions_action:not(:last-child)::after {
+      content: '';
+    }
+  }
+</style>
+
+<div class="article-actions">
+  <span class="article-actions_action">
+    使用 <a href="https://github.com/codebyzack/blog/discussions">Discussions</a> 讨论
+  </span>
+  <span class="article-actions_action">
+    在 <a href="https://github.com/codebyzack/blog/edit/master/articles//WEB/JavaScript相关/JS里继承相关的东西.md/index.md">Github</a> 上编辑
+  </span>
+</div>
+
+  <style>
+.page-footer {
+  font-size: 12px;
+  max-width: var(--content-max-width);
+  margin: 40px auto;
+  padding: 0 30px;
+  color: var(--secondary-color);
+}
+
+.page-footer > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* .page-footer > a > img{
+  user-select: none;
+  width: 12px;
+  height: 12px;
+} */
+
+.page-footer > .author {
+  text-decoration: underline;
+}
+
+.page-footer > a:hover {
+  color: var(--primary-color);
+}
+</style>
+
+<footer class="page-footer">
+  <a href="https://github.com/codebyzack/blog/blob/master/LICENSE">©</a> 2023
+  <a class="author" href="https://zackdk.com">行者、空山</a>
+  <!-- <a class="author" href="/rss.xml"><img src="/rss.png" alt="rss" /></a>
+  <a class="author" href="https://github.com/codebyzack/blog"><img src="/github.png" alt="github" /></a> -->
+</footer>
+
+
+  <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
+
+
+
+</body></html>

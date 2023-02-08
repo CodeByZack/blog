@@ -1,0 +1,738 @@
+<!DOCTYPE html><html lang="zh-cn"><head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="行者、空山">
+<meta name="keywords" content="HTML,CSS,JavaScript,Web,React,Life">
+
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YT4Q3D1PMY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YT4Q3D1PMY');
+</script>
+
+<!-- open graph -->
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/535460b8cc6a91e6a240fa069c326796.png">
+
+<script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+<link rel="shortcut icon" type="image/png" href="/static/535460b8cc6a91e6a240fa069c326796.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body { 
+    --content-max-width: 48rem;
+
+    --primary-color: #616161;
+    --accent-color:  #ee0290;
+    --normal-color: #333;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --tertiary-color: #ddd;
+    --backgroud: rgb(255 255 255);
+
+    --btn-background: #e5e7eb;
+
+    --border-radius: 2px;
+    --transition-duration: 0.3s;
+
+    background-color: var(--backgroud);
+    transition: background-color var(--transition-duration);
+
+    font-family: Helvetica Neue,helvetica,arial,Heti Hei,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  html.dark > body{
+    background-color: #000;
+    --primary-color: #616161;
+    --accent-color:  #79ffe1;
+    --normal-color: #9ca3af;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --btn-background: #1f2937;
+    --tertiary-color: #ddd;
+    --backgroud: rgb(0 0 0);
+  }
+</style>
+
+
+  <title>react/vue 的差异 - 行一度空山</title>
+  <meta name="description" content="经常被问，react和vue的差异。其实最大差异在官网的自我介绍中，就已经很明显了。  > React: A JavaScript library for building user interfaces.  <a name=&quot;Xu24j&quot;></a>  ##  > Vue: The Progress......">
+  <meta property="og:description" content="经常被问，react和vue的差异。其实最大差异在官网的自我介绍中，就已经很明显了。  > React: A JavaScript library for building user interfaces.  <a name=&quot;Xu24j&quot;></a>  ##  > Vue: The Progress......">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
+  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+</head>
+
+<body>
+  <style>
+  .page-header {
+    max-width: calc( var(--content-max-width) + 160px);
+    margin: 0 auto;
+    padding: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .page-header_button{
+    width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background-color: var(--btn-background);
+    border: none;
+    border-radius: 4px;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+
+  .page-header_button .theme-light{
+    display: initial;
+  }
+
+  .page-header_button .theme-dark{
+    display: none;
+  }
+
+  .dark .page-header_button .theme-dark{
+    display: initial;
+
+  }
+  .dark .page-header_button .theme-light{
+    display: none;
+  }
+
+  .page-header_theme{
+    width: 16px;
+    height: 16px;
+    color: var(--normal-color);
+  }
+
+  .page-header_nav > a{
+    color: var(--normal-color);
+    text-decoration: none;
+  }
+
+  .page-header_nav > a:hover{
+    color: var(--accent-color);
+    text-decoration: underline;
+
+  }
+
+  .page-header_nav > a + a{
+    margin-left: 8px;
+  }
+
+  .sticky-header{
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    transition: background-color .1 ease-in-out;
+  }
+
+
+
+</style>
+
+<header class="page-header sticky-header">
+  <button class="page-header_button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-light"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-dark"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+  </button>
+
+  <div class="page-header_nav">
+    <a href="/rss.xml">RSS</a>
+    <a href="https://github.com/codebyzack/blog">Github</a>
+    <a href="/">首页</a>
+  </div>
+
+</header>
+
+  <article>
+    <style>
+.article-header {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding: 0 30px;
+}
+
+.article-title {
+  color: var(--normal-color);
+  font-size: 32px;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.article-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-publish-time {
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-family: common_font;
+}
+
+.article-info_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin-top: 20px;
+}
+
+.article-info_box > .article-info{
+  display: flex;
+  align-items: center;
+}
+
+.article-info_box > .article-info > img{
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+</style>
+
+<section class="article-header">
+  <h1 class="article-title">
+    <a href="//WEB/面试题记录/react_vue 的差异.md">react/vue 的差异</a>
+  </h1>
+  <div class="article-info_box">
+    <div class="article-info">
+      <img src="/static/535460b8cc6a91e6a240fa069c326796.png" alt="logo">
+      <span>行者、空山/2019-03-07 14:27</span>
+    </div>
+    <div class="article-readtime">
+      20 min read 
+    </div>
+  </div>
+</section>
+
+    <style>
+  code {
+    font-family: 'Fira Code' !important;
+  }
+
+  article {
+    --article-space: 30px;
+  }
+
+  article a {
+    color: var(--link-color);
+    text-decoration: none;
+    /* text-decoration-color: var(--primary-color); */
+  }
+  article a:hover{
+    text-decoration: underline;
+  }
+
+  article h2, article h3, article h4, article h5, article h6 {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 0 auto;
+    line-height: 1.5;
+    color: var(--normal-color);
+  }
+
+  article h2 {
+    margin-top: 28px;
+    font-size: 28px;
+  }
+
+  article h3 {
+    margin-top: 26px;
+    font-size: 25px;
+  }
+
+  article h4 {
+    margin-top: 24px;
+    font-size: 22px;
+  }
+
+  article h5 {
+    margin-top: 22px;
+    font-size: 19px;
+  }
+
+  article h6 {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  article p {
+    max-width: var(--content-max-width);
+    margin: 15px auto;
+    padding: 0 30px;
+    color: var(--normal-color);
+  }
+
+  article p code, article ul code {
+    padding: 0 4px;
+    /* border-radius: var(--border-radius); */
+    /* background: rgba(237, 106, 94, 0.3); */
+    color: var(--accent-color);
+  }
+
+  article pre {
+    max-width: var(--content-max-width) !important;
+    margin: 15px auto !important;
+    font-size: 14px !important;
+    box-sizing: border-box;
+    border-radius: var(--border-radius) !important;
+    tab-size: 2 !important;
+    padding: 0 !important;
+  }
+
+  article pre code {
+    display: block;
+    margin: 20px 30px !important;
+    overflow: auto !important;
+    font-size: inherit !important;
+  }
+
+  article hr {
+    max-width: var(--content-max-width);
+    margin: 40px auto;
+    padding: 0 var(--article-space);
+    border: none;
+  }
+
+  article hr::after{
+    content: '';
+    display: block;
+    height: 1px;
+    background-color:var(--tertiary-color);
+  }
+
+  article blockquote {
+    max-width: var(--content-max-width);
+    padding: 0 var(--article-space);
+    margin: 15px auto;
+    position: relative;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--secondary-color);
+  }
+
+  .table-container {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .table-container table {
+    border-collapse: collapse;
+  }
+
+  .table-container th, .table-container td {
+    font-size: 14px;
+    color: var(--normal-color);
+    border: 1px solid var(--tertiary-color);
+    padding: 10px;
+    text-align: left;
+  }
+
+  .table-container th {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  article blockquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary-color);
+  }
+
+  article blockquote p {
+    font-size: 16px;
+    color: inherit;
+    max-width: unset;
+    padding: 0;
+    margin: 0 0 0 30px;
+  }
+
+  article ul,
+  article ol {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+    color: var(--normal-color);
+    line-height: 1.5;
+  }
+
+  article ol {
+    counter-reset: li-count;
+  }
+  
+  article ul li, article ol li {
+    display: block;
+    margin: 5px 0;
+    position: relative;
+  }
+
+  article ol li {
+    counter-increment: li-count;
+  }
+
+  article ul li::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+
+    margin-right: 10px;
+
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+  }
+
+  article ol li::before {
+    content: counter( li-count) '. ';
+    color: var(--primary-color);
+  }
+
+  article figcaption {
+    font-size: 12px;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  .figure-img {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-img img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+  }
+  
+  .figure-video {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-video video {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .figure-iframe {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .figure-iframe iframe {
+    display: block;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    height: 640px;
+    border: 1px solid var(--tertiary-color);
+    border-radius: var(--border-radius);
+  }
+
+</style>
+
+<section>
+  <p>经常被问，react和vue的差异。其实最大差异在官网的自我介绍中，就已经很明显了。</p>
+<blockquote>
+<p>React: A JavaScript library for building user interfaces.</p>
+</blockquote>
+<p><a name="Xu24j"></a></p>
+<h2></h2>
+<blockquote>
+<p>Vue: The Progressive JavaScript Framework.</p>
+</blockquote>
+<p>一个是库，一个是框架。框架专注于大而全，内嵌所有必须的功能，努力提供一个好的开发环境给开发者。库提供的功能相对来说更简单，单一。但专注于该功能，并尽力做到最好。</p>
+<p><a name="Qdy1O"></a></p>
+<h2>组件</h2>
+<p>React 和 Vue 都提供了组件，前端组件泛泛来说一般包含三个部分：</p>
+<ol>
+<li>界面(HTML)</li>
+<li>交互（JavaScript）</li>
+<li>样式（CSS）</li>
+</ol>
+<p><a name="5jmVS"></a></p>
+<h3>Vue</h3>
+<p>Vue 提供的单文件组件，同时包含了这三部分，而且还内置了<a href="https://github.com/JedWatson/classnames">classNames</a>。（非常方便开发者）</p>
+<ul>
+<li><strong>样式</strong>是内置的功能</li>
+<li>内置了<a href="https://github.com/JedWatson/classnames">classNames</a>,来提供class和style的动态计算和绑定</li>
+<li>行内样式，<a href="https://cn.vuejs.org/v2/guide/class-and-style.html#%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E5%89%8D%E7%BC%80">自带css兼容前缀</a></li>
+</ul>
+<p>Vue 的 class 绑定使用起来非常方便，完全感知不到<a href="https://github.com/JedWatson/classnames">classNames</a>这个库的存在。</p>
+<pre><code class="language-vue">// template
+&lt;div
+  class="static"
+  :class="{ active: isActive, 'text-danger': hasError }"
+&gt;&lt;/div&gt;
+
+// data
+data() {
+  return {
+    isActive: true,
+    hasError: false
+  }
+}
+
+//result
+
+&lt;div class="static active"&gt;&lt;/div&gt;
+</code></pre>
+<p><a name="hYm3s"></a></p>
+<h3>React</h3>
+<p>React 组件包含了<strong>交互</strong>和<strong>界面</strong>，但不含<strong>样式</strong>。 但幸运的是 React 社区十分活跃，有大量用于处理 CSS 的库可以选择。但是：</p>
+<ul>
+<li><strong>样式</strong>不是内置的功能</li>
+<li>你必须知道这些CSS库的存在，并学习使用</li>
+<li>支持行内样式，但没有兼容性前缀</li>
+</ul>
+<p>没有内置<a href="https://github.com/JedWatson/classnames">classNames</a>，你需要install，再使用。或者你也可以使用JavaScript自己计算，因为JavaScript确实可以做到。</p>
+<p><a name="UCs7b"></a></p>
+<h2>状态管理和路由</h2>
+<p>随着前端程序变得越来越大，越来越复杂，<strong>状态管理</strong>和<strong>路由</strong>都是必不可少的部分。</p>
+<p><a name="m6VOK"></a></p>
+<h3>Vue</h3>
+<p>Vue 同样内置了处理这两部分的功能，并在官网文档中有明确的提及到。</p>
+<ul>
+<li>Vue Router 处理<strong>路由</strong></li>
+<li>Vuex 处理<strong>状态管理</strong></li>
+<li>最最重要的是，这两个库由 Vue 核心团队维护</li>
+</ul>
+<p>这让新上手 Vue 的开发者，很明确的知道自己需要那些库来解决这些问题，没有挑选成本。（非常方便开发者）</p>
+<p><a name="CxVe1"></a></p>
+<h3>React</h3>
+<p>React 处理这两部分的库，同样是由社区开发维护的，而且多种可选，有一定挑选成本。</p>
+<ul>
+<li><strong>路由</strong>  React-Router</li>
+<li>**状态管理  **Redux/Mobx</li>
+<li>都由社区开发维护</li>
+</ul>
+<p>而且从个人使用体验来说，React这些库的学习成本都比较高。（原因？） <a name="fQ0oJ"></a></p>
+<h2></h2>
+<p><a name="yBurc"></a></p>
+<h2>指令（Vue独有）</h2>
+<blockquote>
+<p>指令 (Directives) 是带有&nbsp;v-&nbsp;前缀的特殊 attribute。指令 attribute 的值预期是单个 JavaScript 表达式&nbsp;(v-for&nbsp;是例外情况，稍后我们再讨论)。指令的职责是，当表达式的值改变时，将其产生的连带影响，响应式地作用于 DOM。</p>
+</blockquote>
+<p><a name="k0DGX"></a></p>
+<h3>指令修饰符</h3>
+<p>尤其是指令修饰符，极大的方便了开发者的使用。</p>
+<pre><code class="language-vue">&lt;!-- the click event's propagation will be stopped --&gt;
+&lt;a @click.stop="doThis"&gt;&lt;/a&gt;
+
+&lt;!-- the submit event will no longer reload the page --&gt;
+&lt;form @submit.prevent="onSubmit"&gt;&lt;/form&gt;
+
+&lt;!-- modifiers can be chained --&gt;
+&lt;a @click.stop.prevent="doThat"&gt;&lt;/a&gt;
+
+&lt;!-- just the modifier --&gt;
+&lt;form @submit.prevent&gt;&lt;/form&gt;
+</code></pre>
+<p><a name="aZd0H"></a></p>
+<h3>自定义指令</h3>
+<pre><code class="language-javascript">const app = Vue.createApp({})
+// Register a global custom directive called `v-focus`
+app.directive('focus', {
+  // When the bound element is mounted into the DOM...
+  mounted(el) {
+    // Focus the element
+    el.focus()
+  }
+})
+
+&lt;input v-focus /&gt;
+</code></pre>
+<p><a name="OVzdu"></a></p>
+<h2>v-modal（vue独有）</h2>
+<p>针对form表单，vue 还有一个比较方便的指令 <a href="https://cn.vuejs.org/v2/guide/forms.html">v-modal</a> 。</p>
+<blockquote>
+<p>你可以用&nbsp;v-model&nbsp;指令在表单&nbsp;<input>、<textarea>&nbsp;及&nbsp;&lt;select&gt;&nbsp;元素上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。尽管有些神奇，但&nbsp;v-model&nbsp;本质上不过是语法糖。它负责监听用户的输入事件以更新数据，并对一些极端场景进行一些特殊处理。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a name="LZBIa"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;&lt;/h2&gt;
+&lt;p&gt;贴一点和 react 对比的代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-javascript"&gt;// Input
+////////
+
+// React
+&lt;input type="input" value={message} onChange={onChange} /&gt;
+
+// Vue.js
+&lt;input type="input" v-model="message" /&gt;
+
+// Checkboxes and Radiobuttons
+////////
+
+// React
+&lt;input type="checkbox" checked={message != null} onChange={onChange} /&gt;
+
+// Vue.js
+&lt;input type="checkbox" v-model="message" /&gt;
+
+// Select
+////////
+
+// React
+&lt;select value={message} onChange={onChange}&gt;
+	&lt;option&gt;A&lt;/option&gt;
+&lt;/select&gt;
+
+// Vue.js
+&lt;select v-model="message"&gt;
+	&lt;option&gt;A&lt;/option&gt;
+&lt;/select&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里文档很明确的指出了&lt;strong&gt;双向绑定&lt;/strong&gt;这个概念，因为的确，它符合双向绑定的概念 。数据改变，自动同步改变到UI上，Form 表单的变动，自动同步到了数据。 &lt;a name="OO1Sy"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;&lt;/h2&gt;
+&lt;p&gt;另外网上经常说 vue 是双向绑定的，贴几个概念在这里：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一般只有UI表单控件才存在双向数据绑定，非UI表单控件只有单向数据绑定。&lt;/li&gt;
+&lt;li&gt;单向数据绑定是指：M的变化可以自动更新到ViewModel，但ViewModel的变化需要手动更新到M（通过给表单控件设置事件监听）&lt;/li&gt;
+&lt;li&gt;双向数据绑定是指念：M的变化可以自动更新到ViewModel，ViewModel的变化也可以自动更新到M&lt;/li&gt;
+&lt;li&gt;双向绑定 = 单向绑定 + UI事件监听。双向和单向只不过是框架封装程度上的差异，本质上两者是可以相互转换的。 &lt;a name="5mViB"&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a name="SZXJB"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;其它一些差异&lt;/h3&gt;
+&lt;p&gt;在 React 应用中，当某个组件的状态发生变化时，它会以该组件为根，重新渲染整个组件子树。
+在 Vue 应用中，组件的依赖是在渲染过程中自动追踪的，所以系统能精确知晓哪个组件确实需要被重渲染。&lt;/p&gt;
+&lt;p&gt;虽然React中可以通过&lt;code&gt;PureComponent&lt;/code&gt; 或者 &lt;code&gt;shouldComponentUpdate&lt;/code&gt;来优化掉不必要的渲染，但这个过程是交给用户的。&lt;/p&gt;
+&lt;p&gt;React 对数据变化毫无感知。&lt;/p&gt;
+&lt;p&gt;Vue 则明确得知道view需要那些数据，并监测数据得变化。&lt;/p&gt;
+&lt;p&gt;其它看到的一些比较有趣的观点：&lt;/p&gt;
+&lt;p&gt;react 相对于 vue 模板语言，缺少编译时的优化手段。&lt;/p&gt;
+&lt;p&gt;&lt;img src="../assets/gxxcqr/1602572822701-a6577eba-5159-48e3-94ca-dea24d74473a.png" alt="FD}(XGCF3ZINVNP%Q9X30$G.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a name="Y1hNT"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;&lt;/h2&gt;
+</textarea></p></blockquote>
+</section>
+
+    
+  </article>
+  
+<style>
+  .article-actions {
+    max-width: var(--content-max-width);
+
+    display: flex;
+    align-items: center;
+
+    margin: 40px auto;
+    padding: 0 30px;
+
+    font-family: common_font;
+    color: var(--normal-color);
+  }
+
+  .article-actions_action:not(:last-child)::after {
+    content: '·\00a0';
+  }
+
+  .article-actions_action > a {
+    color: inherit;
+    text-decoration-color: var(--primary-color);
+  }
+
+  @media (max-width: 520px) {
+    .article-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .article-actions_action::before {
+      content: '·';
+    }
+
+    .article-actions_action:not(:last-child)::after {
+      content: '';
+    }
+  }
+</style>
+
+<div class="article-actions">
+  <span class="article-actions_action">
+    使用 <a href="https://github.com/codebyzack/blog/discussions">Discussions</a> 讨论
+  </span>
+  <span class="article-actions_action">
+    在 <a href="https://github.com/codebyzack/blog/edit/master/articles//WEB/面试题记录/react_vue 的差异.md/index.md">Github</a> 上编辑
+  </span>
+</div>
+
+  <style>
+.page-footer {
+  font-size: 12px;
+  max-width: var(--content-max-width);
+  margin: 40px auto;
+  padding: 0 30px;
+  color: var(--secondary-color);
+}
+
+.page-footer > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* .page-footer > a > img{
+  user-select: none;
+  width: 12px;
+  height: 12px;
+} */
+
+.page-footer > .author {
+  text-decoration: underline;
+}
+
+.page-footer > a:hover {
+  color: var(--primary-color);
+}
+</style>
+
+<footer class="page-footer">
+  <a href="https://github.com/codebyzack/blog/blob/master/LICENSE">©</a> 2023
+  <a class="author" href="https://zackdk.com">行者、空山</a>
+  <!-- <a class="author" href="/rss.xml"><img src="/rss.png" alt="rss" /></a>
+  <a class="author" href="https://github.com/codebyzack/blog"><img src="/github.png" alt="github" /></a> -->
+</footer>
+
+
+  <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
+
+
+
+</body></html>

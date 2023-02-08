@@ -1,0 +1,740 @@
+<!DOCTYPE html><html lang="zh-cn"><head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="行者、空山">
+<meta name="keywords" content="HTML,CSS,JavaScript,Web,React,Life">
+
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YT4Q3D1PMY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YT4Q3D1PMY');
+</script>
+
+<!-- open graph -->
+<meta property="og:type" content="website">
+<meta property="og:image" content="/static/535460b8cc6a91e6a240fa069c326796.png">
+
+<script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+<link rel="shortcut icon" type="image/png" href="/static/535460b8cc6a91e6a240fa069c326796.png">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body { 
+    --content-max-width: 48rem;
+
+    --primary-color: #616161;
+    --accent-color:  #ee0290;
+    --normal-color: #333;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --tertiary-color: #ddd;
+    --backgroud: rgb(255 255 255);
+
+    --btn-background: #e5e7eb;
+
+    --border-radius: 2px;
+    --transition-duration: 0.3s;
+
+    background-color: var(--backgroud);
+    transition: background-color var(--transition-duration);
+
+    font-family: Helvetica Neue,helvetica,arial,Heti Hei,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  html.dark > body{
+    background-color: #000;
+    --primary-color: #616161;
+    --accent-color:  #79ffe1;
+    --normal-color: #9ca3af;
+    --link-color: #0070f3;
+    --secondary-color: rgba(75,85,99);
+    --btn-background: #1f2937;
+    --tertiary-color: #ddd;
+    --backgroud: rgb(0 0 0);
+  }
+</style>
+
+
+  <title>使用 Esbuild 在浏览器内编译 React - 行一度空山</title>
+  <meta name="description" content="## 为什么要在浏览器内编译 React ?  博客编写时需要实时预览，使用的 MDX 需要经过编译，预览则采用了 iframe 进行预览，所以我需要把 MDX 编译成 JavaScript ，放到 iframe 里。  ## esbuild 怎么跑在浏览器内的 ?  esbuild 提供了 was......">
+  <meta property="og:description" content="## 为什么要在浏览器内编译 React ?  博客编写时需要实时预览，使用的 MDX 需要经过编译，预览则采用了 iframe 进行预览，所以我需要把 MDX 编译成 JavaScript ，放到 iframe 里。  ## esbuild 怎么跑在浏览器内的 ?  esbuild 提供了 was......">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
+  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+</head>
+
+<body>
+  <style>
+  .page-header {
+    max-width: calc( var(--content-max-width) + 160px);
+    margin: 0 auto;
+    padding: 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .page-header_button{
+    width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    background-color: var(--btn-background);
+    border: none;
+    border-radius: 4px;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+
+  .page-header_button .theme-light{
+    display: initial;
+  }
+
+  .page-header_button .theme-dark{
+    display: none;
+  }
+
+  .dark .page-header_button .theme-dark{
+    display: initial;
+
+  }
+  .dark .page-header_button .theme-light{
+    display: none;
+  }
+
+  .page-header_theme{
+    width: 16px;
+    height: 16px;
+    color: var(--normal-color);
+  }
+
+  .page-header_nav > a{
+    color: var(--normal-color);
+    text-decoration: none;
+  }
+
+  .page-header_nav > a:hover{
+    color: var(--accent-color);
+    text-decoration: underline;
+
+  }
+
+  .page-header_nav > a + a{
+    margin-left: 8px;
+  }
+
+  .sticky-header{
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    transition: background-color .1 ease-in-out;
+  }
+
+
+
+</style>
+
+<header class="page-header sticky-header">
+  <button class="page-header_button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-light"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" class="page-header_theme theme-dark"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+  </button>
+
+  <div class="page-header_nav">
+    <a href="/rss.xml">RSS</a>
+    <a href="https://github.com/codebyzack/blog">Github</a>
+    <a href="/">首页</a>
+  </div>
+
+</header>
+
+  <article>
+    <style>
+.article-header {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding: 0 30px;
+}
+
+.article-title {
+  color: var(--normal-color);
+  font-size: 32px;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.article-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-publish-time {
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-family: common_font;
+}
+
+.article-info_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin-top: 20px;
+}
+
+.article-info_box > .article-info{
+  display: flex;
+  align-items: center;
+}
+
+.article-info_box > .article-info > img{
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+</style>
+
+<section class="article-header">
+  <h1 class="article-title">
+    <a href="//WEB/React相关/使用 Esbuild 在浏览器内编译 React.md">使用 Esbuild 在浏览器内编译 React</a>
+  </h1>
+  <div class="article-info_box">
+    <div class="article-info">
+      <img src="/static/535460b8cc6a91e6a240fa069c326796.png" alt="logo">
+      <span>行者、空山/2023-01-31 09:51</span>
+    </div>
+    <div class="article-readtime">
+      17 min read 
+    </div>
+  </div>
+</section>
+
+    <style>
+  code {
+    font-family: 'Fira Code' !important;
+  }
+
+  article {
+    --article-space: 30px;
+  }
+
+  article a {
+    color: var(--link-color);
+    text-decoration: none;
+    /* text-decoration-color: var(--primary-color); */
+  }
+  article a:hover{
+    text-decoration: underline;
+  }
+
+  article h2, article h3, article h4, article h5, article h6 {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 0 auto;
+    line-height: 1.5;
+    color: var(--normal-color);
+  }
+
+  article h2 {
+    margin-top: 28px;
+    font-size: 28px;
+  }
+
+  article h3 {
+    margin-top: 26px;
+    font-size: 25px;
+  }
+
+  article h4 {
+    margin-top: 24px;
+    font-size: 22px;
+  }
+
+  article h5 {
+    margin-top: 22px;
+    font-size: 19px;
+  }
+
+  article h6 {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  article p {
+    max-width: var(--content-max-width);
+    margin: 15px auto;
+    padding: 0 30px;
+    color: var(--normal-color);
+  }
+
+  article p code, article ul code {
+    padding: 0 4px;
+    /* border-radius: var(--border-radius); */
+    /* background: rgba(237, 106, 94, 0.3); */
+    color: var(--accent-color);
+  }
+
+  article pre {
+    max-width: var(--content-max-width) !important;
+    margin: 15px auto !important;
+    font-size: 14px !important;
+    box-sizing: border-box;
+    border-radius: var(--border-radius) !important;
+    tab-size: 2 !important;
+    padding: 0 !important;
+  }
+
+  article pre code {
+    display: block;
+    margin: 20px 30px !important;
+    overflow: auto !important;
+    font-size: inherit !important;
+  }
+
+  article hr {
+    max-width: var(--content-max-width);
+    margin: 40px auto;
+    padding: 0 var(--article-space);
+    border: none;
+  }
+
+  article hr::after{
+    content: '';
+    display: block;
+    height: 1px;
+    background-color:var(--tertiary-color);
+  }
+
+  article blockquote {
+    max-width: var(--content-max-width);
+    padding: 0 var(--article-space);
+    margin: 15px auto;
+    position: relative;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--secondary-color);
+  }
+
+  .table-container {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .table-container table {
+    border-collapse: collapse;
+  }
+
+  .table-container th, .table-container td {
+    font-size: 14px;
+    color: var(--normal-color);
+    border: 1px solid var(--tertiary-color);
+    padding: 10px;
+    text-align: left;
+  }
+
+  .table-container th {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  article blockquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 3px;
+    height: 100%;
+    background-color: var(--primary-color);
+  }
+
+  article blockquote p {
+    font-size: 16px;
+    color: inherit;
+    max-width: unset;
+    padding: 0;
+    margin: 0 0 0 30px;
+  }
+
+  article ul,
+  article ol {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+    color: var(--normal-color);
+    line-height: 1.5;
+  }
+
+  article ol {
+    counter-reset: li-count;
+  }
+  
+  article ul li, article ol li {
+    display: block;
+    margin: 5px 0;
+    position: relative;
+  }
+
+  article ol li {
+    counter-increment: li-count;
+  }
+
+  article ul li::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+
+    margin-right: 10px;
+
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+  }
+
+  article ol li::before {
+    content: counter( li-count) '. ';
+    color: var(--primary-color);
+  }
+
+  article figcaption {
+    font-size: 12px;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  .figure-img {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-img img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+  }
+  
+  .figure-video {
+    max-width: var(--content-max-width);
+    padding: 0 30px;
+    margin: 15px auto;
+  }
+
+  .figure-video video {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .figure-iframe {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .figure-iframe iframe {
+    display: block;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    height: 640px;
+    border: 1px solid var(--tertiary-color);
+    border-radius: var(--border-radius);
+  }
+
+</style>
+
+<section>
+  <h2>为什么要在浏览器内编译 React ?</h2>
+<p>博客编写时需要实时预览，使用的 MDX 需要经过编译，预览则采用了 iframe 进行预览，所以我需要把 MDX 编译成 JavaScript ，放到 iframe 里。</p>
+<h2>esbuild 怎么跑在浏览器内的 ?</h2>
+<p>esbuild 提供了 wasm 版本，是支持在浏览器内运行的，具体可以参考<a href="https://esbuild.github.io/api/#running-in-the-browser">官网</a>。</p>
+<h2>esbuild 在浏览器内运行，有啥问题么 ?</h2>
+<p>有的，浏览器内没有文件系统，所以你会看到如下的错误：</p>
+<pre><code class="language-shell">Uncaught (in promise) Error: Build failed with 3 errors:
+error: Cannot read directory ".": not implemented on js
+error: Cannot read directory ".": not implemented on js
+error: Could not resolve "index.jsx"
+</code></pre>
+<p>但可以通过 esbuild 提供的插件机制来解决。</p>
+<h2>亲手尝试一下在浏览器内使用 esbuild 编译</h2>
+<ol>
+<li>引入 esbuild</li>
+</ol>
+<pre><code class="language-html">&lt;script src="https://www.unpkg.com/esbuild-wasm/lib/browser.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    esbuild
+    .initialize({
+        wasmURL: 'https://www.unpkg.com/esbuild-wasm/esbuild.wasm',
+    })
+    .then(() =&gt; {
+        build();
+    });
+
+    const build = () =&gt; {
+        console.log(esbuild);
+    };
+&lt;/script&gt;
+</code></pre>
+<ol start="2">
+<li>使用 esbuild</li>
+</ol>
+<pre><code class="language-javascript">
+esbuild.build({
+    entryPoints: ['index.jsx'],
+    bundle: true,
+    write: false,
+});
+</code></pre>
+<p>不出意外，你就能看到上面那个错误了，因为在浏览器里， esbuild 并不知道去那里读取 <code>index.jsx</code> 这个文件。</p>
+<ol start="3">
+<li>使用插件解决在浏览器内读取文件的问题</li>
+</ol>
+<p>esbuild 插件格式如下：</p>
+<pre><code class="language-javascript">const myPlugin = {
+    name: 'myPlugin',
+    setup: (build) =&gt; {
+        build.onResolve({ filter: /.*/ }, (args) =&gt; {});
+        build.onLoad({ filter: /.*/ }, (args) =&gt; {});
+    },
+};
+</code></pre>
+<p><code>onResolve</code> 是用来解析引入模块的地址的，要求模块的具体地址， <code>onLoad</code> 则是根据 <code>onResolve</code> 返回的 path 去拿到实际的文件内容。</p>
+<p>这个机制正好能解决我们的问题。</p>
+<pre><code class="language-javascript">const files = {
+    '/index.jsx': indexJSX,
+    '/App.jsx': appJSX,
+};
+const myPlugin = {
+    name: 'myPlugin',
+    setup: (build) =&gt; {
+        build.onResolve({ filter: /.*/ }, (args) =&gt; {
+            // 入口文件单独处理
+            if (args.kind === 'entry-point') {
+                return { path: '/' + args.path };
+            }
+            // 这里只是简单处理一下
+            if (args.path === './App.jsx') {
+                return { path: '/App.jsx' };
+            }
+        });
+        build.onLoad({ filter: /.*/ }, (args) =&gt; {
+            if (args.path === '/index.jsx') {
+                return {
+                contents: files['/index.jsx'],
+                loader: 'jsx',
+                };
+            }
+            if (args.path === '/App.jsx') {
+                return {
+                contents: files['/App.jsx'],
+                loader: 'jsx',
+                };
+            }
+            return null;
+        });
+    },
+};
+esbuild.build({
+    entryPoints: ['index.jsx'],
+    bundle: true,
+    write: false,
+    plugins: [myPlugin],
+
+});
+</code></pre>
+<p>如上的插件能解决我们自己的文件引入问题，但控制台还有个错误</p>
+<pre><code class="language-javascript">Uncaught (in promise) Error: Build failed with 2 errors:
+error: Cannot read directory ".": not implemented on js
+index.jsx:1:18: ERROR: Could not resolve "react"
+</code></pre>
+<p>针对第三方包，我们并没有处理。我们当然可以继续沿着上面的逻辑处理，去引入 cdn 上的 React 文件，因为 <code>onLoad</code> 可以是异步的。
+这里我们换一种方式，使用 script 标签引入 React 和 ReactDOM ， esbuild 直接使用 window 上的变量。所以继续对插件进行改造。</p>
+<pre><code class="language-javascript">const files = {
+    '/index.jsx': indexJSX,
+    '/App.jsx': appJSX,
+};
+
+const externals = {
+    react: 'React',
+    'react-dom/client': 'ReactDOM',
+};
+
+const myPlugin = {
+    name: 'myPlugin',
+    setup: (build) =&gt; {
+        build.onResolve({ filter: /.*/ }, (args) =&gt; {
+            // 入口文件单独处理
+            if (args.kind === 'entry-point') {
+                return { path: '/' + args.path };
+            }
+            // 这里只是简单处理一下
+            if (args.path === './App.jsx') {
+                return { path: '/App.jsx' };
+            }
+            if (Object.keys(externals).includes(args.path)) {
+                return { path: `/externals/${args.path}` };
+            }
+        });
+        build.onLoad({ filter: /.*/ }, (args) =&gt; {
+            if (args.path === '/index.jsx') {
+                return {
+                contents: files['/index.jsx'],
+                loader: 'jsx',
+                };
+            }
+            if (args.path === '/App.jsx') {
+                return {
+                contents: files['/App.jsx'],
+                loader: 'jsx',
+                };
+            }
+            if (args.path.startsWith('/externals/')) {
+                const libName = args.path.replace('/externals/', '');
+                const contents = `module.exports = ${externals[libName]}`;
+                return { contents };
+            }
+            return null;
+        });
+    },
+};
+
+const res = await esbuild.build({
+    entryPoints: ['index.jsx'],
+    bundle: true,
+    write: false,
+    plugins: [myPlugin],
+});
+
+console.log(res);
+</code></pre>
+<p>好了能正常编译出来了。但输出的是 <code>Uint8Array</code> 。需要 decode 一下。</p>
+<pre><code class="language-javascript">const contents = res.outputFiles[0].contents;
+const decoder = new TextDecoder();
+const text = decoder.decode(contents);
+</code></pre>
+<h2>以上最终代码的集合</h2>
+
+      <figure class="figure-iframe">
+        <iframe src="https://stackblitz.com/edit/web-platform-tqkzwj?embed=1&amp;file=index.html&amp;hideExplorer=1" title="undefined" loading="lazy"></iframe>
+        
+      </figure>
+    
+</section>
+
+    
+  </article>
+  
+<style>
+  .article-actions {
+    max-width: var(--content-max-width);
+
+    display: flex;
+    align-items: center;
+
+    margin: 40px auto;
+    padding: 0 30px;
+
+    font-family: common_font;
+    color: var(--normal-color);
+  }
+
+  .article-actions_action:not(:last-child)::after {
+    content: '·\00a0';
+  }
+
+  .article-actions_action > a {
+    color: inherit;
+    text-decoration-color: var(--primary-color);
+  }
+
+  @media (max-width: 520px) {
+    .article-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .article-actions_action::before {
+      content: '·';
+    }
+
+    .article-actions_action:not(:last-child)::after {
+      content: '';
+    }
+  }
+</style>
+
+<div class="article-actions">
+  <span class="article-actions_action">
+    使用 <a href="https://github.com/codebyzack/blog/discussions">Discussions</a> 讨论
+  </span>
+  <span class="article-actions_action">
+    在 <a href="https://github.com/codebyzack/blog/edit/master/articles//WEB/React相关/使用 Esbuild 在浏览器内编译 React.md/index.md">Github</a> 上编辑
+  </span>
+</div>
+
+  <style>
+.page-footer {
+  font-size: 12px;
+  max-width: var(--content-max-width);
+  margin: 40px auto;
+  padding: 0 30px;
+  color: var(--secondary-color);
+}
+
+.page-footer > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* .page-footer > a > img{
+  user-select: none;
+  width: 12px;
+  height: 12px;
+} */
+
+.page-footer > .author {
+  text-decoration: underline;
+}
+
+.page-footer > a:hover {
+  color: var(--primary-color);
+}
+</style>
+
+<footer class="page-footer">
+  <a href="https://github.com/codebyzack/blog/blob/master/LICENSE">©</a> 2023
+  <a class="author" href="https://zackdk.com">行者、空山</a>
+  <!-- <a class="author" href="/rss.xml"><img src="/rss.png" alt="rss" /></a>
+  <a class="author" href="https://github.com/codebyzack/blog"><img src="/github.png" alt="github" /></a> -->
+</footer>
+
+
+  <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
+
+
+
+</body></html>
