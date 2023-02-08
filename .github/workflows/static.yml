@@ -1,0 +1,26 @@
+name: build and deploy to gh-pages
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+jobs:
+  build_and_deploy_to_gh_pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+
+      - uses: actions/setup-node@main
+        with:
+          node-version: 14
+
+      - run: |
+          npm install
+          npm run build
+          
+      - run: echo 'zackdk.com' > build/CNAME
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build
