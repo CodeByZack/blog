@@ -17,6 +17,8 @@ jobs:
       - run: |
           npm install
           npm run build
+          
+      - run: echo 'zackdk.com' > build/CNAME
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
