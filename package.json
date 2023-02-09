@@ -27,12 +27,8 @@
     "md5": "^2.3.0",
     "ora": "^5.1.0",
     "prettier": "^2.2.1",
-    "showdown": "^1.9.1",
-    "yargs": "^17.0.1"
-  },
-  "dependencies": {
+    "yargs": "^17.0.1",
     "micromark": "^3.1.0",
-    "micromark-extension-gfm": "^2.0.1",
     "micromark-extension-gfm-table": "^1.0.5",
     "micromark-extension-gfm-task-list-item": "^1.0.3"
   }
