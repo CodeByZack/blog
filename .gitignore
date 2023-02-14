@@ -8,3 +8,4 @@ build/
 
 # macOS
 .DS_Store
+yarn-error.log
