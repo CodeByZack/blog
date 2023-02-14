@@ -467,6 +467,10 @@
 </style>
 
 <section>
+  <div class="markmap"><script type="text/template">---
+markmap:
+  initialExpandLevel: 1
+---
   # web知识图谱
 
 ## CSS知识点
@@ -503,7 +507,7 @@
         - 相邻兄弟选择器
     - A ~ B
         - 普通兄弟选择器
-    - A &gt; B
+    - A > B
         - 子选择器
     - A B
         - 后代选择器
@@ -528,7 +532,7 @@
     - ::before
         - 在元素前插入内容
   - 选择器优先级
-    - !important &gt; 内联样式 &gt; ID选择器 &gt; 类选择器 &gt;标签选择器 &gt; 通配选择器、子代选择器、后代选择器
+    - !important > 内联样式 > ID选择器 > 类选择器 >标签选择器 > 通配选择器、子代选择器、后代选择器
     - 当这些选择器组合的时候，对应有个数值，可以相加得到权重，通常来说权重高的优先级高一些，但有些情况比较特殊。
 - 继承性
   - 默认继承父元素的属性
@@ -561,11 +565,11 @@
         - float 属性不为 none
         - overflow 不为 visible
         - position 为 absolute 或 fixed
-  - IFC (Inline Formatting Context)&nbsp;
+  - IFC (Inline Formatting Context) 
     - 特性
         - 节点无法声明宽高，其中 margin 和 padding 在水平方向有效在垂直方向无效
         - 当一个内联盒子超过父元素的宽度时，它会被分割成多盒子，这些盒子分布在多个 line box 中。如果子元素未设置强制换行的情况下，inline box 将不可被分割，将会溢出父元素
-  - FFC (Flex Formatting Context)&nbsp;
+  - FFC (Flex Formatting Context) 
   - GFC (Grid Formatting Context)
 - 浮动
   - fixed
@@ -633,7 +637,7 @@
     - Header 压缩
     - PUSH 机制
   - HTTP/3
-    - 采用 QUIC 协议&nbsp;
+    - 采用 QUIC 协议 
     - 底层换成了 UDP 协议
   - HTTPS
     - HTTP + SSL
@@ -823,7 +827,7 @@
                 - `function Child(){ Parent.call(this) }； Child.prototype = new Parent()`
             - 父函数相当于执行了两次，造成了属性浪费
         - 寄生继承
-            - 解决属性浪费，直接在子类函数体内，拿到拥有父类原型的空函数生成的对象，把这个对象当作 this 继续执行。&nbsp;
+            - 解决属性浪费，直接在子类函数体内，拿到拥有父类原型的空函数生成的对象，把这个对象当作 this 继续执行。 
         - 组合寄生继承
             - 组合 + 寄生继承
                 - `function Child(){ Parent.call(this) }; Child.prototype  = Object.create(Parent.prototype);`
@@ -880,7 +884,7 @@
 - ​
 ## 浏览器相关
 
-- 同源策略
+- 同源策略</script></div>
 </section>
 
     
@@ -972,6 +976,21 @@
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
+  
+  <style>
+    .markmap {
+      max-width: var(--content-max-width);
+      margin: 15px auto;
+      padding: 0 30px;
+      color: var(--normal-color);
+    }
+    .markmap > svg{
+      width: 100%;
+      height: calc(100vh - 440px);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@latest"></script>
+  
 
 
 
