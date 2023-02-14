@@ -115,7 +115,12 @@ const transformNormalMarkdown = async (mdBody,mdPath)=>{
  * @returns 
  */
 const transformMindMarkdown = (mdBody)=>{
-  return mdBody;
+  const template = `<div class="markmap"><script type="text/template">---
+markmap:
+  initialExpandLevel: 1
+---
+  [MARKDOWN]</script></div>`
+  return template.replace('[MARKDOWN]',mdBody);
 };
 
 export default async (id) => {
@@ -153,6 +158,7 @@ export default async (id) => {
     hidden: attributes.hidden || false,
     content,
     mdText,
-    readTimeStr
+    readTimeStr,
+    isMind: attributes.isMind
   };
 };

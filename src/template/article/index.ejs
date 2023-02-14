@@ -23,6 +23,21 @@
   <%- include('../common/footer.ejs') %>
 
   <script src="/theme.js"></script>
+  <% if (isMind) { %>
+  <style>
+    .markmap {
+      max-width: var(--content-max-width);
+      margin: 15px auto;
+      padding: 0 30px;
+      color: var(--normal-color);
+    }
+    .markmap > svg{
+      width: 100%;
+      height: calc(100vh - 440px);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@latest"></script>
+  <% } %>
 </body>
 
 </html>
