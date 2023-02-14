@@ -74,7 +74,7 @@
   <meta name="description" content="vue有许多内部指令，比如v-on,v-bind,v-model。 当内部指令不能满足我们时，我们也可以定义一些属于自己的指令。 <a name=&quot;39e43c78&quot;></a>  ### 如何定义      // 注册一个全局自定义指令 `v-empty`     Vue.directive('em......">
   <meta property="og:description" content="vue有许多内部指令，比如v-on,v-bind,v-model。 当内部指令不能满足我们时，我们也可以定义一些属于自己的指令。 <a name=&quot;39e43c78&quot;></a>  ### 如何定义      // 注册一个全局自定义指令 `v-empty`     Vue.directive('em......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -468,34 +468,33 @@
 
 <section>
   <p>vue有许多内部指令，比如v-on,v-bind,v-model。
-当内部指令不能满足我们时，我们也可以定义一些属于自己的指令。 <a name="39e43c78"></a></p>
+当内部指令不能满足我们时，我们也可以定义一些属于自己的指令。 </p>
 <h3>如何定义</h3>
-<pre><code>// 注册一个全局自定义指令 `v-empty`
-Vue.directive('empty', {
+<div class="remark-highlight"><pre class="language-unknown"><code class="language-unknown">// 注册一个全局自定义指令 `v-empty`
+Vue.directive(&amp;#39;empty&amp;#39;, {
     bind:function(){//被绑定
-         console.log('1 - bind');
+         console.log(&amp;#39;1 - bind&amp;#39;);
     },
     inserted:function(){//绑定到节点
-          console.log('2 - inserted');
+          console.log(&amp;#39;2 - inserted&amp;#39;);
     },
     update:function(){//组件更新
-          console.log('3 - update');
+          console.log(&amp;#39;3 - update&amp;#39;);
     },
     componentUpdated:function(){//组件更新完成
-          console.log('4 - componentUpdated');
+          console.log(&amp;#39;4 - componentUpdated&amp;#39;);
     },
     unbind:function(){//解绑
-          console.log('1 - bind');
+          console.log(&amp;#39;1 - bind&amp;#39;);
     }
 });
 
 //有时候可能想在 bind 和 update 时触发相同行为，而不关心其它的钩子。可以进行简写。
 
-Vue.directive('empty', function (el, binding) {
-  console.log("---简写---");
-})
-</code></pre>
-<p><a name="416cabe3"></a></p>
+Vue.directive(&amp;#39;empty&amp;#39;, function (el, binding) {
+  console.log(&amp;quot;---简写---&amp;quot;);
+})</code></pre></div>
+<p></p>
 <h3>钩子函数的参数</h3>
 <ul>
 <li><code>el</code>：指令所绑定的元素，可以用来直接操作 DOM 。</li>
@@ -512,53 +511,50 @@ Vue.directive('empty', function (el, binding) {
 <li><code>vnode</code>：Vue 编译生成的虚拟节点。移步 VNode API 来了解更多详情。</li>
 <li><code>oldVnode</code>：上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。</li>
 </ul>
-<p><a name="481feccf"></a></p>
+<p></p>
 <h3>如何使用</h3>
-<p><a name="85a33544"></a></p>
+<p></p>
 <h4>常见使用场景一</h4>
 <p>在图片未完成加载前，用随机的背景色占位，图片加载完成后才直接渲染出来。</p>
-<pre><code>Vue.directive('img', function (el, binding) {
+<div class="remark-highlight"><pre class="language-unknown"><code class="language-unknown">Vue.directive(&amp;#39;img&amp;#39;, function (el, binding) {
   let color = Math.floor(Math.random()*1000000);
-  el.style.backgroundColor = "#"+color;
+  el.style.backgroundColor = &amp;quot;#&amp;quot;+color;
   let img = new Image();
   img.src = binding.value;
   img.onload = function(){
-      el.style.backgroundImage = "url("+binding.value+")";   
+      el.style.backgroundImage = &amp;quot;url(&amp;quot;+binding.value+&amp;quot;)&amp;quot;;   
   }
 })
 
-&lt;div v-img="url" id="demo"&gt;
+&amp;lt;div v-img=&amp;quot;url&amp;quot; id=&amp;quot;demo&amp;quot;&amp;gt;
             
-&lt;/div&gt;
-</code></pre>
-<p><a name="489f921b"></a></p>
+&amp;lt;/div&amp;gt;</code></pre></div>
+<p></p>
 <h4>常见使用场景二</h4>
 <p>常见的 tip 提示弹框的功能，鼠标移入元素，可以在元素的上下左右显示 tip，鼠标移出则隐藏 tip。</p>
-<pre><code>//简单演示，正式使用，请自行完善。
-Vue.directive('tip', function (el, binding) {
-  let span = document.createElement("span");
-  span.style.position = "absolute";
+<div class="remark-highlight"><pre class="language-unknown"><code class="language-unknown">//简单演示，正式使用，请自行完善。
+Vue.directive(&amp;#39;tip&amp;#39;, function (el, binding) {
+  let span = document.createElement(&amp;quot;span&amp;quot;);
+  span.style.position = &amp;quot;absolute&amp;quot;;
   span.innerHTML = binding.value;
-  span.style.backgroundColor = "#333333";
-  span.style.borderRadius = "5px"; 
-  span.style.color = "#fff"; 
-  span.style.padding = "10px";
+  span.style.backgroundColor = &amp;quot;#333333&amp;quot;;
+  span.style.borderRadius = &amp;quot;5px&amp;quot;; 
+  span.style.color = &amp;quot;#fff&amp;quot;; 
+  span.style.padding = &amp;quot;10px&amp;quot;;
   el.onmouseover = function(){
-  	el.style.position = "relative";
+  	el.style.position = &amp;quot;relative&amp;quot;;
         el.appendChild(span);
-        span.style.right = -span.clientWidth+"px";
-  	span.style.top = (el.clientHeight/2-span.clientHeight/2)+"px";
+        span.style.right = -span.clientWidth+&amp;quot;px&amp;quot;;
+  	span.style.top = (el.clientHeight/2-span.clientHeight/2)+&amp;quot;px&amp;quot;;
   }
   el.onmouseout = function(){
     el.removeChild(span);
   }
 })
 
-&lt;div v-img="url" v-tip="tip" id="demo"&gt;
+&amp;lt;div v-img=&amp;quot;url&amp;quot; v-tip=&amp;quot;tip&amp;quot; id=&amp;quot;demo&amp;quot;&amp;gt;
             
-&lt;/div&gt;
-</code></pre>
-
+&amp;lt;/div&amp;gt;</code></pre></div>
 </section>
 
     
@@ -650,7 +646,6 @@ Vue.directive('tip', function (el, binding) {
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

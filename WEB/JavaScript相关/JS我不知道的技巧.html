@@ -74,7 +74,7 @@
   <meta name="description" content="<a name=&quot;5da89314&quot;></a>  ## 最大值  ```javascript Math.max(10,2,33,55); //55 //针对数组 Math.max(...[10,2,33,55]); ```  <a name=&quot;d93a8b48&quot;></a>  ## 数组，字符串去重 ......">
   <meta property="og:description" content="<a name=&quot;5da89314&quot;></a>  ## 最大值  ```javascript Math.max(10,2,33,55); //55 //针对数组 Math.max(...[10,2,33,55]); ```  <a name=&quot;d93a8b48&quot;></a>  ## 数组，字符串去重 ......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -467,135 +467,134 @@
 </style>
 
 <section>
-  <p><a name="5da89314"></a></p>
+  <p></p>
 <h2>最大值</h2>
-<pre><code class="language-javascript">Math.max(10,2,33,55); //55
-//针对数组
-Math.max(...[10,2,33,55]);
-</code></pre>
-<p><a name="d93a8b48"></a></p>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token known-class-name class-name">Math</span><span class="token punctuation">.</span><span class="token method function property-access">max</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">33</span><span class="token punctuation">,</span><span class="token number">55</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//55</span>
+<span class="token comment">//针对数组</span>
+<span class="token known-class-name class-name">Math</span><span class="token punctuation">.</span><span class="token method function property-access">max</span><span class="token punctuation">(</span><span class="token spread operator">...</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">33</span><span class="token punctuation">,</span><span class="token number">55</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
+<p></p>
 <h2>数组，字符串去重</h2>
-<pre><code class="language-javascript">// 去除数组的重复成员
-[...new Set(array)]
-//字符串去重
-[...new Set('ababbc')].join('')
-</code></pre>
-<p><a name="b06baad0"></a></p>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// 去除数组的重复成员</span>
+<span class="token punctuation">[</span><span class="token spread operator">...</span><span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token comment">//字符串去重</span>
+<span class="token punctuation">[</span><span class="token spread operator">...</span><span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span><span class="token string">'ababbc'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token method function property-access">join</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span>
+</code></pre></div>
+<p></p>
 <h2>关于箭头函数的疑惑</h2>
-<pre><code class="language-javascript">let test = {bar:()=&gt;{console.log(this)}};
-function scope(){
-	let test2 = {bar:()=&gt;{console.log(this)}};
-	test.bar();
-	test2.bar();
-}
-let t = {run:scope};
-t.run();
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> test <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token function-variable function">bar</span><span class="token operator">:</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">scope</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">let</span> test2 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token function-variable function">bar</span><span class="token operator">:</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+	test<span class="token punctuation">.</span><span class="token method function property-access">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	test2<span class="token punctuation">.</span><span class="token method function property-access">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">let</span> t <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token literal-property property">run</span><span class="token operator">:</span>scope<span class="token punctuation">}</span><span class="token punctuation">;</span>
+t<span class="token punctuation">.</span><span class="token method function property-access">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <ul>
 <li>函数运行时（执行环境）会有一个this参数传递进来。</li>
 <li>对象不会运行，不存在this。</li>
 <li>箭头函数没有this，this是外层执行作用域上的一个变量，外层执行作用域的this指向由绑定规则决定。</li>
 </ul>
-<p><a name="iOVU5"></a></p>
+<p></p>
 <h2>关于取整</h2>
-<pre><code class="language-javascript">~~3.122222
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token operator">~</span><span class="token operator">~</span><span class="token number">3.122222</span>
 
-//3
-</code></pre>
-<p><a name="4aoCG"></a></p>
+<span class="token comment">//3</span>
+</code></pre></div>
+<p></p>
 <h2>deepGet</h2>
 <p>当对象嵌套层级太深时，可以使用这个方法来获取你想要的值。</p>
-<pre><code class="language-javascript">const deepGet = (obj, keys) =&gt; keys.reduce((xs, x) =&gt; (xs &amp;&amp; xs[x] ? xs[x] : null), obj);
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">deepGet</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">obj<span class="token punctuation">,</span> keys</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> keys<span class="token punctuation">.</span><span class="token method function property-access">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">xs<span class="token punctuation">,</span> x</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">(</span>xs <span class="token operator">&amp;&amp;</span> xs<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">?</span> xs<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token keyword null nil">null</span><span class="token punctuation">)</span><span class="token punctuation">,</span> obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-let index = 2;
-const data = {
-  foo: {
-    foz: [1, 2, 3],
-    bar: {
-      baz: ['a', 'b', 'c']
-    }
-  }
-};
-deepGet(data, ['foo', 'foz', index]); // get 3
-deepGet(data, ['foo', 'bar', 'baz', 8, 'foz']); // null
-</code></pre>
-<p><a name="8soBn"></a></p>
+<span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">foo</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">foz</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">bar</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">baz</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token function">deepGet</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'foo'</span><span class="token punctuation">,</span> <span class="token string">'foz'</span><span class="token punctuation">,</span> index<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// get 3</span>
+<span class="token function">deepGet</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'foo'</span><span class="token punctuation">,</span> <span class="token string">'bar'</span><span class="token punctuation">,</span> <span class="token string">'baz'</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token string">'foz'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// null</span>
+</code></pre></div>
+<p></p>
 <h2>深拷贝</h2>
-<pre><code class="language-javascript">function deepClone(obj, cache = []){
-  if (obj === null || typeof obj !== 'object') {
-    return obj;
-  }
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">deepClone</span><span class="token punctuation">(</span><span class="token parameter">obj<span class="token punctuation">,</span> cache <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>obj <span class="token operator">===</span> <span class="token keyword null nil">null</span> <span class="token operator">||</span> <span class="token keyword">typeof</span> obj <span class="token operator">!==</span> <span class="token string">'object'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword control-flow">return</span> obj<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  const has = cache.filter(c =&gt; c.orignal === obj)[0];
-  if (has) {
-    return has.copy;
-  }
+  <span class="token keyword">const</span> has <span class="token operator">=</span> cache<span class="token punctuation">.</span><span class="token method function property-access">filter</span><span class="token punctuation">(</span><span class="token parameter">c</span> <span class="token arrow operator">=&gt;</span> c<span class="token punctuation">.</span><span class="token property-access">orignal</span> <span class="token operator">===</span> obj<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>has<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword control-flow">return</span> has<span class="token punctuation">.</span><span class="token property-access">copy</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  const copy = Array.isArray(obj) ? [] : {};
-  cache.push({
-    orignal: obj,
+  <span class="token keyword">const</span> copy <span class="token operator">=</span> <span class="token known-class-name class-name">Array</span><span class="token punctuation">.</span><span class="token method function property-access">isArray</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  cache<span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">orignal</span><span class="token operator">:</span> obj<span class="token punctuation">,</span>
     copy
-  });
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  Object.keys(obj).forEach(key =&gt; {
-    copy[key] = deepClone(obj[key], cache);
-  });
-  return copy;
-}
+  <span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">keys</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">key</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+    copy<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">deepClone</span><span class="token punctuation">(</span>obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span> cache<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> copy<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-const a = { foo: 'bar', obj: { a: 1, b: 2 } };
-const b = deepClone(a); // a !== b, a.obj !== b.obj
-</code></pre>
-<p><a name="rgAy8"></a></p>
+<span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token literal-property property">foo</span><span class="token operator">:</span> <span class="token string">'bar'</span><span class="token punctuation">,</span> <span class="token literal-property property">obj</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">b</span><span class="token operator">:</span> <span class="token number">2</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token function">deepClone</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// a !== b, a.obj !== b.obj</span>
+</code></pre></div>
+<p></p>
 <h2>挖掘</h2>
-<pre><code class="language-javascript">const dig = (obj, target) =&gt;
-  target in obj
-    ? obj[target]
-    : Object.values(obj).reduce((acc, val) =&gt; {
-      if (acc !== undefined) return acc;
-      if (typeof val === 'object') return dig(val, target);
-    }, undefined);
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">dig</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">obj<span class="token punctuation">,</span> target</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span>
+  target <span class="token keyword">in</span> obj
+    <span class="token operator">?</span> obj<span class="token punctuation">[</span>target<span class="token punctuation">]</span>
+    <span class="token operator">:</span> <span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">values</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">acc<span class="token punctuation">,</span> val</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>acc <span class="token operator">!==</span> <span class="token keyword nil">undefined</span><span class="token punctuation">)</span> <span class="token keyword control-flow">return</span> acc<span class="token punctuation">;</span>
+      <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> val <span class="token operator">===</span> <span class="token string">'object'</span><span class="token punctuation">)</span> <span class="token keyword control-flow">return</span> <span class="token function">dig</span><span class="token punctuation">(</span>val<span class="token punctuation">,</span> target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword nil">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 
-const data = {
-  level1: {
-    level2: {
-      level3: 'some data'
-    }
-  }
-};
-dig(data, 'level3'); // 'some data'
-dig(data, 'level4'); // undefined
-</code></pre>
-<p><a name="MMGjv"></a></p>
+<span class="token keyword">const</span> data <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">level1</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">level2</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">level3</span><span class="token operator">:</span> <span class="token string">'some data'</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token function">dig</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token string">'level3'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 'some data'</span>
+<span class="token function">dig</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token string">'level4'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// undefined</span>
+</code></pre></div>
+<p></p>
 <h2></h2>
-<p><a name="zfmxi"></a></p>
+<p></p>
 <h2>生成随机整数</h2>
-<pre><code class="language-javascript">const randomNum = (min,max)=&gt;{
-	max || (max=min,min=0)
-	return  parseInt(Math.random()*(max-min+1)+min,10);
-}
-</code></pre>
-<p><a name="ZJKrs"></a></p>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">randomNum</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">min<span class="token punctuation">,</span>max</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+	max <span class="token operator">||</span> <span class="token punctuation">(</span>max<span class="token operator">=</span>min<span class="token punctuation">,</span>min<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+	<span class="token keyword control-flow">return</span>  <span class="token function">parseInt</span><span class="token punctuation">(</span><span class="token known-class-name class-name">Math</span><span class="token punctuation">.</span><span class="token method function property-access">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>max<span class="token operator">-</span>min<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">+</span>min<span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p></p>
 <h2>axios缺失content-type</h2>
 <p>在浏览器端使用的时候，post请求如果没有带data，会缺失content-type这个头部信息。
 这是因为axios在发请求时做了一次过滤，当data为空，会主动删除content-type。
 axios源码如下</p>
-<pre><code class="language-javascript">  // Add headers to the request
-  if ('setRequestHeader' in request) {
-    utils.forEach(requestHeaders, function setRequestHeader(val, key) {
-      if (typeof requestData === 'undefined' &amp;&amp; key.toLowerCase() === 'content-type') {
-        // Remove Content-Type if data is undefined
-        delete requestHeaders[key];
-      } else {
-        // Otherwise add header to the request
-        request.setRequestHeader(key, val);
-      }
-    });
-  }
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// Add headers to the request</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token string">'setRequestHeader'</span> <span class="token keyword">in</span> request<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    utils<span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span>requestHeaders<span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token function">setRequestHeader</span><span class="token punctuation">(</span><span class="token parameter">val<span class="token punctuation">,</span> key</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> requestData <span class="token operator">===</span> <span class="token string">'undefined'</span> <span class="token operator">&amp;&amp;</span> key<span class="token punctuation">.</span><span class="token method function property-access">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'content-type'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Remove Content-Type if data is undefined</span>
+        <span class="token keyword">delete</span> requestHeaders<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword control-flow">else</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Otherwise add header to the request</span>
+        request<span class="token punctuation">.</span><span class="token method function property-access">setRequestHeader</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</code></pre></div>
 <p>其实应该删除，因为没有data（即请求体/body/request-payload），content-type确实没必要。</p>
-
 </section>
 
     
@@ -687,7 +686,6 @@ axios源码如下</p>
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

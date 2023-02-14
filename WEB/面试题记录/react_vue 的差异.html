@@ -74,7 +74,7 @@
   <meta name="description" content="经常被问，react和vue的差异。其实最大差异在官网的自我介绍中，就已经很明显了。  > React: A JavaScript library for building user interfaces.  <a name=&quot;Xu24j&quot;></a>  ##  > Vue: The Progress......">
   <meta property="og:description" content="经常被问，react和vue的差异。其实最大差异在官网的自我介绍中，就已经很明显了。  > React: A JavaScript library for building user interfaces.  <a name=&quot;Xu24j&quot;></a>  ##  > Vue: The Progress......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -471,13 +471,13 @@
 <blockquote>
 <p>React: A JavaScript library for building user interfaces.</p>
 </blockquote>
-<p><a name="Xu24j"></a></p>
+<p></p>
 <h2></h2>
 <blockquote>
 <p>Vue: The Progressive JavaScript Framework.</p>
 </blockquote>
 <p>一个是库，一个是框架。框架专注于大而全，内嵌所有必须的功能，努力提供一个好的开发环境给开发者。库提供的功能相对来说更简单，单一。但专注于该功能，并尽力做到最好。</p>
-<p><a name="Qdy1O"></a></p>
+<p></p>
 <h2>组件</h2>
 <p>React 和 Vue 都提供了组件，前端组件泛泛来说一般包含三个部分：</p>
 <ol>
@@ -485,7 +485,7 @@
 <li>交互（JavaScript）</li>
 <li>样式（CSS）</li>
 </ol>
-<p><a name="5jmVS"></a></p>
+<p></p>
 <h3>Vue</h3>
 <p>Vue 提供的单文件组件，同时包含了这三部分，而且还内置了<a href="https://github.com/JedWatson/classnames">classNames</a>。（非常方便开发者）</p>
 <ul>
@@ -494,11 +494,11 @@
 <li>行内样式，<a href="https://cn.vuejs.org/v2/guide/class-and-style.html#%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E5%89%8D%E7%BC%80">自带css兼容前缀</a></li>
 </ul>
 <p>Vue 的 class 绑定使用起来非常方便，完全感知不到<a href="https://github.com/JedWatson/classnames">classNames</a>这个库的存在。</p>
-<pre><code class="language-vue">// template
-&lt;div
-  class="static"
-  :class="{ active: isActive, 'text-danger': hasError }"
-&gt;&lt;/div&gt;
+<div class="remark-highlight"><pre class="language-vue"><code class="language-vue">// template
+&amp;lt;div
+  class=&amp;quot;static&amp;quot;
+  :class=&amp;quot;{ active: isActive, &amp;#39;text-danger&amp;#39;: hasError }&amp;quot;
+&amp;gt;&amp;lt;/div&amp;gt;
 
 // data
 data() {
@@ -510,9 +510,8 @@ data() {
 
 //result
 
-&lt;div class="static active"&gt;&lt;/div&gt;
-</code></pre>
-<p><a name="hYm3s"></a></p>
+&amp;lt;div class=&amp;quot;static active&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;</code></pre></div>
+<p></p>
 <h3>React</h3>
 <p>React 组件包含了<strong>交互</strong>和<strong>界面</strong>，但不含<strong>样式</strong>。 但幸运的是 React 社区十分活跃，有大量用于处理 CSS 的库可以选择。但是：</p>
 <ul>
@@ -521,10 +520,10 @@ data() {
 <li>支持行内样式，但没有兼容性前缀</li>
 </ul>
 <p>没有内置<a href="https://github.com/JedWatson/classnames">classNames</a>，你需要install，再使用。或者你也可以使用JavaScript自己计算，因为JavaScript确实可以做到。</p>
-<p><a name="UCs7b"></a></p>
+<p></p>
 <h2>状态管理和路由</h2>
 <p>随着前端程序变得越来越大，越来越复杂，<strong>状态管理</strong>和<strong>路由</strong>都是必不可少的部分。</p>
-<p><a name="m6VOK"></a></p>
+<p></p>
 <h3>Vue</h3>
 <p>Vue 同样内置了处理这两部分的功能，并在官网文档中有明确的提及到。</p>
 <ul>
@@ -533,7 +532,7 @@ data() {
 <li>最最重要的是，这两个库由 Vue 核心团队维护</li>
 </ul>
 <p>这让新上手 Vue 的开发者，很明确的知道自己需要那些库来解决这些问题，没有挑选成本。（非常方便开发者）</p>
-<p><a name="CxVe1"></a></p>
+<p></p>
 <h3>React</h3>
 <p>React 处理这两部分的库，同样是由社区开发维护的，而且多种可选，有一定挑选成本。</p>
 <ul>
@@ -541,105 +540,110 @@ data() {
 <li>**状态管理  **Redux/Mobx</li>
 <li>都由社区开发维护</li>
 </ul>
-<p>而且从个人使用体验来说，React这些库的学习成本都比较高。（原因？） <a name="fQ0oJ"></a></p>
+<p>而且从个人使用体验来说，React这些库的学习成本都比较高。（原因？） </p>
 <h2></h2>
-<p><a name="yBurc"></a></p>
+<p></p>
 <h2>指令（Vue独有）</h2>
 <blockquote>
 <p>指令 (Directives) 是带有&nbsp;v-&nbsp;前缀的特殊 attribute。指令 attribute 的值预期是单个 JavaScript 表达式&nbsp;(v-for&nbsp;是例外情况，稍后我们再讨论)。指令的职责是，当表达式的值改变时，将其产生的连带影响，响应式地作用于 DOM。</p>
 </blockquote>
-<p><a name="k0DGX"></a></p>
+<p></p>
 <h3>指令修饰符</h3>
 <p>尤其是指令修饰符，极大的方便了开发者的使用。</p>
-<pre><code class="language-vue">&lt;!-- the click event's propagation will be stopped --&gt;
-&lt;a @click.stop="doThis"&gt;&lt;/a&gt;
+<div class="remark-highlight"><pre class="language-vue"><code class="language-vue">&amp;lt;!-- the click event&amp;#39;s propagation will be stopped --&amp;gt;
+&amp;lt;a @click.stop=&amp;quot;doThis&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;
 
-&lt;!-- the submit event will no longer reload the page --&gt;
-&lt;form @submit.prevent="onSubmit"&gt;&lt;/form&gt;
+&amp;lt;!-- the submit event will no longer reload the page --&amp;gt;
+&amp;lt;form @submit.prevent=&amp;quot;onSubmit&amp;quot;&amp;gt;&amp;lt;/form&amp;gt;
 
-&lt;!-- modifiers can be chained --&gt;
-&lt;a @click.stop.prevent="doThat"&gt;&lt;/a&gt;
+&amp;lt;!-- modifiers can be chained --&amp;gt;
+&amp;lt;a @click.stop.prevent=&amp;quot;doThat&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;
 
-&lt;!-- just the modifier --&gt;
-&lt;form @submit.prevent&gt;&lt;/form&gt;
-</code></pre>
-<p><a name="aZd0H"></a></p>
+&amp;lt;!-- just the modifier --&amp;gt;
+&amp;lt;form @submit.prevent&amp;gt;&amp;lt;/form&amp;gt;</code></pre></div>
+<p></p>
 <h3>自定义指令</h3>
-<pre><code class="language-javascript">const app = Vue.createApp({})
-// Register a global custom directive called `v-focus`
-app.directive('focus', {
-  // When the bound element is mounted into the DOM...
-  mounted(el) {
-    // Focus the element
-    el.focus()
-  }
-})
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token maybe-class-name">Vue</span><span class="token punctuation">.</span><span class="token method function property-access">createApp</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token comment">// Register a global custom directive called `v-focus`</span>
+app<span class="token punctuation">.</span><span class="token method function property-access">directive</span><span class="token punctuation">(</span><span class="token string">'focus'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  <span class="token comment">// When the bound element is mounted into the DOM...</span>
+  <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token parameter">el</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Focus the element</span>
+    el<span class="token punctuation">.</span><span class="token method function property-access">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-&lt;input v-focus /&gt;
-</code></pre>
-<p><a name="OVzdu"></a></p>
+<span class="token operator">&lt;</span>input v<span class="token operator">-</span>focus <span class="token operator">/</span><span class="token operator">&gt;</span>
+</code></pre></div>
+<p></p>
 <h2>v-modal（vue独有）</h2>
 <p>针对form表单，vue 还有一个比较方便的指令 <a href="https://cn.vuejs.org/v2/guide/forms.html">v-modal</a> 。</p>
 <blockquote>
-<p>你可以用&nbsp;v-model&nbsp;指令在表单&nbsp;<input>、<textarea>&nbsp;及&nbsp;&lt;select&gt;&nbsp;元素上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。尽管有些神奇，但&nbsp;v-model&nbsp;本质上不过是语法糖。它负责监听用户的输入事件以更新数据，并对一些极端场景进行一些特殊处理。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;a name="LZBIa"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;&lt;/h2&gt;
-&lt;p&gt;贴一点和 react 对比的代码：&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-javascript"&gt;// Input
-////////
+<p>你可以用&nbsp;v-model&nbsp;指令在表单&nbsp;、&nbsp;及&nbsp;&nbsp;元素上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。尽管有些神奇，但&nbsp;v-model&nbsp;本质上不过是语法糖。它负责监听用户的输入事件以更新数据，并对一些极端场景进行一些特殊处理。</p>
+</blockquote>
+<p></p>
+<h2></h2>
+<p>贴一点和 react 对比的代码：</p>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// Input</span>
+<span class="token comment">////////</span>
 
-// React
-&lt;input type="input" value={message} onChange={onChange} /&gt;
+<span class="token comment">// React</span>
+<span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"input"</span> value<span class="token operator">=</span><span class="token punctuation">{</span>message<span class="token punctuation">}</span> onChange<span class="token operator">=</span><span class="token punctuation">{</span>onChange<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
 
-// Vue.js
-&lt;input type="input" v-model="message" /&gt;
+<span class="token comment">// Vue.js</span>
+<span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"input"</span> v<span class="token operator">-</span>model<span class="token operator">=</span><span class="token string">"message"</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
 
-// Checkboxes and Radiobuttons
-////////
+<span class="token comment">// Checkboxes and Radiobuttons</span>
+<span class="token comment">////////</span>
 
-// React
-&lt;input type="checkbox" checked={message != null} onChange={onChange} /&gt;
+<span class="token comment">// React</span>
+<span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"checkbox"</span> checked<span class="token operator">=</span><span class="token punctuation">{</span>message <span class="token operator">!=</span> <span class="token keyword null nil">null</span><span class="token punctuation">}</span> onChange<span class="token operator">=</span><span class="token punctuation">{</span>onChange<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
 
-// Vue.js
-&lt;input type="checkbox" v-model="message" /&gt;
+<span class="token comment">// Vue.js</span>
+<span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"checkbox"</span> v<span class="token operator">-</span>model<span class="token operator">=</span><span class="token string">"message"</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
 
-// Select
-////////
+<span class="token comment">// Select</span>
+<span class="token comment">////////</span>
 
-// React
-&lt;select value={message} onChange={onChange}&gt;
-	&lt;option&gt;A&lt;/option&gt;
-&lt;/select&gt;
+<span class="token comment">// React</span>
+<span class="token operator">&lt;</span>select value<span class="token operator">=</span><span class="token punctuation">{</span>message<span class="token punctuation">}</span> onChange<span class="token operator">=</span><span class="token punctuation">{</span>onChange<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span>option<span class="token operator">&gt;</span><span class="token constant">A</span><span class="token operator">&lt;</span><span class="token operator">/</span>option<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>select<span class="token operator">&gt;</span>
 
-// Vue.js
-&lt;select v-model="message"&gt;
-	&lt;option&gt;A&lt;/option&gt;
-&lt;/select&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;这里文档很明确的指出了&lt;strong&gt;双向绑定&lt;/strong&gt;这个概念，因为的确，它符合双向绑定的概念 。数据改变，自动同步改变到UI上，Form 表单的变动，自动同步到了数据。 &lt;a name="OO1Sy"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;&lt;/h2&gt;
-&lt;p&gt;另外网上经常说 vue 是双向绑定的，贴几个概念在这里：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;一般只有UI表单控件才存在双向数据绑定，非UI表单控件只有单向数据绑定。&lt;/li&gt;
-&lt;li&gt;单向数据绑定是指：M的变化可以自动更新到ViewModel，但ViewModel的变化需要手动更新到M（通过给表单控件设置事件监听）&lt;/li&gt;
-&lt;li&gt;双向数据绑定是指念：M的变化可以自动更新到ViewModel，ViewModel的变化也可以自动更新到M&lt;/li&gt;
-&lt;li&gt;双向绑定 = 单向绑定 + UI事件监听。双向和单向只不过是框架封装程度上的差异，本质上两者是可以相互转换的。 &lt;a name="5mViB"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a name="SZXJB"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;其它一些差异&lt;/h3&gt;
-&lt;p&gt;在 React 应用中，当某个组件的状态发生变化时，它会以该组件为根，重新渲染整个组件子树。
-在 Vue 应用中，组件的依赖是在渲染过程中自动追踪的，所以系统能精确知晓哪个组件确实需要被重渲染。&lt;/p&gt;
-&lt;p&gt;虽然React中可以通过&lt;code&gt;PureComponent&lt;/code&gt; 或者 &lt;code&gt;shouldComponentUpdate&lt;/code&gt;来优化掉不必要的渲染，但这个过程是交给用户的。&lt;/p&gt;
-&lt;p&gt;React 对数据变化毫无感知。&lt;/p&gt;
-&lt;p&gt;Vue 则明确得知道view需要那些数据，并监测数据得变化。&lt;/p&gt;
-&lt;p&gt;其它看到的一些比较有趣的观点：&lt;/p&gt;
-&lt;p&gt;react 相对于 vue 模板语言，缺少编译时的优化手段。&lt;/p&gt;
-&lt;p&gt;&lt;img src="../assets/gxxcqr/1602572822701-a6577eba-5159-48e3-94ca-dea24d74473a.png" alt="FD}(XGCF3ZINVNP%Q9X30$G.png" /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a name="Y1hNT"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;&lt;/h2&gt;
-</textarea></p></blockquote>
+<span class="token comment">// Vue.js</span>
+<span class="token operator">&lt;</span>select v<span class="token operator">-</span>model<span class="token operator">=</span><span class="token string">"message"</span><span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span>option<span class="token operator">&gt;</span><span class="token constant">A</span><span class="token operator">&lt;</span><span class="token operator">/</span>option<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>select<span class="token operator">&gt;</span>
+</code></pre></div>
+<p>这里文档很明确的指出了<strong>双向绑定</strong>这个概念，因为的确，它符合双向绑定的概念 。数据改变，自动同步改变到UI上，Form 表单的变动，自动同步到了数据。 </p>
+<h2></h2>
+<p>另外网上经常说 vue 是双向绑定的，贴几个概念在这里：</p>
+<ul>
+<li>一般只有UI表单控件才存在双向数据绑定，非UI表单控件只有单向数据绑定。</li>
+<li>单向数据绑定是指：M的变化可以自动更新到ViewModel，但ViewModel的变化需要手动更新到M（通过给表单控件设置事件监听）</li>
+<li>双向数据绑定是指念：M的变化可以自动更新到ViewModel，ViewModel的变化也可以自动更新到M</li>
+<li>双向绑定 = 单向绑定 + UI事件监听。双向和单向只不过是框架封装程度上的差异，本质上两者是可以相互转换的。 </li>
+</ul>
+<h2></h2>
+<p></p>
+<h3>其它一些差异</h3>
+<p>在 React 应用中，当某个组件的状态发生变化时，它会以该组件为根，重新渲染整个组件子树。
+在 Vue 应用中，组件的依赖是在渲染过程中自动追踪的，所以系统能精确知晓哪个组件确实需要被重渲染。</p>
+<p>虽然React中可以通过<code>PureComponent</code> 或者 <code>shouldComponentUpdate</code>来优化掉不必要的渲染，但这个过程是交给用户的。</p>
+<p>React 对数据变化毫无感知。</p>
+<p>Vue 则明确得知道view需要那些数据，并监测数据得变化。</p>
+<p>其它看到的一些比较有趣的观点：</p>
+<p>react 相对于 vue 模板语言，缺少编译时的优化手段。</p>
+
+      <figure class="figure-img">
+        <a href="/static/e43fb90d77fe31b05b07e2d170317b67.png" target="_blank">
+          <img src="/static/e43fb90d77fe31b05b07e2d170317b67.png" alt="FD}(XGCF3ZINVNP%Q9X30$G.png" title="FD}(XGCF3ZINVNP%Q9X30$G.png" loading="lazy">
+        </a>
+        <figcaption>FD}(XGCF3ZINVNP%Q9X30$G.png</figcaption>
+      </figure>
+    
+<p></p>
+<h2></h2>
 </section>
 
     
@@ -731,7 +735,6 @@ app.directive('focus', {
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

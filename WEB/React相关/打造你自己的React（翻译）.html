@@ -74,7 +74,7 @@
   <meta name="description" content="特别声明：该翻译仅供自己参考。如有兴趣请阅读原文。[原文地址](https://pomb.us/build-your-own-react/)  我们将依照React的架构，构造一个精简版的React，主要包括下面的内容：  1. createElement函数 2. render函数 3. Conc......">
   <meta property="og:description" content="特别声明：该翻译仅供自己参考。如有兴趣请阅读原文。[原文地址](https://pomb.us/build-your-own-react/)  我们将依照React的架构，构造一个精简版的React，主要包括下面的内容：  1. createElement函数 2. render函数 3. Conc......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -479,35 +479,35 @@
 <li>函数式组件</li>
 <li>Hooks</li>
 </ol>
-<p><a name="H329q"></a></p>
+<p></p>
 <h2>首先，一些基础理论</h2>
 <p>让我们先来回顾一些基础理论。如果你对React，JSX，DOM很熟悉，你可以跳过这一小节。</p>
-<pre><code class="language-javascript">const element = &lt;h1 title="foo"&gt;Hello&lt;/h1&gt;
-const container = document.getElementById("root")
-ReactDOM.render(element, container)
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> element <span class="token operator">=</span> <span class="token operator">&lt;</span>h1 title<span class="token operator">=</span><span class="token string">"foo"</span><span class="token operator">&gt;</span><span class="token maybe-class-name">Hello</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+<span class="token keyword">const</span> container <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">getElementById</span><span class="token punctuation">(</span><span class="token string">"root"</span><span class="token punctuation">)</span>
+<span class="token maybe-class-name">ReactDOM</span><span class="token punctuation">.</span><span class="token method function property-access">render</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> container<span class="token punctuation">)</span>
+</code></pre></div>
 <p>一个三行代码的简单的React程序，第一行定义了一个React元素，第二行拿到了作为容器的Dom元素，第三行把React元素渲染到容器里，也就是渲染到真实Dom里。</p>
 <p>接下来，让我们用纯JS代码替换掉所有React相关的代码。</p>
 <p>上面第一行代码，使用了JSX。不是JS，需要替换掉。
 JSX转换为JS通常是靠Babel这类工具，做的事也很简单，将JSX代码用createElement函数替换掉。
 比如上面的代码替换完了就是</p>
-<pre><code class="language-javascript">React.createElement(
-  "h1",
-  {title:"foo"},
-  "hello",
-)
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span>
+  <span class="token string">"h1"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span><span class="token literal-property property">title</span><span class="token operator">:</span><span class="token string">"foo"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">"hello"</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+</code></pre></div>
 <p>除了一些验证以外createElement从它的参数里创建出一个对象。所以我们可以暂时用返回的对象替换掉这个函数。</p>
-<pre><code class="language-javascript">const element = {
-  type: "h1",
-  props: {
-    title: "foo",
-    children: "Hello",
-  },
-}//这个就是由createElement创建的对象
-const container = document.getElementById("root")
-ReactDOM.render(element, container)
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> element <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"h1"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"foo"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token string">"Hello"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token comment">//这个就是由createElement创建的对象</span>
+<span class="token keyword">const</span> container <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">getElementById</span><span class="token punctuation">(</span><span class="token string">"root"</span><span class="token punctuation">)</span>
+<span class="token maybe-class-name">ReactDOM</span><span class="token punctuation">.</span><span class="token method function property-access">render</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> container<span class="token punctuation">)</span>
+</code></pre></div>
 <p>这就是createElement返回的对象，拥有type和props两个属性（我们暂时只关注这两个，其它属性后面再说）。</p>
 <ul>
 <li>type
@@ -528,25 +528,25 @@ ReactDOM.render(element, container)
 <p>type是一个string类型，指代一个你想创建的真实Dom类型，也就是你创建HTML元素时，传递给document.createElement的tagName。但是type也可能时一个function，我们放到后面在说。
 props则是一个对象，它拥有所以JSX中定义的属性，以及一个特殊的属性children。在上述列子中，children只是一个string，但通常情况下，它是一个代表着更多元素的array，这也是为什么elements是树形结构的。</p>
 <p>剩下需要替换的是ReactDOM.render。这个函数是React渲染真实Dom的地方。让先暂时用浏览器原生API手动实现一下。</p>
-<pre><code class="language-javascript">const element = {
-  type: "h1",
-  props: {
-    title: "foo",
-    children: "Hello",
-  },
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> element <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"h1"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">title</span><span class="token operator">:</span> <span class="token string">"foo"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token string">"Hello"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
 
-const container = document.getElementById("root")
+<span class="token keyword">const</span> container <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">getElementById</span><span class="token punctuation">(</span><span class="token string">"root"</span><span class="token punctuation">)</span>
 
-const node = document.createElement(element.type)
-node["title"] = element.props.title
+<span class="token keyword">const</span> node <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span>element<span class="token punctuation">.</span><span class="token property-access">type</span><span class="token punctuation">)</span>
+node<span class="token punctuation">[</span><span class="token string">"title"</span><span class="token punctuation">]</span> <span class="token operator">=</span> element<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">.</span><span class="token property-access">title</span>
 
-const text = document.createTextNode("")
-text["nodeValue"] = element.props.children
+<span class="token keyword">const</span> text <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">createTextNode</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span>
+text<span class="token punctuation">[</span><span class="token string">"nodeValue"</span><span class="token punctuation">]</span> <span class="token operator">=</span> element<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">.</span><span class="token property-access">children</span>
 
-node.appendChild(text)
-container.appendChild(node)
-</code></pre>
+node<span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+container<span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span>
+</code></pre></div>
 <p>首先我们根据type创建真实的DOM节点，上面的例子中就是H1。然后我们把所有属性添加上，例子中就只是title。
 ~~<em>为了避免歧义，下面提到node就代表真实的Dom元素，而element代表React元素。</em>~~</p>
 
@@ -557,191 +557,191 @@ container.appendChild(node)
         <figcaption>image.png</figcaption>
       </figure>
     
-<pre><code class="language-javascript">{
-	type : "TEXT_ELEMENT",
-  props : {
-  	nodeValue : "Hello"
-  }
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token punctuation">{</span>
+	<span class="token literal-property property">type</span> <span class="token operator">:</span> <span class="token string">"TEXT_ELEMENT"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">props</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+  	<span class="token literal-property property">nodeValue</span> <span class="token operator">:</span> <span class="token string">"Hello"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>最后，我们只需要将textNode添加到h1，将h1添加到container容器里，然后就完了。现在我们拥有了一个和之前功能一样的App，而且没有使用React。</p>
-<p><a name="C8360"></a></p>
+<p></p>
 <h2>Step1: createElement函数</h2>
-<pre><code class="language-javascript">const element = (
-  &lt;div id="foo"&gt;
-    &lt;a&gt;bar&lt;/a&gt;
-    &lt;b /&gt;
-  &lt;/div&gt;
-)
-const container = document.getElementById("root")
-ReactDOM.render(element, container)
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> element <span class="token operator">=</span> <span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"foo"</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>a<span class="token operator">&gt;</span>bar<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>b <span class="token operator">/</span><span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">const</span> container <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">getElementById</span><span class="token punctuation">(</span><span class="token string">"root"</span><span class="token punctuation">)</span>
+<span class="token maybe-class-name">ReactDOM</span><span class="token punctuation">.</span><span class="token method function property-access">render</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> container<span class="token punctuation">)</span>
 
-</code></pre>
+</code></pre></div>
 <p>我们从另一个简单的ReactApp开始。这次我们将用自己写的React替换掉React的代码。
 从实现createElement开始，把JSX转换为JS，然后我们就能看到craeteElement内部到底发生了什么。</p>
 <p>正如上面提到过的，createElement返回一个拥有type 和 props属性的对象。所以我们只需要写一个返回这个对象的函数即可。</p>
-<pre><code class="language-javascript">function createElement(type, props, ...children) {
-  return {
-    type,
-    props: {
-      ...props,
-      children,
-    },
-  }
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">createElement</span><span class="token punctuation">(</span><span class="token parameter">type<span class="token punctuation">,</span> props<span class="token punctuation">,</span> <span class="token spread operator">...</span>children</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">,</span>
+    <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token spread operator">...</span>props<span class="token punctuation">,</span>
+      children<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>我们使用<a href="https://es6.ruanyifeng.com/?search=%E5%89%A9%E4%BD%99%E5%8F%82%E6%95%B0&amp;x=0&amp;y=0#docs/function#rest-%E5%8F%82%E6%95%B0"><em>rest parameter syntax</em></a>*，<em>来保证_prop.children_总是一个_array。</em>
 *
 比如createElement('div'),createElement('div',null,a),createElement('div',null,a,b)。返回</p>
-<pre><code class="language-javascript">{
-  type : "div",
-  props : {
-  	children : []
-  }  
-}//createElement('div')
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token punctuation">{</span>
+  <span class="token literal-property property">type</span> <span class="token operator">:</span> <span class="token string">"div"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">props</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+  	<span class="token literal-property property">children</span> <span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>  
+<span class="token punctuation">}</span><span class="token comment">//createElement('div')</span>
 
-{
-  type : "div",
-  props : {
-  	children : [a]
-  }  
-}//createElement('div',null,a)
+<span class="token punctuation">{</span>
+  <span class="token literal-property property">type</span> <span class="token operator">:</span> <span class="token string">"div"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">props</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+  	<span class="token literal-property property">children</span> <span class="token operator">:</span> <span class="token punctuation">[</span>a<span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>  
+<span class="token punctuation">}</span><span class="token comment">//createElement('div',null,a)</span>
 
-{
-  type : "div",
-  props : {
-  	children : [a,b]
-  }  
-}//createElement('div',null,a,b)
-</code></pre>
+<span class="token punctuation">{</span>
+  <span class="token literal-property property">type</span> <span class="token operator">:</span> <span class="token string">"div"</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">props</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+  	<span class="token literal-property property">children</span> <span class="token operator">:</span> <span class="token punctuation">[</span>a<span class="token punctuation">,</span>b<span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>  
+<span class="token punctuation">}</span><span class="token comment">//createElement('div',null,a,b)</span>
+</code></pre></div>
 <p>当children中包含文本节点时，children中可能包含原始值string类型。我们需要对原始值进行单独处理，为文本节点创建一个单独的类型TEXT_ELEMENT。</p>
 <p>需要注意的时，React里并不会这样做。我们这样做是为了使代码更简单。</p>
-<pre><code class="language-javascript">function createElement(type, props, ...children) {
-  return {
-    type,
-    props: {
-      ...props,
-      children: children.map(child =&gt;
-        typeof child === "object" ? child : createTextElement(child)
-      )
-    }
-  };
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">createElement</span><span class="token punctuation">(</span><span class="token parameter">type<span class="token punctuation">,</span> props<span class="token punctuation">,</span> <span class="token spread operator">...</span>children</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">,</span>
+    <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token spread operator">...</span>props<span class="token punctuation">,</span>
+      <span class="token literal-property property">children</span><span class="token operator">:</span> children<span class="token punctuation">.</span><span class="token method function property-access">map</span><span class="token punctuation">(</span><span class="token parameter">child</span> <span class="token arrow operator">=&gt;</span>
+        <span class="token keyword">typeof</span> child <span class="token operator">===</span> <span class="token string">"object"</span> <span class="token operator">?</span> child <span class="token operator">:</span> <span class="token function">createTextElement</span><span class="token punctuation">(</span>child<span class="token punctuation">)</span>
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-function createTextElement(text) {
-  return {
-    type: "TEXT_ELEMENT",
-    props: {
-      nodeValue: text,
-      children: []
-    }
-  };
-}
-</code></pre>
+<span class="token keyword">function</span> <span class="token function">createTextElement</span><span class="token punctuation">(</span><span class="token parameter">text</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"TEXT_ELEMENT"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">nodeValue</span><span class="token operator">:</span> text<span class="token punctuation">,</span>
+      <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>现在有了我们自己的createElement函数，可以把React.createElement替换掉了，首先得取一个名字，Didact。</p>
-<pre><code class="language-javascript">function createElement(type, props, ...children) {
-  return {
-    type,
-    props: {
-      ...props,
-      children: children.map(child =&gt;
-        typeof child === "object" ? child : createTextElement(child)
-      )
-    }
-  };
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">createElement</span><span class="token punctuation">(</span><span class="token parameter">type<span class="token punctuation">,</span> props<span class="token punctuation">,</span> <span class="token spread operator">...</span>children</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">,</span>
+    <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token spread operator">...</span>props<span class="token punctuation">,</span>
+      <span class="token literal-property property">children</span><span class="token operator">:</span> children<span class="token punctuation">.</span><span class="token method function property-access">map</span><span class="token punctuation">(</span><span class="token parameter">child</span> <span class="token arrow operator">=&gt;</span>
+        <span class="token keyword">typeof</span> child <span class="token operator">===</span> <span class="token string">"object"</span> <span class="token operator">?</span> child <span class="token operator">:</span> <span class="token function">createTextElement</span><span class="token punctuation">(</span>child<span class="token punctuation">)</span>
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-function createTextElement(text) {
-  return {
-    type: "TEXT_ELEMENT",
-    props: {
-      nodeValue: text,
-      children: []
-    }
-  };
-}
+<span class="token keyword">function</span> <span class="token function">createTextElement</span><span class="token punctuation">(</span><span class="token parameter">text</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"TEXT_ELEMENT"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">nodeValue</span><span class="token operator">:</span> text<span class="token punctuation">,</span>
+      <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-const Didact = {
-  createElement,
-}
+<span class="token keyword">const</span> <span class="token maybe-class-name">Didact</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  createElement<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
 
-const element = Didact.createElement(
-  "div",
-  { id: "foo" },
-  Didact.createElement("a", null, "bar"),
-  Didact.createElement("b")
-)
-const container = document.getElementById("root")
-ReactDOM.render(element, container)
-</code></pre>
+<span class="token keyword">const</span> element <span class="token operator">=</span> <span class="token maybe-class-name">Didact</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span>
+  <span class="token string">"div"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token string">"foo"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token maybe-class-name">Didact</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span> <span class="token string">"bar"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token maybe-class-name">Didact</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span><span class="token string">"b"</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">const</span> container <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">getElementById</span><span class="token punctuation">(</span><span class="token string">"root"</span><span class="token punctuation">)</span>
+<span class="token maybe-class-name">ReactDOM</span><span class="token punctuation">.</span><span class="token method function property-access">render</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> container<span class="token punctuation">)</span>
+</code></pre></div>
 <p>上面的代码看起来仍然没有JSX直观，我们仍想使用JSX。可不可以让Babel直接翻译成我们自己写的createElement函数，而不是React的呢？答案是可以的。</p>
-<pre><code class="language-javascript">/** @jsx Didact.createElement */
-const element = (
-  &lt;div id="foo"&gt;
-    &lt;a&gt;bar&lt;/a&gt;
-    &lt;b /&gt;
-  &lt;/div&gt;
-)
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token doc-comment comment">/** <span class="token keyword">@jsx</span> Didact.createElement */</span>
+<span class="token keyword">const</span> element <span class="token operator">=</span> <span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"foo"</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>a<span class="token operator">&gt;</span>bar<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>b <span class="token operator">/</span><span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span>
+</code></pre></div>
 <p>我们可以使用@jsx标记，这样babel遇到jsx语法就会调用我们的Didact.createElement。</p>
-<p><a name="Yd93M"></a></p>
+<p></p>
 <h2>Step2: render函数</h2>
 <p>现在来实现ReactDOM.render函数。让我们暂时只关心增加dom元素，稍后再处理更新和删除。</p>
-<pre><code class="language-javascript">function createElement(type, props, ...children) {
-  return {
-    type,
-    props: {
-      ...props,
-      children: children.map(child =&gt;
-        typeof child === "object"
-          ? child
-          : createTextElement(child)
-      ),
-    },
-  }
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">createElement</span><span class="token punctuation">(</span><span class="token parameter">type<span class="token punctuation">,</span> props<span class="token punctuation">,</span> <span class="token spread operator">...</span>children</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">,</span>
+    <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token spread operator">...</span>props<span class="token punctuation">,</span>
+      <span class="token literal-property property">children</span><span class="token operator">:</span> children<span class="token punctuation">.</span><span class="token method function property-access">map</span><span class="token punctuation">(</span><span class="token parameter">child</span> <span class="token arrow operator">=&gt;</span>
+        <span class="token keyword">typeof</span> child <span class="token operator">===</span> <span class="token string">"object"</span>
+          <span class="token operator">?</span> child
+          <span class="token operator">:</span> <span class="token function">createTextElement</span><span class="token punctuation">(</span>child<span class="token punctuation">)</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-function createTextElement(text) {
-  return {
-    type: "TEXT_ELEMENT",
-    props: {
-      nodeValue: text,
-      children: [],
-    },
-  }
-}
+<span class="token keyword">function</span> <span class="token function">createTextElement</span><span class="token punctuation">(</span><span class="token parameter">text</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">"TEXT_ELEMENT"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">nodeValue</span><span class="token operator">:</span> text<span class="token punctuation">,</span>
+      <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-function render(element, container) {
-	const dom = element.type == "TEXT_ELEMENT"
-  			?document.createTextNode("")
-        :document.createElement(element.type);
-  const isProperty = key=&gt;key!=="children";
-  Object.keys(element.props)
-  	.filter(isProperty)
-  	.forEach(name=&gt;{
-  		dom[name] = element.props[name];
-  	});
+<span class="token keyword">function</span> <span class="token function">render</span><span class="token punctuation">(</span><span class="token parameter">element<span class="token punctuation">,</span> container</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">const</span> dom <span class="token operator">=</span> element<span class="token punctuation">.</span><span class="token property-access">type</span> <span class="token operator">==</span> <span class="token string">"TEXT_ELEMENT"</span>
+  			<span class="token operator">?</span><span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">createTextNode</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span>
+        <span class="token operator">:</span><span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span>element<span class="token punctuation">.</span><span class="token property-access">type</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">isProperty</span> <span class="token operator">=</span> <span class="token parameter">key</span><span class="token arrow operator">=&gt;</span>key<span class="token operator">!==</span><span class="token string">"children"</span><span class="token punctuation">;</span>
+  <span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">keys</span><span class="token punctuation">(</span>element<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">)</span>
+  	<span class="token punctuation">.</span><span class="token method function property-access">filter</span><span class="token punctuation">(</span>isProperty<span class="token punctuation">)</span>
+  	<span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+  		dom<span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> element<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  	<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   
-  element.props.children.forEach(child=&gt;render(child,dom));
+  element<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">.</span><span class="token property-access">children</span><span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">child</span><span class="token arrow operator">=&gt;</span><span class="token function">render</span><span class="token punctuation">(</span>child<span class="token punctuation">,</span>dom<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  container.appendChild(dom)
-}
+  container<span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>dom<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
 
-const Didact = {
-  createElement,
-  render,
-}
+<span class="token keyword">const</span> <span class="token maybe-class-name">Didact</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  createElement<span class="token punctuation">,</span>
+  render<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
 
-/** @jsx Didact.createElement */
-const element = (
-  &lt;div id="foo"&gt;
-    &lt;a&gt;bar&lt;/a&gt;
-    &lt;b /&gt;
-  &lt;/div&gt;
-)
-const container = document.getElementById("root")
-Didact.render(element, container)
-</code></pre>
+<span class="token doc-comment comment">/** <span class="token keyword">@jsx</span> Didact.createElement */</span>
+<span class="token keyword">const</span> element <span class="token operator">=</span> <span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"foo"</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>a<span class="token operator">&gt;</span>bar<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>b <span class="token operator">/</span><span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">const</span> container <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">getElementById</span><span class="token punctuation">(</span><span class="token string">"root"</span><span class="token punctuation">)</span>
+<span class="token maybe-class-name">Didact</span><span class="token punctuation">.</span><span class="token method function property-access">render</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> container<span class="token punctuation">)</span>
+</code></pre></div>
 <p>render函数接收两个参数，element是JSX翻译过后产生的对象树，container是dom元素需要挂载的节点或者说容器。
 render函数做的事如下：
 1.render函数首先根据element的type值创建出对应的DOM元素。
@@ -749,50 +749,50 @@ render函数做的事如下：
 3.遍历children元素，依次调用render函数，并把当前元素的DOM作为container传递进去。
 4.添加DOM元素到container。</p>
 <p>现在我们有了一个能把JSX渲染为DOM的库了。<a href="https://github.com/CodeByZack/build-your-react-code/tree/step1/2">代码地址</a></p>
-<p><a name="6lNgb"></a></p>
+<p></p>
 <h2>Step3:&nbsp;Concurrent Mode（并发模式）</h2>
 <p>在开始下一步之前，还需要处理一个问题。如果元素嵌套（元素树）很深，我们的代码开始渲染过后，就不会停下来，直到渲染完毕才会去做其他事。这样就可能导致阻赛主线程过久，进而导致浏览器无法响应用户的操作、流畅的绘制动画。所以需要重构一下代码。</p>
 <p>我们将把渲染工作分成许多更小的单元，每当完成一个单元的渲染，让浏览器能打断渲染去处理一些其它必要的事，然后再继续渲染。</p>
-<pre><code class="language-javascript">let nextUnitOfWork = null
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> nextUnitOfWork <span class="token operator">=</span> <span class="token keyword null nil">null</span>
 
-function workLoop(deadline) {
-  let shouldYield = false
-  while (nextUnitOfWork &amp;&amp; !shouldYield) {
-    nextUnitOfWork = performUnitOfWork(
+<span class="token keyword">function</span> <span class="token function">workLoop</span><span class="token punctuation">(</span><span class="token parameter">deadline</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> shouldYield <span class="token operator">=</span> <span class="token boolean">false</span>
+  <span class="token keyword control-flow">while</span> <span class="token punctuation">(</span>nextUnitOfWork <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>shouldYield<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    nextUnitOfWork <span class="token operator">=</span> <span class="token function">performUnitOfWork</span><span class="token punctuation">(</span>
       nextUnitOfWork
-    )
-    shouldYield = deadline.timeRemaining() &lt; 1
-  }
-  requestIdleCallback(workLoop)
-}
+    <span class="token punctuation">)</span>
+    shouldYield <span class="token operator">=</span> deadline<span class="token punctuation">.</span><span class="token method function property-access">timeRemaining</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">requestIdleCallback</span><span class="token punctuation">(</span>workLoop<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
 
-requestIdleCallback(workLoop)
+<span class="token function">requestIdleCallback</span><span class="token punctuation">(</span>workLoop<span class="token punctuation">)</span>
 
-function performUnitOfWork(nextUnitOfWork) {
-  // TODO
-}
-</code></pre>
+<span class="token keyword">function</span> <span class="token function">performUnitOfWork</span><span class="token punctuation">(</span><span class="token parameter">nextUnitOfWork</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// TODO</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>我们使用requestIdleCallback来制造循环，你可以把requestIdleCallback当成setTimeout，但是需要注意，不是我们决定什么时候去执行回调函数，而是浏览器空闲（IDLE）的时候会去主动调用。
 React不使用<a href="https://github.com/facebook/react/issues/11171#issuecomment-417349573">requestIdleCallback </a>，现在使用<a href="https://github.com/facebook/react/tree/master/packages/scheduler">scheduler package</a>。但是在理论上，对于我们现在的情况下，他们都是一样的。
 requestIdleCallback有一个deadline参数，它代表距离下一次浏览器获得控制权的时间。</p>
 <p>为了让循环能跑起来，我们需要手动设置第一个单元的渲染工作。然后实现一个performUnitOfWork函数，该函数不仅执行渲染而且返回下一个单元的渲染工作。</p>
-<p><a name="fmURR"></a></p>
+<p></p>
 <h2>Step4: Fibers</h2>
 <p>为了组织我们的单元/渲染工作，我们需要一个数据结构：fiber tree。
 我们会给每一个元素设置一个fiber，每一个fiber将代表一个单元的渲染工作。
 看一个例子：
 假如我们渲染一个元素树结构如下：</p>
-<pre><code class="language-javascript">Didact.render(
-  &lt;div&gt;
-    &lt;h1&gt;
-      &lt;p /&gt;
-      &lt;a /&gt;
-    &lt;/h1&gt;
-    &lt;h2 /&gt;
-  &lt;/div&gt;,
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token maybe-class-name">Didact</span><span class="token punctuation">.</span><span class="token method function property-access">render</span><span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>p <span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>a <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>h2 <span class="token operator">/</span><span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span><span class="token punctuation">,</span>
   container
-)
-</code></pre>
+<span class="token punctuation">)</span>
+</code></pre></div>
 
       <figure class="figure-img">
         <a href="/static/3ada086d12e6f0f2db7666929b6fe3a4.png" target="_blank">
@@ -816,237 +816,237 @@ requestIdleCallback有一个deadline参数，它代表距离下一次浏览器�
 <p>如果fiber没有child和sibling，我们将把“uncle”：the sibling of the parent 作为下一个fiber，像上述例子中的a 和 h2。如果parent也没有sibling，我们继续往上查找parent's，直到我们找到一个带有sibling的或者直到我们达到root节点。如果我们达到了root节点，也就意味着我们完成了所有渲染工作。</p>
 <p>代码实现如下：
 首先，把render函数原有内容提取成createDom成为一个单独的函数。</p>
-<pre><code class="language-javascript">function createDom(fiber) {
-  const dom =
-    fiber.type == "TEXT_ELEMENT"
-      ? document.createTextNode("")
-      : document.createElement(fiber.type)
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">createDom</span><span class="token punctuation">(</span><span class="token parameter">fiber</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> dom <span class="token operator">=</span>
+    fiber<span class="token punctuation">.</span><span class="token property-access">type</span> <span class="token operator">==</span> <span class="token string">"TEXT_ELEMENT"</span>
+      <span class="token operator">?</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">createTextNode</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span>
+      <span class="token operator">:</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">type</span><span class="token punctuation">)</span>
 
-  const isProperty = key =&gt; key !== "children"
-  Object.keys(fiber.props)
-    .filter(isProperty)
-    .forEach(name =&gt; {
-      dom[name] = fiber.props[name]
-    })
+  <span class="token keyword">const</span> <span class="token function-variable function">isProperty</span> <span class="token operator">=</span> <span class="token parameter">key</span> <span class="token arrow operator">=&gt;</span> key <span class="token operator">!==</span> <span class="token string">"children"</span>
+  <span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">keys</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">filter</span><span class="token punctuation">(</span>isProperty<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">name</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+      dom<span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> fiber<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">[</span>name<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-  return dom
-}
+  <span class="token keyword control-flow">return</span> dom
+<span class="token punctuation">}</span>
 
-function render(element, container) {
-  // TODO set next unit of work
-}
-</code></pre>
+<span class="token keyword">function</span> <span class="token function">render</span><span class="token punctuation">(</span><span class="token parameter">element<span class="token punctuation">,</span> container</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// TODO set next unit of work</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>在render函数,设置第一个nextUnitWork，也就是root fiber。</p>
-<pre><code class="language-javascript">let nextUnitWork = null;
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> nextUnitWork <span class="token operator">=</span> <span class="token keyword null nil">null</span><span class="token punctuation">;</span>
 
-function render(element,container){
-	nextUnitWork = {
-  	dom: container,
-    props: {
-    	children : [element]
-    }
-  }
-}
-</code></pre>
+<span class="token keyword">function</span> <span class="token function">render</span><span class="token punctuation">(</span><span class="token parameter">element<span class="token punctuation">,</span>container</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	nextUnitWork <span class="token operator">=</span> <span class="token punctuation">{</span>
+  	<span class="token literal-property property">dom</span><span class="token operator">:</span> container<span class="token punctuation">,</span>
+    <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    	<span class="token literal-property property">children</span> <span class="token operator">:</span> <span class="token punctuation">[</span>element<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>然后实现performUnitOfWork。再确认一次，这个函数做了以下三件事</p>
 <ol>
 <li>添加element到dom。</li>
 <li>为element的子元素创建fibers。</li>
 <li>确定下一个unit of work。</li>
 </ol>
-<pre><code class="language-javascript">function performUnitOfWork(fiber) {
-  //创建dom，并储存在fiber.dom上
-  if(!fiber.dom){
-		fiber.dom = createDom(fiber);
-	}
-  //添加dom到父元素
-  if(fiber.parent){
-  	fiber.parent.dom.appendChild(fiber.dom);
-  }
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">performUnitOfWork</span><span class="token punctuation">(</span><span class="token parameter">fiber</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">//创建dom，并储存在fiber.dom上</span>
+  <span class="token keyword control-flow">if</span><span class="token punctuation">(</span><span class="token operator">!</span>fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		fiber<span class="token punctuation">.</span><span class="token property-access">dom</span> <span class="token operator">=</span> <span class="token function">createDom</span><span class="token punctuation">(</span>fiber<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+  <span class="token comment">//添加dom到父元素</span>
+  <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">parent</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  	fiber<span class="token punctuation">.</span><span class="token property-access">parent</span><span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   
-  //生成子元素的fiber并关联
-  const elements = fiber.props.children;
-  let index = 0;
-  let prevSibling = null;
-  while(index&lt;elements.length){
-  	const element = elements[index];
-    const newFiber = {
-    	type : element.type,
-      props : element.props,
-      parent : fiber,
-      dom : null
-    };
-    if(index === 0){
-    	fiber.child = newFiber;
-    }else{
-    	prevSibling.sibling = newFiber
-    }
-    prevSibling = newFiber;
-    index++;
-  }
+  <span class="token comment">//生成子元素的fiber并关联</span>
+  <span class="token keyword">const</span> elements <span class="token operator">=</span> fiber<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">.</span><span class="token property-access">children</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> prevSibling <span class="token operator">=</span> <span class="token keyword null nil">null</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">while</span><span class="token punctuation">(</span>index<span class="token operator">&lt;</span>elements<span class="token punctuation">.</span><span class="token property-access">length</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  	<span class="token keyword">const</span> element <span class="token operator">=</span> elements<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> newFiber <span class="token operator">=</span> <span class="token punctuation">{</span>
+    	<span class="token literal-property property">type</span> <span class="token operator">:</span> element<span class="token punctuation">.</span><span class="token property-access">type</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">props</span> <span class="token operator">:</span> element<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">parent</span> <span class="token operator">:</span> fiber<span class="token punctuation">,</span>
+      <span class="token literal-property property">dom</span> <span class="token operator">:</span> <span class="token keyword null nil">null</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>index <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    	fiber<span class="token punctuation">.</span><span class="token property-access">child</span> <span class="token operator">=</span> newFiber<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token keyword control-flow">else</span><span class="token punctuation">{</span>
+    	prevSibling<span class="token punctuation">.</span><span class="token property-access">sibling</span> <span class="token operator">=</span> newFiber
+    <span class="token punctuation">}</span>
+    prevSibling <span class="token operator">=</span> newFiber<span class="token punctuation">;</span>
+    index<span class="token operator">++</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   
-  //返回fiber的child
-  if(fiber.child){
-  	return fiber.child
-  }
-  //返回sibling或者上一级的sibling
-  let nextFiber = fiber;
-  while(nextFiber){
-  	if(nextFiber.sibling){
-    	return nextFiber.sibling;
-    }
-    nextFiber = nextFiber.parent
-  }
-}
-</code></pre>
+  <span class="token comment">//返回fiber的child</span>
+  <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">child</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  	<span class="token keyword control-flow">return</span> fiber<span class="token punctuation">.</span><span class="token property-access">child</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">//返回sibling或者上一级的sibling</span>
+  <span class="token keyword">let</span> nextFiber <span class="token operator">=</span> fiber<span class="token punctuation">;</span>
+  <span class="token keyword control-flow">while</span><span class="token punctuation">(</span>nextFiber<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  	<span class="token keyword control-flow">if</span><span class="token punctuation">(</span>nextFiber<span class="token punctuation">.</span><span class="token property-access">sibling</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    	<span class="token keyword control-flow">return</span> nextFiber<span class="token punctuation">.</span><span class="token property-access">sibling</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    nextFiber <span class="token operator">=</span> nextFiber<span class="token punctuation">.</span><span class="token property-access">parent</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>Step1-4<a href="https://github.com/CodeByZack/build-your-react-code/tree/step1-4">代码地址</a></p>
-<p><a name="YfAcr"></a></p>
+<p></p>
 <h2>Step5: 渲染和提交阶段</h2>
 <p>现在我们有另一个问题了。我们处理fiber的时候，把生成的node实际添加到了dom里。而且，请记住，在我们渲染完整个dom树之前，浏览器可以随时打断我们的工作，那就意味着，用户可能看到一个不完整的UI，我们需要避免这个问题。</p>
 <p>因此，我们需要先删除更改DOM的部分。然后用一个新变量wipRoot来保存对fiber tree的追踪。
 然后，当我们完成所有fiber的dom节点创造过后，我们再统一提交到真正的dom上。我们在commitRoot里做这件事，遍历fiber树，把节点提交到真实dom上。</p>
-<pre><code class="language-javascript">//这段代码需要删除
- if(fiber.parent){
-  fiber.parent.dom.appendChild(fiber.dom);
- }
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//这段代码需要删除</span>
+ <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">parent</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  fiber<span class="token punctuation">.</span><span class="token property-access">parent</span><span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
 
-//新变量
-let wibRoot = null;
+<span class="token comment">//新变量</span>
+<span class="token keyword">let</span> wibRoot <span class="token operator">=</span> <span class="token keyword null nil">null</span><span class="token punctuation">;</span>
 
-//render函数
-function render(element, container) {
-  wipRoot = {
-    dom: container,
-    props: {
-      children: [element]
-    }
-  };
-  nextUnitOfWork = wipRoot;
-}
+<span class="token comment">//render函数</span>
+<span class="token keyword">function</span> <span class="token function">render</span><span class="token punctuation">(</span><span class="token parameter">element<span class="token punctuation">,</span> container</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  wipRoot <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">dom</span><span class="token operator">:</span> container<span class="token punctuation">,</span>
+    <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token punctuation">[</span>element<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  nextUnitOfWork <span class="token operator">=</span> wipRoot<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 
 
-function commitRoot(){
-  commitWork(wipRoot.child);
-  wipRoot=null;
-}
+<span class="token keyword">function</span> <span class="token function">commitRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">commitWork</span><span class="token punctuation">(</span>wipRoot<span class="token punctuation">.</span><span class="token property-access">child</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  wipRoot<span class="token operator">=</span><span class="token keyword null nil">null</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-function commitWork(fiber){
-  if(!fiber)return;
-  const domParent = fiber.parent.dom;
-  domParent.appendChild(fiber.dom);
-  commitWork(fiber.child);
-  commitWork(fiber.sibling);
-}
+<span class="token keyword">function</span> <span class="token function">commitWork</span><span class="token punctuation">(</span><span class="token parameter">fiber</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword control-flow">if</span><span class="token punctuation">(</span><span class="token operator">!</span>fiber<span class="token punctuation">)</span><span class="token keyword control-flow">return</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> domParent <span class="token operator">=</span> fiber<span class="token punctuation">.</span><span class="token property-access">parent</span><span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">;</span>
+  domParent<span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">commitWork</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">child</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">commitWork</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">sibling</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-function workLoop(deadLine) {
-  let shouldYield = false;
-  while (nextUnitOfWork &amp;&amp; !shouldYield) {
-    nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
-    shouldYield = deadLine.timeRemaining() &lt; 1;
-  }
+<span class="token keyword">function</span> <span class="token function">workLoop</span><span class="token punctuation">(</span><span class="token parameter">deadLine</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> shouldYield <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">while</span> <span class="token punctuation">(</span>nextUnitOfWork <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>shouldYield<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    nextUnitOfWork <span class="token operator">=</span> <span class="token function">performUnitOfWork</span><span class="token punctuation">(</span>nextUnitOfWork<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    shouldYield <span class="token operator">=</span> deadLine<span class="token punctuation">.</span><span class="token method function property-access">timeRemaining</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  if (!nextUnitOfWork &amp;&amp; wipRoot) {
-    commitRoot()
-  }
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>nextUnitOfWork <span class="token operator">&amp;&amp;</span> wipRoot<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">commitRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
   
-  if (nextUnitOfWork) {
-    requestIdleCallback(workLoop);
-  }
-}
-</code></pre>
-<p><a name="qPrre"></a></p>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>nextUnitOfWork<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">requestIdleCallback</span><span class="token punctuation">(</span>workLoop<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p></p>
 <h2>Step6:Reconciliation</h2>
 <p>目前为止，我们只是往DOM里添加，还没有处理更新和删除，接下来我们就处理这个。我们需要把render函数收到的elemets与已有的fiber tree进行比对。所以我们需要一个变量来保存上一次提交到DOM树的fiber tree，currentRoot。我们还需要在每个fiber上增加一个alternate属性，值为上一次提交阶段的老fiber。</p>
-<pre><code class="language-javascript">let currentRoot = null;
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> currentRoot <span class="token operator">=</span> <span class="token keyword null nil">null</span><span class="token punctuation">;</span>
 
-function commitRoot(){
-	commitWork(wipRoot.child);
-  currentRoot = wipRoot;
-  wipRoot = null;
-}
+<span class="token keyword">function</span> <span class="token function">commitRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token function">commitWork</span><span class="token punctuation">(</span>wipRoot<span class="token punctuation">.</span><span class="token property-access">child</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  currentRoot <span class="token operator">=</span> wipRoot<span class="token punctuation">;</span>
+  wipRoot <span class="token operator">=</span> <span class="token keyword null nil">null</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-function render(element,container){
-	wipRoot = {
-  	dom: container,
-    props: {
-    	children:[element],
-    },
-    alternate: currentRoot,
-  }
-  nextUnitOfWork = wipRoot;
-}
+<span class="token keyword">function</span> <span class="token function">render</span><span class="token punctuation">(</span><span class="token parameter">element<span class="token punctuation">,</span>container</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	wipRoot <span class="token operator">=</span> <span class="token punctuation">{</span>
+  	<span class="token literal-property property">dom</span><span class="token operator">:</span> container<span class="token punctuation">,</span>
+    <span class="token literal-property property">props</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    	<span class="token literal-property property">children</span><span class="token operator">:</span><span class="token punctuation">[</span>element<span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">alternate</span><span class="token operator">:</span> currentRoot<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+  nextUnitOfWork <span class="token operator">=</span> wipRoot<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 
-</code></pre>
+</code></pre></div>
 <p>我们先来把创建new fiber的代码提取出来，单独成为一个函数reconcileChildren。~~我们在这个函数里协调旧的fibers 和 新的 elements。~~Here we will reconcile the old fibers with the new elements.</p>
-<pre><code class="language-javascript">function performUnitOfWork(fiber) {
-  if (!fiber.dom) {
-    fiber.dom = createDom(fiber)
-  }
-  const elements = fiber.props.children
-  reconcileChildren(fiber, elements)
-  if (fiber.child) {
-    return fiber.child
-  }
-  let nextFiber = fiber
-  while (nextFiber) {
-    if (nextFiber.sibling) {
-      return nextFiber.sibling
-    }
-    nextFiber = nextFiber.parent
-  }
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">performUnitOfWork</span><span class="token punctuation">(</span><span class="token parameter">fiber</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fiber<span class="token punctuation">.</span><span class="token property-access">dom</span> <span class="token operator">=</span> <span class="token function">createDom</span><span class="token punctuation">(</span>fiber<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">const</span> elements <span class="token operator">=</span> fiber<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">.</span><span class="token property-access">children</span>
+  <span class="token function">reconcileChildren</span><span class="token punctuation">(</span>fiber<span class="token punctuation">,</span> elements<span class="token punctuation">)</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">child</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword control-flow">return</span> fiber<span class="token punctuation">.</span><span class="token property-access">child</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">let</span> nextFiber <span class="token operator">=</span> fiber
+  <span class="token keyword control-flow">while</span> <span class="token punctuation">(</span>nextFiber<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>nextFiber<span class="token punctuation">.</span><span class="token property-access">sibling</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword control-flow">return</span> nextFiber<span class="token punctuation">.</span><span class="token property-access">sibling</span>
+    <span class="token punctuation">}</span>
+    nextFiber <span class="token operator">=</span> nextFiber<span class="token punctuation">.</span><span class="token property-access">parent</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-function reconcileChildren(wipFiber, elements) {
-  let index = 0
-  let prevSibling = null
+<span class="token keyword">function</span> <span class="token function">reconcileChildren</span><span class="token punctuation">(</span><span class="token parameter">wipFiber<span class="token punctuation">,</span> elements</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token keyword">let</span> prevSibling <span class="token operator">=</span> <span class="token keyword null nil">null</span>
 
-  while (index &lt; elements.length) {
-    const element = elements[index]
+  <span class="token keyword control-flow">while</span> <span class="token punctuation">(</span>index <span class="token operator">&lt;</span> elements<span class="token punctuation">.</span><span class="token property-access">length</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> element <span class="token operator">=</span> elements<span class="token punctuation">[</span>index<span class="token punctuation">]</span>
 
-    const newFiber = {
-      type: element.type,
-      props: element.props,
-      parent: wipFiber,
-      dom: null,
-    }
+    <span class="token keyword">const</span> newFiber <span class="token operator">=</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">type</span><span class="token operator">:</span> element<span class="token punctuation">.</span><span class="token property-access">type</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">props</span><span class="token operator">:</span> element<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">parent</span><span class="token operator">:</span> wipFiber<span class="token punctuation">,</span>
+      <span class="token literal-property property">dom</span><span class="token operator">:</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
 
-    if (index === 0) {
-      wipFiber.child = newFiber
-    } else {
-      prevSibling.sibling = newFiber
-    }
+    <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>index <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      wipFiber<span class="token punctuation">.</span><span class="token property-access">child</span> <span class="token operator">=</span> newFiber
+    <span class="token punctuation">}</span> <span class="token keyword control-flow">else</span> <span class="token punctuation">{</span>
+      prevSibling<span class="token punctuation">.</span><span class="token property-access">sibling</span> <span class="token operator">=</span> newFiber
+    <span class="token punctuation">}</span>
 
-    prevSibling = newFiber
-    index++
-  }
-}
-</code></pre>
+    prevSibling <span class="token operator">=</span> newFiber
+    index<span class="token operator">++</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>我们在reconcileChildren函数里，遍历元素时，同时遍历old fiber。除开遍历和取值的模版代码，我们需要关心的是old fiber 和 当前的element。对比出它们两个之间的差异。</p>
-<pre><code class="language-javascript">function reconcileChildren(wipFiber, elements) {
-  let index = 0;
-  let oldFiber = wipFiber.alternate &amp;&amp; wipFiber.alternate.child;
-  let prevSibling = null
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">reconcileChildren</span><span class="token punctuation">(</span><span class="token parameter">wipFiber<span class="token punctuation">,</span> elements</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> oldFiber <span class="token operator">=</span> wipFiber<span class="token punctuation">.</span><span class="token property-access">alternate</span> <span class="token operator">&amp;&amp;</span> wipFiber<span class="token punctuation">.</span><span class="token property-access">alternate</span><span class="token punctuation">.</span><span class="token property-access">child</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> prevSibling <span class="token operator">=</span> <span class="token keyword null nil">null</span>
 
-  while (index &lt; elements.length || oldFiber!= null) {
-    const element = elements[index]
-		let newFiber = null;
-    //todo compare oldFiber to element
-		if(oldFiber){
-    	oldFiber = oldFiber.sibling;
-    }
-    if (index === 0) {
-      wipFiber.child = newFiber
-    } else {
-      prevSibling.sibling = newFiber
-    }
+  <span class="token keyword control-flow">while</span> <span class="token punctuation">(</span>index <span class="token operator">&lt;</span> elements<span class="token punctuation">.</span><span class="token property-access">length</span> <span class="token operator">||</span> oldFiber<span class="token operator">!=</span> <span class="token keyword null nil">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> element <span class="token operator">=</span> elements<span class="token punctuation">[</span>index<span class="token punctuation">]</span>
+		<span class="token keyword">let</span> newFiber <span class="token operator">=</span> <span class="token keyword null nil">null</span><span class="token punctuation">;</span>
+    <span class="token comment">//todo compare oldFiber to element</span>
+		<span class="token keyword control-flow">if</span><span class="token punctuation">(</span>oldFiber<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    	oldFiber <span class="token operator">=</span> oldFiber<span class="token punctuation">.</span><span class="token property-access">sibling</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>index <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      wipFiber<span class="token punctuation">.</span><span class="token property-access">child</span> <span class="token operator">=</span> newFiber
+    <span class="token punctuation">}</span> <span class="token keyword control-flow">else</span> <span class="token punctuation">{</span>
+      prevSibling<span class="token punctuation">.</span><span class="token property-access">sibling</span> <span class="token operator">=</span> newFiber
+    <span class="token punctuation">}</span>
 
-    prevSibling = newFiber
-    index++
-  }
-}
-</code></pre>
+    prevSibling <span class="token operator">=</span> newFiber
+    index<span class="token operator">++</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>我们使用type来进行比对。</p>
 <ol>
 <li>old fiber 和 element 的 type值一样，我们继续使用原有DOM，只对它进行props的更新。</li>
@@ -1054,234 +1054,234 @@ function reconcileChildren(wipFiber, elements) {
 <li>old fiber 和 element 的 type值不一样，且element不存在，old fiber存在，我们将删除旧的DOM。</li>
 </ol>
 <p>React使用keys来进行更好的比对。例如它能检测到列表中元素顺序的变动。（不理解）</p>
-<pre><code class="language-javascript">function reconcileChildren(wipFiber, elements) {
-  let index = 0;
-  let oldFiber = wipFiber.alternate &amp;&amp; wipFiber.alternate.child;
-  let prevSibling = null
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">reconcileChildren</span><span class="token punctuation">(</span><span class="token parameter">wipFiber<span class="token punctuation">,</span> elements</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> oldFiber <span class="token operator">=</span> wipFiber<span class="token punctuation">.</span><span class="token property-access">alternate</span> <span class="token operator">&amp;&amp;</span> wipFiber<span class="token punctuation">.</span><span class="token property-access">alternate</span><span class="token punctuation">.</span><span class="token property-access">child</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> prevSibling <span class="token operator">=</span> <span class="token keyword null nil">null</span>
 
-  while (index &lt; elements.length || oldFiber!= null) {
-    const element = elements[index]
-		let newFiber = null;
-    const sameType =
-      oldFiber &amp;&amp;
-      element &amp;&amp;
-      element.type == oldFiber.type
-    if (sameType) {
-      // TODO update the node
-    }
-    if (element &amp;&amp; !sameType) {
-      // TODO add this node
-    }
-    if (oldFiber &amp;&amp; !sameType) {
-      // TODO delete the oldFiber's node
-    }
-		if(oldFiber){
-    	oldFiber = oldFiber.sibling;
-    }
-    if (index === 0) {
-      wipFiber.child = newFiber
-    } else {
-      prevSibling.sibling = newFiber
-    }
+  <span class="token keyword control-flow">while</span> <span class="token punctuation">(</span>index <span class="token operator">&lt;</span> elements<span class="token punctuation">.</span><span class="token property-access">length</span> <span class="token operator">||</span> oldFiber<span class="token operator">!=</span> <span class="token keyword null nil">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> element <span class="token operator">=</span> elements<span class="token punctuation">[</span>index<span class="token punctuation">]</span>
+		<span class="token keyword">let</span> newFiber <span class="token operator">=</span> <span class="token keyword null nil">null</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> sameType <span class="token operator">=</span>
+      oldFiber <span class="token operator">&amp;&amp;</span>
+      element <span class="token operator">&amp;&amp;</span>
+      element<span class="token punctuation">.</span><span class="token property-access">type</span> <span class="token operator">==</span> oldFiber<span class="token punctuation">.</span><span class="token property-access">type</span>
+    <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>sameType<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// TODO update the node</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>element <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>sameType<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// TODO add this node</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>oldFiber <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>sameType<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// TODO delete the oldFiber's node</span>
+    <span class="token punctuation">}</span>
+		<span class="token keyword control-flow">if</span><span class="token punctuation">(</span>oldFiber<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    	oldFiber <span class="token operator">=</span> oldFiber<span class="token punctuation">.</span><span class="token property-access">sibling</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>index <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      wipFiber<span class="token punctuation">.</span><span class="token property-access">child</span> <span class="token operator">=</span> newFiber
+    <span class="token punctuation">}</span> <span class="token keyword control-flow">else</span> <span class="token punctuation">{</span>
+      prevSibling<span class="token punctuation">.</span><span class="token property-access">sibling</span> <span class="token operator">=</span> newFiber
+    <span class="token punctuation">}</span>
 
-    prevSibling = newFiber
-    index++
-  }
-}
-</code></pre>
+    prevSibling <span class="token operator">=</span> newFiber
+    index<span class="token operator">++</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>当old fiber type和 element type一样。我们创建一个new fiber，但是dom元素沿用old fiber的，props则更新为element的。与此同时，我们需要添加一个effectTag，我们会在提交阶段用到这个。</p>
-<pre><code class="language-javascript">if (sameType) {
-    newFiber = {
-      type: oldFiber.type,
-      props: element.props,
-      dom: oldFiber.dom,
-      parent: wipFiber,
-      alternate: oldFiber,
-      effectTag: "UPDATE",
-    }
-  }
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>sameType<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    newFiber <span class="token operator">=</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">type</span><span class="token operator">:</span> oldFiber<span class="token punctuation">.</span><span class="token property-access">type</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">props</span><span class="token operator">:</span> element<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">dom</span><span class="token operator">:</span> oldFiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">parent</span><span class="token operator">:</span> wipFiber<span class="token punctuation">,</span>
+      <span class="token literal-property property">alternate</span><span class="token operator">:</span> oldFiber<span class="token punctuation">,</span>
+      <span class="token literal-property property">effectTag</span><span class="token operator">:</span> <span class="token string">"UPDATE"</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+</code></pre></div>
 <p>对于第二种情况，我们需要新创建DOM，并打上一个PLACEMENT effectTag。</p>
-<pre><code class="language-javascript">if (element &amp;&amp; !sameType) {
-    newFiber = {
-      type: element.type,
-      props: element.props,
-      dom: null,
-      parent: wipFiber,
-      alternate: null,
-      effectTag: "PLACEMENT",
-    }
-  }
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>element <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>sameType<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    newFiber <span class="token operator">=</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">type</span><span class="token operator">:</span> element<span class="token punctuation">.</span><span class="token property-access">type</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">props</span><span class="token operator">:</span> element<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">dom</span><span class="token operator">:</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">parent</span><span class="token operator">:</span> wipFiber<span class="token punctuation">,</span>
+      <span class="token literal-property property">alternate</span><span class="token operator">:</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">effectTag</span><span class="token operator">:</span> <span class="token string">"PLACEMENT"</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+</code></pre></div>
 <p>对于第三种情况，我们需要删除DOM。但是并不存在一个新的fiber，所以我们需要在老的fiber上打上标记。
 然后还有一个问题是，我们提交阶段使用的是wipRoot，但是该变量上并不存在old fibers。所以我们需要一个额外的数组来保存我们需要删除的old fibers。最后在提交阶段使用这个数组去做删除工作。</p>
-<pre><code class="language-javascript">let deletions = null;
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> deletions <span class="token operator">=</span> <span class="token keyword null nil">null</span><span class="token punctuation">;</span>
 
-function render(){
-	...
-  deletions = [];
-  ...
-}
+<span class="token keyword">function</span> <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token spread operator">...</span>
+  deletions <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token spread operator">...</span>
+<span class="token punctuation">}</span>
 
-function commitRoot(){
-	deletions.forEach(commitWork);
-  ...
-}
+<span class="token keyword">function</span> <span class="token function">commitRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	deletions<span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span>commitWork<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token spread operator">...</span>
+<span class="token punctuation">}</span>
 
 
-if (oldFiber &amp;&amp; !sameType) {
-  oldFiber.effectTag = "DELETION"
-  deletions.push(oldFiber)
-}
-</code></pre>
+<span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>oldFiber <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>sameType<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  oldFiber<span class="token punctuation">.</span><span class="token property-access">effectTag</span> <span class="token operator">=</span> <span class="token string">"DELETION"</span>
+  deletions<span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span>oldFiber<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>接下来，我们来更改commitWork，使之能处理effectTags。
 如果fiber有一个PLACEMENT effectTag，我们添加一个新dom。</p>
-<pre><code class="language-javascript">function commitWork(fiber) {
-  if (!fiber) {
-    return
-  }
-  const domParent = fiber.parent.dom
-  if (
-    fiber.effectTag === "PLACEMENT" &amp;&amp;
-    fiber.dom != null
-  ) {
-    domParent.appendChild(fiber.dom)
-  }
-  commitWork(fiber.child)
-  commitWork(fiber.sibling)
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">commitWork</span><span class="token punctuation">(</span><span class="token parameter">fiber</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fiber<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword control-flow">return</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">const</span> domParent <span class="token operator">=</span> fiber<span class="token punctuation">.</span><span class="token property-access">parent</span><span class="token punctuation">.</span><span class="token property-access">dom</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>
+    fiber<span class="token punctuation">.</span><span class="token property-access">effectTag</span> <span class="token operator">===</span> <span class="token string">"PLACEMENT"</span> <span class="token operator">&amp;&amp;</span>
+    fiber<span class="token punctuation">.</span><span class="token property-access">dom</span> <span class="token operator">!=</span> <span class="token keyword null nil">null</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    domParent<span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">commitWork</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">child</span><span class="token punctuation">)</span>
+  <span class="token function">commitWork</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">sibling</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>如果fiber有一个DELETION effectTag，我们执行删除操作。</p>
-<pre><code class="language-javascript">function commitWork(fiber) {
-  if (!fiber) {
-    return
-  }
-  const domParent = fiber.parent.dom
-  if (
-    fiber.effectTag === "PLACEMENT" &amp;&amp;
-    fiber.dom != null
-  ) {
-    domParent.appendChild(fiber.dom)
-  }else if(fiber.effectTag === "PLACEMENT"){
-		domParent.removeChild(fiber.dom)
-	}
-  commitWork(fiber.child)
-  commitWork(fiber.sibling)
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">commitWork</span><span class="token punctuation">(</span><span class="token parameter">fiber</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fiber<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword control-flow">return</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">const</span> domParent <span class="token operator">=</span> fiber<span class="token punctuation">.</span><span class="token property-access">parent</span><span class="token punctuation">.</span><span class="token property-access">dom</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>
+    fiber<span class="token punctuation">.</span><span class="token property-access">effectTag</span> <span class="token operator">===</span> <span class="token string">"PLACEMENT"</span> <span class="token operator">&amp;&amp;</span>
+    fiber<span class="token punctuation">.</span><span class="token property-access">dom</span> <span class="token operator">!=</span> <span class="token keyword null nil">null</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    domParent<span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token keyword control-flow">else</span> <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">effectTag</span> <span class="token operator">===</span> <span class="token string">"PLACEMENT"</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		domParent<span class="token punctuation">.</span><span class="token method function property-access">removeChild</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span>
+  <span class="token function">commitWork</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">child</span><span class="token punctuation">)</span>
+  <span class="token function">commitWork</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">sibling</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>最后，如果是UPDATE effectTag，我们需要用新的props更新存在的DOM节点。我们将在updateDom里做属性更新。</p>
-<pre><code class="language-javascript">function commitWork(fiber) {
-  if (!fiber) {
-    return
-  }
-  const domParent = fiber.parent.dom
-  if (
-    fiber.effectTag === "PLACEMENT" &amp;&amp;
-    fiber.dom != null
-  ) {
-    domParent.appendChild(fiber.dom)
-  } else if (
-    fiber.effectTag === "UPDATE" &amp;&amp;
-    fiber.dom != null
-  ) {
-    updateDom(
-      fiber.dom,
-      fiber.alternate.props,
-      fiber.props
-    )
-  }else if(fiber.effectTag === "PLACEMENT"){
-		domParent.removeChild(fiber.dom)
-	}
-  commitWork(fiber.child)
-  commitWork(fiber.sibling)
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">commitWork</span><span class="token punctuation">(</span><span class="token parameter">fiber</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fiber<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword control-flow">return</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">const</span> domParent <span class="token operator">=</span> fiber<span class="token punctuation">.</span><span class="token property-access">parent</span><span class="token punctuation">.</span><span class="token property-access">dom</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>
+    fiber<span class="token punctuation">.</span><span class="token property-access">effectTag</span> <span class="token operator">===</span> <span class="token string">"PLACEMENT"</span> <span class="token operator">&amp;&amp;</span>
+    fiber<span class="token punctuation">.</span><span class="token property-access">dom</span> <span class="token operator">!=</span> <span class="token keyword null nil">null</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    domParent<span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> <span class="token keyword control-flow">else</span> <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>
+    fiber<span class="token punctuation">.</span><span class="token property-access">effectTag</span> <span class="token operator">===</span> <span class="token string">"UPDATE"</span> <span class="token operator">&amp;&amp;</span>
+    fiber<span class="token punctuation">.</span><span class="token property-access">dom</span> <span class="token operator">!=</span> <span class="token keyword null nil">null</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">updateDom</span><span class="token punctuation">(</span>
+      fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">,</span>
+      fiber<span class="token punctuation">.</span><span class="token property-access">alternate</span><span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">,</span>
+      fiber<span class="token punctuation">.</span><span class="token property-access">props</span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token keyword control-flow">else</span> <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">effectTag</span> <span class="token operator">===</span> <span class="token string">"PLACEMENT"</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		domParent<span class="token punctuation">.</span><span class="token method function property-access">removeChild</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span>
+  <span class="token function">commitWork</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">child</span><span class="token punctuation">)</span>
+  <span class="token function">commitWork</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">sibling</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
 
-function updateDom(){
-	// TODO
-}
-</code></pre>
+<span class="token keyword">function</span> <span class="token function">updateDom</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token comment">// TODO</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>我们比对新老props，移除已经不存在的props，添加新的prop，更新都有的prop。</p>
 <p>还需要处理一类特殊的属性，事件监听器listener，所以如果prop name 以 on 开头，我们会特殊处理。</p>
-<pre><code class="language-javascript">const isEvent = key =&gt; key.startsWith("on")
-const isProperty = key =&gt;
-  key !== "children" &amp;&amp; !isEvent(key)
-const isNew = (prev, next) =&gt; key =&gt;
-  prev[key] !== next[key]
-const isGone = (prev, next) =&gt; key =&gt; !(key in next)
-function updateDom(dom, prevProps, nextProps) {
-  //Remove old or changed event listeners
-  Object.keys(prevProps)
-    .filter(isEvent)
-    .filter(
-      key =&gt;
-        !(key in nextProps) ||
-        isNew(prevProps, nextProps)(key)
-    )
-    .forEach(name =&gt; {
-      const eventType = name
-        .toLowerCase()
-        .substring(2)
-      dom.removeEventListener(
-        eventType,
-        prevProps[name]
-      )
-    })
-  // Remove old properties
-  Object.keys(prevProps)
-    .filter(isProperty)
-    .filter(isGone(prevProps, nextProps))
-    .forEach(name =&gt; {
-      dom[name] = ""
-    })
-  // Set new or changed properties
-  Object.keys(nextProps)
-    .filter(isProperty)
-    .filter(isNew(prevProps, nextProps))
-    .forEach(name =&gt; {
-      dom[name] = nextProps[name]
-    })
-  // Add event listeners
-  Object.keys(nextProps)
-    .filter(isEvent)
-    .filter(isNew(prevProps, nextProps))
-    .forEach(name =&gt; {
-      const eventType = name
-        .toLowerCase()
-        .substring(2)
-      dom.addEventListener(
-        eventType,
-        nextProps[name]
-      )
-    })
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">isEvent</span> <span class="token operator">=</span> <span class="token parameter">key</span> <span class="token arrow operator">=&gt;</span> key<span class="token punctuation">.</span><span class="token method function property-access">startsWith</span><span class="token punctuation">(</span><span class="token string">"on"</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">isProperty</span> <span class="token operator">=</span> <span class="token parameter">key</span> <span class="token arrow operator">=&gt;</span>
+  key <span class="token operator">!==</span> <span class="token string">"children"</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">isEvent</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">isNew</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">prev<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token parameter">key</span> <span class="token arrow operator">=&gt;</span>
+  prev<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">!==</span> next<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+<span class="token keyword">const</span> <span class="token function-variable function">isGone</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">prev<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token parameter">key</span> <span class="token arrow operator">=&gt;</span> <span class="token operator">!</span><span class="token punctuation">(</span>key <span class="token keyword">in</span> next<span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">updateDom</span><span class="token punctuation">(</span><span class="token parameter">dom<span class="token punctuation">,</span> prevProps<span class="token punctuation">,</span> nextProps</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">//Remove old or changed event listeners</span>
+  <span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">keys</span><span class="token punctuation">(</span>prevProps<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">filter</span><span class="token punctuation">(</span>isEvent<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">filter</span><span class="token punctuation">(</span>
+      <span class="token parameter">key</span> <span class="token arrow operator">=&gt;</span>
+        <span class="token operator">!</span><span class="token punctuation">(</span>key <span class="token keyword">in</span> nextProps<span class="token punctuation">)</span> <span class="token operator">||</span>
+        <span class="token function">isNew</span><span class="token punctuation">(</span>prevProps<span class="token punctuation">,</span> nextProps<span class="token punctuation">)</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">name</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> eventType <span class="token operator">=</span> name
+        <span class="token punctuation">.</span><span class="token method function property-access">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token method function property-access">substring</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+      dom<span class="token punctuation">.</span><span class="token method function property-access">removeEventListener</span><span class="token punctuation">(</span>
+        eventType<span class="token punctuation">,</span>
+        prevProps<span class="token punctuation">[</span>name<span class="token punctuation">]</span>
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token comment">// Remove old properties</span>
+  <span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">keys</span><span class="token punctuation">(</span>prevProps<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">filter</span><span class="token punctuation">(</span>isProperty<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">filter</span><span class="token punctuation">(</span><span class="token function">isGone</span><span class="token punctuation">(</span>prevProps<span class="token punctuation">,</span> nextProps<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">name</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+      dom<span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">""</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token comment">// Set new or changed properties</span>
+  <span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">keys</span><span class="token punctuation">(</span>nextProps<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">filter</span><span class="token punctuation">(</span>isProperty<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">filter</span><span class="token punctuation">(</span><span class="token function">isNew</span><span class="token punctuation">(</span>prevProps<span class="token punctuation">,</span> nextProps<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">name</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+      dom<span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> nextProps<span class="token punctuation">[</span>name<span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token comment">// Add event listeners</span>
+  <span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">keys</span><span class="token punctuation">(</span>nextProps<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">filter</span><span class="token punctuation">(</span>isEvent<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">filter</span><span class="token punctuation">(</span><span class="token function">isNew</span><span class="token punctuation">(</span>prevProps<span class="token punctuation">,</span> nextProps<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">name</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> eventType <span class="token operator">=</span> name
+        <span class="token punctuation">.</span><span class="token method function property-access">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token method function property-access">substring</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+      dom<span class="token punctuation">.</span><span class="token method function property-access">addEventListener</span><span class="token punctuation">(</span>
+        eventType<span class="token punctuation">,</span>
+        nextProps<span class="token punctuation">[</span>name<span class="token punctuation">]</span>
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>STEP1-6<a href="https://github.com/CodeByZack/build-your-react-code/tree/step1-6">代码地址</a></p>
-<p><a name="step-vii-function-components"></a></p>
+<p></p>
 <h3></h3>
-<p><a name="ED7tY"></a></p>
+<p></p>
 <h2>Step7:函数组件</h2>
 <p>我们接下来要实现函数组件，首先我们更改demo为简单的函数组件。</p>
-<pre><code class="language-javascript">function App(props) {
-  return &lt;h1&gt;Hi {props.name}&lt;/h1&gt;
-}
-const element = &lt;App name="foo" /&gt;
-const container = document.getElementById("root")
-Didact.render(element, container)
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">App</span></span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span><span class="token maybe-class-name">Hi</span> <span class="token punctuation">{</span>props<span class="token punctuation">.</span><span class="token property-access">name</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> element <span class="token operator">=</span> <span class="token operator">&lt;</span><span class="token maybe-class-name">App</span> name<span class="token operator">=</span><span class="token string">"foo"</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+<span class="token keyword">const</span> container <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">getElementById</span><span class="token punctuation">(</span><span class="token string">"root"</span><span class="token punctuation">)</span>
+<span class="token maybe-class-name">Didact</span><span class="token punctuation">.</span><span class="token method function property-access">render</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> container<span class="token punctuation">)</span>
+</code></pre></div>
 <p>如果把JSX写成JS是这样的</p>
-<pre><code class="language-javascript">function App(props) {
-  return Didact.createElement(
-    "h1",
-    null,
-    "Hi ",
-    props.name
-  )
-}
-//注意这个APP，不是一个tag了，是一个函数了
-const element = Didact.createElement(App, {
-  name: "foo",
-})
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">App</span></span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token maybe-class-name">Didact</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span>
+    <span class="token string">"h1"</span><span class="token punctuation">,</span>
+    <span class="token keyword null nil">null</span><span class="token punctuation">,</span>
+    <span class="token string">"Hi "</span><span class="token punctuation">,</span>
+    props<span class="token punctuation">.</span><span class="token property-access">name</span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//注意这个APP，不是一个tag了，是一个函数了</span>
+<span class="token keyword">const</span> element <span class="token operator">=</span> <span class="token maybe-class-name">Didact</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span><span class="token maybe-class-name">App</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"foo"</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
 <p>函数组件在两个方面有不同：</p>
 <ul>
 <li>函数组件的fiber没有dom节点</li>
@@ -1290,144 +1290,143 @@ const element = Didact.createElement(App, {
 <p>我们需要修改performUnitOfWork，在函数内判断当前fiber的type是不是function，来走不同的 update function。
 在updateHostComponent我们保持和之前一致。
 在updateFunctionComponent我们运行函数并得到children元素。</p>
-<pre><code class="language-javascript">function performUnitOfWork(fiber){
-	...
-  const isFunctionComponent =
-    fiber.type instanceof Function
-  if (isFunctionComponent) {
-    updateFunctionComponent(fiber)
-  } else {
-    updateHostComponent(fiber)
-  }
-	...
-}  
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">performUnitOfWork</span><span class="token punctuation">(</span><span class="token parameter">fiber</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token spread operator">...</span>
+  <span class="token keyword">const</span> isFunctionComponent <span class="token operator">=</span>
+    fiber<span class="token punctuation">.</span><span class="token property-access">type</span> <span class="token keyword">instanceof</span> <span class="token class-name">Function</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>isFunctionComponent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">updateFunctionComponent</span><span class="token punctuation">(</span>fiber<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> <span class="token keyword control-flow">else</span> <span class="token punctuation">{</span>
+    <span class="token function">updateHostComponent</span><span class="token punctuation">(</span>fiber<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+	<span class="token spread operator">...</span>
+<span class="token punctuation">}</span>  
 
-function updateFunctionComponent(fiber) {
-  // TODO
-}
+<span class="token keyword">function</span> <span class="token function">updateFunctionComponent</span><span class="token punctuation">(</span><span class="token parameter">fiber</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// TODO</span>
+<span class="token punctuation">}</span>
 
-function updateHostComponent(fiber) {
-  if (!fiber.dom) {
-    fiber.dom = createDom(fiber)
-  }
-  reconcileChildren(fiber, fiber.props.children)
-}
-</code></pre>
+<span class="token keyword">function</span> <span class="token function">updateHostComponent</span><span class="token punctuation">(</span><span class="token parameter">fiber</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fiber<span class="token punctuation">.</span><span class="token property-access">dom</span> <span class="token operator">=</span> <span class="token function">createDom</span><span class="token punctuation">(</span>fiber<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">reconcileChildren</span><span class="token punctuation">(</span>fiber<span class="token punctuation">,</span> fiber<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">.</span><span class="token property-access">children</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>在我们的列子中，fiber.type 是App函数，当我们执行App函数，它返回H1元素。当函数执行完毕，拿到children我们就可以按之前的流程继续执行下去了。</p>
 <p>然后我们需要更改一下commitwork函数，因为现在有没有DOM节点的fiber存在。需要做两件事如下：
 1.我们需要向上查找父级元素，直到找到一个拥有DOM节点的fiber。
 2.当我们删除元素的时候，也需要向下查找到一个带有DOM节点的子元素进行删除。</p>
-<pre><code class="language-javascript">function commitWork(fiber){
-  ...
-  let domParentFiber = fiber.parent
-  while (!domParentFiber.dom) {
-    domParentFiber = domParentFiber.parent
-  }
-  const domParent = domParentFiber.dom
-  ...
-  if (
-    fiber.effectTag === "PLACEMENT" &amp;&amp;
-    fiber.dom != null
-  ) {
-    domParent.appendChild(fiber.dom)
-  }
-  ...
-  else if (fiber.effectTag === "DELETION") {
-    commitDeletion(fiber, domParent)
-  }
-  ...
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">commitWork</span><span class="token punctuation">(</span><span class="token parameter">fiber</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token spread operator">...</span>
+  <span class="token keyword">let</span> domParentFiber <span class="token operator">=</span> fiber<span class="token punctuation">.</span><span class="token property-access">parent</span>
+  <span class="token keyword control-flow">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>domParentFiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    domParentFiber <span class="token operator">=</span> domParentFiber<span class="token punctuation">.</span><span class="token property-access">parent</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">const</span> domParent <span class="token operator">=</span> domParentFiber<span class="token punctuation">.</span><span class="token property-access">dom</span>
+  <span class="token spread operator">...</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>
+    fiber<span class="token punctuation">.</span><span class="token property-access">effectTag</span> <span class="token operator">===</span> <span class="token string">"PLACEMENT"</span> <span class="token operator">&amp;&amp;</span>
+    fiber<span class="token punctuation">.</span><span class="token property-access">dom</span> <span class="token operator">!=</span> <span class="token keyword null nil">null</span>
+  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    domParent<span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token spread operator">...</span>
+  <span class="token keyword control-flow">else</span> <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">effectTag</span> <span class="token operator">===</span> <span class="token string">"DELETION"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">commitDeletion</span><span class="token punctuation">(</span>fiber<span class="token punctuation">,</span> domParent<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token spread operator">...</span>
+<span class="token punctuation">}</span>
   
- function commitDeletion(fiber, domParent) {
-  if (fiber.dom) {
-    domParent.removeChild(fiber.dom)
-  } else {
-    commitDeletion(fiber.child, domParent)
-  }
-}
-</code></pre>
+ <span class="token keyword">function</span> <span class="token function">commitDeletion</span><span class="token punctuation">(</span><span class="token parameter">fiber<span class="token punctuation">,</span> domParent</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    domParent<span class="token punctuation">.</span><span class="token method function property-access">removeChild</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> <span class="token keyword control-flow">else</span> <span class="token punctuation">{</span>
+    <span class="token function">commitDeletion</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">child</span><span class="token punctuation">,</span> domParent<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>STEP1-7<a href="https://github.com/CodeByZack/build-your-react-code/tree/step1-7">代码地址</a></p>
-<p><a name="0pQr7"></a></p>
+<p></p>
 <h2>Step8:hooks</h2>
 <p>最后，让我们实现一下state。</p>
 <p>先改造一下demo，经典的counter。</p>
-<pre><code class="language-javascript">const Didact = {
-  createElement,
-  render,
-  useState,
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token maybe-class-name">Didact</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  createElement<span class="token punctuation">,</span>
+  render<span class="token punctuation">,</span>
+  useState<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
 
-function useState(){
-	// TODO
-}
+<span class="token keyword">function</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token comment">// TODO</span>
+<span class="token punctuation">}</span>
 
-function Counter() {
-  const [state, setState] = Didact.useState(1)
-  return (
-    &lt;h1 onClick={() =&gt; setState(c =&gt; c + 1)}&gt;
-      Count: {state}
-    &lt;/h1&gt;
-  )
-}
-const element = &lt;Counter /&gt;;
-</code></pre>
+<span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">Counter</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>state<span class="token punctuation">,</span> setState<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token maybe-class-name">Didact</span><span class="token punctuation">.</span><span class="token method function property-access">useState</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>h1 onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token function">setState</span><span class="token punctuation">(</span><span class="token parameter">c</span> <span class="token arrow operator">=&gt;</span> c <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>
+      <span class="token literal-property property">Count</span><span class="token operator">:</span> <span class="token punctuation">{</span>state<span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> element <span class="token operator">=</span> <span class="token operator">&lt;</span><span class="token maybe-class-name">Counter</span> <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>我们是在updateFunctionComponent里执行Counter函数的，现在我们还需要在这调用useState。</p>
 <p>我们需要一些额外的全局的变量，wipFIber，hookIndex，以便在useState里使用。我们首先设置wipFiber为当前处理的fiber。然后我们需要在fiber添加一个hooks数组，储存在同一个组件中多次调用useState产生的hook。hookIndex按调用顺序一一对应上useState。</p>
-<pre><code class="language-javascript">let wipFiber = null;
-let hookIndex = null;
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> wipFiber <span class="token operator">=</span> <span class="token keyword null nil">null</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> hookIndex <span class="token operator">=</span> <span class="token keyword null nil">null</span><span class="token punctuation">;</span>
 
-function updateFunctionComponent(fiber){
-	wipFiber = fiber;
-  //每执行一个函数组件前，就重置index，保证顺序对应。
-  hookIndex = 0;
-  wipFiber.hooks = [];
-  const children = [fiber.type(fiber.props)];
-  reconcileChildren(fiber, children)
-}
+<span class="token keyword">function</span> <span class="token function">updateFunctionComponent</span><span class="token punctuation">(</span><span class="token parameter">fiber</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	wipFiber <span class="token operator">=</span> fiber<span class="token punctuation">;</span>
+  <span class="token comment">//每执行一个函数组件前，就重置index，保证顺序对应。</span>
+  hookIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  wipFiber<span class="token punctuation">.</span><span class="token property-access">hooks</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> children <span class="token operator">=</span> <span class="token punctuation">[</span>fiber<span class="token punctuation">.</span><span class="token method function property-access">type</span><span class="token punctuation">(</span>fiber<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token function">reconcileChildren</span><span class="token punctuation">(</span>fiber<span class="token punctuation">,</span> children<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
 
-function useState(initial){
-	//TODO
-}
+<span class="token keyword">function</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token parameter">initial</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token comment">//TODO</span>
+<span class="token punctuation">}</span>
 
-</code></pre>
+</code></pre></div>
 <p>当函数组件内调用useState时，我们在wipFiber的alternate的hooks用hookIndex检查是否含有一个老的hook存在。如果存在就赋值给新hook，不存在就使用初始值。然后把新hook添加到wibFiber的hooks数组里。最后把新hook的值返回出去。</p>
-<pre><code class="language-javascript">function useState(initial){
-	const oldHook = wipFiber.alternate &amp;&amp; wipFiber.alternate.hooks &amp;&amp; wipFiber.alternate.hooks[hookIndex];
-  const hook = {
-  	state : oldHook ? oldHook.state : initial;
-  }
-  wibFiber.hooks.push(hook);
-  hookIndex++;
-  return [hook.state];
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token parameter">initial</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">const</span> oldHook <span class="token operator">=</span> wipFiber<span class="token punctuation">.</span><span class="token property-access">alternate</span> <span class="token operator">&amp;&amp;</span> wipFiber<span class="token punctuation">.</span><span class="token property-access">alternate</span><span class="token punctuation">.</span><span class="token property-access">hooks</span> <span class="token operator">&amp;&amp;</span> wipFiber<span class="token punctuation">.</span><span class="token property-access">alternate</span><span class="token punctuation">.</span><span class="token property-access">hooks</span><span class="token punctuation">[</span>hookIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> hook <span class="token operator">=</span> <span class="token punctuation">{</span>
+  	<span class="token literal-property property">state</span> <span class="token operator">:</span> oldHook <span class="token operator">?</span> oldHook<span class="token punctuation">.</span><span class="token property-access">state</span> <span class="token operator">:</span> initial<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  wibFiber<span class="token punctuation">.</span><span class="token property-access">hooks</span><span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span>hook<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  hookIndex<span class="token operator">++</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">[</span>hook<span class="token punctuation">.</span><span class="token property-access">state</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>useState还应该返回一个setState函数去更新state的值。这个setState接收的参数为暂时称之为action。我们需要把这个action放在hook里的quene存起来。然后模仿render函数，生成一个新的nextUnitOfWork，让数据能及时更新到页面上。</p>
-<pre><code class="language-javascript">function useState(initial){
-	const oldHook = wipFiber.alternate &amp;&amp; wipFiber.alternate.hooks &amp;&amp; wipFiber.alternate.hooks[hookIndex];
-  const hook = {
-  	state : oldHook ? oldHook.state : initial;
-  	queue: []
-  }
-  wibFiber.hooks.push(hook);
-  hookIndex++;
-  const setState = (action)=&gt;{
-  	hook.queue.push(action);
-    wipRoot = {
-    	dom: currentRoot.dom,
-      props: currentRoot.props,
-      alternate: currentRoot,
-    }
-    nextUnitOfWork = wipRoot;
-    deletions = [];
-  }
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token parameter">initial</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">const</span> oldHook <span class="token operator">=</span> wipFiber<span class="token punctuation">.</span><span class="token property-access">alternate</span> <span class="token operator">&amp;&amp;</span> wipFiber<span class="token punctuation">.</span><span class="token property-access">alternate</span><span class="token punctuation">.</span><span class="token property-access">hooks</span> <span class="token operator">&amp;&amp;</span> wipFiber<span class="token punctuation">.</span><span class="token property-access">alternate</span><span class="token punctuation">.</span><span class="token property-access">hooks</span><span class="token punctuation">[</span>hookIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> hook <span class="token operator">=</span> <span class="token punctuation">{</span>
+  	<span class="token literal-property property">state</span> <span class="token operator">:</span> oldHook <span class="token operator">?</span> oldHook<span class="token punctuation">.</span><span class="token property-access">state</span> <span class="token operator">:</span> initial<span class="token punctuation">;</span>
+  	<span class="token literal-property property">queue</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+  wibFiber<span class="token punctuation">.</span><span class="token property-access">hooks</span><span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span>hook<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  hookIndex<span class="token operator">++</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">setState</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">action</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+  	hook<span class="token punctuation">.</span><span class="token property-access">queue</span><span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    wipRoot <span class="token operator">=</span> <span class="token punctuation">{</span>
+    	<span class="token literal-property property">dom</span><span class="token operator">:</span> currentRoot<span class="token punctuation">.</span><span class="token property-access">dom</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">props</span><span class="token operator">:</span> currentRoot<span class="token punctuation">.</span><span class="token property-access">props</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">alternate</span><span class="token operator">:</span> currentRoot<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+    nextUnitOfWork <span class="token operator">=</span> wipRoot<span class="token punctuation">;</span>
+    deletions <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   
-  return [hook.state,setState];
-}
-</code></pre>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">[</span>hook<span class="token punctuation">.</span><span class="token property-access">state</span><span class="token punctuation">,</span>setState<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>但是我们现在还没有执行action（作者默认action为函数）。
 我们在下一次更新组件的时候执行它，我们从老hook中的queue中取出所有actions。然后依次执行，赋值给当前hook的state。这样返回出去的就是最新的state了。</p>
 <p>STEP1-8<a href="https://github.com/CodeByZack/build-your-react-code/tree/step1-8">代码地址</a></p>
-
 </section>
 
     
@@ -1519,7 +1518,6 @@ function useState(initial){
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

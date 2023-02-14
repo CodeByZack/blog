@@ -74,7 +74,7 @@
   <meta name="description" content="在ES6之前，js只有全局作用域和函数作用域，声明变量一般用var，否则就是全局变量。 ES6，新增了块级作用域，声明变量多了两个关键字let,const。 <a name=&quot;0665242f&quot;></a>  ## 块级作用域  对于从安卓转到前端的我来说，ES5没有块级作用域，还是很容易造成代码理解......">
   <meta property="og:description" content="在ES6之前，js只有全局作用域和函数作用域，声明变量一般用var，否则就是全局变量。 ES6，新增了块级作用域，声明变量多了两个关键字let,const。 <a name=&quot;0665242f&quot;></a>  ## 块级作用域  对于从安卓转到前端的我来说，ES5没有块级作用域，还是很容易造成代码理解......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -468,133 +468,132 @@
 
 <section>
   <p>在ES6之前，js只有全局作用域和函数作用域，声明变量一般用var，否则就是全局变量。
-ES6，新增了块级作用域，声明变量多了两个关键字let,const。 <a name="0665242f"></a></p>
+ES6，新增了块级作用域，声明变量多了两个关键字let,const。 </p>
 <h2>块级作用域</h2>
 <p>对于从安卓转到前端的我来说，ES5没有块级作用域，还是很容易造成代码理解的错误的。</p>
-<pre><code class="language-javascript">for(var i=0;i&lt;10;i++){
-    //do something...
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//do something...</span>
+<span class="token punctuation">}</span>
 
-console.log(i);//   10
-</code></pre>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//   10</span>
+</code></pre></div>
 <p>按照java的习惯，i 变量应该是只在for代码块里生效的。但是js里，这样声明的 i 就是全局变量。这就是因为js没有块级作用域。</p>
 <p>ES6新增了块级作用域。既let,const,让{ }之间拥有了块级作用域。</p>
-<pre><code class="language-javascript">{
-    let t = 0;
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> t <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-console.log(t); //Uncaught ReferenceError
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//Uncaught ReferenceError</span>
 
-for(let i=0;i&lt;10;i++){
-    //do something...
-}
+<span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">//do something...</span>
+<span class="token punctuation">}</span>
 
-console.log(i); //Uncaught ReferenceError
-</code></pre>
-<p><a name="f93ec1d0"></a></p>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//Uncaught ReferenceError</span>
+</code></pre></div>
+<p></p>
 <h2>let关键字</h2>
-<p><a name="704f29e0"></a></p>
+<p></p>
 <h3>基本用法</h3>
-<pre><code class="language-javascript">{
-    let t = 0;
-    var m = 1; 
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> t <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> m <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
 
-console.log(t); //Uncaught ReferenceError
-console.log(m); //1
-</code></pre>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//Uncaught ReferenceError</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//1</span>
+</code></pre></div>
 <p>上面代码在代码块之中，分别用let和var声明了两个变量。然后在代码块之外调用这两个变量，结果let声明的变量报错，var声明的变量返回了正确的值。这表明，let声明的变量只在它所在的代码块有效。</p>
-<p><a name="5625aedb"></a></p>
+<p></p>
 <h3>不存在变量提升</h3>
 <p>let不像var那样会发生“变量提升”现象。所以，变量一定要在声明后使用，否则报错。</p>
-<pre><code class="language-javascript">console.log(foo); // 输出undefined
-console.log(bar); // 报错ReferenceError
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出undefined</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>bar<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 报错ReferenceError</span>
 
-var foo = 2;
-let bar = 2;
-</code></pre>
+<span class="token keyword">var</span> foo <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> bar <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>上面代码中，变量foo用var命令声明，会发生变量提升，即脚本开始运行时，变量foo已经存在了，但是没有值，所以会输出undefined。变量bar用let命令声明，不会发生变量提升。这表示在声明它之前，变量bar是不存在的，这时如果用到它，就会抛出一个错误，所以使用let请先声明，后使用。</p>
-<p><a name="45a566a3"></a></p>
+<p></p>
 <h3>暂时性死区（temporal dead zone）</h3>
 <p>只要块级作用域内存在let命令，它所声明的变量在声明之前都是不可用的，即使全局变量中存在同名变量。</p>
-<pre><code class="language-javascript">var tmp = 111；
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">var</span> tmp <span class="token operator">=</span> <span class="token number">111</span>；
 
-if (true) {
-  // TDZ开始
-  tmp = 'abc'; // ReferenceError
-  console.log(tmp); // ReferenceError
+<span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// TDZ开始</span>
+  tmp <span class="token operator">=</span> <span class="token string">'abc'</span><span class="token punctuation">;</span> <span class="token comment">// ReferenceError</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ReferenceError</span>
 
-  let tmp; // TDZ结束
-  console.log(tmp); // undefined
+  <span class="token keyword">let</span> tmp<span class="token punctuation">;</span> <span class="token comment">// TDZ结束</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// undefined</span>
 
-  tmp = 123;
-  console.log(tmp); // 123
-}
-</code></pre>
+  tmp <span class="token operator">=</span> <span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 123</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>上面代码中，存在全局变量tmp，但是块级作用域内let又声明了一个局部变量tmp，导致后者绑定这个块级作用域，所以在let声明变量前，对tmp赋值会报错。</p>
 <p>ES6明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。</p>
 <p>总之，在代码块内，使用let命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”（temporal dead zone，简称TDZ）。</p>
-<p><a name="dccd9155"></a></p>
+<p></p>
 <h3>不允许重复声明</h3>
 <p>let不允许在相同作用域内，重复声明同一个变量。</p>
-<pre><code class="language-javascript">// 报错
-function () {
-  let a = 10;
-  var a = 1;
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// 报错</span>
+<span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-// 报错
-function () {
-  let a = 10;
-  let a = 1;
-}
-</code></pre>
+<span class="token comment">// 报错</span>
+<span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>因此，不能在函数内部重新声明参数。</p>
-<pre><code class="language-javascript">function func(arg) {
-  let arg; // 报错
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token parameter">arg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> arg<span class="token punctuation">;</span> <span class="token comment">// 报错</span>
+<span class="token punctuation">}</span>
 
-function func(arg) {
-  {
-    let arg; // 不报错
-  }
-}
-</code></pre>
-<p><a name="27fce117"></a></p>
+<span class="token keyword">function</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token parameter">arg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> arg<span class="token punctuation">;</span> <span class="token comment">// 不报错</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p></p>
 <h2>const关键字</h2>
 <p>const特性与let基本一致。</p>
 <p>const声明一个只读的常量。一旦声明，常量的值就不能改变。</p>
-<pre><code class="language-javascript">const PI = 3.1415;
-PI // 3.1415
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token constant">PI</span> <span class="token operator">=</span> <span class="token number">3.1415</span><span class="token punctuation">;</span>
+<span class="token constant">PI</span> <span class="token comment">// 3.1415</span>
 
-PI = 3;
-// TypeError: Assignment to constant variable.
-</code></pre>
+<span class="token constant">PI</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token comment">// TypeError: Assignment to constant variable.</span>
+</code></pre></div>
 <p>上面代码表明改变常量的值会报错。</p>
 <p>const声明的变量不得改变值，这意味着，const一旦声明变量，就必须立即初始化，不能留到以后赋值。</p>
-<pre><code class="language-javascript">const a = 1;
-a // 1
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+a <span class="token comment">// 1</span>
 
-a = 3;
-// TypeError: Assignment to constant variable.
+a <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token comment">// TypeError: Assignment to constant variable.</span>
 
 
-const b = { a:1,c:2 };
-b //  { a:1,c:2 }
+<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token literal-property property">a</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token literal-property property">c</span><span class="token operator">:</span><span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+b <span class="token comment">//  { a:1,c:2 }</span>
 
-b = {};
-// TypeError: Assignment to constant variable.
+b <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">// TypeError: Assignment to constant variable.</span>
 
-b.a = 3;
+b<span class="token punctuation">.</span><span class="token property-access">a</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
 
-b.c =12;
+b<span class="token punctuation">.</span><span class="token property-access">c</span> <span class="token operator">=</span><span class="token number">12</span><span class="token punctuation">;</span>
 
-b //  { a:3,c:12 }
-</code></pre>
+b <span class="token comment">//  { a:3,c:12 }</span>
+</code></pre></div>
 <p>js的变量可以分为两类，值类型，引用类型。</p>
 <p>引用类型，变量其实储存的可以理解为一个内存地址，真正的内容储存在内存地址所指向的内存。</p>
 <p>const修饰引用类型时，const只是限制了引用的地址不能改变，并不会限制地址指向的内容不改变。</p>
-
 </section>
 
     
@@ -686,7 +685,6 @@ b //  { a:3,c:12 }
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

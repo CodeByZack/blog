@@ -74,7 +74,7 @@
   <meta name="description" content="## VSCODE JS代码片段  vscode插入代码片段，直接设置里搜索user snippets  ```json  &quot;react class component&quot;: {   &quot;prefix&quot;: &quot;rcc&quot;,   &quot;body&quot;: [    &quot;import React, { Component ......">
   <meta property="og:description" content="## VSCODE JS代码片段  vscode插入代码片段，直接设置里搜索user snippets  ```json  &quot;react class component&quot;: {   &quot;prefix&quot;: &quot;rcc&quot;,   &quot;body&quot;: [    &quot;import React, { Component ......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -469,34 +469,34 @@
 <section>
   <h2>VSCODE JS代码片段</h2>
 <p>vscode插入代码片段，直接设置里搜索user snippets</p>
-<pre><code class="language-json">	"react class component": {
-		"prefix": "rcc",
-		"body": [
-			"import React, { Component } from 'react'",
-			"class $1 extends Component {",
-			"    render(){",
-			"        return (&lt;div&gt;&lt;/div&gt;);",
-			"    }",
-			"}",
-			"export default $1;"
-		],
-		"description": "react class component"
-	},
+<div class="remark-highlight"><pre class="language-json"><code class="language-json"><span class="token property">"react class component"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+		<span class="token property">"prefix"</span><span class="token operator">:</span> <span class="token string">"rcc"</span><span class="token punctuation">,</span>
+		<span class="token property">"body"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+			<span class="token string">"import React, { Component } from 'react'"</span><span class="token punctuation">,</span>
+			<span class="token string">"class $1 extends Component {"</span><span class="token punctuation">,</span>
+			<span class="token string">"    render(){"</span><span class="token punctuation">,</span>
+			<span class="token string">"        return (&lt;div&gt;&lt;/div&gt;);"</span><span class="token punctuation">,</span>
+			<span class="token string">"    }"</span><span class="token punctuation">,</span>
+			<span class="token string">"}"</span><span class="token punctuation">,</span>
+			<span class="token string">"export default $1;"</span>
+		<span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"react class component"</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
 
-	"react function component": {
-		"prefix": "rfc",
-		"body": [
-			"import React from 'react';",
-			"const $1 = (props)=&gt;{",
-			"    return (",
-			"        &lt;div&gt;$1&lt;/div&gt;",
-			"    );",
-			"}",
-			"export default $1;"
-		],
-		"description": "react function component"
-	},
-</code></pre>
+	<span class="token property">"react function component"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+		<span class="token property">"prefix"</span><span class="token operator">:</span> <span class="token string">"rfc"</span><span class="token punctuation">,</span>
+		<span class="token property">"body"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+			<span class="token string">"import React from 'react';"</span><span class="token punctuation">,</span>
+			<span class="token string">"const $1 = (props)=&gt;{"</span><span class="token punctuation">,</span>
+			<span class="token string">"    return ("</span><span class="token punctuation">,</span>
+			<span class="token string">"        &lt;div&gt;$1&lt;/div&gt;"</span><span class="token punctuation">,</span>
+			<span class="token string">"    );"</span><span class="token punctuation">,</span>
+			<span class="token string">"}"</span><span class="token punctuation">,</span>
+			<span class="token string">"export default $1;"</span>
+		<span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"react function component"</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre></div>
 <h2>mac下mysql 相关命令</h2>
 <p>mysql.server start</p>
 <p>mysql.server&nbsp;stop</p>
@@ -521,14 +521,14 @@
     
 <p>注册一个命令，会返回Disposable对象，该对象需要放到context.subscriptions里
 所以会看到下面这种格式的代码，固定写法</p>
-<pre><code class="language-javascript">context.subscriptions.push(vscode.commands.registerCommand('extension.sayHello2', () =&gt; {
-    vscode.window.showInformationMessage('Hello World！你好，小茗同学！');
-}));
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript">context<span class="token punctuation">.</span><span class="token property-access">subscriptions</span><span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span>vscode<span class="token punctuation">.</span><span class="token property-access">commands</span><span class="token punctuation">.</span><span class="token method function property-access">registerCommand</span><span class="token punctuation">(</span><span class="token string">'extension.sayHello2'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+    vscode<span class="token punctuation">.</span><span class="token property-access">window</span><span class="token punctuation">.</span><span class="token method function property-access">showInformationMessage</span><span class="token punctuation">(</span><span class="token string">'Hello World！你好，小茗同学！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 
-vscode.commands.registerCommand('命令名','执行命令时调用的函数')
-context.subscriptions.push(Disposable)
-</code></pre>
+vscode<span class="token punctuation">.</span><span class="token property-access">commands</span><span class="token punctuation">.</span><span class="token method function property-access">registerCommand</span><span class="token punctuation">(</span><span class="token string">'命令名'</span><span class="token punctuation">,</span><span class="token string">'执行命令时调用的函数'</span><span class="token punctuation">)</span>
+context<span class="token punctuation">.</span><span class="token property-access">subscriptions</span><span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span><span class="token maybe-class-name">Disposable</span><span class="token punctuation">)</span>
+</code></pre></div>
 <h2>CSS之盒模型</h2>
 <h4>行内框盒子模型</h4>
 <p>1.内容区高度
@@ -610,94 +610,94 @@ dev上有三个节点</p>
 **/^[0-9a-zA-Z]{4}$/</p>
 <p><strong>匹配邮箱地址</strong>
 /^[\w]+@[\w]+.[\w]+$/</p>
-<pre><code class="language-javascript">const axios = require("axios");
-const http = require('http');
-const path = require('path');
-const fs = require('fs');
-const url = "http://172.26.66.38/src/";
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> axios <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"axios"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'http'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> url <span class="token operator">=</span> <span class="token string">"http://172.26.66.38/src/"</span><span class="token punctuation">;</span>
 
-axios.get(url).then(res=&gt;{
-    const allLinks = getAllLink(res.data);
-    checkIfFiles(url,"ui/",allLinks);
-    console.log(allLinks);
-});
-
-
-const getAllLink = ( html )=&gt;{
-    const links = html.match(/&lt;a[^&gt;]+?href=["']?([^"']+)["']?[^&gt;]*&gt;([^&lt;]+)&lt;\/a&gt;/g);
-    if(!links)return[];
-    const linkObjArr = links.map(link=&gt;{
-        const obj = {};
-        const a = link.match(/.+href=["']?([^"']*)["']?/);
-        const b = link.match(/&lt;a[^&gt;]+&gt;([^&lt;]+)&lt;/);
-        obj.link = a?a[1]:null;
-        obj.text = b?b[1]:null;
-        return obj;
-    });
-    return linkObjArr.filter(link=&gt;!link.link.includes("../"));
-}
-
-const checkIfFiles = async (url,dir,allLinks)=&gt;{
-    for (let i = 0; i &lt; allLinks.length; i++) {
-        const linkObj = allLinks[i];
-        const { link, text } = linkObj;
-        const urlNow = url + link;
-        const dirNow = dir + text;
-        console.log(urlNow);
-        await new Promise((resolve)=&gt;setTimeout(resolve,500));
-        if(text.includes("/")){
-            const html = await axios.get(urlNow);
-            const allLinks = getAllLink(html.data);
-            await checkIfFiles(urlNow,dirNow,allLinks);
-        }else{
-            console.log("it is file");
-            console.log(dirNow);
-            await downloadFileAsync(urlNow,dirNow)
-        }        
-    }
-}
+axios<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+    <span class="token keyword">const</span> allLinks <span class="token operator">=</span> <span class="token function">getAllLink</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span><span class="token property-access">data</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">checkIfFiles</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span><span class="token string">"ui/"</span><span class="token punctuation">,</span>allLinks<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>allLinks<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 
-function downloadFileAsync(uri, dest){
-  return new Promise((resolve, reject)=&gt;{
-    // 确保dest路径存在
-    fs.mkdirSync(path.dirname(dest),{recursive :true});
-    fs.writeFileSync(dest);
-    const file = fs.createWriteStream(dest);
-    http.get(uri, (res)=&gt;{
-      if(res.statusCode !== 200){
-        reject(response.statusCode);
-        return;
-      }
+<span class="token keyword">const</span> <span class="token function-variable function">getAllLink</span> <span class="token operator">=</span> <span class="token punctuation">(</span> <span class="token parameter">html</span> <span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+    <span class="token keyword">const</span> links <span class="token operator">=</span> html<span class="token punctuation">.</span><span class="token method function property-access">match</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;a<span class="token char-class"><span class="token char-class-punctuation punctuation">[</span><span class="token char-class-negation operator">^</span>&gt;<span class="token char-class-punctuation punctuation">]</span></span><span class="token quantifier number">+?</span>href=<span class="token char-class"><span class="token char-class-punctuation punctuation">[</span>"'<span class="token char-class-punctuation punctuation">]</span></span><span class="token quantifier number">?</span><span class="token group punctuation">(</span><span class="token char-class"><span class="token char-class-punctuation punctuation">[</span><span class="token char-class-negation operator">^</span>"'<span class="token char-class-punctuation punctuation">]</span></span><span class="token quantifier number">+</span><span class="token group punctuation">)</span><span class="token char-class"><span class="token char-class-punctuation punctuation">[</span>"'<span class="token char-class-punctuation punctuation">]</span></span><span class="token quantifier number">?</span><span class="token char-class"><span class="token char-class-punctuation punctuation">[</span><span class="token char-class-negation operator">^</span>&gt;<span class="token char-class-punctuation punctuation">]</span></span><span class="token quantifier number">*</span>&gt;<span class="token group punctuation">(</span><span class="token char-class"><span class="token char-class-punctuation punctuation">[</span><span class="token char-class-negation operator">^</span>&lt;<span class="token char-class-punctuation punctuation">]</span></span><span class="token quantifier number">+</span><span class="token group punctuation">)</span>&lt;<span class="token escape">\/</span>a&gt;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">if</span><span class="token punctuation">(</span><span class="token operator">!</span>links<span class="token punctuation">)</span><span class="token keyword control-flow">return</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> linkObjArr <span class="token operator">=</span> links<span class="token punctuation">.</span><span class="token method function property-access">map</span><span class="token punctuation">(</span><span class="token parameter">link</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+        <span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token keyword">const</span> a <span class="token operator">=</span> link<span class="token punctuation">.</span><span class="token method function property-access">match</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex"><span class="token char-set class-name">.</span><span class="token quantifier number">+</span>href=<span class="token char-class"><span class="token char-class-punctuation punctuation">[</span>"'<span class="token char-class-punctuation punctuation">]</span></span><span class="token quantifier number">?</span><span class="token group punctuation">(</span><span class="token char-class"><span class="token char-class-punctuation punctuation">[</span><span class="token char-class-negation operator">^</span>"'<span class="token char-class-punctuation punctuation">]</span></span><span class="token quantifier number">*</span><span class="token group punctuation">)</span><span class="token char-class"><span class="token char-class-punctuation punctuation">[</span>"'<span class="token char-class-punctuation punctuation">]</span></span><span class="token quantifier number">?</span></span><span class="token regex-delimiter">/</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">const</span> b <span class="token operator">=</span> link<span class="token punctuation">.</span><span class="token method function property-access">match</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;a<span class="token char-class"><span class="token char-class-punctuation punctuation">[</span><span class="token char-class-negation operator">^</span>&gt;<span class="token char-class-punctuation punctuation">]</span></span><span class="token quantifier number">+</span>&gt;<span class="token group punctuation">(</span><span class="token char-class"><span class="token char-class-punctuation punctuation">[</span><span class="token char-class-negation operator">^</span>&lt;<span class="token char-class-punctuation punctuation">]</span></span><span class="token quantifier number">+</span><span class="token group punctuation">)</span>&lt;</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        obj<span class="token punctuation">.</span><span class="token property-access">link</span> <span class="token operator">=</span> a<span class="token operator">?</span>a<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">:</span><span class="token keyword null nil">null</span><span class="token punctuation">;</span>
+        obj<span class="token punctuation">.</span><span class="token property-access">text</span> <span class="token operator">=</span> b<span class="token operator">?</span>b<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">:</span><span class="token keyword null nil">null</span><span class="token punctuation">;</span>
+        <span class="token keyword control-flow">return</span> obj<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">return</span> linkObjArr<span class="token punctuation">.</span><span class="token method function property-access">filter</span><span class="token punctuation">(</span><span class="token parameter">link</span><span class="token arrow operator">=&gt;</span><span class="token operator">!</span>link<span class="token punctuation">.</span><span class="token property-access">link</span><span class="token punctuation">.</span><span class="token method function property-access">includes</span><span class="token punctuation">(</span><span class="token string">"../"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-      res.on('end', ()=&gt;{
-        console.log('download end');
-      });
+<span class="token keyword">const</span> <span class="token function-variable function">checkIfFiles</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">url<span class="token punctuation">,</span>dir<span class="token punctuation">,</span>allLinks</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+    <span class="token keyword control-flow">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> allLinks<span class="token punctuation">.</span><span class="token property-access">length</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> linkObj <span class="token operator">=</span> allLinks<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">const</span> <span class="token punctuation">{</span> link<span class="token punctuation">,</span> text <span class="token punctuation">}</span> <span class="token operator">=</span> linkObj<span class="token punctuation">;</span>
+        <span class="token keyword">const</span> urlNow <span class="token operator">=</span> url <span class="token operator">+</span> link<span class="token punctuation">;</span>
+        <span class="token keyword">const</span> dirNow <span class="token operator">=</span> dir <span class="token operator">+</span> text<span class="token punctuation">;</span>
+        <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>urlNow<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword control-flow">await</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token function">setTimeout</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>text<span class="token punctuation">.</span><span class="token method function property-access">includes</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">const</span> html <span class="token operator">=</span> <span class="token keyword control-flow">await</span> axios<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span>urlNow<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">const</span> allLinks <span class="token operator">=</span> <span class="token function">getAllLink</span><span class="token punctuation">(</span>html<span class="token punctuation">.</span><span class="token property-access">data</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword control-flow">await</span> <span class="token function">checkIfFiles</span><span class="token punctuation">(</span>urlNow<span class="token punctuation">,</span>dirNow<span class="token punctuation">,</span>allLinks<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword control-flow">else</span><span class="token punctuation">{</span>
+            <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"it is file"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>dirNow<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword control-flow">await</span> <span class="token function">downloadFileAsync</span><span class="token punctuation">(</span>urlNow<span class="token punctuation">,</span>dirNow<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>        
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-      // 进度、超时等
 
-      file.on('finish', ()=&gt;{
-        console.log('finish write file')
-        file.close(resolve);
-      }).on('error', (err)=&gt;{
-        fs.unlink(dest);
-        reject(err.message);
-      })
+<span class="token keyword">function</span> <span class="token function">downloadFileAsync</span><span class="token punctuation">(</span><span class="token parameter">uri<span class="token punctuation">,</span> dest</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+    <span class="token comment">// 确保dest路径存在</span>
+    fs<span class="token punctuation">.</span><span class="token method function property-access">mkdirSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token method function property-access">dirname</span><span class="token punctuation">(</span>dest<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token literal-property property">recursive</span> <span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    fs<span class="token punctuation">.</span><span class="token method function property-access">writeFileSync</span><span class="token punctuation">(</span>dest<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> file <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token method function property-access">createWriteStream</span><span class="token punctuation">(</span>dest<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    http<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span>uri<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">res</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+      <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span><span class="token property-access">statusCode</span> <span class="token operator">!==</span> <span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">reject</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span><span class="token property-access">statusCode</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword control-flow">return</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
 
-      res.pipe(file);
-    });
-  });
-}
+      res<span class="token punctuation">.</span><span class="token method function property-access">on</span><span class="token punctuation">(</span><span class="token string">'end'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+        <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">'download end'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-</code></pre>
+      <span class="token comment">// 进度、超时等</span>
+
+      file<span class="token punctuation">.</span><span class="token method function property-access">on</span><span class="token punctuation">(</span><span class="token string">'finish'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+        <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">'finish write file'</span><span class="token punctuation">)</span>
+        file<span class="token punctuation">.</span><span class="token method function property-access">close</span><span class="token punctuation">(</span>resolve<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">on</span><span class="token punctuation">(</span><span class="token string">'error'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+        fs<span class="token punctuation">.</span><span class="token method function property-access">unlink</span><span class="token punctuation">(</span>dest<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">reject</span><span class="token punctuation">(</span>err<span class="token punctuation">.</span><span class="token property-access">message</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+      res<span class="token punctuation">.</span><span class="token method function property-access">pipe</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div>
 <h2>向当前页面注入script标签</h2>
-<pre><code class="language-javascript">var htmm =document.getElementsByTagName("html")[0];
-var scri = document.createElement("script");
-scri.async="async"
-scri.src="https://cdn.jsdelivr.net/npm/immer/dist/immer.umd.js"
-scri.onload=function(){console.log("script onloaded");}
-htmm.appendChild(scri);
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">var</span> htmm <span class="token operator">=</span><span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">getElementsByTagName</span><span class="token punctuation">(</span><span class="token string">"html"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> scri <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span><span class="token string">"script"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+scri<span class="token punctuation">.</span><span class="token property-access">async</span><span class="token operator">=</span><span class="token string">"async"</span>
+scri<span class="token punctuation">.</span><span class="token property-access">src</span><span class="token operator">=</span><span class="token string">"https://cdn.jsdelivr.net/npm/immer/dist/immer.umd.js"</span>
+scri<span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">onload</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"script onloaded"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+htmm<span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>scri<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <h2>GIT SSL错误</h2>
 <p>错误内容：<code>OpenSSL SSL_connect: SSL_ERROR_SYSCALL</code></p>
 <p>原因简述：当你通过HTTPS访问Git远程仓库的时候，如果服务器的SSL证书未经过第三方机构(例如：CA)签署，那么Git就会报错。原因是因为未知的没有签署过的证书意味着可能存在很大的风险。</p>
@@ -736,12 +736,10 @@ htmm.appendChild(scri);
 <h2>翻墙工具 全局代理 无法代理命令行工具</h2>
 <p>需要设置你所在的命令行工具把请求转发到 翻墙工具的端口上。
 android studio 可以在 gradle.properties 添加代理</p>
-<pre><code>systemProp.https.proxyPort=7890
+<div class="remark-highlight"><pre class="language-unknown"><code class="language-unknown">systemProp.https.proxyPort=7890
 systemProp.http.proxyHost=127.0.0.1
 systemProp.https.proxyHost=127.0.0.1
-systemProp.http.proxyPort=7890
-</code></pre>
-
+systemProp.http.proxyPort=7890</code></pre></div>
 </section>
 
     
@@ -833,7 +831,6 @@ systemProp.http.proxyPort=7890
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

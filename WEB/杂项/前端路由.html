@@ -74,7 +74,7 @@
   <meta name="description" content="在传统的多页面时代，网页都是请求一个url，然后后端生成一个完整的html文档，返回给前端。 每次url改变都意味着页面刷新，重新加载新的html文档。这个时候所有路由都是后端控制的。  随着前端技术的发展，前端可以用ajax请求后端数据，便出现了单页面应用。所谓单页面应用，就是只在开始加载一次ht......">
   <meta property="og:description" content="在传统的多页面时代，网页都是请求一个url，然后后端生成一个完整的html文档，返回给前端。 每次url改变都意味着页面刷新，重新加载新的html文档。这个时候所有路由都是后端控制的。  随着前端技术的发展，前端可以用ajax请求后端数据，便出现了单页面应用。所谓单页面应用，就是只在开始加载一次ht......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -472,114 +472,113 @@
 <p>随着前端技术的发展，前端可以用ajax请求后端数据，便出现了单页面应用。所谓单页面应用，就是只在开始加载一次html文档，之后的操作都是js完成。其中就包括了路由这个功能。</p>
 <p>说起来也挺简单，js监听url的改变，js改变dom。</p>
 <h2>History</h2>
-<pre><code class="language-javascript">&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8" /&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
-    &lt;meta http-equiv="X-UA-Compatible" content="ie=edge" /&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href="/"&gt;/&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href="/page1"&gt;page1&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href="/page2"&gt;page2&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;div class="content-div"&gt;&lt;/div&gt;
-  &lt;/body&gt;
-  &lt;script&gt;
-    class RouterClass {
-      constructor(path) {
-        this.routes = {}; // 记录路径标识符对应的cb
-        history.replaceState({ path }, null, path); // 进入状态
-        this.routes[path] &amp;&amp; this.routes[path]();
-        window.addEventListener("popstate", e =&gt; {// 当用户点击浏览器的前进或者后退触发
-            console.log(e.state)
-          const path = e.state &amp;&amp; e.state.path;
-          this.routes[path] &amp;&amp; this.routes[path]();
-        });
-      }
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token constant">DOCTYPE</span> html<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>html lang<span class="token operator">=</span><span class="token string">"en"</span><span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>head<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>meta charset<span class="token operator">=</span><span class="token string">"UTF-8"</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>meta name<span class="token operator">=</span><span class="token string">"viewport"</span> content<span class="token operator">=</span><span class="token string">"width=device-width, initial-scale=1.0"</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>meta http<span class="token operator">-</span>equiv<span class="token operator">=</span><span class="token string">"X-UA-Compatible"</span> content<span class="token operator">=</span><span class="token string">"ie=edge"</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>title<span class="token operator">&gt;</span><span class="token maybe-class-name">Document</span><span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>body<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>ul<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>li<span class="token operator">&gt;</span><span class="token operator">&lt;</span>a href<span class="token operator">=</span><span class="token string">"/"</span><span class="token operator">&gt;</span><span class="token operator">/</span><span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>li<span class="token operator">&gt;</span><span class="token operator">&lt;</span>a href<span class="token operator">=</span><span class="token string">"/page1"</span><span class="token operator">&gt;</span>page1<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>li<span class="token operator">&gt;</span><span class="token operator">&lt;</span>a href<span class="token operator">=</span><span class="token string">"/page2"</span><span class="token operator">&gt;</span>page2<span class="token operator">&lt;</span><span class="token operator">/</span>a<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"content-div"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>script<span class="token operator">&gt;</span>
+    <span class="token keyword">class</span> <span class="token class-name">RouterClass</span> <span class="token punctuation">{</span>
+      <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">path</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">routes</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// 记录路径标识符对应的cb</span>
+        history<span class="token punctuation">.</span><span class="token method function property-access">replaceState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> path <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span> path<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 进入状态</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">routes</span><span class="token punctuation">[</span>path<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">routes</span><span class="token punctuation">[</span>path<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token dom variable">window</span><span class="token punctuation">.</span><span class="token method function property-access">addEventListener</span><span class="token punctuation">(</span><span class="token string">"popstate"</span><span class="token punctuation">,</span> <span class="token parameter">e</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span><span class="token comment">// 当用户点击浏览器的前进或者后退触发</span>
+            <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token property-access">state</span><span class="token punctuation">)</span>
+          <span class="token keyword">const</span> path <span class="token operator">=</span> e<span class="token punctuation">.</span><span class="token property-access">state</span> <span class="token operator">&amp;&amp;</span> e<span class="token punctuation">.</span><span class="token property-access">state</span><span class="token punctuation">.</span><span class="token property-access">path</span><span class="token punctuation">;</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">routes</span><span class="token punctuation">[</span>path<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">routes</span><span class="token punctuation">[</span>path<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
       
-      /* 初始化 */
-      static init() {
-        window.Router = new RouterClass(location.pathname);
-      }
+      <span class="token comment">/* 初始化 */</span>
+      <span class="token keyword">static</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token dom variable">window</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">Router</span></span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RouterClass</span><span class="token punctuation">(</span><span class="token dom variable">location</span><span class="token punctuation">.</span><span class="token property-access">pathname</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
 
-      /* 注册路由和回调 */
-      route(path, cb) {
-        this.routes[path] = cb || function() {};
-      }
+      <span class="token comment">/* 注册路由和回调 */</span>
+      <span class="token function">route</span><span class="token punctuation">(</span><span class="token parameter">path<span class="token punctuation">,</span> cb</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">routes</span><span class="token punctuation">[</span>path<span class="token punctuation">]</span> <span class="token operator">=</span> cb <span class="token operator">||</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
 
-      /* 跳转路由，并触发路由对应回调 */
-      go(path) {
+      <span class="token comment">/* 跳转路由，并触发路由对应回调 */</span>
+      <span class="token function">go</span><span class="token punctuation">(</span><span class="token parameter">path</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         
-        history.pushState({ path }, null, path);
-        console.log(history);
-        this.routes[path] &amp;&amp; this.routes[path]();
-      }
-    }
+        history<span class="token punctuation">.</span><span class="token method function property-access">pushState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> path <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span> path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>history<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">routes</span><span class="token punctuation">[</span>path<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">routes</span><span class="token punctuation">[</span>path<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    RouterClass.init();
-    const ul = document.querySelector("ul");
-    const ContentDom = document.querySelector(".content-div");
-    const changeContent = content =&gt; (ContentDom.innerHTML = content);
+    <span class="token maybe-class-name">RouterClass</span><span class="token punctuation">.</span><span class="token method function property-access">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> ul <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">querySelector</span><span class="token punctuation">(</span><span class="token string">"ul"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token maybe-class-name">ContentDom</span> <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">querySelector</span><span class="token punctuation">(</span><span class="token string">".content-div"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token function-variable function">changeContent</span> <span class="token operator">=</span> <span class="token parameter">content</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">(</span><span class="token maybe-class-name">ContentDom</span><span class="token punctuation">.</span><span class="token property-access">innerHTML</span> <span class="token operator">=</span> content<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    Router.route("/", () =&gt; changeContent("默认页面"));
-    Router.route("/page1", () =&gt; changeContent("page1页面"));
-    Router.route("/page2", () =&gt; changeContent("page2页面"));
+    <span class="token maybe-class-name">Router</span><span class="token punctuation">.</span><span class="token method function property-access">route</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token function">changeContent</span><span class="token punctuation">(</span><span class="token string">"默认页面"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token maybe-class-name">Router</span><span class="token punctuation">.</span><span class="token method function property-access">route</span><span class="token punctuation">(</span><span class="token string">"/page1"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token function">changeContent</span><span class="token punctuation">(</span><span class="token string">"page1页面"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token maybe-class-name">Router</span><span class="token punctuation">.</span><span class="token method function property-access">route</span><span class="token punctuation">(</span><span class="token string">"/page2"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token function">changeContent</span><span class="token punctuation">(</span><span class="token string">"page2页面"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    ul.addEventListener("click", e =&gt; {
-      console.log(e.target.tagName);
-      if (e.target.tagName === "A") {
-        e.preventDefault();
-        Router.go(e.target.getAttribute("href"));
-      }
-    });
-  &lt;/script&gt;
-&lt;/html&gt;
-</code></pre>
+    ul<span class="token punctuation">.</span><span class="token method function property-access">addEventListener</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">,</span> <span class="token parameter">e</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token property-access">target</span><span class="token punctuation">.</span><span class="token property-access">tagName</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token property-access">target</span><span class="token punctuation">.</span><span class="token property-access">tagName</span> <span class="token operator">===</span> <span class="token string">"A"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        e<span class="token punctuation">.</span><span class="token method function property-access">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token maybe-class-name">Router</span><span class="token punctuation">.</span><span class="token method function property-access">go</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token property-access">target</span><span class="token punctuation">.</span><span class="token method function property-access">getAttribute</span><span class="token punctuation">(</span><span class="token string">"href"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">&gt;</span>
+</code></pre></div>
 <h2>Hash</h2>
 <p>URL 片段是哈希标记 <code>#</code> 前面的名称，哈希标记指定当前文档中的内部目标位置（HTML 元素的 ID）。</p>
 <p><code>#</code> 最开始学习html时候，称之为锚点定位，也有叫他页面内部的超链接的。<code>#</code> 后面跟的是元素 id。
 如果<code>&lt;a href="#demo"/&gt;</code> 点击页面就会定位 demo 这个元素所在的地方。
 另外值得一提的是，<code>#</code>或者<code>top</code>会跳到页面最顶部。</p>
 <p>hash 路由就是借用这个 <code>#</code> 号来实现的。因为每次 <code>#</code> 后面的内容改变，都有一个 <code>hashchang</code> 事件。大概原理如下：</p>
-<pre><code class="language-javascript">function Router(){
-    this.routes = [];
-    this.currentUrl = '';
-}
-Router.prototype.add = function(path,callback){
-    this.routes[path] = callback || function(){};
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">Router</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">routes</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">currentUrl</span> <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token class-name">Router</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">add</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">path<span class="token punctuation">,</span>callback</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">routes</span><span class="token punctuation">[</span>path<span class="token punctuation">]</span> <span class="token operator">=</span> callback <span class="token operator">||</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-Router.prototype.refresh = function(){
-    this.currentUrl = location.hash.replace(/^#*/,'');
-    this.routes[this.currentUrl]();
-}
-Router.prototype.load = function(){
-    window.addEventListener('load',this.refresh.bind(this),false);
-    window.addEventListener('hashchange',this.refresh.bind(this),false);
-}
-Router.prototype.nevigate = function(path){
-    path = path ? path : "";
-    location.href = location.href.replace(/#(.*)$/,'')+'#'+path;
-}
-window.Router = new Router();
-window.Router.load();
+<span class="token class-name">Router</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">refresh</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">currentUrl</span> <span class="token operator">=</span> <span class="token dom variable">location</span><span class="token punctuation">.</span><span class="token property-access">hash</span><span class="token punctuation">.</span><span class="token method function property-access">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex"><span class="token anchor function">^</span>#<span class="token quantifier number">*</span></span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">routes</span><span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">currentUrl</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token class-name">Router</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">load</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token dom variable">window</span><span class="token punctuation">.</span><span class="token method function property-access">addEventListener</span><span class="token punctuation">(</span><span class="token string">'load'</span><span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token method function property-access">refresh</span><span class="token punctuation">.</span><span class="token method function property-access">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token dom variable">window</span><span class="token punctuation">.</span><span class="token method function property-access">addEventListener</span><span class="token punctuation">(</span><span class="token string">'hashchange'</span><span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token method function property-access">refresh</span><span class="token punctuation">.</span><span class="token method function property-access">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token class-name">Router</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">nevigate</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">path</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    path <span class="token operator">=</span> path <span class="token operator">?</span> path <span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">;</span>
+    <span class="token dom variable">location</span><span class="token punctuation">.</span><span class="token property-access">href</span> <span class="token operator">=</span> <span class="token dom variable">location</span><span class="token punctuation">.</span><span class="token property-access">href</span><span class="token punctuation">.</span><span class="token method function property-access">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">#<span class="token group punctuation">(</span><span class="token char-set class-name">.</span><span class="token quantifier number">*</span><span class="token group punctuation">)</span><span class="token anchor function">$</span></span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">'#'</span><span class="token operator">+</span>path<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token dom variable">window</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">Router</span></span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Router</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token dom variable">window</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">Router</span></span><span class="token punctuation">.</span><span class="token method function property-access">load</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 
 
-//使用
-Router.add('/',function(){
-    document.getElementById('demo').innerHTML="Router home!!!";
-});
-Router.add('/blue',function(){
-    document.getElementById('demo').innerHTML="Router blue!!!";
-});
-</code></pre>
+<span class="token comment">//使用</span>
+<span class="token maybe-class-name">Router</span><span class="token punctuation">.</span><span class="token method function property-access">add</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">getElementById</span><span class="token punctuation">(</span><span class="token string">'demo'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token property-access">innerHTML</span><span class="token operator">=</span><span class="token string">"Router home!!!"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token maybe-class-name">Router</span><span class="token punctuation">.</span><span class="token method function property-access">add</span><span class="token punctuation">(</span><span class="token string">'/blue'</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">getElementById</span><span class="token punctuation">(</span><span class="token string">'demo'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token property-access">innerHTML</span><span class="token operator">=</span><span class="token string">"Router blue!!!"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>当然实际使用需要处理更多情况。</p>
-
 </section>
 
     
@@ -671,7 +670,6 @@ Router.add('/blue',function(){
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

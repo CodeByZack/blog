@@ -74,7 +74,7 @@
   <meta name="description" content="## 起因  之前入手了台黑群晖 NAS ，折腾了一段时间，影视/相册/音乐都搭建好了服务，还有 docker 可以尝试各种服务，家里内网下使用还是很爽的，至少没了烦人的广告了。现在想在外网也能使用某些 NAS 上的服务，然后就折腾起了内网穿透这一块的东西。  心理路程如下：  1. **公网 IP......">
   <meta property="og:description" content="## 起因  之前入手了台黑群晖 NAS ，折腾了一段时间，影视/相册/音乐都搭建好了服务，还有 docker 可以尝试各种服务，家里内网下使用还是很爽的，至少没了烦人的广告了。现在想在外网也能使用某些 NAS 上的服务，然后就折腾起了内网穿透这一块的东西。  心理路程如下：  1. **公网 IP......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -481,17 +481,17 @@
 <p><strong>需要注意的点</strong>：<strong>NPS</strong> 服务端默认会占据好几个端口(80/443/8080/8024)，其它几个端口都可以先不管，但我服务器上装了宝塔面板，已经把80/443端口占了。所以需要在配置文件里把这两个端口改一下(808/4438)。然后再用 Nginx 反向代理域名到(808/4438)端口上。</p>
 <h3>安装 NPS</h3>
 <p>在 Github 上找到适合你系统的最新的 Release 文件</p>
-<pre><code class="language-bash">wget https://github.com/ehang-io/nps/releases/download/v0.26.10/linux_386_server.tar.gz
+<div class="remark-highlight"><pre class="language-bash"><code class="language-bash"><span class="token function">wget</span> https://github.com/ehang-io/nps/releases/download/v0.26.10/linux_386_server.tar.gz
 
-tar -zxvf linux_386_server.tar.gz
+<span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> linux_386_server.tar.gz
 
-./nps install
+./nps <span class="token function">install</span>
 
-## 配置文件在 /etc/nps/conf/nps.conf 下，可以去这改端口和web端的账户密码
-## vi /etc/nps/conf/nps.conf
+<span class="token comment">## 配置文件在 /etc/nps/conf/nps.conf 下，可以去这改端口和web端的账户密码</span>
+<span class="token comment">## vi /etc/nps/conf/nps.conf</span>
 
 nps start
-</code></pre>
+</code></pre></div>
 <p>执行完上面的操作后，就可以使用 ip:8080 去访问 web 端管理。
 第一步需要创建一个客户端。把客户端的连接密钥记住。</p>
 <p>然后就是客户端的操作，在群晖套件中心找到 npc 套件。如下图：</p>
@@ -624,7 +624,6 @@ nps start
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

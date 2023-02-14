@@ -74,7 +74,7 @@
   <meta name="description" content="<a name=&quot;2889328f&quot;></a>  ## 宽不定，宽高比固定 的图片  ```css .img-container{  position:relative;   height:0;   padding-bottom:100%;//控制高度和宽度一样 1：1   .img{    pos......">
   <meta property="og:description" content="<a name=&quot;2889328f&quot;></a>  ## 宽不定，宽高比固定 的图片  ```css .img-container{  position:relative;   height:0;   padding-bottom:100%;//控制高度和宽度一样 1：1   .img{    pos......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -467,26 +467,25 @@
 </style>
 
 <section>
-  <p><a name="2889328f"></a></p>
+  <p></p>
 <h2>宽不定，宽高比固定 的图片</h2>
-<pre><code class="language-css">.img-container{
-	position:relative;
-  height:0;
-  padding-bottom:100%;//控制高度和宽度一样 1：1
-  .img{
-  	position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-  }
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-css"><code class="language-css"><span class="token selector"><span class="token class">.img-container</span></span><span class="token punctuation">{</span>
+	<span class="token property">position</span><span class="token punctuation">:</span>relative<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token property">padding-bottom</span><span class="token punctuation">:</span><span class="token number">100</span><span class="token unit">%</span><span class="token punctuation">;</span>//控制高度和宽度一样 <span class="token selector">1：1
+  <span class="token class">.img</span></span><span class="token punctuation">{</span>
+  	<span class="token property">position</span><span class="token punctuation">:</span>absolute<span class="token punctuation">;</span>
+    <span class="token property">top</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token property">left</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span><span class="token number">100</span><span class="token unit">%</span><span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span><span class="token number">100</span><span class="token unit">%</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>原理：
 padding 和 margin 后面的值如果是百分比，是相对于父元素的宽度的。
 把容器img-container高度设为0，下内边距100%，即让宽高比为1：1。
 然后真正的图片作为子元素利用定位占满即可。</p>
-
 </section>
 
     
@@ -578,7 +577,6 @@ padding 和 margin 后面的值如果是百分比，是相对于父元素的宽�
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

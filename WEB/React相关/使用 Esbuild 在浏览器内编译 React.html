@@ -74,7 +74,7 @@
   <meta name="description" content="## 为什么要在浏览器内编译 React ?  博客编写时需要实时预览，使用的 MDX 需要经过编译，预览则采用了 iframe 进行预览，所以我需要把 MDX 编译成 JavaScript ，放到 iframe 里。  ## esbuild 怎么跑在浏览器内的 ?  esbuild 提供了 was......">
   <meta property="og:description" content="## 为什么要在浏览器内编译 React ?  博客编写时需要实时预览，使用的 MDX 需要经过编译，预览则采用了 iframe 进行预览，所以我需要把 MDX 编译成 JavaScript ，放到 iframe 里。  ## esbuild 怎么跑在浏览器内的 ?  esbuild 提供了 was......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -473,175 +473,168 @@
 <p>esbuild 提供了 wasm 版本，是支持在浏览器内运行的，具体可以参考<a href="https://esbuild.github.io/api/#running-in-the-browser">官网</a>。</p>
 <h2>esbuild 在浏览器内运行，有啥问题么 ?</h2>
 <p>有的，浏览器内没有文件系统，所以你会看到如下的错误：</p>
-<pre><code class="language-shell">Uncaught (in promise) Error: Build failed with 3 errors:
-error: Cannot read directory ".": not implemented on js
-error: Cannot read directory ".": not implemented on js
-error: Could not resolve "index.jsx"
-</code></pre>
+<div class="remark-highlight"><pre class="language-shell"><code class="language-shell">Uncaught <span class="token punctuation">(</span>in promise<span class="token punctuation">)</span> Error: Build failed with <span class="token number">3</span> errors:
+error: Cannot <span class="token builtin class-name">read</span> directory <span class="token string">"."</span><span class="token builtin class-name">:</span> not implemented on js
+error: Cannot <span class="token builtin class-name">read</span> directory <span class="token string">"."</span><span class="token builtin class-name">:</span> not implemented on js
+error: Could not resolve <span class="token string">"index.jsx"</span>
+</code></pre></div>
 <p>但可以通过 esbuild 提供的插件机制来解决。</p>
 <h2>亲手尝试一下在浏览器内使用 esbuild 编译</h2>
 <ol>
 <li>引入 esbuild</li>
 </ol>
-<pre><code class="language-html">&lt;script src="https://www.unpkg.com/esbuild-wasm/lib/browser.min.js"&gt;&lt;/script&gt;
-&lt;script&gt;
+<div class="remark-highlight"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.unpkg.com/esbuild-wasm/lib/browser.min.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
     esbuild
-    .initialize({
-        wasmURL: 'https://www.unpkg.com/esbuild-wasm/esbuild.wasm',
-    })
-    .then(() =&gt; {
-        build();
-    });
+    <span class="token punctuation">.</span><span class="token method function property-access">initialize</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token literal-property property">wasmURL</span><span class="token operator">:</span> <span class="token string">'https://www.unpkg.com/esbuild-wasm/esbuild.wasm'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    const build = () =&gt; {
-        console.log(esbuild);
-    };
-&lt;/script&gt;
-</code></pre>
+    <span class="token keyword">const</span> <span class="token function-variable function">build</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>esbuild<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div>
 <ol start="2">
 <li>使用 esbuild</li>
 </ol>
-<pre><code class="language-javascript">
-esbuild.build({
-    entryPoints: ['index.jsx'],
-    bundle: true,
-    write: false,
-});
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript">esbuild<span class="token punctuation">.</span><span class="token method function property-access">build</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">entryPoints</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'index.jsx'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">bundle</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">write</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>不出意外，你就能看到上面那个错误了，因为在浏览器里， esbuild 并不知道去那里读取 <code>index.jsx</code> 这个文件。</p>
 <ol start="3">
 <li>使用插件解决在浏览器内读取文件的问题</li>
 </ol>
 <p>esbuild 插件格式如下：</p>
-<pre><code class="language-javascript">const myPlugin = {
-    name: 'myPlugin',
-    setup: (build) =&gt; {
-        build.onResolve({ filter: /.*/ }, (args) =&gt; {});
-        build.onLoad({ filter: /.*/ }, (args) =&gt; {});
-    },
-};
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> myPlugin <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'myPlugin'</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">setup</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">build</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+        build<span class="token punctuation">.</span><span class="token method function property-access">onResolve</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">filter</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex"><span class="token char-set class-name">.</span><span class="token quantifier number">*</span></span><span class="token regex-delimiter">/</span></span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        build<span class="token punctuation">.</span><span class="token method function property-access">onLoad</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">filter</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex"><span class="token char-set class-name">.</span><span class="token quantifier number">*</span></span><span class="token regex-delimiter">/</span></span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p><code>onResolve</code> 是用来解析引入模块的地址的，要求模块的具体地址， <code>onLoad</code> 则是根据 <code>onResolve</code> 返回的 path 去拿到实际的文件内容。</p>
 <p>这个机制正好能解决我们的问题。</p>
-<pre><code class="language-javascript">const files = {
-    '/index.jsx': indexJSX,
-    '/App.jsx': appJSX,
-};
-const myPlugin = {
-    name: 'myPlugin',
-    setup: (build) =&gt; {
-        build.onResolve({ filter: /.*/ }, (args) =&gt; {
-            // 入口文件单独处理
-            if (args.kind === 'entry-point') {
-                return { path: '/' + args.path };
-            }
-            // 这里只是简单处理一下
-            if (args.path === './App.jsx') {
-                return { path: '/App.jsx' };
-            }
-        });
-        build.onLoad({ filter: /.*/ }, (args) =&gt; {
-            if (args.path === '/index.jsx') {
-                return {
-                contents: files['/index.jsx'],
-                loader: 'jsx',
-                };
-            }
-            if (args.path === '/App.jsx') {
-                return {
-                contents: files['/App.jsx'],
-                loader: 'jsx',
-                };
-            }
-            return null;
-        });
-    },
-};
-esbuild.build({
-    entryPoints: ['index.jsx'],
-    bundle: true,
-    write: false,
-    plugins: [myPlugin],
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> files <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string-property property">'/index.jsx'</span><span class="token operator">:</span> indexJSX<span class="token punctuation">,</span>
+    <span class="token string-property property">'/App.jsx'</span><span class="token operator">:</span> appJSX<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> myPlugin <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'myPlugin'</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">setup</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">build</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+        build<span class="token punctuation">.</span><span class="token method function property-access">onResolve</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">filter</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex"><span class="token char-set class-name">.</span><span class="token quantifier number">*</span></span><span class="token regex-delimiter">/</span></span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 入口文件单独处理</span>
+            <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span><span class="token property-access">kind</span> <span class="token operator">===</span> <span class="token string">'entry-point'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/'</span> <span class="token operator">+</span> args<span class="token punctuation">.</span><span class="token property-access">path</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">// 这里只是简单处理一下</span>
+            <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span><span class="token property-access">path</span> <span class="token operator">===</span> <span class="token string">'./App.jsx'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/App.jsx'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        build<span class="token punctuation">.</span><span class="token method function property-access">onLoad</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">filter</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex"><span class="token char-set class-name">.</span><span class="token quantifier number">*</span></span><span class="token regex-delimiter">/</span></span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span><span class="token property-access">path</span> <span class="token operator">===</span> <span class="token string">'/index.jsx'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span>
+                <span class="token literal-property property">contents</span><span class="token operator">:</span> files<span class="token punctuation">[</span><span class="token string">'/index.jsx'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token literal-property property">loader</span><span class="token operator">:</span> <span class="token string">'jsx'</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span><span class="token property-access">path</span> <span class="token operator">===</span> <span class="token string">'/App.jsx'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span>
+                <span class="token literal-property property">contents</span><span class="token operator">:</span> files<span class="token punctuation">[</span><span class="token string">'/App.jsx'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token literal-property property">loader</span><span class="token operator">:</span> <span class="token string">'jsx'</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword control-flow">return</span> <span class="token keyword null nil">null</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+esbuild<span class="token punctuation">.</span><span class="token method function property-access">build</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">entryPoints</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'index.jsx'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">bundle</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">write</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span>myPlugin<span class="token punctuation">]</span><span class="token punctuation">,</span>
 
-});
-</code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>如上的插件能解决我们自己的文件引入问题，但控制台还有个错误</p>
-<pre><code class="language-javascript">Uncaught (in promise) Error: Build failed with 2 errors:
-error: Cannot read directory ".": not implemented on js
-index.jsx:1:18: ERROR: Could not resolve "react"
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token function"><span class="token maybe-class-name">Uncaught</span></span> <span class="token punctuation">(</span><span class="token keyword">in</span> promise<span class="token punctuation">)</span> <span class="token known-class-name class-name">Error</span><span class="token operator">:</span> <span class="token maybe-class-name">Build</span> failed <span class="token keyword">with</span> <span class="token number">2</span> <span class="token literal-property property">errors</span><span class="token operator">:</span>
+<span class="token literal-property property">error</span><span class="token operator">:</span> <span class="token maybe-class-name">Cannot</span> read directory <span class="token string">"."</span><span class="token operator">:</span> not implemented on js
+index<span class="token punctuation">.</span><span class="token property-access">jsx</span><span class="token operator">:</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">18</span><span class="token operator">:</span> <span class="token constant">ERROR</span><span class="token operator">:</span> <span class="token maybe-class-name">Could</span> not resolve <span class="token string">"react"</span>
+</code></pre></div>
 <p>针对第三方包，我们并没有处理。我们当然可以继续沿着上面的逻辑处理，去引入 cdn 上的 React 文件，因为 <code>onLoad</code> 可以是异步的。
 这里我们换一种方式，使用 script 标签引入 React 和 ReactDOM ， esbuild 直接使用 window 上的变量。所以继续对插件进行改造。</p>
-<pre><code class="language-javascript">const files = {
-    '/index.jsx': indexJSX,
-    '/App.jsx': appJSX,
-};
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> files <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string-property property">'/index.jsx'</span><span class="token operator">:</span> indexJSX<span class="token punctuation">,</span>
+    <span class="token string-property property">'/App.jsx'</span><span class="token operator">:</span> appJSX<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-const externals = {
-    react: 'React',
-    'react-dom/client': 'ReactDOM',
-};
+<span class="token keyword">const</span> externals <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">react</span><span class="token operator">:</span> <span class="token string">'React'</span><span class="token punctuation">,</span>
+    <span class="token string-property property">'react-dom/client'</span><span class="token operator">:</span> <span class="token string">'ReactDOM'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-const myPlugin = {
-    name: 'myPlugin',
-    setup: (build) =&gt; {
-        build.onResolve({ filter: /.*/ }, (args) =&gt; {
-            // 入口文件单独处理
-            if (args.kind === 'entry-point') {
-                return { path: '/' + args.path };
-            }
-            // 这里只是简单处理一下
-            if (args.path === './App.jsx') {
-                return { path: '/App.jsx' };
-            }
-            if (Object.keys(externals).includes(args.path)) {
-                return { path: `/externals/${args.path}` };
-            }
-        });
-        build.onLoad({ filter: /.*/ }, (args) =&gt; {
-            if (args.path === '/index.jsx') {
-                return {
-                contents: files['/index.jsx'],
-                loader: 'jsx',
-                };
-            }
-            if (args.path === '/App.jsx') {
-                return {
-                contents: files['/App.jsx'],
-                loader: 'jsx',
-                };
-            }
-            if (args.path.startsWith('/externals/')) {
-                const libName = args.path.replace('/externals/', '');
-                const contents = `module.exports = ${externals[libName]}`;
-                return { contents };
-            }
-            return null;
-        });
-    },
-};
+<span class="token keyword">const</span> myPlugin <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">'myPlugin'</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">setup</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">build</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+        build<span class="token punctuation">.</span><span class="token method function property-access">onResolve</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">filter</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex"><span class="token char-set class-name">.</span><span class="token quantifier number">*</span></span><span class="token regex-delimiter">/</span></span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 入口文件单独处理</span>
+            <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span><span class="token property-access">kind</span> <span class="token operator">===</span> <span class="token string">'entry-point'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/'</span> <span class="token operator">+</span> args<span class="token punctuation">.</span><span class="token property-access">path</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">// 这里只是简单处理一下</span>
+            <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span><span class="token property-access">path</span> <span class="token operator">===</span> <span class="token string">'./App.jsx'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'/App.jsx'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">keys</span><span class="token punctuation">(</span>externals<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">includes</span><span class="token punctuation">(</span>args<span class="token punctuation">.</span><span class="token property-access">path</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span> <span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/externals/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>args<span class="token punctuation">.</span><span class="token property-access">path</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        build<span class="token punctuation">.</span><span class="token method function property-access">onLoad</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">filter</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex"><span class="token char-set class-name">.</span><span class="token quantifier number">*</span></span><span class="token regex-delimiter">/</span></span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span><span class="token property-access">path</span> <span class="token operator">===</span> <span class="token string">'/index.jsx'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span>
+                <span class="token literal-property property">contents</span><span class="token operator">:</span> files<span class="token punctuation">[</span><span class="token string">'/index.jsx'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token literal-property property">loader</span><span class="token operator">:</span> <span class="token string">'jsx'</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span><span class="token property-access">path</span> <span class="token operator">===</span> <span class="token string">'/App.jsx'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span>
+                <span class="token literal-property property">contents</span><span class="token operator">:</span> files<span class="token punctuation">[</span><span class="token string">'/App.jsx'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token literal-property property">loader</span><span class="token operator">:</span> <span class="token string">'jsx'</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span><span class="token property-access">path</span><span class="token punctuation">.</span><span class="token method function property-access">startsWith</span><span class="token punctuation">(</span><span class="token string">'/externals/'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">const</span> libName <span class="token operator">=</span> args<span class="token punctuation">.</span><span class="token property-access">path</span><span class="token punctuation">.</span><span class="token method function property-access">replace</span><span class="token punctuation">(</span><span class="token string">'/externals/'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">const</span> contents <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">module.exports = </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>externals<span class="token punctuation">[</span>libName<span class="token punctuation">]</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+                <span class="token keyword control-flow">return</span> <span class="token punctuation">{</span> contents <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword control-flow">return</span> <span class="token keyword null nil">null</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-const res = await esbuild.build({
-    entryPoints: ['index.jsx'],
-    bundle: true,
-    write: false,
-    plugins: [myPlugin],
-});
+<span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword control-flow">await</span> esbuild<span class="token punctuation">.</span><span class="token method function property-access">build</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">entryPoints</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'index.jsx'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">bundle</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">write</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span>myPlugin<span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-console.log(res);
-</code></pre>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>好了能正常编译出来了。但输出的是 <code>Uint8Array</code> 。需要 decode 一下。</p>
-<pre><code class="language-javascript">const contents = res.outputFiles[0].contents;
-const decoder = new TextDecoder();
-const text = decoder.decode(contents);
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> contents <span class="token operator">=</span> res<span class="token punctuation">.</span><span class="token property-access">outputFiles</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token property-access">contents</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> decoder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TextDecoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> text <span class="token operator">=</span> decoder<span class="token punctuation">.</span><span class="token method function property-access">decode</span><span class="token punctuation">(</span>contents<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <h2>以上最终代码的集合</h2>
-
-      <figure class="figure-iframe">
-        <iframe src="https://stackblitz.com/edit/web-platform-tqkzwj?embed=1&amp;file=index.html&amp;hideExplorer=1" title="undefined" loading="lazy"></iframe>
-        
-      </figure>
-    
 </section>
 
     
@@ -733,7 +726,6 @@ const text = decoder.decode(contents);
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

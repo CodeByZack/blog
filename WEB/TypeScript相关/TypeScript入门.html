@@ -74,7 +74,7 @@
   <meta name="description" content="## 基础类型  ### 原始值类型  原始值类型，ts 会自动推导出来。  类型语法：string，number，boolean  ```typescript const a: string = 'hello ts'; const b: number = 2; const c: boolean =......">
   <meta property="og:description" content="## 基础类型  ### 原始值类型  原始值类型，ts 会自动推导出来。  类型语法：string，number，boolean  ```typescript const a: string = 'hello ts'; const b: number = 2; const c: boolean =......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -471,101 +471,101 @@
 <h3>原始值类型</h3>
 <p>原始值类型，ts 会自动推导出来。</p>
 <p>类型语法：string，number，boolean</p>
-<pre><code class="language-typescript">const a: string = 'hello ts';
-const b: number = 2;
-const c: boolean = true;
-</code></pre>
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> a<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">'hello ts'</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> b<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> c<span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>需要注意的是：String, Number, Boolean 在 TS 里都是有效值，但平时使用中几乎不会用到。</p>
 <h3>数组类型</h3>
 <p>如下定义：</p>
-<pre><code class="language-typescript">// 可以使用[]进行类型定义
-const numArr: number[] = [1, 2, 3];
-const strArr: string[] = ['1', '2', '3'];
-const booleanArr: boolean[] = [true, false];
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// 可以使用[]进行类型定义</span>
+<span class="token keyword">const</span> numArr<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> strArr<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'1'</span><span class="token punctuation">,</span> <span class="token string">'2'</span><span class="token punctuation">,</span> <span class="token string">'3'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> booleanArr<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-// 也可以使用Array&lt;T&gt;进行类型定义
-const numArr: Arrary&lt;number&gt; = [1, 2, 3];
-const strArr: Arrary&lt;string&gt; = ['1', '2', '3'];
-const booleanArr: Arrary&lt;boolean&gt; = [true, false];
-</code></pre>
+<span class="token comment">// 也可以使用Array&lt;T&gt;进行类型定义</span>
+<span class="token keyword">const</span> numArr<span class="token operator">:</span> Arrary<span class="token operator">&lt;</span><span class="token builtin">number</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> strArr<span class="token operator">:</span> Arrary<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'1'</span><span class="token punctuation">,</span> <span class="token string">'2'</span><span class="token punctuation">,</span> <span class="token string">'3'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> booleanArr<span class="token operator">:</span> Arrary<span class="token operator">&lt;</span><span class="token builtin">boolean</span><span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre></div>
 <h3>函数类型</h3>
 <p>函数主要定义入参和出参的类型：</p>
-<pre><code class="language-typescript">// function 定义
-function identify(params: string): string {
-  return params;
-}
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// function 定义</span>
+<span class="token keyword">function</span> <span class="token function">identify</span><span class="token punctuation">(</span>params<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> params<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-const identify2 = function (params: number): number {
-  return params;
-};
+<span class="token keyword">const</span> <span class="token function-variable function">identify2</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>params<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> params<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-// 箭头函数
-const arrowFunc = (i: boolean): boolean =&gt; {
-  return i;
-};
+<span class="token comment">// 箭头函数</span>
+<span class="token keyword">const</span> arrowFunc <span class="token operator">=</span> <span class="token punctuation">(</span>i<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> i<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-export type identifyType = typeof identify;
-export type identify2Type = typeof identify2;
-export type identify3Type = typeof arrowFunc;
-</code></pre>
+<span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">identifyType</span> <span class="token operator">=</span> <span class="token keyword">typeof</span> identify<span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">identify2Type</span> <span class="token operator">=</span> <span class="token keyword">typeof</span> identify2<span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">identify3Type</span> <span class="token operator">=</span> <span class="token keyword">typeof</span> arrowFunc<span class="token punctuation">;</span>
+</code></pre></div>
 <p>todo-函数重载</p>
 <h3>对象类型</h3>
 <p>最常用的类型，使用 ?: 可以让某个属性可选。</p>
-<pre><code class="language-typescript">const obj: {
-  x: number;
-  z: boolean;
-  c?: string;
-} = {
-  x: 1,
-  z: false,
-  c: '',
-};
-</code></pre>
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> obj<span class="token operator">:</span> <span class="token punctuation">{</span>
+  x<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  z<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+  c<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  x<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  z<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  c<span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div>
 <h3>联合类型（Union Types）</h3>
 <p>简单来说就是，一个变量可能有多个类型选项。</p>
 <p>当一个函数入参可能是这种类型，或者是那种类型。就可以使用联合类型。如下：</p>
-<pre><code class="language-typescript">const printId = (id: number | string) =&gt; {
-  console.log('Your ID is: ' + id);
-};
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> <span class="token function-variable function">printId</span> <span class="token operator">=</span> <span class="token punctuation">(</span>id<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Your ID is: '</span> <span class="token operator">+</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-printId(1);
-printId('str');
-// printId(true); 此处会提示类型错误
-</code></pre>
+<span class="token function">printId</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printId</span><span class="token punctuation">(</span><span class="token string">'str'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// printId(true); 此处会提示类型错误</span>
+</code></pre></div>
 <p>有一个问题，既然变量可能有多个类型定义，你就不能只使用属于某个类型定义的属性。</p>
-<pre><code class="language-typescript">const printId = (id: number | string) =&gt; {
-  console.log(id.toUpperCase()); // 此处会提示类型错误
-};
-</code></pre>
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> <span class="token function-variable function">printId</span> <span class="token operator">=</span> <span class="token punctuation">(</span>id<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>id<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 此处会提示类型错误</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>此时你需要做一个操作，类型收窄，即判断了类型再使用相应类型的属性。</p>
-<pre><code class="language-typescript">const printId = (id: number | string) =&gt; {
-  if (typeof id === 'string') {
-    // In this branch, id is of type 'string'
-    console.log(id.toUpperCase());
-  } else {
-    // Here, id is of type 'number'
-    console.log(id);
-  }
-};
-</code></pre>
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> <span class="token function-variable function">printId</span> <span class="token operator">=</span> <span class="token punctuation">(</span>id<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> id <span class="token operator">===</span> <span class="token string">'string'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// In this branch, id is of type 'string'</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>id<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Here, id is of type 'number'</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div>
 <h3>类型别名（Type Aliases）</h3>
 <p>上面都是直接在变量后面追加类型定义，很方便，但是不方便复用。这个时候你就可以考虑类型别名。</p>
-<pre><code class="language-typescript">// 对象类型 别名Point
-type Point = {
-  x: number;
-  y: number;
-};
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// 对象类型 别名Point</span>
+<span class="token keyword">type</span> <span class="token class-name">Point</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  x<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  y<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-// 联合类型 别名ID
-type ID = string | number;
-</code></pre>
+<span class="token comment">// 联合类型 别名ID</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token constant">ID</span></span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+</code></pre></div>
 <h3>接口类型（Interfaces）</h3>
 <p>还有一种方式定义对象类型的别名。</p>
-<pre><code class="language-typescript">interface Point {
-  x: number;
-  y: number;
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">Point</span> <span class="token punctuation">{</span>
+  x<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  y<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>接口类型和类型别名的差异</p>
 
       <figure class="figure-img">
@@ -579,76 +579,75 @@ type ID = string | number;
 interface 可以使用 extends 继承。定义多个同名 interface 可以合并属性。</p>
 <p>Type 可以使用 &amp; 进行继承合并。多个同名 Type 会报错。</p>
 <p>个人补充一点，类型计算一般都使用的 Type . 无法使用 interface .</p>
-<pre><code class="language-typescript">// 以下会报错
-interface I&lt;T&gt;{
-   [i in keyof T] : T[i]
-}
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// 以下会报错</span>
+<span class="token keyword">interface</span> <span class="token class-name"><span class="token constant">I</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span><span class="token punctuation">{</span>
+   <span class="token punctuation">[</span>i <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
 
-// 以下不会
-export type D&lt;T&gt; = {
-  [i in keyof T]: T[i];
-};
-</code></pre>
+<span class="token comment">// 以下不会</span>
+<span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name"><span class="token constant">D</span><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">[</span>i <span class="token keyword">in</span> <span class="token keyword">keyof</span> <span class="token constant">T</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div>
 <h3>类型断言</h3>
 <p>有些时候，typescript 并不能推断出具体的类型。</p>
 <p>像下面这样的</p>
-<pre><code class="language-typescript">const myCanvas = document.getElementById('main_canvas');
-</code></pre>
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> myCanvas <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'main_canvas'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>typescript 只能推断出它属于<code>HTMLElement</code>类型，但你是明确知道元素是<code>HTMLCanvasElement</code>。这种时候你就可以使用类型断言，像下面这样</p>
-<pre><code class="language-typescript">const myCanvas = document.getElementById('main_canvas') as HTMLCanvasElement;
-</code></pre>
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> myCanvas <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'main_canvas'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> HTMLCanvasElement<span class="token punctuation">;</span>
+</code></pre></div>
 <h3>字面量类型</h3>
 <p>字面量类型，顾名思义就是像下面这样，<code>a</code>的类型就固定为<code>test</code>了，不是<code>string</code>。</p>
-<pre><code class="language-typescript">let a: 'test' = 'test';
-</code></pre>
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">let</span> a<span class="token operator">:</span> <span class="token string">'test'</span> <span class="token operator">=</span> <span class="token string">'test'</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>需要特别注意的是，取决于 Javascript 声明变量的方式，TS 会推断出不同的类型。<code>let</code>、<code>var</code>声明的变量都允许修改。<code>const</code>则不允许。</p>
 <p>因此对于<code>let</code>、<code>var</code>声明的变量：</p>
-<pre><code class="language-typescript">let str = 'str'; // 推断为 string 类型
-let num = 'num'; // 推断为 number 类型
-let b = true; // 推断为 boolean 类型
-</code></pre>
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">'str'</span><span class="token punctuation">;</span> <span class="token comment">// 推断为 string 类型</span>
+<span class="token keyword">let</span> num <span class="token operator">=</span> <span class="token string">'num'</span><span class="token punctuation">;</span> <span class="token comment">// 推断为 number 类型</span>
+<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment">// 推断为 boolean 类型</span>
+</code></pre></div>
 <p>对于<code>const</code>声明的变量：</p>
-<pre><code class="language-typescript">const str = 'str'; // 推断为字面量 'str' 类型
-const num = 'num'; // 推断为字面量 'num' 类型
-const b = true; // 推断为字面量 true 类型
-</code></pre>
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> str <span class="token operator">=</span> <span class="token string">'str'</span><span class="token punctuation">;</span> <span class="token comment">// 推断为字面量 'str' 类型</span>
+<span class="token keyword">const</span> num <span class="token operator">=</span> <span class="token string">'num'</span><span class="token punctuation">;</span> <span class="token comment">// 推断为字面量 'num' 类型</span>
+<span class="token keyword">const</span> b <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment">// 推断为字面量 true 类型</span>
+</code></pre></div>
 <p>但当在用 const 声明一个对象时，TS 会默认该对象的属性都是可以修改的。所以推断出的类型都是基本类型。如果你想推断为字面量的类型，需要在后面加上<code>as const</code>，示例如下：</p>
-<pre><code class="language-typescript">// 以下推断出的类型为
-interface {
-  url : string;
-  method : string;
-}
-const req = { url: "https://example.com", method: "GET" };
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token comment">// 以下推断出的类型为</span>
+<span class="token keyword">interface</span> <span class="token punctuation">{</span>
+  url <span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  method <span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> req <span class="token operator">=</span> <span class="token punctuation">{</span> url<span class="token operator">:</span> <span class="token string">"https://example.com"</span><span class="token punctuation">,</span> method<span class="token operator">:</span> <span class="token string">"GET"</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-// 以下推断出的类型为
-interface {
-  url : "https://example.com";
-  method : "GET";
-}
+<span class="token comment">// 以下推断出的类型为</span>
+<span class="token keyword">interface</span> <span class="token punctuation">{</span>
+  url <span class="token operator">:</span> <span class="token string">"https://example.com"</span><span class="token punctuation">;</span>
+  method <span class="token operator">:</span> <span class="token string">"GET"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-const req = { url: "https://example.com", method: "GET" } as const;
-</code></pre>
+<span class="token keyword">const</span> req <span class="token operator">=</span> <span class="token punctuation">{</span> url<span class="token operator">:</span> <span class="token string">"https://example.com"</span><span class="token punctuation">,</span> method<span class="token operator">:</span> <span class="token string">"GET"</span> <span class="token punctuation">}</span> <span class="token keyword">as</span> <span class="token keyword">const</span><span class="token punctuation">;</span>
+</code></pre></div>
 <h3>null、undefined</h3>
 <p><code>JavaScript</code>有两个特殊的类型<code>null</code>和<code>undefined</code>用于代表不存在或者未初始化。</p>
 <p><code>TypeScript</code>也有这两个相对应的类型的定义<code>null</code>和<code>undefined</code>。</p>
 <p>这两个类型和<code>strictNullChecks</code>配置相关，当配置为<code>off</code>时，这两个类型可以赋值给任意类型，不会报错。当配置为<code>on</code>时，使用之前需要先检查是否为空，否则<code>TS</code>会提示错误。</p>
-<pre><code class="language-typescript">function doSomething(x: string | null) {
-  if (x === null) {
-    // do nothing
-  } else {
-    console.log('Hello, ' + x.toUpperCase());
-  }
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">function</span> <span class="token function">doSomething</span><span class="token punctuation">(</span>x<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// do nothing</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Hello, '</span> <span class="token operator">+</span> x<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>你也可以使用<code>!</code>进行非空断言，但需要注意的是，类型断言不会影响代码运行时的行为，你需要自己确保这个值不会为空值。</p>
-<pre><code class="language-typescript">function liveDangerously(x?: number | null) {
-  // No error
-  console.log(x!.toFixed());
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">function</span> <span class="token function">liveDangerously</span><span class="token punctuation">(</span>x<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// No error</span>
+  <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token operator">!</span><span class="token punctuation">.</span><span class="token function">toFixed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <h3>enum</h3>
 <p>枚举是 <code>TypeScript</code> 添加到 <code>JavaScript</code> 的一项功能，与其它类型不同的是，枚举是会添加代码到运行时的，也就是说会影响你的代码。所以在使用枚举之前，确保你知道自己在做什么。</p>
-
 </section>
 
     
@@ -740,7 +739,6 @@ const req = { url: "https://example.com", method: "GET" } as const;
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

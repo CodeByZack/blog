@@ -74,7 +74,7 @@
   <meta name="description" content="## 实现 call/apply/bind  ```javascript //call 和 apply 只是参数传递方式不同。  //apply 传递的是个参数数组 Function.prototype.myApply = function(context,args){     let fn = t......">
   <meta property="og:description" content="## 实现 call/apply/bind  ```javascript //call 和 apply 只是参数传递方式不同。  //apply 传递的是个参数数组 Function.prototype.myApply = function(context,args){     let fn = t......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -468,57 +468,57 @@
 
 <section>
   <h2>实现 call/apply/bind</h2>
-<pre><code class="language-javascript">//call 和 apply 只是参数传递方式不同。
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//call 和 apply 只是参数传递方式不同。</span>
 
-//apply 传递的是个参数数组
-Function.prototype.myApply = function(context,args){
-    let fn = this;
-    let key = Symbol();
-    context[key] = fn;
-    let res = context[key](...args);
-    delete context[key];
-    return res;
-}
+<span class="token comment">//apply 传递的是个参数数组</span>
+<span class="token class-name">Function</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">myApply</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span>args</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> fn <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> key <span class="token operator">=</span> <span class="token known-class-name class-name">Symbol</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    context<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> fn<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> res <span class="token operator">=</span> context<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token spread operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">delete</span> context<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">return</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-function a (...x){console.log(this.a,x)}
+<span class="token keyword">function</span> <span class="token function">a</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token spread operator">...</span>x</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">a</span><span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">}</span>
 
-a.myApply({a:"myapply"},[1,2,3])
-a.apply({a:"myapply"},[1,2,3])
+a<span class="token punctuation">.</span><span class="token method function property-access">myApply</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">a</span><span class="token operator">:</span><span class="token string">"myapply"</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+a<span class="token punctuation">.</span><span class="token method function property-access">apply</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">a</span><span class="token operator">:</span><span class="token string">"myapply"</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
-//call 传递的是参数列表
-Function.prototype.myCall = function(context,...args){
-    let fn = this;
-    let key = Symbol();
-    context[key] = fn;
-    let res = context[key](...args);
-    delete context[key];
-    return res;
-}
+<span class="token comment">//call 传递的是参数列表</span>
+<span class="token class-name">Function</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">myCall</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span><span class="token spread operator">...</span>args</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> fn <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> key <span class="token operator">=</span> <span class="token known-class-name class-name">Symbol</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    context<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> fn<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> res <span class="token operator">=</span> context<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token spread operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">delete</span> context<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">return</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-function a (...x){console.log(this.a,x)}
+<span class="token keyword">function</span> <span class="token function">a</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token spread operator">...</span>x</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">a</span><span class="token punctuation">,</span>x<span class="token punctuation">)</span><span class="token punctuation">}</span>
 
-a.myCall({a:"myCall"},111,22)
+a<span class="token punctuation">.</span><span class="token method function property-access">myCall</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">a</span><span class="token operator">:</span><span class="token string">"myCall"</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">111</span><span class="token punctuation">,</span><span class="token number">22</span><span class="token punctuation">)</span>
 
-a.call({a:"myCall"},111,22)
+a<span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">a</span><span class="token operator">:</span><span class="token string">"myCall"</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">111</span><span class="token punctuation">,</span><span class="token number">22</span><span class="token punctuation">)</span>
 
-//bind 返回一个绑定了this的函数
-Function.prototype.myBind = function(context,...bindArgs){
-    let fn = this;
-    let key = Symbol();
-    context[key] = fn;
-    return function(...args){
-        let finalArgs = [...bindArgs,...args];
-        let res = context[key](...finalArgs);
-        delete context[key];
-        return res;
-    }
-}
-b = a.myBind({a:"myBind"},1,2)
-b(3,4)
+<span class="token comment">//bind 返回一个绑定了this的函数</span>
+<span class="token class-name">Function</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">myBind</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">context<span class="token punctuation">,</span><span class="token spread operator">...</span>bindArgs</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> fn <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> key <span class="token operator">=</span> <span class="token known-class-name class-name">Symbol</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    context<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> fn<span class="token punctuation">;</span>
+    <span class="token keyword control-flow">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter"><span class="token spread operator">...</span>args</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">let</span> finalArgs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token spread operator">...</span>bindArgs<span class="token punctuation">,</span><span class="token spread operator">...</span>args<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> res <span class="token operator">=</span> context<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token spread operator">...</span>finalArgs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">delete</span> context<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword control-flow">return</span> res<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+b <span class="token operator">=</span> a<span class="token punctuation">.</span><span class="token method function property-access">myBind</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">a</span><span class="token operator">:</span><span class="token string">"myBind"</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token function">b</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span>
 
-b = a.bind({a:"myBind"},1,2)
-b(3,4)
-</code></pre>
+b <span class="token operator">=</span> a<span class="token punctuation">.</span><span class="token method function property-access">bind</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">a</span><span class="token operator">:</span><span class="token string">"myBind"</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token function">b</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span>
+</code></pre></div>
 <h2>实现 new</h2>
 <p>new操作符做了如下几件事：</p>
 <ol>
@@ -527,86 +527,85 @@ b(3,4)
 <li>以新建对象为this执行构造函数</li>
 <li>判断构造函数的返回值，对象就返回对象，不是就返回新建对象</li>
 </ol>
-<pre><code class="language-javascript">
-function myNew(fn,...args){
-	let obj = Object.create(null);
-  obj.__proto__ = fn.prototype;
-  let res = fn.apply(obj,args);
-  return typeof res === "object"?res:obj;
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">myNew</span><span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span><span class="token spread operator">...</span>args</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">let</span> obj <span class="token operator">=</span> <span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">create</span><span class="token punctuation">(</span><span class="token keyword null nil">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  obj<span class="token punctuation">.</span><span class="token property-access">__proto__</span> <span class="token operator">=</span> fn<span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> res <span class="token operator">=</span> fn<span class="token punctuation">.</span><span class="token method function property-access">apply</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token keyword">typeof</span> res <span class="token operator">===</span> <span class="token string">"object"</span><span class="token operator">?</span>res<span class="token operator">:</span>obj<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-function a (word) {
-    this.temp = "myNew"
-    this.word = word
-}
-a.prototype.myNew = ()=&gt;{console.log("myNew")}
+<span class="token keyword">function</span> <span class="token function">a</span> <span class="token punctuation">(</span><span class="token parameter">word</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">temp</span> <span class="token operator">=</span> <span class="token string">"myNew"</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">word</span> <span class="token operator">=</span> word
+<span class="token punctuation">}</span>
+a<span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">myNew</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"myNew"</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
 
-myNew(a,"hello")
-</code></pre>
+<span class="token function">myNew</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span><span class="token string">"hello"</span><span class="token punctuation">)</span>
+</code></pre></div>
 <h2>实现 节流防抖</h2>
 <p>节流防抖目的都是同一个，防止事件触发太频繁。区别在于
 防抖：不停触发事件，事件最终只响应一次。在间隔时间后，再次触发才会再次响应。
 节流：不停触发事件，事件会按照设定的间隔时间，间隔响应。</p>
-<pre><code class="language-javascript">//防抖
-function debounce(fn,wait){
-	let timer;
-  return function(...args){
-		if(timer)clearTimeout(timer);
-		timer = setTimeout(()=&gt;{
-			fn(...args);
-		},wait);
-	}
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//防抖</span>
+<span class="token keyword">function</span> <span class="token function">debounce</span><span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span>wait</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">let</span> timer<span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter"><span class="token spread operator">...</span>args</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token keyword control-flow">if</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span><span class="token function">clearTimeout</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		timer <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+			<span class="token function">fn</span><span class="token punctuation">(</span><span class="token spread operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span><span class="token punctuation">,</span>wait<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-//节流 这个不太精确
-function throttle(fn,wait){
-	let time = 0;
-  return function(...args){
-		if(Date.now() - time &gt; wait){
-			fn(...args);
-      time = Date.now();
-		}
-	}
-}
+<span class="token comment">//节流 这个不太精确</span>
+<span class="token keyword">function</span> <span class="token function">throttle</span><span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span>wait</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">let</span> time <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter"><span class="token spread operator">...</span>args</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token keyword control-flow">if</span><span class="token punctuation">(</span><span class="token known-class-name class-name">Date</span><span class="token punctuation">.</span><span class="token method function property-access">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> time <span class="token operator">&gt;</span> wait<span class="token punctuation">)</span><span class="token punctuation">{</span>
+			<span class="token function">fn</span><span class="token punctuation">(</span><span class="token spread operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      time <span class="token operator">=</span> <span class="token known-class-name class-name">Date</span><span class="token punctuation">.</span><span class="token method function property-access">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-a = function(){console.log("onscroll")}
-b = debounce(a,100)
-c = throttle(a,1000)
-window.onscroll = a;
-//滚动试试
-
-
-window.onscroll = b;
-//滚动试试
+<span class="token function-variable function">a</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"onscroll"</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+b <span class="token operator">=</span> <span class="token function">debounce</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span>
+c <span class="token operator">=</span> <span class="token function">throttle</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">)</span>
+<span class="token dom variable">window</span><span class="token punctuation">.</span><span class="token property-access">onscroll</span> <span class="token operator">=</span> a<span class="token punctuation">;</span>
+<span class="token comment">//滚动试试</span>
 
 
-window.onscroll = c;
-//滚动试试
-</code></pre>
+<span class="token dom variable">window</span><span class="token punctuation">.</span><span class="token property-access">onscroll</span> <span class="token operator">=</span> b<span class="token punctuation">;</span>
+<span class="token comment">//滚动试试</span>
+
+
+<span class="token dom variable">window</span><span class="token punctuation">.</span><span class="token property-access">onscroll</span> <span class="token operator">=</span> c<span class="token punctuation">;</span>
+<span class="token comment">//滚动试试</span>
+</code></pre></div>
 <h2>实现深拷贝</h2>
-<pre><code class="language-javascript">function deepclone(obj,cache=[]){
-	if(obj === null || typeof obj !== "object"){
-  	return obj;
-  }
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">deepclone</span><span class="token punctuation">(</span><span class="token parameter">obj<span class="token punctuation">,</span>cache<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword control-flow">if</span><span class="token punctuation">(</span>obj <span class="token operator">===</span> <span class="token keyword null nil">null</span> <span class="token operator">||</span> <span class="token keyword">typeof</span> obj <span class="token operator">!==</span> <span class="token string">"object"</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  	<span class="token keyword control-flow">return</span> obj<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   
-  const has = cache.filter(cache=&gt;cache.orignal === obj)[0];
-  if(has){
-  	return has.copy;
-  }
+  <span class="token keyword">const</span> has <span class="token operator">=</span> cache<span class="token punctuation">.</span><span class="token method function property-access">filter</span><span class="token punctuation">(</span><span class="token parameter">cache</span><span class="token arrow operator">=&gt;</span>cache<span class="token punctuation">.</span><span class="token property-access">orignal</span> <span class="token operator">===</span> obj<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>has<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  	<span class="token keyword control-flow">return</span> has<span class="token punctuation">.</span><span class="token property-access">copy</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   
-  const copy = Array.isArray(obj)?[]:{};
+  <span class="token keyword">const</span> copy <span class="token operator">=</span> <span class="token known-class-name class-name">Array</span><span class="token punctuation">.</span><span class="token method function property-access">isArray</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
   
-  cache.push({
-    orignal: obj,
+  cache<span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">orignal</span><span class="token operator">:</span> obj<span class="token punctuation">,</span>
     copy
-  });
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  Object.keys(obj).forEach(key =&gt; {
-    copy[key] = deepClone(obj[key], cache);
-  });
-  return copy;
-}
-</code></pre>
+  <span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">keys</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">key</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+    copy<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">deepClone</span><span class="token punctuation">(</span>obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span> cache<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> copy<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <h2>实现Promise(todo)</h2>
 <p>做这个之前，最好浏览一遍promise的规范<a href="https://malcolmyu.github.io/2015/06/12/Promises-A-Plus/#%E6%9C%AF%E8%AF%AD">链接</a>。</p>
 <p>实现promise的构造函数。</p>
@@ -614,171 +613,170 @@ window.onscroll = c;
 <p>pending/fulfilled/rejected</p>
 <p>且状态只能由pending-&gt;fulfilled 或者 pending-&gt;rejected</p>
 <p>promise初始化 状态为pending。</p>
-<pre><code class="language-javascript">const PENDING = "pending";
-const FULFILLED = "fulfilled";
-const REJECTED = "rejected";
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token constant">PENDING</span> <span class="token operator">=</span> <span class="token string">"pending"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token constant">FULFILLED</span> <span class="token operator">=</span> <span class="token string">"fulfilled"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token constant">REJECTED</span> <span class="token operator">=</span> <span class="token string">"rejected"</span><span class="token punctuation">;</span>
 
-const resolvePromise = (res,resolve,reject)=&gt;{
-    if(res &amp;&amp; typeof res === 'object' ||  typeof res === 'function' ){
-        let then = res.then;
-        if(typeof then === 'function'){
-            then.call(res,(r)=&gt;{
-                resolvePromise(r,resolve,reject);
-            },(r)=&gt;{
-                reject(r);
-            })
-        }else{
-            reject(x);
-        }
-    }else{
-        resolve(res);
-    }
-};
+<span class="token keyword">const</span> <span class="token function-variable function">resolvePromise</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">res<span class="token punctuation">,</span>resolve<span class="token punctuation">,</span>reject</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+    <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>res <span class="token operator">&amp;&amp;</span> <span class="token keyword">typeof</span> res <span class="token operator">===</span> <span class="token string">'object'</span> <span class="token operator">||</span>  <span class="token keyword">typeof</span> res <span class="token operator">===</span> <span class="token string">'function'</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">let</span> then <span class="token operator">=</span> res<span class="token punctuation">.</span><span class="token property-access">then</span><span class="token punctuation">;</span>
+        <span class="token keyword control-flow">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> then <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            then<span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">r</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+                <span class="token function">resolvePromise</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span>resolve<span class="token punctuation">,</span>reject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">r</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+                <span class="token function">reject</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token keyword control-flow">else</span><span class="token punctuation">{</span>
+            <span class="token function">reject</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token keyword control-flow">else</span><span class="token punctuation">{</span>
+        <span class="token function">resolve</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-function XPromise(fn) {
-    this.status = PENDING;
-    this.value = undefined;
-    this.reason = undefined;
-    this.onFulfilledCB = [];
-    this.onRejectedCB = [];
-    let that = this;
-    function resolve(value) {
-        setTimeout(() =&gt; {
-            if (that.status === PENDING) {
-                that.status = FULFILLED;
-                that.value = value;
-                that.onFulfilledCB.forEach(cb =&gt; cb(that.value));
-            };
-        },0)
-    }
-    function reject(reason) {
-        setTimeout(() =&gt; {
-            if (that.status === PENDING) {
-                that.status = REJECTED;
-                that.reason = reason;
-                that.onRejectedCB.forEach(cb =&gt; cb(reason));
-            }
-        },0)
-    }
+<span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">XPromise</span></span><span class="token punctuation">(</span><span class="token parameter">fn</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">status</span> <span class="token operator">=</span> <span class="token constant">PENDING</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">value</span> <span class="token operator">=</span> <span class="token keyword nil">undefined</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">reason</span> <span class="token operator">=</span> <span class="token keyword nil">undefined</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">onFulfilledCB</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">onRejectedCB</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> that <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword">function</span> <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>that<span class="token punctuation">.</span><span class="token property-access">status</span> <span class="token operator">===</span> <span class="token constant">PENDING</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                that<span class="token punctuation">.</span><span class="token property-access">status</span> <span class="token operator">=</span> <span class="token constant">FULFILLED</span><span class="token punctuation">;</span>
+                that<span class="token punctuation">.</span><span class="token property-access">value</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
+                that<span class="token punctuation">.</span><span class="token property-access">onFulfilledCB</span><span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">cb</span> <span class="token arrow operator">=&gt;</span> <span class="token function">cb</span><span class="token punctuation">(</span>that<span class="token punctuation">.</span><span class="token property-access">value</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">function</span> <span class="token function">reject</span><span class="token punctuation">(</span><span class="token parameter">reason</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>that<span class="token punctuation">.</span><span class="token property-access">status</span> <span class="token operator">===</span> <span class="token constant">PENDING</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                that<span class="token punctuation">.</span><span class="token property-access">status</span> <span class="token operator">=</span> <span class="token constant">REJECTED</span><span class="token punctuation">;</span>
+                that<span class="token punctuation">.</span><span class="token property-access">reason</span> <span class="token operator">=</span> reason<span class="token punctuation">;</span>
+                that<span class="token punctuation">.</span><span class="token property-access">onRejectedCB</span><span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">cb</span> <span class="token arrow operator">=&gt;</span> <span class="token function">cb</span><span class="token punctuation">(</span>reason<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
 
-    try {
-        fn(resolve, reject)
-    } catch (e) {
-        reject(e)
-    }
-
-
-};
-
-XPromise.prototype.then = function (onFulfill, onReject) {
-
-    onFulfill = typeof onFulfill === 'function' ? onFulfill : r=&gt;r;
-    onReject = typeof onReject === 'function' ? onReject : r=&gt;{throw(r)};
-    const that = this;
-    return new XPromise((resolve,reject)=&gt;{
-        if (that.status === PENDING){
-            that.onFulfilledCB.push((value)=&gt;{
-                setTimeout(()=&gt;{
-                    try {
-                        const res = onFulfill(value);
-                        resolvePromise(res,resolve,reject);
-                    } catch (error) {
-                        reject(error);
-                    }
-                },0);
-            });
-            that.onRejectedCB.push((reason)=&gt;{
-                setTimeout(()=&gt;{
-                    try {
-                        const res = onReject(reason);
-                        resolvePromise(res,resolve,reject);
-                    } catch (error) {
-                        reject(error);
-                    }
-                },0);
-            });
-        }else if (that.status === FULFILLED){
-            setTimeout(()=&gt;{
-                try {
-                    const res = onFulfill(that.value);
-                    // 根据res来执行后续
-                    resolvePromise(res,resolve,reject);
-                } catch (error) {
-                    reject(error);
-                }
-            },0);
-        }else if (that.status === REJECTED){
-            setTimeout(()=&gt;{
-                try {
-                    const res = onReject(that.reason);
-                    // 根据res来执行后续
-                    resolvePromise(res,resolve,reject);
-                } catch (error) {
-                    reject(error);
-                }
-            },0);
-        }
-    });
-};
+    <span class="token keyword control-flow">try</span> <span class="token punctuation">{</span>
+        <span class="token function">fn</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword control-flow">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">reject</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
 
 
-const p = new XPromise((resolve,reject)=&gt;{
-    setTimeout(()=&gt;reject("test"),1000);
-});
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-p2 = p.then(v=&gt;{console.log(v);return 'sdsds'}).then(v=&gt;console.log(v),(r)=&gt;console.log(r));
-</code></pre>
+<span class="token class-name">XPromise</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">then</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">onFulfill<span class="token punctuation">,</span> onReject</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    onFulfill <span class="token operator">=</span> <span class="token keyword">typeof</span> onFulfill <span class="token operator">===</span> <span class="token string">'function'</span> <span class="token operator">?</span> <span class="token function-variable function">onFulfill</span> <span class="token operator">:</span> <span class="token parameter">r</span><span class="token arrow operator">=&gt;</span>r<span class="token punctuation">;</span>
+    onReject <span class="token operator">=</span> <span class="token keyword">typeof</span> onReject <span class="token operator">===</span> <span class="token string">'function'</span> <span class="token operator">?</span> <span class="token function-variable function">onReject</span> <span class="token operator">:</span> <span class="token parameter">r</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span><span class="token keyword control-flow">throw</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> that <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">return</span> <span class="token keyword">new</span> <span class="token class-name">XPromise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span>reject</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+        <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>that<span class="token punctuation">.</span><span class="token property-access">status</span> <span class="token operator">===</span> <span class="token constant">PENDING</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            that<span class="token punctuation">.</span><span class="token property-access">onFulfilledCB</span><span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+                <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+                    <span class="token keyword control-flow">try</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token function">onFulfill</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token function">resolvePromise</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span>resolve<span class="token punctuation">,</span>reject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span> <span class="token keyword control-flow">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            that<span class="token punctuation">.</span><span class="token property-access">onRejectedCB</span><span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">reason</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+                <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+                    <span class="token keyword control-flow">try</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token function">onReject</span><span class="token punctuation">(</span>reason<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token function">resolvePromise</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span>resolve<span class="token punctuation">,</span>reject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span> <span class="token keyword control-flow">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword control-flow">else</span> <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>that<span class="token punctuation">.</span><span class="token property-access">status</span> <span class="token operator">===</span> <span class="token constant">FULFILLED</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+                <span class="token keyword control-flow">try</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token function">onFulfill</span><span class="token punctuation">(</span>that<span class="token punctuation">.</span><span class="token property-access">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token comment">// 根据res来执行后续</span>
+                    <span class="token function">resolvePromise</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span>resolve<span class="token punctuation">,</span>reject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword control-flow">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword control-flow">else</span> <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>that<span class="token punctuation">.</span><span class="token property-access">status</span> <span class="token operator">===</span> <span class="token constant">REJECTED</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+                <span class="token keyword control-flow">try</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token function">onReject</span><span class="token punctuation">(</span>that<span class="token punctuation">.</span><span class="token property-access">reason</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token comment">// 根据res来执行后续</span>
+                    <span class="token function">resolvePromise</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span>resolve<span class="token punctuation">,</span>reject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword control-flow">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token function">reject</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+
+<span class="token keyword">const</span> p <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XPromise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span>reject</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token function">reject</span><span class="token punctuation">(</span><span class="token string">"test"</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+p2 <span class="token operator">=</span> p<span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token parameter">v</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword control-flow">return</span> <span class="token string">'sdsds'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token parameter">v</span><span class="token arrow operator">=&gt;</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">r</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <h2>常见的排序方式</h2>
 <h2>基础的算法题目</h2>
 <h3>1.将一个数组奇数在前偶数在后</h3>
-<pre><code class="language-javascript">function test(array){
-    array.sort(function(a,b){
-        if(a%2 == 0 &amp;&amp; b%2!=0){
-            return 1;
-        }else{
-            return -1;
-        }
-    })
-    console.log(array);
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token parameter">array</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    array<span class="token punctuation">.</span><span class="token method function property-access">sort</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span>b</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>a<span class="token operator">%</span><span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> b<span class="token operator">%</span><span class="token number">2</span><span class="token operator">!=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword control-flow">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword control-flow">else</span><span class="token punctuation">{</span>
+            <span class="token keyword control-flow">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <h3>2.打印一个三角形</h3>
-<pre><code class="language-javascript">const getStr = (i, n) =&gt; {
-  let str = "";
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">getStr</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">i<span class="token punctuation">,</span> n</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
 
-  let emptyStrLength = n - i;
-  let notEmptyStrLen = 1+(2*(i-1));
+  <span class="token keyword">let</span> emptyStrLength <span class="token operator">=</span> n <span class="token operator">-</span> i<span class="token punctuation">;</span>
+  <span class="token keyword">let</span> notEmptyStrLen <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">*</span><span class="token punctuation">(</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  let loop = 0;
-  while (loop &lt; emptyStrLength) {
-    str += " ";
-    loop++;
-  }
-  loop = 0;
-  while (loop &lt; notEmptyStrLen) {
-    str += '*';
-    loop++;
-  }
-  loop = 0;
-  while (loop &lt; emptyStrLength) {
-    str += " ";
-    loop++;
-  }
-  return str;
-};
+  <span class="token keyword">let</span> loop <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">while</span> <span class="token punctuation">(</span>loop <span class="token operator">&lt;</span> emptyStrLength<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    str <span class="token operator">+=</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+    loop<span class="token operator">++</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  loop <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">while</span> <span class="token punctuation">(</span>loop <span class="token operator">&lt;</span> notEmptyStrLen<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    str <span class="token operator">+=</span> <span class="token string">'*'</span><span class="token punctuation">;</span>
+    loop<span class="token operator">++</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  loop <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">while</span> <span class="token punctuation">(</span>loop <span class="token operator">&lt;</span> emptyStrLength<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    str <span class="token operator">+=</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+    loop<span class="token operator">++</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword control-flow">return</span> str<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-const trig = (n) =&gt; {
-  let i = 1;
-  while (i &lt;= n) {
-    console.log(getStr(i, n));
-    i++;
-  }
-};
+<span class="token keyword">const</span> <span class="token function-variable function">trig</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">while</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;=</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token function">getStr</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    i<span class="token operator">++</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-trig(6);
+<span class="token function">trig</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-</code></pre>
-
+</code></pre></div>
 </section>
 
     
@@ -870,7 +868,6 @@ trig(6);
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

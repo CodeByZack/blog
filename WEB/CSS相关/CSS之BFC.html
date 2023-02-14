@@ -74,7 +74,7 @@
   <meta name="description" content="<a name=&quot;e4db8e92&quot;></a>  ## BFC 概念  BFC 是什么呢？  BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于我们常说的普通流。  具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元......">
   <meta property="og:description" content="<a name=&quot;e4db8e92&quot;></a>  ## BFC 概念  BFC 是什么呢？  BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于我们常说的普通流。  具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -467,11 +467,11 @@
 </style>
 
 <section>
-  <p><a name="e4db8e92"></a></p>
+  <p></p>
 <h2>BFC 概念</h2>
 <p>BFC 是什么呢？</p>
 <p>BFC 即 Block Formatting Contexts (块级格式化上下文)，它属于我们常说的普通流。</p>
-<p>具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。 <a name="15245ae2"></a></p>
+<p>具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。 </p>
 <h2>触发 BFC</h2>
 <p>只要元素满足下面任一条件即可触发 BFC 特性：</p>
 <ul>
@@ -480,23 +480,23 @@
 <li>display 为 inline-block、table-cells、flex</li>
 <li>overflow 除了 visible 以外的值 (hidden、auto、scroll)</li>
 </ul>
-<p><a name="76af9171"></a></p>
+<p></p>
 <h2>BFC特性</h2>
-<p><a name="cb95ed7b"></a></p>
+<p></p>
 <h4>1.同一个 BFC 下，外边距会发生折叠</h4>
-<pre><code class="language-html">&lt;style&gt;
-div{
-    width: 100px;
-    height: 100px;
-    background: black;
-    margin: 100px;
-}
-&lt;/style&gt;
-&lt;body&gt;
-    &lt;div&gt;&lt;/div&gt;
-    &lt;div&gt;&lt;/div&gt;
-&lt;/body&gt;
-</code></pre>
+<div class="remark-highlight"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">div</span><span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">100</span><span class="token unit">px</span><span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> <span class="token number">100</span><span class="token unit">px</span><span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token color">black</span><span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">100</span><span class="token unit">px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div>
 
       <figure class="figure-img">
         <a href="/static/00166316dfffbfbd50b617b3b4f844d3.png" target="_blank">
@@ -515,7 +515,7 @@ div{
 <p>将其放在不同的 BFC 容器中。</p>
 </li>
 </ol>
-<pre><code class="language-html">&lt;head&gt;
+<div class="remark-highlight"><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
 div{
     overflow:hidden;
 }
@@ -525,16 +525,16 @@ p{
     background: black;
     margin: 100px;
 }
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div&gt;
-          &lt;p&gt;&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-          &lt;p&gt;&lt;/p&gt;
-    &lt;/div&gt;
-&lt;/body&gt;
-</code></pre>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div>
 
       <figure class="figure-img">
         <a href="/static/8facbbaefbaa39bd03166f320a2b7e25.png" target="_blank">
@@ -543,7 +543,7 @@ p{
         <figcaption>image.png</figcaption>
       </figure>
     
-<p><a name="b2acacd3"></a></p>
+<p></p>
 <h4>2. BFC 可以包含浮动的元素（清除浮动）</h4>
 <p>浮动的元素，会脱离普通文档流，导致一个问题就是，撑不开容器的高度。</p>
 <p>清除浮动的方法很多，overflow:hidden也可以清除浮动。其实就是因为，这个属性触发了BFC。而BFC是能包含浮动元素的。且与外部容器隔离开，这样就做到了清除浮动的效果。</p>
@@ -555,7 +555,7 @@ p{
         <figcaption>GIF.gif</figcaption>
       </figure>
     
-<p><a name="670f1623"></a></p>
+<p></p>
 <h4>3. BFC 可以阻止元素被浮动元素覆盖</h4>
 
       <figure class="figure-img">
@@ -566,7 +566,6 @@ p{
       </figure>
     
 <p>这种方法可以用来做两列自适应。</p>
-
 </section>
 
     
@@ -658,7 +657,6 @@ p{
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

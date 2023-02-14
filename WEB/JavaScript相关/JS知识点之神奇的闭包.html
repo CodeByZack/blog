@@ -74,7 +74,7 @@
   <meta name="description" content="## 1.定义  > 函数与对其状态即**词法环境**（**lexical environment**）的引用共同构成**闭包**（**closure**）。[mdn](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures)......">
   <meta property="og:description" content="## 1.定义  > 函数与对其状态即**词法环境**（**lexical environment**）的引用共同构成**闭包**（**closure**）。[mdn](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures)......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -487,44 +487,44 @@
 当函数作为参数传进另一个函数的时候。一般称为 <strong>downward funarg problem。</strong>
 当函数作为返回值的时候。一般称为 <strong>upward funarg problem</strong> 。</p>
 <p>1.<strong>downward funarg problem</strong></p>
-<pre><code class="language-javascript">let x = 10;
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
  
-function foo() {
-  console.log(x);
-}
+<span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
  
-function bar(funArg) {
-  let x = 20;
-  funArg(); // 10, not 20!
-}
+<span class="token keyword">function</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token parameter">funArg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
+  <span class="token function">funArg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 10, not 20!</span>
+<span class="token punctuation">}</span>
  
-// Pass `foo` as an argument to `bar`.
-bar(foo);
-</code></pre>
+<span class="token comment">// Pass `foo` as an argument to `bar`.</span>
+<span class="token function">bar</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>对于函数 <code>foo</code> 来说，<code>x</code> 是自由变量。当函数调用的时候（通过 funArg ），<code>x</code> 应该如何解析呢，是定义时候的外部作用域里去找，还是执行时的作用域呢？此时变量的查找就会存在多义性。</p>
 <p>JS 采用词法作用域来避免这个多义性，使用 <code>[[Scope]]</code> 来保存这个词法作用域的引用。
 这一手段其实就是闭包的核心，在创建函数的时候，保存以词法作用域为准的父作用域的引用，用以将来函数调用时进行变量查找。</p>
 <p>2.<strong>upward funarg problem</strong></p>
-<pre><code class="language-javascript">function foo() {
-  let x = 10;
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
    
-  // Closure, capturing environment of `foo`.
-  function bar() {
-    return x;
-  }
+  <span class="token comment">// Closure, capturing environment of `foo`.</span>
+  <span class="token keyword">function</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword control-flow">return</span> x<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
  
-  // Upward funarg.
-  return bar;
-}
+  <span class="token comment">// Upward funarg.</span>
+  <span class="token keyword control-flow">return</span> bar<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
  
-let x = 20;
+<span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
  
-// Call to `foo` returns `bar` closure.
-let bar = foo();
+<span class="token comment">// Call to `foo` returns `bar` closure.</span>
+<span class="token keyword">let</span> bar <span class="token operator">=</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
  
-bar(); // 10, not 20!
+<span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 10, not 20!</span>
 
-</code></pre>
+</code></pre></div>
 <p>正常来说，函数执行完毕后，函数会被回收掉。所以当 <code>foo</code> 执行完毕后， <code>foo</code> 就被回收掉了。此时bar的父环境作用域已经不存在了，如果 <code>bar</code> 函数中依赖父环境中的变量，那么函数执行结果就不会符合预期了。</p>
 <p>由于 JS 中闭包的存在，<code>foo</code> 执行完毕后，并没有释放而是被 <code>bar</code> 函数引用，而保留下来了。所以这个问题也就迎刃而解了。</p>
 <h3>小结</h3>
@@ -540,7 +540,6 @@ JS里采用了词法作用域，来消除这个二义性，即自由变量的值
 <h2>3.作用</h2>
 <p>1.私有变量
 2.模块化</p>
-
 </section>
 
     
@@ -632,7 +631,6 @@ JS里采用了词法作用域，来消除这个二义性，即自由变量的值
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

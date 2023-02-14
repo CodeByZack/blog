@@ -74,7 +74,7 @@
   <meta name="description" content="React 组件的生命周期大概是这样：  `mount -> init-render -> re-render -> unmount`  在线demo。可对照着查看。  <iframe src=&quot;https://stackblitz.com/edit/rerender-in-react?embed=......">
   <meta property="og:description" content="React 组件的生命周期大概是这样：  `mount -> init-render -> re-render -> unmount`  在线demo。可对照着查看。  <iframe src=&quot;https://stackblitz.com/edit/rerender-in-react?embed=......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -470,12 +470,6 @@
   <p>React 组件的生命周期大概是这样：</p>
 <p><code>mount -&gt; init-render -&gt; re-render -&gt; unmount</code></p>
 <p>在线demo。可对照着查看。</p>
-
-      <figure class="figure-iframe">
-        <iframe src="https://stackblitz.com/edit/rerender-in-react?embed=1&amp;file=App.tsx&amp;hideNavigation=1" title="undefined" loading="lazy"></iframe>
-        
-      </figure>
-    
 <p>由于很久不用类组件了，以下都只针对函数式组件。</p>
 <h2>1. props 变动，引起的渲染</h2>
 <p>此处省略。</p>
@@ -502,45 +496,45 @@
 <li>组件的引用地址变动，导致 diff 时判定了 unmount，然而实际上也是同一个组件占了这个位置，继而马上 mount 。
 这种情况比较特别，目前只发现一种情况下会出现，即组件内部声明组件。如下：</li>
 </ol>
-<pre><code class="language-javascript">export const UnmountMountPaper3 = () =&gt; {
-  const forceUpdate = useForceRender();
-  useLogger('ParentNode');
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword module">export</span> <span class="token keyword">const</span> <span class="token function-variable function"><span class="token maybe-class-name">UnmountMountPaper3</span></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> forceUpdate <span class="token operator">=</span> <span class="token function">useForceRender</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">useLogger</span><span class="token punctuation">(</span><span class="token string">'ParentNode'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  const InnerChild = () =&gt; {
-    useLogger('InnerChild');
-    const [num, setNum] = React.useState(0);
+  <span class="token keyword">const</span> <span class="token function-variable function"><span class="token maybe-class-name">InnerChild</span></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">useLogger</span><span class="token punctuation">(</span><span class="token string">'InnerChild'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token punctuation">[</span>num<span class="token punctuation">,</span> setNum<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">useState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    return (
-      &lt;div&gt;
-        &lt;div
-          onClick={() =&gt; {
-            forceUpdate();
-            setNum((n) =&gt; n + 1);
-          }}
-        &gt;
-          click me : {num}
-        &lt;/div&gt;
-        &lt;Typography p={1} component="p"&gt;
-          InnerChild
-        &lt;/Typography&gt;
-      &lt;/div&gt;
-    );
-  };
+    <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>div
+          onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token function">forceUpdate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">setNum</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">}</span>
+        <span class="token operator">&gt;</span>
+          click me <span class="token operator">:</span> <span class="token punctuation">{</span>num<span class="token punctuation">}</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token maybe-class-name">Typography</span> p<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> component<span class="token operator">=</span><span class="token string">"p"</span><span class="token operator">&gt;</span>
+          <span class="token maybe-class-name">InnerChild</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token maybe-class-name">Typography</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-  return (
-    &lt;Paper sx={{ m: 1, width: '100%' }}&gt;
-      &lt;InnerChild /&gt;
-      &lt;Button
-        onClick={() =&gt; {
-          forceUpdate();
-        }}
-      &gt;
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span><span class="token maybe-class-name">Paper</span> sx<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> <span class="token literal-property property">m</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token string">'100%'</span> <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token maybe-class-name">InnerChild</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token maybe-class-name">Button</span>
+        onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token function">forceUpdate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">}</span>
+      <span class="token operator">&gt;</span>
         触发组件更新
-      &lt;/Button&gt;
-    &lt;/Paper&gt;
-  );
-};
-</code></pre>
+      <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token maybe-class-name">Button</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token maybe-class-name">Paper</span><span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>这种情况容易出问题，比如上面例子中的 click me 按钮 ，点击了应该是把 num + 1 才对，可实际不管点击多少次都是0。
 这是因为 InnerChild 是 unmount -&gt; mount -&gt; render 这样一个过程。因为走了一遍 mount 过程， num 的值又被初始化为 0 了。</p>
 <h2>5. state 变动，引起的渲染</h2>
@@ -565,23 +559,22 @@
 </ul>
 <p>以下摘自 react-redux 7.x 版本的代码:</p>
 <p>Connect 最终触发 React 更新的<a href="https://github.com/reduxjs/react-redux/blob/7.x/src/components/connectAdvanced.js#L21">代码</a></p>
-<pre><code class="language-typescript">function storeStateUpdatesReducer(state, action) {
-  const [, updateCount] = state
-  return [action.payload, updateCount + 1]
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">function</span> <span class="token function">storeStateUpdatesReducer</span><span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">,</span> updateCount<span class="token punctuation">]</span> <span class="token operator">=</span> state
+  <span class="token keyword">return</span> <span class="token punctuation">[</span>action<span class="token punctuation">.</span>payload<span class="token punctuation">,</span> updateCount <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>useSelector 最终触发 React 更新的<a href="https://github.com/reduxjs/react-redux/blob/7.x/src/hooks/useSelector.js#L15">代码</a></p>
-<pre><code class="language-typescript">const [, forceRender] = useReducer((s) =&gt; s + 1, 0)
-</code></pre>
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">,</span> forceRender<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useReducer</span><span class="token punctuation">(</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> s <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+</code></pre></div>
 <p>由上面代码可以看出来， redux 最终通知 React 进行一次渲染，就是通过state的改变来做的。</p>
 <ol start="4">
 <li>Mobx 触发更新的方式</li>
 </ol>
 <p>以下摘自 mobx-react-lite 的<a href="https://github.com/mobxjs/mobx/blob/main/packages/mobx-react-lite/src/useObserver.ts#L32">代码</a>:</p>
-<pre><code class="language-typescript">const [, setState] = React.useState()
-const forceUpdate = () =&gt; setState([] as any)
-</code></pre>
-
+<div class="remark-highlight"><pre class="language-typescript"><code class="language-typescript"><span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">,</span> setState<span class="token punctuation">]</span> <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">useState</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token function-variable function">forceUpdate</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token keyword">as</span> <span class="token builtin">any</span><span class="token punctuation">)</span>
+</code></pre></div>
 </section>
 
     
@@ -673,7 +666,6 @@ const forceUpdate = () =&gt; setState([] as any)
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

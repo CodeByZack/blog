@@ -74,7 +74,7 @@
   <meta name="description" content="<a name=&quot;r5OpT&quot;></a>  ## 作用域（Scope）  > 作用域（scope，或译作有效范围）是名字（name）与实体（entity）的绑定（binding）保持有效的那部分计算机程序。（[维基百科](https://zh.wikipedia.org/wiki/%E4%BD%9C......">
   <meta property="og:description" content="<a name=&quot;r5OpT&quot;></a>  ## 作用域（Scope）  > 作用域（scope，或译作有效范围）是名字（name）与实体（entity）的绑定（binding）保持有效的那部分计算机程序。（[维基百科](https://zh.wikipedia.org/wiki/%E4%BD%9C......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -467,7 +467,7 @@
 </style>
 
 <section>
-  <p><a name="r5OpT"></a></p>
+  <p></p>
 <h2>作用域（Scope）</h2>
 <blockquote>
 <p>作用域（scope，或译作有效范围）是名字（name）与实体（entity）的绑定（binding）保持有效的那部分计算机程序。（<a href="https://zh.wikipedia.org/wiki/%E4%BD%9C%E7%94%A8%E5%9F%9F">维基百科</a>）</p>
@@ -478,37 +478,37 @@
 <p>作用域还分动态作用域和静态作用域。具体区别参考<a href="JavaScript%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F.md">链接</a>。
 JS采用的是静态作用域，也叫词法作用域。</p>
 <p>JS里ES6之前，只有两种作用域，全局作用域，和函数作用域。</p>
-<p><a name="O50lt"></a></p>
+<p></p>
 <h3>全局作用域</h3>
 <p>全局作用域，声明的变量任何地方都可以访问得到。</p>
-<p><a name="CB8lj"></a></p>
+<p></p>
 <h3>函数作用域</h3>
 <p>顾名思义，定义一个函数就会生成函数作用域。在函数外部，是没法访问到，函数内部定义的变量的。</p>
-<pre><code class="language-javascript">function a (){
-	var b = 'inner function!';
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">a</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">var</span> b <span class="token operator">=</span> <span class="token string">'inner function!'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-console.log(b);//ReferenceError
-</code></pre>
-<p><a name="aSUqk"></a></p>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//ReferenceError</span>
+</code></pre></div>
+<p></p>
 <h3>块级作用域</h3>
 <p>todo。</p>
-<p><a name="S1mEw"></a></p>
+<p></p>
 <h2>执行上下文（<a href="https://www.ecma-international.org/ecma-262/11.0/index.html#sec-execution-contexts">Execution Contexts</a>）</h2>
 <p>可以简单理解为代码执行时所在的环境。具体到JS来说，一开始执行代码时，就有一个全局的执行上下文，然后是各个函数执行时，会生成新的执行上下文。ES使用  <a href="https://zh.wikipedia.org/wiki/%E5%A0%86%E6%A0%88"><code>stack</code></a>&nbsp;管理这些执行上下文。</p>
 <p>&nbsp;另外值得一提的是，处于栈顶的执行上下文，称之为 <code>running execution context</code>&nbsp;，即当前正在被执行的代码所属的上下文，同一时刻，有且只有一个 <code>running execution context  </code> 。</p>
 <p>看下面这段代码：</p>
-<pre><code class="language-javascript">var a = "coffe"; //1.进入全局执行上下文
-function out() {
-    var b = "18";
-    function inner() {
-        var c = "91";
-        console.log(a+b+c);
-    }
-    inner(); //3.进入inner函数的执行上下文
-}
-out(); //2.进入out函数的执行上下文
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">"coffe"</span><span class="token punctuation">;</span> <span class="token comment">//1.进入全局执行上下文</span>
+<span class="token keyword">function</span> <span class="token function">out</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> b <span class="token operator">=</span> <span class="token string">"18"</span><span class="token punctuation">;</span>
+    <span class="token keyword">function</span> <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> c <span class="token operator">=</span> <span class="token string">"91"</span><span class="token punctuation">;</span>
+        <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>a<span class="token operator">+</span>b<span class="token operator">+</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//3.进入inner函数的执行上下文</span>
+<span class="token punctuation">}</span>
+<span class="token function">out</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//2.进入out函数的执行上下文</span>
+</code></pre></div>
 <ol>
 <li>一开始执行，就有一个全局的执行上下文。</li>
 <li>调用out的时候，生成out函数的执行上下文。</li>
@@ -525,7 +525,7 @@ out(); //2.进入out函数的执行上下文
         
       </figure>
     
-<p><a name="gDdJ1"></a></p>
+<p></p>
 <h3>Execution Context的结构</h3>
 <p>emmmm，或许说到执行上下文，你听过vo(变量对象)，ao（激活对象），scope chain（作用域链）等概念。可能看起来就像下面这样</p>
 
@@ -557,19 +557,18 @@ out(); //2.进入out函数的执行上下文
 </blockquote>
 <p>另外在<a href="http://dmitrysoshnikov.com/ecmascript/es5-chapter-3-2-lexical-environments-ecmascript-implementation/#variable-environment">ECMA-262-5 in detail. Chapter 3.2. Lexical environments: ECMAScript implementation.</a>也提到了这两者之间的差异。</p>
 <p>todo 弄明白两者之间的差异</p>
-<p><a name="hkakX"></a></p>
+<p></p>
 <h3>Environment Record的类型</h3>
-<p><a name="93Sdw"></a></p>
+<p></p>
 <h4>Declarative Environment Records</h4>
-<p><a name="1LN1r"></a></p>
+<p></p>
 <h4>Object Environment Records</h4>
-<p><a name="xIvk4"></a></p>
+<p></p>
 <h4>Function Environment Records</h4>
-<p><a name="i51fx"></a></p>
+<p></p>
 <h4>Global Environment Records</h4>
-<p><a name="IY7bn"></a></p>
+<p></p>
 <h4>Module Environment Records</h4>
-
 </section>
 
     
@@ -661,7 +660,6 @@ out(); //2.进入out函数的执行上下文
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

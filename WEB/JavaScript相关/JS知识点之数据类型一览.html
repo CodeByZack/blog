@@ -74,7 +74,7 @@
   <meta name="description" content="## JavaScript中的变量类型有哪些？  ### 值类型：  字符串（string）、数值（number）、布尔值（boolean）、undefined   ### 引用类型：  对象（Object）、数组（Array）、函数（Function）   ## 标题值类型和引用类型的区别  ##......">
   <meta property="og:description" content="## JavaScript中的变量类型有哪些？  ### 值类型：  字符串（string）、数值（number）、布尔值（boolean）、undefined   ### 引用类型：  对象（Object）、数组（Array）、函数（Function）   ## 标题值类型和引用类型的区别  ##......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -480,126 +480,125 @@
 <li>使用typeof检测数据的类型</li>
 <li>基本类型数据是值类型</li>
 </ol>
-<pre><code class="language-javascript">//复制的是值本身
-var a = 10; 
-var b = a;
-b = 12;
-console.log(a); //10
-console.log(b); //12
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//复制的是值本身</span>
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> 
+<span class="token keyword">var</span> b <span class="token operator">=</span> a<span class="token punctuation">;</span>
+b <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//10</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//12</span>
 
-//使用typeof 检测数据类型
-typeof(10) //"number"
-typeof("") //"string"
-typeof(true) //"boolean"
-typeof(undefined) //"undefined"
+<span class="token comment">//使用typeof 检测数据类型</span>
+<span class="token keyword">typeof</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token comment">//"number"</span>
+<span class="token keyword">typeof</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span> <span class="token comment">//"string"</span>
+<span class="token keyword">typeof</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token comment">//"boolean"</span>
+<span class="token keyword">typeof</span><span class="token punctuation">(</span><span class="token keyword nil">undefined</span><span class="token punctuation">)</span> <span class="token comment">//"undefined"</span>
 
-//无法检测出null，可检测出function
-typeof(null) //"object"
-typeof(function(){}) //"function"
-</code></pre>
+<span class="token comment">//无法检测出null，可检测出function</span>
+<span class="token keyword">typeof</span><span class="token punctuation">(</span><span class="token keyword null nil">null</span><span class="token punctuation">)</span> <span class="token comment">//"object"</span>
+<span class="token keyword">typeof</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token comment">//"function"</span>
+</code></pre></div>
 <h3>引用类型（Object）：</h3>
 <ol>
 <li>占用空间不固定，保存在堆中，栈中保存的只是一个指针。</li>
 <li>保存与复制的是指向对象的一个指针。</li>
 <li>使用instanceof检测数据类型。</li>
 </ol>
-<pre><code class="language-javascript">//复制的是执向对象的指针
-var a = {t:10}; 
-var b = a;
-b.t = 12;
-console.log(a); //{t:12}
-console.log(b); //{t:12}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//复制的是执向对象的指针</span>
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token literal-property property">t</span><span class="token operator">:</span><span class="token number">10</span><span class="token punctuation">}</span><span class="token punctuation">;</span> 
+<span class="token keyword">var</span> b <span class="token operator">=</span> a<span class="token punctuation">;</span>
+b<span class="token punctuation">.</span><span class="token property-access">t</span> <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//{t:12}</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//{t:12}</span>
 
-//使用instanceof检测数据类型，
-//实际上是判断对象的__proto__是否指向了构造函数的prototype。
-var a = function(){};
-a instanceof Function//true
-a.__proto__ == Function.prototype//true
+<span class="token comment">//使用instanceof检测数据类型，</span>
+<span class="token comment">//实际上是判断对象的__proto__是否指向了构造函数的prototype。</span>
+<span class="token keyword">var</span> <span class="token function-variable function">a</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+a <span class="token keyword">instanceof</span> <span class="token class-name">Function</span><span class="token comment">//true</span>
+a<span class="token punctuation">.</span><span class="token property-access">__proto__</span> <span class="token operator">==</span> <span class="token class-name">Function</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token comment">//true</span>
 
-var a = [];
-a instanceof Array//true
-a.__proto__ == Array.prototype//true
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+a <span class="token keyword">instanceof</span> <span class="token class-name">Array</span><span class="token comment">//true</span>
+a<span class="token punctuation">.</span><span class="token property-access">__proto__</span> <span class="token operator">==</span> <span class="token class-name">Array</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token comment">//true</span>
 
-function study(){};
-var a = new study();
-a instanceof study//true
-a.__proto__ == study.prototype//true
-</code></pre>
+<span class="token keyword">function</span> <span class="token function">study</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">study</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+a <span class="token keyword">instanceof</span> <span class="token class-name">study</span><span class="token comment">//true</span>
+a<span class="token punctuation">.</span><span class="token property-access">__proto__</span> <span class="token operator">==</span> study<span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token comment">//true</span>
+</code></pre></div>
 <h2>使用tostring方法检测类型</h2>
 <p>toString() 是 Object 的原型方法，调用该方法，默认返回当前对象的 [[Class]] 。这是一个内部属性，其格式为 [object Xxx] ，其中 Xxx 就是对象的类型。</p>
 <p>对于 Object 对象，直接调用 toString()  就能返回 [object Object] 。而对于其他对象，则需要通过 call / apply 来调用才能返回正确的类型信息。</p>
-<pre><code class="language-javascript">Object.prototype.toString.call('') ;   // [object String]
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>   <span class="token comment">// [object String]</span>
 
-Object.prototype.toString.call(1) ;    // [object Number]
+<span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>    <span class="token comment">// [object Number]</span>
 
-Object.prototype.toString.call(true) ; // [object Boolean]
+<span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// [object Boolean]</span>
 
-Object.prototype.toString.call(Symbol()); //[object Symbol]
+<span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span><span class="token known-class-name class-name">Symbol</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//[object Symbol]</span>
 
-Object.prototype.toString.call(undefined) ; // [object Undefined]
+<span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span><span class="token keyword nil">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// [object Undefined]</span>
 
-Object.prototype.toString.call(null) ; // [object Null]
+<span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span><span class="token keyword null nil">null</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// [object Null]</span>
 
-Object.prototype.toString.call(new Function()) ; // [object Function]
+<span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// [object Function]</span>
 
-Object.prototype.toString.call(new Date()) ; // [object Date]
+<span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// [object Date]</span>
 
-Object.prototype.toString.call([]) ; // [object Array]
+<span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// [object Array]</span>
 
-Object.prototype.toString.call(new RegExp()) ; // [object RegExp]
+<span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">RegExp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// [object RegExp]</span>
 
-Object.prototype.toString.call(new Error()) ; // [object Error]
+<span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// [object Error]</span>
 
-Object.prototype.toString.call(document) ; // [object HTMLDocument]
+<span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span><span class="token dom variable">document</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">// [object HTMLDocument]</span>
 
-Object.prototype.toString.call(window) ; //[object global] window 是全局对象 global 的引用
-</code></pre>
+<span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span><span class="token dom variable">window</span><span class="token punctuation">)</span> <span class="token punctuation">;</span> <span class="token comment">//[object global] window 是全局对象 global 的引用</span>
+</code></pre></div>
 <p>稍微封装一下</p>
-<pre><code class="language-javascript">const isObject = function(target){ 
-    return Object.prototype.toString.call(target) === '[object Object]'; 
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">isObject</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">target</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    <span class="token keyword control-flow">return</span> <span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object Object]'</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
 
-const isNumber = function(target){ 
-    return Object.prototype.toString.call(target) === '[object Number]'; 
-}
+<span class="token keyword">const</span> <span class="token function-variable function">isNumber</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">target</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    <span class="token keyword control-flow">return</span> <span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object Number]'</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
 
-const isString = function(target){ 
-    return Object.prototype.toString.call(target) === '[object String]'; 
-}
+<span class="token keyword">const</span> <span class="token function-variable function">isString</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">target</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    <span class="token keyword control-flow">return</span> <span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object String]'</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
 
-const isUndefined = function(target){ 
-    return Object.prototype.toString.call(target) === '[object Undefined]'; 
-}
+<span class="token keyword">const</span> <span class="token function-variable function">isUndefined</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">target</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    <span class="token keyword control-flow">return</span> <span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object Undefined]'</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
 
-const isBoolean = function(target){ 
-    return Object.prototype.toString.call(target) === '[object Boolean]'; 
-}
+<span class="token keyword">const</span> <span class="token function-variable function">isBoolean</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">target</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    <span class="token keyword control-flow">return</span> <span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object Boolean]'</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
 
-const isArray = function(target){ 
-    return Object.prototype.toString.call(target) === '[object Array]'; 
-}
+<span class="token keyword">const</span> <span class="token function-variable function">isArray</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">target</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    <span class="token keyword control-flow">return</span> <span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object Array]'</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
 
-const isFunction = function(target){ 
-    return Object.prototype.toString.call(target) === '[object Function]'; 
-}
-</code></pre>
+<span class="token keyword">const</span> <span class="token function-variable function">isFunction</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">target</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    <span class="token keyword control-flow">return</span> <span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object Function]'</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>再次封装一下</p>
-<pre><code class="language-javascript">const checkType = (type)=&gt;{
-	return (target)=&gt;{
-		return Object.prototype.toString.call(target) === `[object ${type}]`;
-	}
-}
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">checkType</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">type</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+	<span class="token keyword control-flow">return</span> <span class="token punctuation">(</span><span class="token parameter">target</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+		<span class="token keyword control-flow">return</span> <span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method function property-access">toString</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">[object </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>type<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">]</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-isObject = checkType('Object');
-isArray = checkType('Array');
-isFunction = checkType('Function');
-isBoolean = checkType('Boolean');
-isString = checkType('String');
-isNumber = checkType('Number');
-isUndefined = checkType('Undefined');
+isObject <span class="token operator">=</span> <span class="token function">checkType</span><span class="token punctuation">(</span><span class="token string">'Object'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+isArray <span class="token operator">=</span> <span class="token function">checkType</span><span class="token punctuation">(</span><span class="token string">'Array'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+isFunction <span class="token operator">=</span> <span class="token function">checkType</span><span class="token punctuation">(</span><span class="token string">'Function'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+isBoolean <span class="token operator">=</span> <span class="token function">checkType</span><span class="token punctuation">(</span><span class="token string">'Boolean'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+isString <span class="token operator">=</span> <span class="token function">checkType</span><span class="token punctuation">(</span><span class="token string">'String'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+isNumber <span class="token operator">=</span> <span class="token function">checkType</span><span class="token punctuation">(</span><span class="token string">'Number'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+isUndefined <span class="token operator">=</span> <span class="token function">checkType</span><span class="token punctuation">(</span><span class="token string">'Undefined'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-</code></pre>
-
+</code></pre></div>
 </section>
 
     
@@ -691,7 +690,6 @@ isUndefined = checkType('Undefined');
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

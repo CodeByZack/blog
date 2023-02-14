@@ -74,7 +74,7 @@
   <meta name="description" content="<a name=&quot;c8ff2c48&quot;></a>  ### Generator基本的语法  ```javascript function* a(){  console.log('hello generator'); } var a1 = a();//这里不会执行函数内部任何代码，只会返回一个迭代器 a......">
   <meta property="og:description" content="<a name=&quot;c8ff2c48&quot;></a>  ### Generator基本的语法  ```javascript function* a(){  console.log('hello generator'); } var a1 = a();//这里不会执行函数内部任何代码，只会返回一个迭代器 a......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -467,257 +467,256 @@
 </style>
 
 <section>
-  <p><a name="c8ff2c48"></a></p>
+  <p></p>
 <h3>Generator基本的语法</h3>
-<pre><code class="language-javascript">function* a(){
-	console.log('hello generator');
-}
-var a1 = a();//这里不会执行函数内部任何代码，只会返回一个迭代器
-a1.next();//这里会打印hello generator，返回值为{value:undefined,done:true}
-function* b(){
-    yield 1;
-    yield 2;
-    return 3;
-}
-var b1 = b();
-b1.next();//{value:1,done:false}
-b1.next();//{value:2,done:false}
-b1.next();//{value:3,done:true}
-</code></pre>
-<p><a name="9fdc86c9"></a></p>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">'hello generator'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> a1 <span class="token operator">=</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//这里不会执行函数内部任何代码，只会返回一个迭代器</span>
+a1<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//这里会打印hello generator，返回值为{value:undefined,done:true}</span>
+<span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword control-flow">yield</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">yield</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">return</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> b1 <span class="token operator">=</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+b1<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//{value:1,done:false}</span>
+b1<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//{value:2,done:false}</span>
+b1<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//{value:3,done:true}</span>
+</code></pre></div>
+<p></p>
 <h4>generator可以向外输出数据</h4>
-<pre><code class="language-javascript">function* b(){
-    yield 1;
-    yield 2;
-    return 3;
-}
-var b1 = b();
-b1.next();//{value:1,done:false}
-b1.next();//{value:2,done:false}
-b1.next();//{value:3,done:true}
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword control-flow">yield</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">yield</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">return</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> b1 <span class="token operator">=</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+b1<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//{value:1,done:false}</span>
+b1<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//{value:2,done:false}</span>
+b1<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//{value:3,done:true}</span>
+</code></pre></div>
 <p>其中value的值 有几种情况。</p>
 <ol>
 <li>遇到yield ：value为 yield后表达式的值，done为false。</li>
 <li>遇到return ：value为 return 后表达式的值，done为true。</li>
 <li>函数执行完毕，没有return ： value为undfined，done为true。</li>
 </ol>
-<p><a name="a53b1d21"></a></p>
+<p></p>
 <h4>generator可以接受外部的输入数据</h4>
 <p>yield本身并没有返回值，但next可以接收一个参数。
 该参数会被当作上一个yield的返回值。</p>
-<pre><code class="language-javascript">function* c(){
-    let a = yield 1;
-    let b = yield a;
-	return b;
-}
-var c1 = c();
-c1.next();//{value:1,done:false}
-c1.next(2);//{value:2,done:false}
-c1.next(3);//{value:3,done:true}
-</code></pre>
-<p><a name="d3cb8f20"></a></p>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> a<span class="token punctuation">;</span>
+	<span class="token keyword control-flow">return</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> c1 <span class="token operator">=</span> <span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+c1<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//{value:1,done:false}</span>
+c1<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//{value:2,done:false}</span>
+c1<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//{value:3,done:true}</span>
+</code></pre></div>
+<p></p>
 <h4>generator特别的地方</h4>
 <ol>
 <li>可控制代片段的暂停与执行，遇到yield暂停执行代码，外部手动调用next恢复执行。</li>
 <li>对于每一个代码段，你可以通过next函数的返回值获得代码段的输出，通过next函数传参，向代码段输入参数。</li>
 <li>generator函数调用后，返回的是一个迭代器，迭代器每一次迭代都是执行某段代码片段，获得返回值。</li>
 </ol>
-<p><a name="ceed1589"></a></p>
+<p></p>
 <h3>generator的执行器</h3>
 <p>generator遇到yield后回暂停执行，并不会自动恢复执行，恢复执行必须手动调用next。像下面这样。</p>
-<pre><code class="language-javascript">function *main(){
-    let a = yield 1 + 2;
-    let b = yield 3 + a;
-    let c = yield 7 + b;
-	console.log(c);
-}
-//这里生成迭代器，并不会执行任何函数内的代码
-let m = main();
-//执行到第一个yield表达式
-let resObj = m.next();//{value:3,done:false}
-//执行到第二个yield表达式,并把上一个yield获得的值传入，作为yield的返回值
-resObj = m.next(resObj.value);//{value:6,done:false}
-resObj = m.next(resObj.value);//{value:13,done:false}
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token operator">*</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token number">3</span> <span class="token operator">+</span> a<span class="token punctuation">;</span>
+    <span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token number">7</span> <span class="token operator">+</span> b<span class="token punctuation">;</span>
+	<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//这里生成迭代器，并不会执行任何函数内的代码</span>
+<span class="token keyword">let</span> m <span class="token operator">=</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//执行到第一个yield表达式</span>
+<span class="token keyword">let</span> resObj <span class="token operator">=</span> m<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//{value:3,done:false}</span>
+<span class="token comment">//执行到第二个yield表达式,并把上一个yield获得的值传入，作为yield的返回值</span>
+resObj <span class="token operator">=</span> m<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span>resObj<span class="token punctuation">.</span><span class="token property-access">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//{value:6,done:false}</span>
+resObj <span class="token operator">=</span> m<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span>resObj<span class="token punctuation">.</span><span class="token property-access">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//{value:13,done:false}</span>
+</code></pre></div>
 <p>观察上面的表达式，可以看到，手动调用next，显得很繁琐，而且其中有重复的逻辑。
 把next获得的返回值作为下一次next的入参，传进generator内部。</p>
-<p><a name="adeca386"></a></p>
+<p></p>
 <h4>同步任务的自动执行</h4>
 <p>所以可以写一个自动执行器，像下面这样</p>
-<pre><code class="language-javascript">function makeCall(num){
-    console.log(`${num} 进行*2操作`)
-    return num * 2
-}
-function run(generator){
-    let it = generator();
-    let resObj = it.next();
-    while(!resObj.done){
-        resObj = it.next(resObj.value);
-    }
-}
-function *main(){
-    let a = yield makeCall(2);
-    let b = yield makeCall(a);
-    let c = yield makeCall(b);
-	console.log(c);
-}
-run(main);
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">makeCall</span><span class="token punctuation">(</span><span class="token parameter">num</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>num<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> 进行*2操作</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+    <span class="token keyword control-flow">return</span> num <span class="token operator">*</span> <span class="token number">2</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token parameter">generator</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> it <span class="token operator">=</span> <span class="token function">generator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> resObj <span class="token operator">=</span> it<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">while</span><span class="token punctuation">(</span><span class="token operator">!</span>resObj<span class="token punctuation">.</span><span class="token property-access">done</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        resObj <span class="token operator">=</span> it<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span>resObj<span class="token punctuation">.</span><span class="token property-access">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token operator">*</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCall</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCall</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCall</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">run</span><span class="token punctuation">(</span>main<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>因为每一次判断还可以迭代的时候，是立马执行下一个it.next()的。所以这个执行器是只能执行同步的任务。假如任务是异步的，是没法一个接一个的执行的。</p>
-<p><a name="c3846e8c"></a></p>
+<p></p>
 <h4>异步任务的自动执行</h4>
 <p>异步任务，简单理解就是，发请求，请求回来过后会有一个callback来处理返回结果。
 有些时候下一个异步任务需要依赖于上一个异步任务的返回值。这样的依赖一多，就会形成callback hell了。</p>
-<pre><code class="language-javascript">function makeCall(arg,callback){
-    console.log(`${arg} 进行*2操作,并在1s后通知操作完成`)
-	setTimeout(()=&gt;{callback(arg*2)},1000);
-}
-//经典的callback形式
-makeCall(111,(arg)=&gt;{
-	console.log(arg)
-});
-//经典的回掉地狱
-makeCall(111,(res)=&gt;{
-	console.log(res)
-	makeCall(res,(res2)=&gt;{
-    	console.log(res2);
-	})
-});
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">makeCall</span><span class="token punctuation">(</span><span class="token parameter">arg<span class="token punctuation">,</span>callback</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>arg<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> 进行*2操作,并在1s后通知操作完成</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+	<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span><span class="token function">callback</span><span class="token punctuation">(</span>arg<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//经典的callback形式</span>
+<span class="token function">makeCall</span><span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">arg</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+	<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//经典的回掉地狱</span>
+<span class="token function">makeCall</span><span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+	<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+	<span class="token function">makeCall</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">res2</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+    	<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p><strong>利用thunk结合generator处理异步任务：</strong>
 原有的makeCall函数，callback是作为函数参数传入的，异步的请求和返回结果处理在一个函数，没有分开。在结合yield时候很不方便，或者说复杂。
 所以这里需要对callback形式做一些改变，引入thunk，thunk函数介绍<a href="http://es6.ruanyifeng.com/#docs/generator-async#Thunk-%E5%87%BD%E6%95%B0">链接</a></p>
-<pre><code class="language-javascript">function makeCall(arg,callback){
-    console.log(`${arg} 进行*2操作,并在1s后通知操作完成`)
-	setTimeout(()=&gt;{callback(arg*2)},1000);
-}
-//改造makeCall为thunk形式
-function makeCallThunk (arg) {
-    return function (callback) {
-        return makeCall(arg, callback);
-    };
-};
-//调用应该像下面这样
-makeCallThunk(arg)(cb);
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">makeCall</span><span class="token punctuation">(</span><span class="token parameter">arg<span class="token punctuation">,</span>callback</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>arg<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> 进行*2操作,并在1s后通知操作完成</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+	<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span><span class="token function">callback</span><span class="token punctuation">(</span>arg<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//改造makeCall为thunk形式</span>
+<span class="token keyword">function</span> <span class="token function">makeCallThunk</span> <span class="token punctuation">(</span><span class="token parameter">arg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword control-flow">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">callback</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword control-flow">return</span> <span class="token function">makeCall</span><span class="token punctuation">(</span>arg<span class="token punctuation">,</span> callback<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">//调用应该像下面这样</span>
+<span class="token function">makeCallThunk</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span><span class="token punctuation">(</span>cb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>函数thunk化后，如果需要发起请求，需要调用两次。
 第一次调用返回的是函数
 第二次调用才会真正发起请求
 有了thunk函数，写一个针对异步操作的自动执行器就容易多了</p>
-<pre><code class="language-javascript">//thunk版本的自动执行器
-function run(fn) {
-    let it = fn();
-    function next(data) {
-        var resObj = it.next(data);
-        if (resObj.done) return;
-        resObj.value(next);
-    }
-    next();
-}
-//可以仔细看下面这个代码，和执行同步任务的时候并没有什么差别。
-function *makeCallGenerator(){
-    let res = yield makeCallThunk(2);
-    let res2 = yield makeCallThunk(res);
-    let res3 = yield makeCallThunk(res2);
-    console.log(res3)
-}
-run(makeCallGenerator)
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//thunk版本的自动执行器</span>
+<span class="token keyword">function</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token parameter">fn</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> it <span class="token operator">=</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">function</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> resObj <span class="token operator">=</span> it<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>resObj<span class="token punctuation">.</span><span class="token property-access">done</span><span class="token punctuation">)</span> <span class="token keyword control-flow">return</span><span class="token punctuation">;</span>
+        resObj<span class="token punctuation">.</span><span class="token method function property-access">value</span><span class="token punctuation">(</span>next<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//可以仔细看下面这个代码，和执行同步任务的时候并没有什么差别。</span>
+<span class="token keyword">function</span> <span class="token operator">*</span><span class="token function">makeCallGenerator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> res <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCallThunk</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> res2 <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCallThunk</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> res3 <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCallThunk</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>res3<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">run</span><span class="token punctuation">(</span>makeCallGenerator<span class="token punctuation">)</span>
+</code></pre></div>
 <p><strong>利用promise结合generator处理异步任务：</strong>
 promise都比较熟悉了，先给makeCall包装一层promise。</p>
-<pre><code class="language-javascript">function makeCall(arg,callback){
-    console.log(`${arg} 进行*2操作,并在1s后通知操作完成`)
-setTimeout(()=&gt;{callback(arg*2)},1000);
-}
-//makeCall 包装一层promise
-function makeCallPromise(arg){
-	return new Promise((resolve,reject)=&gt;{
-		makeCall(arg,(res)=&gt;{
-			if(res&gt;1000){reject(res);}else{resolve(res);}
-		});
-	})
-}
-//promise形式调用。
-makeCallPromise(111)
-	.then((res)=&gt;{console.log(res)});
-//promise让回调减少了一些层级，好看一些了。
-makeCallPromise(111)
-	.then((res)=&gt;makeCallPromise(222))
-	.then((res)=&gt;console.log(res));
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">makeCall</span><span class="token punctuation">(</span><span class="token parameter">arg<span class="token punctuation">,</span>callback</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>arg<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> 进行*2操作,并在1s后通知操作完成</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span><span class="token function">callback</span><span class="token punctuation">(</span>arg<span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//makeCall 包装一层promise</span>
+<span class="token keyword">function</span> <span class="token function">makeCallPromise</span><span class="token punctuation">(</span><span class="token parameter">arg</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword control-flow">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span>reject</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+		<span class="token function">makeCall</span><span class="token punctuation">(</span>arg<span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+			<span class="token keyword control-flow">if</span><span class="token punctuation">(</span>res<span class="token operator">&gt;</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token function">reject</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword control-flow">else</span><span class="token punctuation">{</span><span class="token function">resolve</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+		<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//promise形式调用。</span>
+<span class="token function">makeCallPromise</span><span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//promise让回调减少了一些层级，好看一些了。</span>
+<span class="token function">makeCallPromise</span><span class="token punctuation">(</span><span class="token number">111</span><span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token function">makeCallPromise</span><span class="token punctuation">(</span><span class="token number">222</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>promise版本的执行器</p>
-<pre><code class="language-javascript">function* makeCallGenerator(){
-let res = yield makeCallPromise(2);
-    let res2 = yield makeCallPromise(res);
-    let res3 = yield makeCallPromise(res2);
-    console.log(res3)
-}
-//执行器
-function run(gen){
-	let it = gen();
-	function next(data){
-    	let resObj = it.next(data);
-        if(resObj.done)return;
-        resObj.value.then((res)=&gt;next(res));
-	}
-    next();
-}
-run(makeCallGenerator)
-</code></pre>
-<p><a name="23abcbd1"></a></p>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">makeCallGenerator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token keyword">let</span> res <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCallPromise</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> res2 <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCallPromise</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> res3 <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCallPromise</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>res3<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//执行器</span>
+<span class="token keyword">function</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token parameter">gen</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">let</span> it <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">function</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    	<span class="token keyword">let</span> resObj <span class="token operator">=</span> it<span class="token punctuation">.</span><span class="token method function property-access">next</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>resObj<span class="token punctuation">.</span><span class="token property-access">done</span><span class="token punctuation">)</span><span class="token keyword control-flow">return</span><span class="token punctuation">;</span>
+        resObj<span class="token punctuation">.</span><span class="token property-access">value</span><span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token function">next</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+    <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">run</span><span class="token punctuation">(</span>makeCallGenerator<span class="token punctuation">)</span>
+</code></pre></div>
+<p></p>
 <h3>两个问题</h3>
 <ol>
 <li><strong>使用generator执行异步操作的好处。</strong></li>
 <li><strong>与async，await的差异。</strong></li>
 </ol>
-<p><a name="04b6391b"></a></p>
+<p></p>
 <h4>使用generator执行异步操作的好处。</h4>
-<pre><code class="language-javascript">//异步任务
-function* makeCallGenerator(){
-	let res = yield makeCallPromise(2);
-    let res2 = yield makeCallPromise(res);
-    let res3 = yield makeCallPromise(res2);
-    console.log(res3)
-}
-run(makeCallGenerator)
-console.log(1);
-//同步任务
-function *main(){
-    let a = yield makeCall(2);
-    let b = yield makeCall(a);
-    let c = yield makeCall(b);
-	console.log(c);
-}
-run(main);
-console.log(1);
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//异步任务</span>
+<span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">makeCallGenerator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">let</span> res <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCallPromise</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> res2 <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCallPromise</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> res3 <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCallPromise</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>res3<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">run</span><span class="token punctuation">(</span>makeCallGenerator<span class="token punctuation">)</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//同步任务</span>
+<span class="token keyword">function</span> <span class="token operator">*</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCall</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCall</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCall</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">run</span><span class="token punctuation">(</span>main<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>抛开generator的执行器不看，异步任务和同步任务的写法几乎一模一样。</p>
-<p><a name="923a5f2b"></a></p>
+<p></p>
 <h4>与async，await的差异。</h4>
-<pre><code class="language-javascript">//generator
-function* makeCallGenerator(){
-	let res = yield makeCallPromise(2);
-    let res2 = yield makeCallPromise(res);
-    let res3 = yield makeCallPromise(res2);
-    console.log(res3)
-}
-run(makeCallGenerator)
-//async await
-async function makeCallCopy(){
-    let res = await makeCallPromise(2);
-    let res2 = await makeCallPromise(res);
-    let res3 = await makeCallPromise(res2);
-    console.log(res3)
-}
-makeCallCopy();
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//generator</span>
+<span class="token keyword">function</span><span class="token operator">*</span> <span class="token function">makeCallGenerator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">let</span> res <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCallPromise</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> res2 <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCallPromise</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> res3 <span class="token operator">=</span> <span class="token keyword control-flow">yield</span> <span class="token function">makeCallPromise</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>res3<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">run</span><span class="token punctuation">(</span>makeCallGenerator<span class="token punctuation">)</span>
+<span class="token comment">//async await</span>
+<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">makeCallCopy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> res <span class="token operator">=</span> <span class="token keyword control-flow">await</span> <span class="token function">makeCallPromise</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> res2 <span class="token operator">=</span> <span class="token keyword control-flow">await</span> <span class="token function">makeCallPromise</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> res3 <span class="token operator">=</span> <span class="token keyword control-flow">await</span> <span class="token function">makeCallPromise</span><span class="token punctuation">(</span>res2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>res3<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function">makeCallCopy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>写法几乎一模一样，只不过 * 号变成了 async，yield 变成了 await。
 但async/await执行器是自带的，generator执行器需要自己去手写，但也意味着更多可能。
 另外 async/await 默认是 使用的 generator + promise的形式执行异步任务，是这个模式之上的语法糖，能很好的解决异步任务。
-但generator除了结合promise 和可以结合类似thunk之类的去执行异步任务。 <a name="end"></a></p>
+但generator除了结合promise 和可以结合类似thunk之类的去执行异步任务。 </p>
 <h1></h1>
-
 </section>
 
     
@@ -809,7 +808,6 @@ makeCallCopy();
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

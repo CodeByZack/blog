@@ -74,7 +74,7 @@
   <meta name="description" content="这里只是记录对promise的一些疑惑点，不会具体说promise是什么东西，或者怎么使用。  <a name=&quot;Qhswp&quot;></a>  ## Promise的then的两个参数。  then有两个入参，为两个函数，如果你传其它类型的值进去，会被忽略掉。 比如 `promise.then(1,2)......">
   <meta property="og:description" content="这里只是记录对promise的一些疑惑点，不会具体说promise是什么东西，或者怎么使用。  <a name=&quot;Qhswp&quot;></a>  ## Promise的then的两个参数。  then有两个入参，为两个函数，如果你传其它类型的值进去，会被忽略掉。 比如 `promise.then(1,2)......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -468,7 +468,7 @@
 
 <section>
   <p>这里只是记录对promise的一些疑惑点，不会具体说promise是什么东西，或者怎么使用。</p>
-<p><a name="Qhswp"></a></p>
+<p></p>
 <h2>Promise的then的两个参数。</h2>
 <p>then有两个入参，为两个函数，如果你传其它类型的值进去，会被忽略掉。
 比如&nbsp;<code>promise.then(1,2)</code>
@@ -480,23 +480,23 @@
 比如&nbsp;<code>Promise.reject(111).then(()=&gt;{},err=&gt;console.log(err))</code>
 其中err的值为111
 另外，除了在promise内部reject值以外，当promise内部发生语法错误，或者主动抛出了错误，都会被reject捕捉到，当作callback下的入参。</p>
-<pre><code class="language-javascript">var promiseA = new Promise((reslove,reject)=&gt;{
-	reslove("这个是正常返回的结果")
-})
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">var</span> promiseA <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">reslove<span class="token punctuation">,</span>reject</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+	<span class="token function">reslove</span><span class="token punctuation">(</span><span class="token string">"这个是正常返回的结果"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-var promiseB = new Promise((reslove,reject)=&gt;{
-	reject("这个是出错返回的结果")
-})
+<span class="token keyword">var</span> promiseB <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">reslove<span class="token punctuation">,</span>reject</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+	<span class="token function">reject</span><span class="token punctuation">(</span><span class="token string">"这个是出错返回的结果"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-var promiseC = new Promise((reslove,reject)=&gt;{
-	dodo("这里会产生语法错误")
-})
+<span class="token keyword">var</span> promiseC <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">reslove<span class="token punctuation">,</span>reject</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+	<span class="token function">dodo</span><span class="token punctuation">(</span><span class="token string">"这里会产生语法错误"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-promiseA.then(res=&gt;console.log(res))//这个是正常返回的结果
-promiseB.then(1,err=&gt;console.log(err))//这个是出错返回的结果
-promiseC.then(1,err=&gt;console.log(err))//ReferenceError: dodo is not defined
-</code></pre>
-<p><a name="YPMDr"></a></p>
+promiseA<span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token arrow operator">=&gt;</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">//这个是正常返回的结果</span>
+promiseB<span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token parameter">err</span><span class="token arrow operator">=&gt;</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">//这个是出错返回的结果</span>
+promiseC<span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token parameter">err</span><span class="token arrow operator">=&gt;</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">//ReferenceError: dodo is not defined</span>
+</code></pre></div>
+<p></p>
 <h2>Promise的then的返回值。</h2>
 <p>说到底，then是一个函数，那就会有返回值，且then的返回值固定为promise对象，以便链式调用。
 而then的返回值，取决于实际上调用了那个callback。具体一点来说，</p>
@@ -518,53 +518,52 @@ promiseC.then(1,err=&gt;console.log(err))//ReferenceError: dodo is not defined
 <p><strong>3.没有显示返回值，那么then的返回值为Promise.resolve(undefined)</strong>
 如：promiseA.then(res=&gt;{})</p>
 <p>返回值为 Promise.resolve(<strong>undefined</strong>)</p>
-<pre><code class="language-javascript">var promiseA = new Promise((reslove,reject)=&gt;{
-	reslove("这个是正常返回的结果")
-})
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">var</span> promiseA <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">reslove<span class="token punctuation">,</span>reject</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+	<span class="token function">reslove</span><span class="token punctuation">(</span><span class="token string">"这个是正常返回的结果"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-var resPromise = promiseA.then()
+<span class="token keyword">var</span> resPromise <span class="token operator">=</span> promiseA<span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-var resPromise1 = promiseA.then(res=&gt;{})
+<span class="token keyword">var</span> resPromise1 <span class="token operator">=</span> promiseA<span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-var resPromise2 = promiseA.then(res=&gt;123)
+<span class="token keyword">var</span> resPromise2 <span class="token operator">=</span> promiseA<span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token arrow operator">=&gt;</span><span class="token number">123</span><span class="token punctuation">)</span>
 
-var resPromise3 = promiseA.then(res=&gt;({key:123}))
+<span class="token keyword">var</span> resPromise3 <span class="token operator">=</span> promiseA<span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">key</span><span class="token operator">:</span><span class="token number">123</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-var resPromise4 = promiseA.then(res=&gt;Promise.resolve("resolve"))
+<span class="token keyword">var</span> resPromise4 <span class="token operator">=</span> promiseA<span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token arrow operator">=&gt;</span><span class="token known-class-name class-name">Promise</span><span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span><span class="token string">"resolve"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-var resPromise5 = promiseA.then(res=&gt;Promise.reject("reject"))
+<span class="token keyword">var</span> resPromise5 <span class="token operator">=</span> promiseA<span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token arrow operator">=&gt;</span><span class="token known-class-name class-name">Promise</span><span class="token punctuation">.</span><span class="token method function property-access">reject</span><span class="token punctuation">(</span><span class="token string">"reject"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-setTimeout(()=&gt;{
-  console.log( resPromise )
-  console.log( resPromise1 )
-  console.log( resPromise2 )
-  console.log( resPromise3 )
-  console.log( resPromise4 )
-  console.log( resPromise5 )
-},0)
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span> resPromise <span class="token punctuation">)</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span> resPromise1 <span class="token punctuation">)</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span> resPromise2 <span class="token punctuation">)</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span> resPromise3 <span class="token punctuation">)</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span> resPromise4 <span class="token punctuation">)</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span> resPromise5 <span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span>
 
-//这里解释一下，为什么需要用setTimeout来打印结果
-//因为then同步返回的是一个新生成的promise,是pending状态。
-//对于这个新的promise的状态改变,是异步的。
-//也就是根据callback的返回值来确定新生成的promise的状态这个操作，是下一个tick才会去做。
-//我也是写这个例子的时候才发现这个问题，但是不想改前面的了。
-//正确说法请参考MDN相关章节
-</code></pre>
+<span class="token comment">//这里解释一下，为什么需要用setTimeout来打印结果</span>
+<span class="token comment">//因为then同步返回的是一个新生成的promise,是pending状态。</span>
+<span class="token comment">//对于这个新的promise的状态改变,是异步的。</span>
+<span class="token comment">//也就是根据callback的返回值来确定新生成的promise的状态这个操作，是下一个tick才会去做。</span>
+<span class="token comment">//我也是写这个例子的时候才发现这个问题，但是不想改前面的了。</span>
+<span class="token comment">//正确说法请参考MDN相关章节</span>
+</code></pre></div>
 <p>MDN Promise then<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/then">链接</a></p>
-<p><a name="mq8vH"></a></p>
+<p></p>
 <h2>Promise的catch。</h2>
 <p>catch也是设计来捕捉错误的，reject，或者语法错误，或者主动抛出的错误,和then的第二个函数作用一样。</p>
 <p>所以这两个是有冲突的，如果promise是reject状态，当既有then(,()=&gt;{})又有catch的时候，catch是执行不到的。</p>
 <p>catch也会返回一个新的promise，规则同上面所说的。</p>
-<pre><code class="language-javascript">var promiseB = new Promise((reslove,reject)=&gt;{
-	reject("这个是出错返回的结果")
-})
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">var</span> promiseB <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">reslove<span class="token punctuation">,</span>reject</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+	<span class="token function">reject</span><span class="token punctuation">(</span><span class="token string">"这个是出错返回的结果"</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
 
 promiseB
-  .then(1,(err)=&gt;{console.log("then")})
-  .catch(err=&gt;{console.log("catch")})
-</code></pre>
-
+  <span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"then"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token keyword control-flow">catch</span><span class="token punctuation">(</span><span class="token parameter">err</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"catch"</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
 </section>
 
     
@@ -656,7 +655,6 @@ promiseB
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

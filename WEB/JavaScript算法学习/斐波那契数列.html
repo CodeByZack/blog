@@ -74,7 +74,7 @@
   <meta name="description" content="<a name=&quot;TauCK&quot;></a>  ## 定义  在数学中，斐波那契数是以下整数序列（称为斐波那契数列）中的数字，其特征在于前两个数字之后的每个数字都是前两个数字的和：  `0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...`  边长为连续斐波......">
   <meta property="og:description" content="<a name=&quot;TauCK&quot;></a>  ## 定义  在数学中，斐波那契数是以下整数序列（称为斐波那契数列）中的数字，其特征在于前两个数字之后的每个数字都是前两个数字的和：  `0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...`  边长为连续斐波......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -467,7 +467,7 @@
 </style>
 
 <section>
-  <p><a name="TauCK"></a></p>
+  <p></p>
 <h2>定义</h2>
 <p>在数学中，斐波那契数是以下整数序列（称为斐波那契数列）中的数字，其特征在于前两个数字之后的每个数字都是前两个数字的和：</p>
 <p><code>0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...</code></p>
@@ -489,44 +489,43 @@
         
       </figure>
     
-<p><a name="99r12"></a></p>
+<p></p>
 <h2>代码实现</h2>
-<pre><code class="language-javascript">//时间复杂度为O(n)
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//时间复杂度为O(n)</span>
 
-const fibonacci = (n)=&gt;{
-  const fibSequence = [1];
+<span class="token keyword">const</span> <span class="token function-variable function">fibonacci</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+  <span class="token keyword">const</span> fibSequence <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-  let currentValue = 1;
-  let previousValue = 0;
+  <span class="token keyword">let</span> currentValue <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">let</span> previousValue <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
-  if (n === 1) {
-    return fibSequence;
-  }
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>n <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword control-flow">return</span> fibSequence<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  let iterationsCounter = n - 1;
+  <span class="token keyword">let</span> iterationsCounter <span class="token operator">=</span> n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
 
-  while (iterationsCounter) {
-		//let now = previousValue + currentValue;
-  	//previousValue = currentValue;
-  	//currentValue = now;
-    currentValue += previousValue;
-    previousValue = currentValue - previousValue;
+  <span class="token keyword control-flow">while</span> <span class="token punctuation">(</span>iterationsCounter<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token comment">//let now = previousValue + currentValue;</span>
+  	<span class="token comment">//previousValue = currentValue;</span>
+  	<span class="token comment">//currentValue = now;</span>
+    currentValue <span class="token operator">+=</span> previousValue<span class="token punctuation">;</span>
+    previousValue <span class="token operator">=</span> currentValue <span class="token operator">-</span> previousValue<span class="token punctuation">;</span>
     
-    fibSequence.push(currentValue);
+    fibSequence<span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span>currentValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    iterationsCounter -= 1;
-  }
+    iterationsCounter <span class="token operator">-=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  return fibSequence;
-}
+  <span class="token keyword control-flow">return</span> fibSequence<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-</code></pre>
-<p><a name="References"></a></p>
+</code></pre></div>
+<p></p>
 <h2>References</h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Fibonacci_number">Wikipedia</a></li>
 </ul>
-
 </section>
 
     
@@ -618,7 +617,6 @@ const fibonacci = (n)=&gt;{
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

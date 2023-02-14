@@ -74,7 +74,7 @@
   <meta name="description" content="这篇文章起源于一道面试题，找出一个字符串中，出现次数最多的字符。面试题不难,正常思路是遍历字符串，统计下字符个数，再排个序，找出最大的。 可是可是，好久没手写代码的我，写不来for循环了，平时太依赖自动提示了，依赖调试工具了，都是写错了，然后看报错信息然后改就行。所以所以有了这篇文章。 <a nam......">
   <meta property="og:description" content="这篇文章起源于一道面试题，找出一个字符串中，出现次数最多的字符。面试题不难,正常思路是遍历字符串，统计下字符个数，再排个序，找出最大的。 可是可是，好久没手写代码的我，写不来for循环了，平时太依赖自动提示了，依赖调试工具了，都是写错了，然后看报错信息然后改就行。所以所以有了这篇文章。 <a nam......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -468,128 +468,127 @@
 
 <section>
   <p>这篇文章起源于一道面试题，找出一个字符串中，出现次数最多的字符。面试题不难,正常思路是遍历字符串，统计下字符个数，再排个序，找出最大的。
-可是可是，好久没手写代码的我，写不来for循环了，平时太依赖自动提示了，依赖调试工具了，都是写错了，然后看报错信息然后改就行。所以所以有了这篇文章。 <a name="9e260d4a"></a></p>
+可是可是，好久没手写代码的我，写不来for循环了，平时太依赖自动提示了，依赖调试工具了，都是写错了，然后看报错信息然后改就行。所以所以有了这篇文章。 </p>
 <h2>普通for循环</h2>
 <p>普通for循环可 遍历** 数组** <strong>字符串</strong>。</p>
-<pre><code class="language-javascript">//遍历数组
-let array = [1,2,3];
-for(let i =0; i&lt;array.length; i++){
-   const value = array[i];
-   console.log(value);
-}
-//遍历字符串
-let str = "hello zack!";
-for(let i =0; i&lt;str.length; i++){
-   const value = str[i];
-   console.log(value);
-}
-</code></pre>
-<p><a name="c6ef0d10"></a></p>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//遍历数组</span>
+<span class="token keyword">let</span> array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>array<span class="token punctuation">.</span><span class="token property-access">length</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token keyword">const</span> value <span class="token operator">=</span> array<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//遍历字符串</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">"hello zack!"</span><span class="token punctuation">;</span>
+<span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>str<span class="token punctuation">.</span><span class="token property-access">length</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token keyword">const</span> value <span class="token operator">=</span> str<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p></p>
 <h2>for...in遍历</h2>
 <p>for...in可用于遍历<strong>字符串</strong>，<strong>对象</strong>，<strong>数组</strong></p>
-<pre><code class="language-javascript">//遍历数组
-let array = [1,2,3];
-for(let i in array){
-   const value = array[i];
-   console.log(value);
-}
-//遍历字符串
-let str = "hello zack!";
-for(let i in str){
-   const value = str[i];
-   console.log(value);
-}
-//遍历对象
-let obj={name:"zack",age:24};
-for(let i in obj){
-   const value = obj[i];
-   console.log(value);
-}
-</code></pre>
-<p><a name="00b9902a"></a></p>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//遍历数组</span>
+<span class="token keyword">let</span> array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token keyword">in</span> array<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token keyword">const</span> value <span class="token operator">=</span> array<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//遍历字符串</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span> <span class="token string">"hello zack!"</span><span class="token punctuation">;</span>
+<span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token keyword">in</span> str<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token keyword">const</span> value <span class="token operator">=</span> str<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//遍历对象</span>
+<span class="token keyword">let</span> obj<span class="token operator">=</span><span class="token punctuation">{</span><span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">"zack"</span><span class="token punctuation">,</span><span class="token literal-property property">age</span><span class="token operator">:</span><span class="token number">24</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token keyword">in</span> obj<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token keyword">const</span> value <span class="token operator">=</span> obj<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p></p>
 <h2>forEach 遍历</h2>
 <p>forEach在ES6之前是数组特有的方法，只能用于遍历数组。ES6之后，新增了Set和Map数据解构，也带有forEach方法。</p>
-<pre><code class="language-javascript">//遍历数组
-let array = [1,2,3,4];
-array.forEach(function(value){
-   console.log(value);
-})
-//遍历Set
-let array = [1,2,3,4];
-let set = new Set(array);
-set.forEach(function(value){
-   console.log(value);
-})
-//遍历Map
-let map= new Map([["a",{}],["b","sss"],["c",222]]);
-map.forEach(function(value,key){
-   console.log(key+"=="+value);
-})
-</code></pre>
-<p><a name="ffb76f6a"></a></p>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//遍历数组</span>
+<span class="token keyword">let</span> array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+array<span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token comment">//遍历Set</span>
+<span class="token keyword">let</span> array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> set <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>
+set<span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token comment">//遍历Map</span>
+<span class="token keyword">let</span> map<span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"sss"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token number">222</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+map<span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">value<span class="token punctuation">,</span>key</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>key<span class="token operator">+</span><span class="token string">"=="</span><span class="token operator">+</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
+<p></p>
 <h2>for...of ES6新增</h2>
 <p>for...of 用于遍历部署了迭代器接口<code>Symbol.iterator</code>的数据解构。
 ES6以后部署了迭代器接口的数据解构有，数组，字符串，Set，Map。对象是没有这个接口的，也就是说for...of不能用于遍历对象。</p>
-<pre><code class="language-javascript">//遍历字符串
-let str ="string";
-for(let v of str){
-   console.log(v);
-}
-//遍历数组
-let array = [1,2,3,4];
-for(let v of array){
-   console.log(v);
-}
-//遍历Set
-let array = [1,2,3,4];
-let set = new Set(array);
-for(let v of set ){
-   console.log(v);
-}
-//遍历Map
-let map= new Map([["a",{}],["b","sss"],["c",222]]);
-for(let v of map){
-   console.log(v[0]+":"+v[1]);
-}
-//利用解构直接获取key，value
-for(let [key,value] of map){
-   console.log(key+":"+value);
-}
-for(let v of map.keys()){
-   console.log(v);
-}
-for(let v of map.values()){
-   console.log(v);
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//遍历字符串</span>
+<span class="token keyword">let</span> str <span class="token operator">=</span><span class="token string">"string"</span><span class="token punctuation">;</span>
+<span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> v <span class="token keyword">of</span> str<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//遍历数组</span>
+<span class="token keyword">let</span> array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> v <span class="token keyword">of</span> array<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//遍历Set</span>
+<span class="token keyword">let</span> array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> set <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> v <span class="token keyword">of</span> set <span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//遍历Map</span>
+<span class="token keyword">let</span> map<span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"sss"</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token number">222</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> v <span class="token keyword">of</span> map<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>v<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">+</span><span class="token string">":"</span><span class="token operator">+</span>v<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//利用解构直接获取key，value</span>
+<span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> <span class="token punctuation">[</span>key<span class="token punctuation">,</span>value<span class="token punctuation">]</span> <span class="token keyword">of</span> map<span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>key<span class="token operator">+</span><span class="token string">":"</span><span class="token operator">+</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> v <span class="token keyword">of</span> map<span class="token punctuation">.</span><span class="token method function property-access">keys</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> v <span class="token keyword">of</span> map<span class="token punctuation">.</span><span class="token method function property-access">values</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>通过一些操作也是可以遍历对象的，可以选择手动给对象添加一个迭代器接口，或者是把对象转换为其它数据结构。</p>
-<pre><code class="language-javascript">//通过Object.valuse 获取对象的所有值。
-let obj={name:"zack",age:24};
-for(let v of Object.values(obj)){
-   console.log(v);
-}
-</code></pre>
-<p><a name="c4bb1b6c"></a></p>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//通过Object.valuse 获取对象的所有值。</span>
+<span class="token keyword">let</span> obj<span class="token operator">=</span><span class="token punctuation">{</span><span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">"zack"</span><span class="token punctuation">,</span><span class="token literal-property property">age</span><span class="token operator">:</span><span class="token number">24</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> v <span class="token keyword">of</span> <span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">values</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p></p>
 <h2>最后给出开始那道面试题的参考。</h2>
-<pre><code class="language-javascript">function findMax(str){
-   //统计字符
-   let count = {};
-   for(let char of str){
-       if(count[char] == null){
-           count[char]=1;
-       }else{
-           count[char]++;
-       }
-   }
-   //排序
-   let res = Object.entries(count).sort((a,b)=&gt;{
-       return b[1]-a[1];
-   })
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">findMax</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token comment">//统计字符</span>
+   <span class="token keyword">let</span> count <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+   <span class="token keyword control-flow">for</span><span class="token punctuation">(</span><span class="token keyword">let</span> char <span class="token keyword">of</span> str<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>count<span class="token punctuation">[</span>char<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token keyword null nil">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+           count<span class="token punctuation">[</span>char<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span><span class="token keyword control-flow">else</span><span class="token punctuation">{</span>
+           count<span class="token punctuation">[</span>char<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span>
+   <span class="token comment">//排序</span>
+   <span class="token keyword">let</span> res <span class="token operator">=</span> <span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">entries</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">sort</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span>b</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+       <span class="token keyword control-flow">return</span> b<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">-</span>a<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span><span class="token punctuation">)</span>
    
-   return res[0];
-}
-</code></pre>
-
+   <span class="token keyword control-flow">return</span> res<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 </section>
 
     
@@ -681,7 +680,6 @@ for(let v of Object.values(obj)){
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

@@ -74,7 +74,7 @@
   <meta name="description" content="缓存，首先肯定是在第一次访问之后的事。  第一次访问网页，要显示完整的网页需要加载很多 诸如css/js/html/图片等资源文件。每一个文件都需要经过你的电脑然后各种各样的中间服务器到达最后的资源服务器，不用说也知道这是需要花费一定时间的，加上资源文件这么多，所以第一次打开网页，你需要等一段时间才......">
   <meta property="og:description" content="缓存，首先肯定是在第一次访问之后的事。  第一次访问网页，要显示完整的网页需要加载很多 诸如css/js/html/图片等资源文件。每一个文件都需要经过你的电脑然后各种各样的中间服务器到达最后的资源服务器，不用说也知道这是需要花费一定时间的，加上资源文件这么多，所以第一次打开网页，你需要等一段时间才......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -500,8 +500,8 @@
 <p>强缓存最大的特点是：如果缓存判定没有过期，则不会请求服务器，直接从缓存拿数据。</p>
 <h3>Expires</h3>
 <p>和单词字面意思一样，过期时间。后面跟的是一个时间字符串，过了这个时间，代表缓存过期了。需要走下面的步骤（协商缓存，或者重新获取资源）。但有明显的问题，客户端和服务器时间存在不一致，导致判定过期或者不过期。</p>
-<pre><code class="language-http">Expires: Wed, 21 Oct 2015 07:28:00 GMT
-</code></pre>
+<div class="remark-highlight"><pre class="language-http"><code class="language-http"><span class="token header"><span class="token header-name keyword">Expires</span><span class="token punctuation">:</span> <span class="token header-value">Wed, 21 Oct 2015 07:28:00 GMT</span></span>
+</code></pre></div>
 <h3>Cache-Control</h3>
 <p>首先第一点，cache-control的优先级比expires高；
 然后和expires不同，这个后面可以跟多个指令。常见的有代表，</p>
@@ -539,26 +539,26 @@
       </div>
     
 <p>到期时间的相关。max-age最常用。其它请参考MDN。
-<strong>max-age=<seconds></seconds></strong>
+<strong>max-age=</strong>
 max-age后面跟秒数，代表客户端拿到这个请求，多少秒后会过期。这个就避免了expires的客户端服务器时间不一致的问题了。</p>
-<pre><code class="language-http">Cache-Control: no-store//关闭缓存
-Cache-Control:public, max-age=31536000//对于长久不变的资源文件，缓存时间很长。
+<div class="remark-highlight"><pre class="language-http"><code class="language-http"><span class="token header"><span class="token header-name keyword">Cache-Control</span><span class="token punctuation">:</span> <span class="token header-value">no-store//关闭缓存</span></span>
+<span class="token header"><span class="token header-name keyword">Cache-Control</span><span class="token punctuation">:</span><span class="token header-value">public, max-age=31536000//对于长久不变的资源文件，缓存时间很长。</span></span>
 
-Cache-Control: no-cache//强制对缓存进行有效性检验（协商缓存？）
-Cache-Control: max-age=0//代表收到请求资源就已过期，需要验证缓存有效性（协商缓存？）。
-</code></pre>
+<span class="token header"><span class="token header-name keyword">Cache-Control</span><span class="token punctuation">:</span> <span class="token header-value">no-cache//强制对缓存进行有效性检验（协商缓存？）</span></span>
+<span class="token header"><span class="token header-name keyword">Cache-Control</span><span class="token punctuation">:</span> <span class="token header-value">max-age=0//代表收到请求资源就已过期，需要验证缓存有效性（协商缓存？）。</span></span>
+</code></pre></div>
 <h2>协商缓存</h2>
 <p>当强缓存判断过期了，或者cache-control设置为no-cache时，需要去验证资源是否有效。这时候就走协商缓存了。</p>
 <p>协商缓存，会像服务器发请求，然后服务器判断资源是否还有效，有效就返回304状态码，带上最新的头信息。没有body内容。如果无效，就正常返回新的资源内容。</p>
 <p>协商缓存如其名，需要客户端和服务器协商。协商是靠<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/ETag">Etag</a>和<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Last-Modified">Last-modified</a>来进行的。</p>
 <h3>Last-modified/If-Modified-Since</h3>
 <p>指令后面跟的值都是GMT的标准时间字符串。</p>
-<pre><code class="language-http">//出现在响应头中
-Last-Modified: Wed, 21 Oct 2015 07:28:00 GMT 
+<div class="remark-highlight"><pre class="language-http"><code class="language-http">//出现在响应头中
+<span class="token header"><span class="token header-name keyword">Last-Modified</span><span class="token punctuation">:</span> <span class="token header-value">Wed, 21 Oct 2015 07:28:00 GMT </span></span>
 
 //出现在请求头中
-If-Modified-Since: Wed, 21 Oct 2015 07:28:00 GMT
-</code></pre>
+<span class="token header"><span class="token header-name keyword">If-Modified-Since</span><span class="token punctuation">:</span> <span class="token header-value">Wed, 21 Oct 2015 07:28:00 GMT</span></span>
+</code></pre></div>
 <p>其中last-modified是响应头字段，即客户端像服务器请求某个资源，服务器响应回来的头字段里会包含该字段。标记此文件在服务期端最后被修改的时间
 然后if-modified-since是请求头字段，即需要验证资源有效的时候，像服务器发送的请求会带这个字段，值为响应头的last-modified的值。</p>
 <p>这样一来一去，服务器收到验证请求的时候，拿这个if-modified-since的值去对比资源修改的时间，如果资源在那之后有过修改，就返回新的资源，否则就返回304状态码。浏览器则继续使用当前缓存。</p>
@@ -566,11 +566,11 @@ If-Modified-Since: Wed, 21 Oct 2015 07:28:00 GMT
 <h3>Etag/If-None-Match</h3>
 <p>etag原理和last-modified差不多。但etag优先级更高。
 但etag的值一般使用文件内容或者文件最后修改日期的hash值。代表该资源的唯一标识符，一旦文件改变，该标识就会改变。</p>
-<pre><code class="language-http">//出现在响应头中
-ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4
+<div class="remark-highlight"><pre class="language-http"><code class="language-http">//出现在响应头中
+<span class="token header"><span class="token header-name keyword">ETag</span><span class="token punctuation">:</span> <span class="token header-value">"33a64df551425fcc55e4d42a148795d9f25f89d4</span></span>
 //出现在请求头中
-If-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
-</code></pre>
+<span class="token header"><span class="token header-name keyword">If-Match</span><span class="token punctuation">:</span> <span class="token header-value">"33a64df551425fcc55e4d42a148795d9f25f89d4"</span></span>
+</code></pre></div>
 <p>其中ETag是响应头字段，即客户端像服务器请求某个资源，服务器响应回来的头字段里会包含该字段。代表此文件的唯一标识。
 然后if-none-match是请求头字段，即需要验证资源有效的时候，像服务器发送的请求会带这个字段，值为响应头的ETag的值。t</p>
 <p>这样一来一去，服务器收到验证请求的时候，拿这个if-none-match的值去对比服务器上文件的etag值，如果不一致，就返回新的资源，否则就返回304状态码。浏览器则继续使用当前缓存。</p>
@@ -603,7 +603,6 @@ If-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
 <li><a href="https://www.cnblogs.com/leftJS/p/11082777.html">200（强缓存）和304（协商缓存）的区别</a></li>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers">MDN headers相关章节</a></li>
 </ol>
-
 </section>
 
     
@@ -695,7 +694,6 @@ If-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

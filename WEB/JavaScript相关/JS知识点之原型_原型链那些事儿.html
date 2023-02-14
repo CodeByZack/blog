@@ -74,7 +74,7 @@
   <meta name="description" content="<a name=&quot;53582bdc&quot;></a>  ## 原型（prototype）是什么？  原型并不神秘，它实际也就是一个对象或者是null。  JavaScript里每个对象都有一个与之相关连的原型，你可以通过访问对象的`__proto__`属性，或者使用`Object.getPrototype......">
   <meta property="og:description" content="<a name=&quot;53582bdc&quot;></a>  ## 原型（prototype）是什么？  原型并不神秘，它实际也就是一个对象或者是null。  JavaScript里每个对象都有一个与之相关连的原型，你可以通过访问对象的`__proto__`属性，或者使用`Object.getPrototype......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -467,75 +467,72 @@
 </style>
 
 <section>
-  <p><a name="53582bdc"></a></p>
+  <p></p>
 <h2>原型（prototype）是什么？</h2>
 <p>原型并不神秘，它实际也就是一个对象或者是null。</p>
 <p>JavaScript里每个对象都有一个与之相关连的原型，你可以通过访问对象的<code>__proto__</code>属性，或者使用<code>Object.getPrototypeOf</code>来找到它。</p>
 <p>你可以使用<code>Object.setPrototypeOf</code>显示去修改一个对象的原型指向。</p>
 <p>但需要注意的是，原型有可能为不存在，即值为<code>null</code>，代表着这个对象没有原型了。</p>
-<pre><code class="language-javascript">//获取原型
-const a = {};
-a.__proto__ === Object.getPrototypeOf(a);
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//获取原型</span>
+<span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+a<span class="token punctuation">.</span><span class="token property-access">__proto__</span> <span class="token operator">===</span> <span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">getPrototypeOf</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-//修改原型指向
-Object.setPrototypeOf(a,null);
+<span class="token comment">//修改原型指向</span>
+<span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">setPrototypeOf</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span><span class="token keyword null nil">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-//原型为 null
-Object.__proto__.__proto__.__proto__ === null;
+<span class="token comment">//原型为 null</span>
+<span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">__proto__</span><span class="token punctuation">.</span><span class="token property-access">__proto__</span><span class="token punctuation">.</span><span class="token property-access">__proto__</span> <span class="token operator">===</span> <span class="token keyword null nil">null</span><span class="token punctuation">;</span>
 
-Object.getPrototypeOf(a) === null;
-</code></pre>
-<p><a name="dp9QS"></a></p>
+<span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">getPrototypeOf</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token keyword null nil">null</span><span class="token punctuation">;</span>
+</code></pre></div>
+<p></p>
 <h2>原型链是什么？</h2>
 <p>假设A对象的<code>__proto__</code>属性，指向的为B对象，则B对象就是A对象的原型。</p>
 <p>B本身也是对象，则也拥有一个<code>__proto__</code>属性，指向另一个对象。</p>
 <p>这样一层套一层，就形成了一个链条。直到原型链顶端<code>__proto__</code>属性指向<code>null</code>。原型链结束。</p>
 <p>JS中原型默认指向<code>null</code>的对象为数不多，<code>Object.prototype</code>就是其中的一个，既<code>Object.prototype.__proto__ === null</code>。</p>
-<p><a name="66b6b632"></a></p>
+<p></p>
 <h2>原型指向是如何确定的？</h2>
 <p><code>__proto__</code>指向的对象是如何确定的？</p>
 <p>要确定这件事，我们得看看JavaScript里是怎么生成对象的：</p>
-<p><a name="9181f2f5"></a></p>
+<p></p>
 <h3>1.通过new操作符生成对象</h3>
 <p>JavaScript里new操作符，不过是使用特定的方式去调用一个函数。</p>
 <p>JavaScript里通过new调用的函数，称之为构造函数。</p>
 <p>JavaScript里函数都带有一个<code>prototype</code>属性，你可以随时更改它的指向。</p>
 <p>JavaScript里函数默认的<code>prototype</code>属性，拥有一个<code>constructor</code>属性，指向函数自己。</p>
 <p>通过new操作符调用构造函数，生成对象。该对象的<strong>原型</strong>指向了<strong>构造函数的<code>prototype</code>属性</strong>。</p>
-<pre><code class="language-javascript">
-function temp(){};
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">temp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-const a = new temp();
+<span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">temp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-temp.prototype === a.__proto__;
+temp<span class="token punctuation">.</span><span class="token property-access">prototype</span> <span class="token operator">===</span> a<span class="token punctuation">.</span><span class="token property-access">__proto__</span><span class="token punctuation">;</span>
 
-temp.prototype.constructor === temp;
-</code></pre>
-<p><a name="02c6fe0b"></a></p>
+temp<span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token property-access">constructor</span> <span class="token operator">===</span> temp<span class="token punctuation">;</span>
+</code></pre></div>
+<p></p>
 <h3>2.对象字面量</h3>
 <p>对象字面量即常用的写一对大括号，里面是key-value形式的键值对。该种方式声明对象的原型指向<code>Object.prototype</code>。</p>
 <p>或者换种说法，字面量声明对象，默认是使用<code>Object</code>去构造的,即<code>new Object()</code>。</p>
-<pre><code class="language-javascript">
-a = { b:1 };
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript">a <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token literal-property property">b</span><span class="token operator">:</span><span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-b = new Object();
+b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-a.__proto__ === b.__proto__
+a<span class="token punctuation">.</span><span class="token property-access">__proto__</span> <span class="token operator">===</span> b<span class="token punctuation">.</span><span class="token property-access">__proto__</span>
 
-a.__proto__ === Object.prototype
-</code></pre>
-<p><a name="d49ecf0a"></a></p>
+a<span class="token punctuation">.</span><span class="token property-access">__proto__</span> <span class="token operator">===</span> <span class="token class-name">Object</span><span class="token punctuation">.</span><span class="token property-access">prototype</span>
+</code></pre></div>
+<p></p>
 <h3>3.使用Object.create创建对象</h3>
 <p>调用<code>Object.create</code>后会产生一个新的对象，传入<code>Object.create</code>的参数即为新对象的原型。</p>
-<pre><code class="language-javascript">
-a = { b:1 };
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript">a <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token literal-property property">b</span><span class="token operator">:</span><span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-b = Object.create(a);
+b <span class="token operator">=</span> <span class="token known-class-name class-name">Object</span><span class="token punctuation">.</span><span class="token method function property-access">create</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-b.__proto__ === a;
-</code></pre>
+b<span class="token punctuation">.</span><span class="token property-access">__proto__</span> <span class="token operator">===</span> a<span class="token punctuation">;</span>
+</code></pre></div>
 <p>总结一下，使用new调用构造函数生成新对象，新对象原型指向了构造函数的<code>prototype</code>属性、使用对象字面量的形式创建的对象，原型默认指向了<code>Object.prototype</code>、使用<code>Object.create</code>创建的对象的原型指向了你传入的第一个参数。</p>
-<p><a name="b5a146f5"></a></p>
+<p></p>
 <h2>一张关于原型的经典的图</h2>
 
       <figure class="figure-img">
@@ -548,28 +545,27 @@ b.__proto__ === a;
 <p>这里存在一个的问题，众所周知JS里函数也是对象，那么函数是由谁构造的呢？那么函数的<code>__proto__</code>指向谁呢？</p>
 <p>先看图中中间一部分，声明了三个函数，Foo函数，Object函数，Function函数。</p>
 <p>然后从上到下一个一个说，</p>
-<p><a name="d2cb3dfb"></a></p>
+<p></p>
 <h3>1.Foo函数</h3>
 <p>Foo函数有它的<code>prototype</code>属性，且<code>prototype.constructor</code>指回了Foo函数本身。</p>
 <p>f1/f2 是通过<code>new Foo()</code>生成的新对象，它俩的<code>__proto__</code>属性都指向了<code>Foo.prototype</code>。</p>
 <p><code>Foo.prototype</code>只是一个对象，所以它也有自己的原型，即<code>__proto__</code>属性，在你没修改情况下，指向了<code>Object.prototype</code>。</p>
 <p>Foo函数本身也是一个对象，意味着它有自己的原型<code>__proto__</code>，指向了<code>Function.prototype</code>，这条线意味着，<strong>函数都是通过内置的<code>Function</code>函数构造出来的</strong>。</p>
 <p>至此图中所有指向都明晰了。</p>
-<p><a name="e160e5ca"></a></p>
+<p></p>
 <h3>2.Object函数</h3>
 <p>Object函数基本上和Foo函数的指向是一样的，毕竟他们都是函数，只不过Object是内置的，Foo是你写的，还有一点不同在他们的<code>prototype</code>属性上。</p>
 <p>Object函数有自己的<code>prototype</code>属性，且<code>prototype.constructor</code>指回了Object函数本身。</p>
 <p>f1/f2 是通过<code>new Object()</code>生成的新对象，它俩的<code>__proto__</code>属性都指向了<code>Object.prototype</code>。</p>
 <p><code>Object.prototype</code>只是一个对象，所以它也有自己的原型，即<code>__proto__</code>属性，Object函数不同点就在于此，<code>Object.prototype.__proto__</code>值为<code>null</code>。即原型链在此终结。</p>
 <p>Object函数本身也是一个对象，意味着它有自己的原型<code>__proto__</code>，指向了<code>Function.prototype</code>，这条线意味着，<strong>函数都是通过内置的<code>Function</code>函数构造出来的</strong>。</p>
-<p><a name="cf908962"></a></p>
+<p></p>
 <h3>3.Function函数</h3>
 <p>Function函数也是内置的，且所有函数都是通过它构造出来的，包括它自己。所以，你可以说，<strong>默认情况下，所有函数的__proto__属性都指向Function.prototype</strong>。</p>
 <p>所以上图中，<code>Foo.__proto__</code>、<code>Object.__proto__</code>、<code>Function.__proto__</code> 都指向了<code>Function.prototype</code>。</p>
 <p>其它指向不出其外。</p>
 <p>Function函数有自己的<code>prototype</code>属性，且<code>prototype.constructor</code>指回了Function函数本身。</p>
 <p><code>Function.prototype</code>只是一个对象，所以它也有自己的原型，即<code>__proto__</code>属性，在你没修改情况下，指向了<code>Object.prototype</code>。</p>
-
 </section>
 
     
@@ -661,7 +657,6 @@ b.__proto__ === a;
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

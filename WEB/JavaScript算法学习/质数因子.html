@@ -74,7 +74,7 @@
   <meta name="description" content="<a name=&quot;C36aa&quot;></a>  ## 定义  **质数** 是一个比 `1` 大的整数，且 **不能**由其它整数相乘得出。前几个质数是: `2`, `3`, `5`, `7`, `11`, `13`, `17`, `19`,依此类推。  如果我们**能**通过其它整数相乘得出，我们则称......">
   <meta property="og:description" content="<a name=&quot;C36aa&quot;></a>  ## 定义  **质数** 是一个比 `1` 大的整数，且 **不能**由其它整数相乘得出。前几个质数是: `2`, `3`, `5`, `7`, `11`, `13`, `17`, `19`,依此类推。  如果我们**能**通过其它整数相乘得出，我们则称......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -467,7 +467,7 @@
 </style>
 
 <section>
-  <p><a name="C36aa"></a></p>
+  <p></p>
 <h2>定义</h2>
 <p><strong>质数</strong> 是一个比 <code>1</code> 大的整数，且 <strong>不能</strong>由其它整数相乘得出。前几个质数是: <code>2</code>, <code>3</code>, <code>5</code>, <code>7</code>, <code>11</code>, <code>13</code>, <code>17</code>, <code>19</code>,依此类推。</p>
 <p>如果我们<strong>能</strong>通过其它整数相乘得出，我们则称它为<strong>合数</strong></p>
@@ -490,36 +490,36 @@
       </figure>
     
 <p><em>Image source: <a href="https://www.mathsisfun.com/prime-factorization.html">Math is Fun</a></em></p>
-<p><a name="2fa66895"></a></p>
+<p></p>
 <h2>正确计算所有的质数因子及其数量</h2>
 <p>这个方法将自然数<code>n</code>从<code>i = 2</code>除到<code>i = n</code>（仅按质数索引）。且每次循环后<code>n</code>的值被<code>(n / i)</code>的值替换。</p>
 <p>在最坏的情况下，即循环从<code>i = 2</code>执行到 <code>i = n</code>，上述方法的时间复杂度为<code>O(n)</code>。时间复杂度其实可以从<code>O(n)</code>减少到<code>O(sqrt(n))</code>，通过减少循环的执行次数，从<code>i = 2</code>执行到 <code>i = sqrt(n)</code>。因为可以确认，当<code>i</code>大于<code>sqrt(n)</code>时，除了<code>n</code>本身，再没有数可以被整除了。</p>
-<pre><code class="language-javascript">const primeFactors = (n)=&gt;{
-  let nn = n;
-  const factors = [];
-  for (let factor = 2; factor &lt;= Math.sqrt(nn); factor += 1) {
-    while (nn % factor === 0) {
-      nn /= factor;
-      factors.push(factor);
-    }
-  }
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">primeFactors</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span><span class="token arrow operator">=&gt;</span><span class="token punctuation">{</span>
+  <span class="token keyword">let</span> nn <span class="token operator">=</span> n<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> factors <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> factor <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> factor <span class="token operator">&lt;=</span> <span class="token known-class-name class-name">Math</span><span class="token punctuation">.</span><span class="token method function property-access">sqrt</span><span class="token punctuation">(</span>nn<span class="token punctuation">)</span><span class="token punctuation">;</span> factor <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword control-flow">while</span> <span class="token punctuation">(</span>nn <span class="token operator">%</span> factor <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      nn <span class="token operator">/=</span> factor<span class="token punctuation">;</span>
+      factors<span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span>factor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
 
-  if (nn !== 1) {
-    factors.push(nn);
-  }
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>nn <span class="token operator">!==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    factors<span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span>nn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
 
-  return factors;
-}
-</code></pre>
-<p><a name="9bef63f9"></a></p>
+  <span class="token keyword control-flow">return</span> factors<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p></p>
 <h2>Hardy-Ramanujan公式用于计算质数因子的个数</h2>
 <p>1917年，G.H Hardy和Srinivasa Ramanujan提出了一个定理，该定理指出，自然数 <code>n</code> 的不同素数的数 <code>ω(n)</code> 的正态次序是<code>log(log(n))</code>。
 粗略地讲，这意味着大多数数字具有这个数量的质数因子。</p>
-<pre><code class="language-javascript">const hardyRamanujan = (n) =&gt; {
-  return Math.log(Math.log(n));
-}
-</code></pre>
-<p><a name="References"></a></p>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">hardyRamanujan</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">n</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token known-class-name class-name">Math</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token known-class-name class-name">Math</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
+<p></p>
 <h2>References</h2>
 <ul>
 <li><a href="https://www.mathsisfun.com/prime-factorization.html">Prime numbers on Math is Fun</a></li>
@@ -527,7 +527,6 @@
 <li><a href="https://en.wikipedia.org/wiki/Hardy%E2%80%93Ramanujan_theorem">Hardy–Ramanujan theorem on Wikipedia</a></li>
 <li><a href="https://www.youtube.com/watch?v=6PDtgHhpCHo&amp;list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&amp;index=82">Prime factorization of a number on Youtube</a></li>
 </ul>
-
 </section>
 
     
@@ -619,7 +618,6 @@
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 

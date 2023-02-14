@@ -74,7 +74,7 @@
   <meta name="description" content="<a name=&quot;JNKp2&quot;></a>  ## 先看看vue的响应式  vue的响应式是指，当数据发生改变的时候，会自动去通知使用到该数据的代码。比如View，然后View就可以自动更新了。像下面这样：  ```vue <div id=&quot;root&quot;>{{text}}</div>  <script>......">
   <meta property="og:description" content="<a name=&quot;JNKp2&quot;></a>  ## 先看看vue的响应式  vue的响应式是指，当数据发生改变的时候，会自动去通知使用到该数据的代码。比如View，然后View就可以自动更新了。像下面这样：  ```vue <div id=&quot;root&quot;>{{text}}</div>  <script>......">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@5.2.0/distr/fira_code.min.css">
-  <link rel="stylesheet" href="/static/ece570de77ba673c17121d06fc929bd9.css">
+  <link rel="stylesheet" href="/static/761f0c679976e05c667cdb3b6db5c345.css">
 </head>
 
 <body>
@@ -467,36 +467,35 @@
 </style>
 
 <section>
-  <p><a name="JNKp2"></a></p>
+  <p></p>
 <h2>先看看vue的响应式</h2>
 <p>vue的响应式是指，当数据发生改变的时候，会自动去通知使用到该数据的代码。比如View，然后View就可以自动更新了。像下面这样：</p>
-<pre><code class="language-vue">&lt;div id="root"&gt;{{text}}&lt;/div&gt;
+<div class="remark-highlight"><pre class="language-vue"><code class="language-vue">&amp;lt;div id=&amp;quot;root&amp;quot;&amp;gt;{{text}}&amp;lt;/div&amp;gt;
 
-&lt;script&gt;
+&amp;lt;script&amp;gt;
 let vm = new Vue({
-	el : "#root",
+	el : &amp;quot;#root&amp;quot;,
 	data : {
-		text: 'hello'
+		text: &amp;#39;hello&amp;#39;
 	}
 })
 //现在上面会显示,hello
 
-vm.text = "world";
+vm.text = &amp;quot;world&amp;quot;;
 //当改变name的时候，View随即更新成了world。这就是响应式了。 
-&lt;/script&gt;
-</code></pre>
+&amp;lt;/script&amp;gt;</code></pre></div>
 <p>接下来，让我们一步一步看看vue的响应式到底是怎么回事吧。</p>
-<p><a name="SWna7"></a></p>
+<p></p>
 <h2>观察者模式</h2>
 <p>首先，我对什么模式不敢兴趣，我只对大白话感兴趣。</p>
 <p>首先主角是数据data。也就是<strong>被观察者</strong>。那就会有对应的<strong>观察者</strong>watcher。当data发生改变的时候，通知所有的watcher。</p>
 <p>看起来像这样。</p>
-<pre><code class="language-javascript">data -&gt; watcher
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript">data <span class="token operator">-</span><span class="token operator">&gt;</span> watcher
+</code></pre></div>
 <p>但是由于一个data可能有多个观察者，也就是一对多的关系。在Vue里，每个data对应一个Dep对象，Dep就可以把所有watcher存下来了。
 然后就像这样了。</p>
-<pre><code class="language-javascript">data -&gt; Dep -&gt; watchers
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript">data <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token maybe-class-name">Dep</span> <span class="token operator">-</span><span class="token operator">&gt;</span> watchers
+</code></pre></div>
 <p>其中Dep有两个关键的属性。
 Dep</p>
 <ul>
@@ -520,75 +519,75 @@ Watcher</p>
 ~~我一直都错误的以为watcher是直接观察data的。~~</p>
 </blockquote>
 <p>理论太多了，来看一个实际的例子理一理他们的关系。</p>
-<pre><code class="language-javascript">let vm = new Vue({
-	data : { 
-  	name : "zack",
-    age : "26"
-  }
-});
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> vm <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+	<span class="token literal-property property">data</span> <span class="token operator">:</span> <span class="token punctuation">{</span> 
+  	<span class="token literal-property property">name</span> <span class="token operator">:</span> <span class="token string">"zack"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">age</span> <span class="token operator">:</span> <span class="token string">"26"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-function hello (){
-	return `hello ${this.name} ${this.age}`;
-}
+<span class="token keyword">function</span> <span class="token function">hello</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword control-flow">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">hello </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">name</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">age</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-const changeCB = str=&gt;console.log(str);
+<span class="token keyword">const</span> <span class="token function-variable function">changeCB</span> <span class="token operator">=</span> <span class="token parameter">str</span><span class="token arrow operator">=&gt;</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-vm.$watch(hello, changeCB);
+vm<span class="token punctuation">.</span><span class="token method function property-access">$watch</span><span class="token punctuation">(</span>hello<span class="token punctuation">,</span> changeCB<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-//现在当你改变vm里data的数据
-vm.age = 30;// hello zack 30
-vm.name = "world";//hell world 30
-</code></pre>
+<span class="token comment">//现在当你改变vm里data的数据</span>
+vm<span class="token punctuation">.</span><span class="token property-access">age</span> <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span><span class="token comment">// hello zack 30</span>
+vm<span class="token punctuation">.</span><span class="token property-access">name</span> <span class="token operator">=</span> <span class="token string">"world"</span><span class="token punctuation">;</span><span class="token comment">//hell world 30</span>
+</code></pre></div>
 <p>用现有的东西解释一下上面发生了些什么。在new Vue的过程中。给name 和 age创建了对应的Dep。并劫持了属性的get/set方法。</p>
-<pre><code class="language-javascript">name -&gt; dep1
-age  -&gt; dep2
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript">name <span class="token operator">-</span><span class="token operator">&gt;</span> dep1
+age  <span class="token operator">-</span><span class="token operator">&gt;</span> dep2
+</code></pre></div>
 <p>调用$watch过后。产生一个新的watcher，并收集到dep1，dep2作为依赖。并且，dep1和dep2都把watcher添加到自己的subs里。</p>
-<pre><code class="language-javascript">watcher.deps = [dep1,dep2]
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript">watcher<span class="token punctuation">.</span><span class="token property-access">deps</span> <span class="token operator">=</span> <span class="token punctuation">[</span>dep1<span class="token punctuation">,</span>dep2<span class="token punctuation">]</span>
 
-dep1.subs = [wathcer]
-dep2.subs = [wathcer]
-</code></pre>
+dep1<span class="token punctuation">.</span><span class="token property-access">subs</span> <span class="token operator">=</span> <span class="token punctuation">[</span>wathcer<span class="token punctuation">]</span>
+dep2<span class="token punctuation">.</span><span class="token property-access">subs</span> <span class="token operator">=</span> <span class="token punctuation">[</span>wathcer<span class="token punctuation">]</span>
+</code></pre></div>
 <p>然后就是当你改变name的时候，dep1就通知所有的watcher，然后watcher会执行getter得到新的value值，并调用cb。</p>
-<pre><code class="language-javascript">name -&gt; dep1 -&gt; wathcer -&gt; getter -&gt; value -&gt; cb
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript">name <span class="token operator">-</span><span class="token operator">&gt;</span> dep1 <span class="token operator">-</span><span class="token operator">&gt;</span> wathcer <span class="token operator">-</span><span class="token operator">&gt;</span> getter <span class="token operator">-</span><span class="token operator">&gt;</span> value <span class="token operator">-</span><span class="token operator">&gt;</span> cb
+</code></pre></div>
 <p>然后然后就是你有没有发现上面的hello很像计算属性，computed。</p>
-<pre><code class="language-javascript">let vm = new Vue({
-	data : {
-  	name : "zack",
-    age : "26"
-  },
-  computed : {
-  	hello(){
-			return `hello ${this.name} ${this.age}`
-    }
-  }
-})
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> vm <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+	<span class="token literal-property property">data</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+  	<span class="token literal-property property">name</span> <span class="token operator">:</span> <span class="token string">"zack"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">age</span> <span class="token operator">:</span> <span class="token string">"26"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">computed</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+  	<span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+			<span class="token keyword control-flow">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">hello </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">name</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">age</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
 <p>没错，计算属性肯定也是基于watcher实现的，但做了些改变。毕竟要是没有使用到计算属性，依赖的数据改变都要重新计算一次，有点浪费。这个稍后再说。</p>
-<p><a name="Q1Xz4"></a></p>
+<p></p>
 <h2>依赖关系</h2>
 <p>上面理了理 data / watcher / dep / watcher的观察对象(函数)，之间的关系。
 下面就看看Vue理具体怎么去把这些依赖关系关联起来的把。</p>
 <p>Vue的响应式核心代码都在<a href="https://github.com/vuejs/vue/tree/v2.5.13/src/core/observer">vue/src/core/observer</a>目录下。
 我们顺着上面的例子，一步一步来。</p>
-<pre><code class="language-javascript">let vm = new Vue({
-	data : {
-  	name : "zack",
-    age : "26"
-  }
-});
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> vm <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+	<span class="token literal-property property">data</span> <span class="token operator">:</span> <span class="token punctuation">{</span>
+  	<span class="token literal-property property">name</span> <span class="token operator">:</span> <span class="token string">"zack"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">age</span> <span class="token operator">:</span> <span class="token string">"26"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>对传入的data进行响应化初始的地方在<a href="https://github.com/vuejs/vue/blob/v2.5.16/src/core/instance/state.js">vue/src/core/instance/state.js</a></p>
 <p><a href="https://github.com/vuejs/vue/blob/v2.5.13/src/core/instance/state.js#L149">state.js#L149</a></p>
-<pre><code class="language-javascript">// new Vue() -&gt; ... -&gt; initState() -&gt; initData()
-observe(data)
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// new Vue() -&gt; ... -&gt; initState() -&gt; initData()</span>
+<span class="token function">observe</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+</code></pre></div>
 <p>observe的目的是为了让data成为响应式的，它会遍历整个data的属性，然后调用defineReactive。</p>
 <p><a href="https://github.com/vuejs/vue/blob/v2.5.13/src/core/observer/index.js#L64">observer/index.js#L64</a></p>
-<pre><code class="language-javascript">//observe() -&gt; new Observer() -&gt; observer.walk()
-defineReactive(obj, key, value)
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//observe() -&gt; new Observer() -&gt; observer.walk()</span>
+<span class="token function">defineReactive</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
+</code></pre></div>
 <p>defineReactive()是定义响应式的核心函数。它主要干了以下几件事：</p>
 <ol>
 <li>为当前数据新建一个Dep对象。</li>
@@ -596,61 +595,61 @@ defineReactive(obj, key, value)
 </ol>
 <p>vue的实例化到这告一段落。但还需要说一点，传入Vue的data的所有属性，会被代理到创建的Vue实例上，这样操作vm.name，实际上也就是操作vm.data.name。</p>
 <p>接着是watcher的创建。</p>
-<pre><code class="language-javascript">vm.$watch(hello, changeCB);
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript">vm<span class="token punctuation">.</span><span class="token method function property-access">$watch</span><span class="token punctuation">(</span>hello<span class="token punctuation">,</span> changeCB<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
 <p>上述代码执行后，会调用：
 <a href="https://github.com/vuejs/vue/blob/v2.5.13/src/core/instance/state.js#L346">state.js#L346</a></p>
-<pre><code class="language-javascript">//Vue.prototype.$watch()
-new Watcher(vm,expOrFn,cb,options)
-//传入我们代码里的参数，也就是
-new Watcher(vm,hello,changeCB,{/*略*/})
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//Vue.prototype.$watch()</span>
+<span class="token keyword">new</span> <span class="token class-name">Watcher</span><span class="token punctuation">(</span>vm<span class="token punctuation">,</span>expOrFn<span class="token punctuation">,</span>cb<span class="token punctuation">,</span>options<span class="token punctuation">)</span>
+<span class="token comment">//传入我们代码里的参数，也就是</span>
+<span class="token keyword">new</span> <span class="token class-name">Watcher</span><span class="token punctuation">(</span>vm<span class="token punctuation">,</span>hello<span class="token punctuation">,</span>changeCB<span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token comment">/*略*/</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div>
 <p>在watcher的创建过程中，除了记录了vm，getter，cb，以及其它一些必要工作外，最重要的是调用了一次getter。</p>
 <p><a href="https://github.com/vuejs/vue/blob/v2.5.13/src/core/observer/watcher.js#L103">watcher.js#L103</a></p>
-<pre><code class="language-javascript">//new Watcher() -&gt; this.get()
-value = this.getter.call(vm,vm)
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//new Watcher() -&gt; this.get()</span>
+value <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token method function property-access">getter</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span>vm<span class="token punctuation">,</span>vm<span class="token punctuation">)</span>
+</code></pre></div>
 <p>在getter的执行过程中，需要对数据进行读取，就触发了之前通过defineReactive()配置过的get方法。</p>
 <p><a href="https://github.com/vuejs/vue/blob/v2.5.13/src/core/observer/index.js#L156">observer/index.js#L156</a></p>
-<pre><code class="language-javascript">//其中有一段代码简化如下
-if (Dep.target) {
-  dep.depend()
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//其中有一段代码简化如下</span>
+<span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token maybe-class-name">Dep</span><span class="token punctuation">.</span><span class="token property-access">target</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  dep<span class="token punctuation">.</span><span class="token method function property-access">depend</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>这是在做什么呢？回到wathcer.get()方法,你会看到。</p>
 <p><a href="https://github.com/vuejs/vue/blob/v2.5.13/src/core/observer/watcher.js#L103">watcher.js#L103</a></p>
-<pre><code class="language-javascript">pushTarget(this)
-//...
-value = this.getter.call(vm,vm)
-//...
-popTarget()
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token function">pushTarget</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+<span class="token comment">//...</span>
+value <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token method function property-access">getter</span><span class="token punctuation">.</span><span class="token method function property-access">call</span><span class="token punctuation">(</span>vm<span class="token punctuation">,</span>vm<span class="token punctuation">)</span>
+<span class="token comment">//...</span>
+<span class="token function">popTarget</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div>
 <p>这个pushTarget/popTarget都是<a href="https://github.com/vuejs/vue/blob/v2.5.13/src/core/observer/dep.js#L51">Dep</a>提供的方法，目的是为了执行getter的时候，保证Dep.target就是当前的watcher。然后通过dep.depend()建立依赖关系。</p>
 <p><a href="https://github.com/vuejs/vue/blob/v2.5.13/src/core/observer/dep.js#L30">dep.js#L30</a>
 <a href="https://github.com/vuejs/vue/blob/4f111f9225f938f7a2456d341626dbdfd210ff0c/src/core/observer/watcher.js#L134">watcher.js#L134</a></p>
-<pre><code class="language-javascript">//dep.depend() 把dep添加进watcher的依赖里
- if (Dep.target) {
- 	Dep.target.addDep(this)
- }
-//watcher.addDep() -&gt; dep.addSub() dep把watcher保存进subs数组
-if (!this.depIds.has(id)) {
-  dep.addSub(this)
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//dep.depend() 把dep添加进watcher的依赖里</span>
+ <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token maybe-class-name">Dep</span><span class="token punctuation">.</span><span class="token property-access">target</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ 	<span class="token maybe-class-name">Dep</span><span class="token punctuation">.</span><span class="token property-access">target</span><span class="token punctuation">.</span><span class="token method function property-access">addDep</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+ <span class="token punctuation">}</span>
+<span class="token comment">//watcher.addDep() -&gt; dep.addSub() dep把watcher保存进subs数组</span>
+<span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">depIds</span><span class="token punctuation">.</span><span class="token method function property-access">has</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  dep<span class="token punctuation">.</span><span class="token method function property-access">addSub</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>最后一步，数据改变的时候发生了些什么。</p>
-<pre><code class="language-javascript">vm.age = 30;// hello zack 30
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript">vm<span class="token punctuation">.</span><span class="token property-access">age</span> <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span><span class="token comment">// hello zack 30</span>
+</code></pre></div>
 <p>改变属性的值，会触发defineReactive()设置过的set方法。</p>
 <p><a href="https://github.com/vuejs/vue/blob/v2.5.13/src/core/observer/index.js#L183">observer/index.js#L183</a></p>
-<pre><code class="language-javascript">//defineReactive() -&gt; set() -&gt; dep.notify() -&gt; watcher.update()
-dep.notify()
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token comment">//defineReactive() -&gt; set() -&gt; dep.notify() -&gt; watcher.update()</span>
+dep<span class="token punctuation">.</span><span class="token method function property-access">notify</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div>
 <p>notify方法会调用所有subs里的watcher.update().
 <a href="https://github.com/vuejs/vue/blob/v2.5.13/src/core/observer/dep.js#L36">dep.js#L36</a></p>
-<pre><code class="language-javascript">  for (let i = 0, l = subs.length; i &lt; l; i++) {
-    subs[i].update()
-  }
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword control-flow">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> l <span class="token operator">=</span> subs<span class="token punctuation">.</span><span class="token property-access">length</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> l<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    subs<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token method function property-access">update</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+</code></pre></div>
 <p>这样相关的watcher都被通知到了，知道了数据的改变，就可以进行后续的处理，先暂时放一放。</p>
 <p>到这里响应式的机制就基本清楚了。</p>
 <ul>
@@ -669,49 +668,49 @@ dep.notify()
     
 <p>图里watcher/data都有了，暂时把左边那一堆当成getter。就都有了。这样看起来就比较好理解了。
 实例化Vue的时候，observe(data)为所有属性添加get/set方法，新建watcher，会执行一次getter，触发data属性的get方法，进行依赖收集，与watcher建立关系。当改变data数据的时候，notify告知watcher进行更新。</p>
-<p><a name="WBLg3"></a></p>
+<p></p>
 <h2>计算属性（ComputedWatcher&nbsp;）</h2>
 <p>计算属性也是由watcher实现得，不过明显得不同有两点：1.不需要cb。2.需要时才计算，而且会缓存。</p>
 <p>在创建ComputedWatcher时，getter不会立即执行，也就是一开始不会计算值，依赖关系也没有计算出来。
 Comp
 那么计算属性的值在被获取的时候，会走下面的逻辑。</p>
 <p><a href="https://github.com/vuejs/vue/blob/v2.5.13/src/core/instance/state.js#L238">state.js#L238</a></p>
-<pre><code class="language-javascript">if (watcher) {
-  if (watcher.dirty) {
-    watcher.evaluate()
-  }
-  if (Dep.target) {
-    watcher.depend()
-  }
-  return watcher.value
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>watcher<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>watcher<span class="token punctuation">.</span><span class="token property-access">dirty</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    watcher<span class="token punctuation">.</span><span class="token method function property-access">evaluate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token maybe-class-name">Dep</span><span class="token punctuation">.</span><span class="token property-access">target</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    watcher<span class="token punctuation">.</span><span class="token method function property-access">depend</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword control-flow">return</span> watcher<span class="token punctuation">.</span><span class="token property-access">value</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>watcher的dirty属性代表需不需要计算值value。
 在创建ComputedWatcher时，并没有执行getter，所以会设置dirty为true。然后当计算属性值被获取时，会走watcher.evaluate()，计算值value，并把dirty设置为false。这样下次获取值的时候就不用重新计算了。</p>
 <p>相对应的，当调用watcher.evaluate()时，会执行到getter，收集到依赖，当这些依赖发生改变时，通知到watcher，watcher只是把dirty设置为true，并不会立即计算出新的值，下一次被获取的时候才会去计算。</p>
 <p>另外还有一点，计算属性本身也是作为值存在的，所以是可以被其它watcher依赖的，当其它watcher收集依赖到计算属性的时候，计算属性并没有一个对应的Dep去让watcher收集，它只能把自己的deps里的dep全部给收集者。也就是代码中的watcher.depend()，它会遍历所有dep，调用dep.depend()。</p>
-<p><a name="bymVu"></a></p>
+<p></p>
 <h2>RenderWatcher 及异步更新</h2>
 <p>RenderWatcher顾名思义，就是更新view用的watcher，一个vm只有一个对应的RenderWatcher，保存在vm._watcher上。</p>
 <p>RenderWatcher 的创建，在函数&nbsp;<a href="https://github.com/vuejs/vue/blob/v2.5.13/src/core/instance/lifecycle.js#L143">mountComponent</a>&nbsp;中：</p>
-<pre><code class="language-javascript">let updateComponent = () =&gt; {
-  vm._update(vm._render(), hydrating)
-}
-new Watcher(vm, updateComponent, noop, null, true /* isRenderWatcher */)
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> <span class="token function-variable function">updateComponent</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span>
+  vm<span class="token punctuation">.</span><span class="token method function property-access">_update</span><span class="token punctuation">(</span>vm<span class="token punctuation">.</span><span class="token method function property-access">_render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> hydrating<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">new</span> <span class="token class-name">Watcher</span><span class="token punctuation">(</span>vm<span class="token punctuation">,</span> updateComponent<span class="token punctuation">,</span> noop<span class="token punctuation">,</span> <span class="token keyword null nil">null</span><span class="token punctuation">,</span> <span class="token boolean">true</span> <span class="token comment">/* isRenderWatcher */</span><span class="token punctuation">)</span>
+</code></pre></div>
 <p>有了上面的知识，直接看关键部分，该watcher的cb是noop，等于不需要，确实也不需要。getter是updateComponent。
 也就是说，执行到watcher.get()的时候，会执行到updateComponent()进而更行了view，同时也收集到了依赖，依赖发生改变时，通知watcher，然后更新view。</p>
 <p>但是这里如果，频繁改变数据，那不是会频繁更新view？所以这里的更新是异步更新的。</p>
 <p>数据改变后，会执行到watcher.update()方法。</p>
 <p><a href="https://github.com/vuejs/vue/blob/v2.5.13/src/core/observer/watcher.js#L161">observer/watcher.js#L161</a></p>
-<pre><code class="language-javascript">if (this.lazy) {
-  this.dirty = true
-} else if (this.sync) {
-  this.run()
-} else {
-  queueWatcher(this)
-}
-</code></pre>
+<div class="remark-highlight"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">lazy</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">dirty</span> <span class="token operator">=</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span> <span class="token keyword control-flow">else</span> <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">sync</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token method function property-access">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span> <span class="token keyword control-flow">else</span> <span class="token punctuation">{</span>
+  <span class="token function">queueWatcher</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div>
 <p>第一种情况，lazy 为 true，也就是计算属性，只是标记 dirty 为 true，并不立即计算。
 第二种情况，sync 为 true 的情况，就是立即执行计算。
 第三种情况，就是这里 的RenderWatcher ，并不立即执行，而是放到了一个队列中。</p>
@@ -719,7 +718,6 @@ new Watcher(vm, updateComponent, noop, null, true /* isRenderWatcher */)
 相关代码在 <a href="https://github.com/vuejs/vue/blob/v2.5.13/src/core/observer/scheduler.js">observer/scheduler.js</a> 中，简单来说，RenderWatcher 将其 getter，也就是 updateComponent 函数异步执行，并且，多次触发
 RenderWatcher 的 update()，最终也只会执行一次 updateComponent。</p>
 <p>至于什么时机执行updateComponent。就暂时不展开了。</p>
-
 </section>
 
     
@@ -811,7 +809,6 @@ RenderWatcher 的 update()，最终也只会执行一次 updateComponent。</p>
 
 
   <script src="/static/d9371f9a2f2fee2fda292f0da89e35bf.js"></script>
-  <script src="/static/39c97c2884c3a2b5e64c8f085b843d4e.js"></script>
 
 
 
