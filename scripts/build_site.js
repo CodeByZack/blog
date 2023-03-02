@@ -58,8 +58,14 @@ const buildSite = async () => {
       innerSpinner.info(createLog('已构建, 属于隐藏文章'));
     } else {
       innerSpinner.succeed(createLog('已构建'));
+
+      let id = articleIdNoExt.split(path.sep).join('/');
+      if(id.startsWith("/")){
+        id = id.substr(1);
+      }
+
       articleList.push({
-        id: articleIdNoExt,
+        id,
         title: data.title,
         description: data.description,
         publishTime: data.publishTime,

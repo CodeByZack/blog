@@ -3,7 +3,421 @@ title: web知识体系
 url: 'https://www.yuque.com/zackdk/web/wo972c'
 created_at: '2022-09-23 15:16'
 updated_at: '2022-09-30 15:35'
-hidden: true
+# hidden: true
+isMind: true
 ---
 
-{"format":"lakeboard","type":"Board","version":"1.0","diagramData":{"head":{"version":"2.0.0"},"body":\[{"id":"b13139c2-8d4d-4666-a86b-b1c95d6f4fe6","html":"web知识图谱","children":\[{"treeEdge":{"stroke":"#6F81DB"},"id":"2e8866d6-f288-4b9b-9ade-c73175ff011d","children":\[{"id":"20b8c6f7-c428-4b60-bee8-c73dd0ff187f","children":\[{"id":"51433da9-3565-4505-8d18-906d4c1cb849","children":\[{"id":"e195da5a-80f2-4420-9b5c-8d8eaa27c8d6","children":\[],"zIndex":35,"html":"高版本的浏览器基本上默认都是使用标准盒模型"},{"html":"盒子的 width = content","id":"e035291d-1531-4521-92ec-7b8d4586befe","children":\[],"zIndex":34}],"zIndex":36,"html":"标准盒模型"},{"html":"IE盒模型","id":"da834490-1e1d-4b46-ac85-fee150939b0e","children":\[{"id":"c9f0e23e-45e2-4871-961e-5c1a3ff8ad7e","children":\[],"zIndex":32,"html":"盒子的 width = content + padding + border"}],"zIndex":33}],"zIndex":37,"html":"盒模型"},{"html":"选择器","id":"fad2913f-960f-4b2c-a7bc-c7eee38eff32","children":\[{"id":"5885ed88-ebee-46fd-9019-60cf59d2a895","children":\[{"id":"b885c374-d7a4-4f82-8145-f60be3ae2410","children":\[{"id":"c8354811-f09d-40de-99e4-9c9421a4918c","children":\[],"zIndex":73,"html":"h1"}],"zIndex":74,"html":"标签选择器"},{"html":"类选择器","id":"68f8279f-0916-48ad-9852-59ee3ee590de","children":\[{"id":"26e67ed5-0da9-4211-b948-825aa0071935","children":\[],"zIndex":77,"html":".header"}],"zIndex":78},{"html":"ID 选择 器","id":"54aa1bfd-3c0d-4bb2-bdf2-ad07030d024b","children":\[{"id":"fab20a21-04f9-4096-97ae-4abb2aa46ebd","children":\[],"zIndex":75,"html":"#foot"}],"zIndex":76},{"html":"通配选择器","id":"9636b934-8ec3-4878-881d-54bd5ed41b3a","children":\[{"id":"88113fe5-d825-4d17-970e-65bfa3c2a3f1","children":\[],"zIndex":71,"html":"*"}],"zIndex":72}],"zIndex":79,"html":"基础选择器"},{"html":"属性选择器","id":"1b783103-8911-4a75-89a8-058f6221494b","children":\[{"id":"8d76c983-792c-4d73-b56d-d801ddee5bee","children":\[{"id":"d88fb279-1f9a-437b-bf0e-3b6584cc4732","children":\[],"zIndex":87,"html":"指定属性的元素"}],"zIndex":88,"html":"\[attr]"},{"html":"\[attr=val]","id":"6fc5d182-f9d1-4cb0-8a41-104e0432d650","children":\[{"id":"293c5510-8258-406e-9e98-99fca008c21b","children":\[],"zIndex":91,"html":"属性等于指定值的元素"}],"zIndex":92},{"html":"\[attr*=val]","id":"fc63630b-674a-4fbb-9a7e-e2c2eaf7b61e","children":\[{"id":"c09c0018-19d4-472b-8670-57c80a7e0d2e","children":\[],"zIndex":93,"html":"属性包含指定值的元素"}],"zIndex":94},{"html":"\[attr^=val]","id":"2efb2439-7ca2-48ac-a826-4e4c3ead7ccb","children":\[{"id":"2c2ced86-cff9-4d88-b24c-87602a94cd57","children":\[],"zIndex":89,"html":"属性以指定值开头的元素"}],"zIndex":90},{"html":"\[attr$=val]","id":"a6ff7bd0-6233-4680-9e3e-b0a755746a67","children":\[{"id":"57c1b0ba-47a8-4b2f-be52-2761bc9655a9","children":\[],"zIndex":85,"html":"属性以指定值结尾的元素"}],"zIndex":86}],"zIndex":95},{"html":"组合选择器","id":"8e58ee04-3b6d-4aa7-99a6-688c82d4bf04","children":\[{"id":"766e9654-c65d-49da-9588-2a14d556f6c0","children":\[{"id":"518d831d-b675-4794-80a5-4a2854176455","children":\[],"zIndex":113,"html":"相邻兄弟选择器"}],"zIndex":114,"html":"A + B"},{"html":"A ~ B","id":"06301b75-84e9-4342-bde5-ee5a714e06e3","children":\[{"id":"95908e92-faf3-434d-9ccf-8105d4a5df91","children":\[],"zIndex":117,"html":"普通兄弟选择器"}],"zIndex":118},{"html":"A > B","id":"089c3d97-289b-489e-9983-fd74ffd6669d","children":\[{"id":"e1c82d71-c050-40eb-bd9b-f408171f6c14","children":\[],"zIndex":115,"html":"子选择器"}],"zIndex":116},{"html":"A B","id":"2bb14e7d-6357-435a-ad51-1208f883775b","children":\[{"id":"0d85626e-6028-4525-aebc-30d6b144e4bf","children":\[],"zIndex":111,"html":"后代选择器"}],"zIndex":112}],"zIndex":119},{"html":"常用伪类选择器","id":"282a511b-4969-414b-96ea-ed5774ef6633","children":\[{"id":"f63ae92d-9d79-4619-8d02-312f9026bb09","children":\[{"id":"78157bef-48de-4e0f-aae5-d07888d6b129","children":\[],"zIndex":98,"html":"鼠标悬浮的元素"}],"zIndex":99,"html":":hover"},{"html":":active","id":"85c2d15a-a1e1-442b-8a02-24a6b99a0a7b","children":\[{"id":"bb454291-0345-4d43-adda-d8b8563ae9ea","children":\[],"zIndex":102,"html":"鼠标激活的元素"}],"zIndex":103},{"html":":not()","id":"8333e727-aba1-41e8-a0eb-e21d6a57b262","children":\[{"id":"65ac2b3a-e001-499a-9f7c-5ea5c86de2e0","children":\[],"zIndex":106,"html":"用来匹配不符合一组选择器的元素"}],"zIndex":107},{"html":":nth-child()","id":"0850c33e-538a-4913-a693-1031c2b153aa","children":\[{"id":"4f52765f-d5bf-4b4d-8aa7-852ca5f566f9","children":\[],"zIndex":108,"html":"元素中指定顺序索引的元素"}],"zIndex":109},{"html":":first-child()","id":"f5e7d2a9-001d-460b-bcba-bb0e9c32e10d","children":\[{"id":"134d8b3e-e401-4c3b-a8ba-dd45af68960a","children":\[],"zIndex":104,"html":"元素中为首的元素"}],"zIndex":105},{"html":":last-child()","id":"36b2d256-e27b-4a1f-8987-63a5ff155860","children":\[{"id":"858508af-4f44-450c-9614-6ba85fb8590c","children":\[],"zIndex":100,"html":"元素中为尾的元素"}],"zIndex":101},{"html":":first-letter","id":"dd959e9e-83ae-49e0-80f7-8e8e935a26f7","children":\[{"id":"07190ba8-40fc-4e57-bc5e-d8cc49b0c020","children":\[],"zIndex":96,"html":"元素的首字母"}],"zIndex":97}],"zIndex":110},{"html":"伪元素","id":"70d38595-e4bf-45c3-8773-4a2ff7a0a54e","children":\[{"id":"6b1bb9ae-84e4-44a2-b4a0-5f2f70e8c16b","children":\[{"id":"b47e2d3d-cdad-4bf2-81a1-23403d53f0e3","children":\[],"zIndex":82,"html":"在元素后插入内容"}],"zIndex":83,"html":"::after"},{"html":"::before","id":"39d4bc59-fc0f-4f3c-9ea9-52e2da16b3b8","children":\[{"id":"f0e79cb9-b1e0-49b2-8917-7370022de0b4","children":\[],"zIndex":80,"html":"在元素前插入内容"}],"zIndex":81}],"zIndex":84},{"html":"选择器优先级","id":"9019d013-22e0-4d98-a62d-58dc0a087bd1","children":\[{"id":"a459e98b-59f3-40ba-b61a-25f2036d7791","children":\[],"zIndex":69,"html":"!important > 内联样式 > ID选择器 > 类选择器 >标签选择器 > 通配选择器、子代选择器、后代选择器"},{"html":"当这些选择器组合的时候，对应有个数值，可以相加得到权重，通常来说权重高的优先级高一些，但有些情况比较特殊。\<a href="https://www.yuque.com/zackdk/web/wbt6ne" target="\_blank" style>CSS之选择器权重</a>","id":"29112f28-d352-49b8-80db-d32ad7493d55","children":\[],"zIndex":68}],"zIndex":70}],"zIndex":120},{"html":"继承性","id":"3ee7aa00-e02e-4251-97be-366fd7179708","children":\[{"id":"ccaaa596-289d-43e7-bb83-fb2749f0ee53","children":\[{"id":"1778955e-8c77-4168-96a4-230430118420","children":\[{"id":"e51e0e02-e664-473f-9d73-55b3c95ab204","children":\[],"zIndex":132,"html":"font-family、font-style、font-size、font-weight 等"}],"zIndex":133,"html":"字体相关"},{"html":"文本相关","id":"6d2bc8bc-247b-424a-8939-9aa1f8fa8e98","children":\[{"id":"52169b19-ab13-4769-aa11-60f5b4e3b712","children":\[],"zIndex":136,"html":"text-align、text-indent、text-decoration、text-shadow、letter-spacing、word-spacing、white-space、line-height、color 等"}],"zIndex":137},{"html":"列表相关","id":"c14bd2bf-1d97-4077-9c40-ec48a085e46b","children":\[{"id":"1d9459a9-8d5b-4eb0-8149-cd6410541c24","children":\[],"zIndex":134,"html":"list-style、list-style-image、list-style-type、list-style-position 等"}],"zIndex":135},{"html":"其他属性","id":"172fbd77-bdbb-4790-8852-f2cb1d00453c","children":\[{"id":"8e43623e-9433-43f9-b91c-865bb6b34019","children":\[],"zIndex":130,"html":"visibility、cursor 等"}],"zIndex":131}],"zIndex":138,"html":"默认继承父元素的属性"},{"html":"可以通过以下几个属性控制继承","id":"606db191-81f7-491a-bd4c-95f677b4cea7","children":\[{"id":"5e99fc3a-75a4-452e-bba3-70cf7233981f","children":\[{"id":"7014a973-3056-453f-b774-ca317fa903c9","children":\[],"zIndex":123,"html":"继承父元素对应属性的计算值"}],"zIndex":124,"html":"inherit"},{"html":"initial","id":"fd45d7cd-204d-4af2-b354-5532ebbd75f9","children":\[{"id":"98da7aa5-4b0d-4237-849a-2eab2f2a14ae","children":\[],"zIndex":127,"html":"应用该属性的默认值"}],"zIndex":128},{"html":"unset","id":"3debc5bb-c97e-488a-83ef-bb52163afc9d","children":\[{"id":"7cebfcc5-bd5d-4c62-b7ff-f584fd7e8af1","children":\[],"zIndex":125,"html":"如果属性是默认可以继承的，则取 inherit 的效果，否则同 initial"}],"zIndex":126},{"html":"revert","id":"255cc1d2-0b25-441a-8b73-89bcf76cd2c5","children":\[{"id":"0b82d021-5f79-4946-a4f3-4bfeaf181a2a","children":\[],"zIndex":121,"html":"效果等同于 unset，兼容性差"}],"zIndex":122}],"zIndex":129}],"zIndex":139},{"html":"格式化上下文","id":"d5a8ea40-b5f9-4e34-a504-63941ee72566","children":\[{"id":"e7a9b9cf-acc9-47f8-9bfb-a9c85327d071","children":\[{"id":"97efee25-5dc2-4791-8be7-1ad285bc0798","children":\[{"id":"93f2a004-a672-42e6-bdcc-124e7681f23d","children":\[],"zIndex":57,"html":"BFC 区域内垂直方向 margin 会合并"},{"html":"BFC 的区域不会与 float 盒子重叠(todo 验证)","id":"4b0714bd-df7c-45bf-b583-2f32f09daeff","children":\[],"zIndex":59},{"html":"计算 BFC 的高度时，浮动元素也参与计算","id":"cb14a749-4cf8-4644-ad3b-23d26df145f8","children":\[],"zIndex":58},{"html":"BFC 为独立的渲染区域，内外互不影响","id":"bc3adf9f-7f9c-42de-a40a-f099103fa151","children":\[],"zIndex":56}],"zIndex":60,"html":"特性"},{"html":"触发 BFC","id":"7972fe64-5749-4974-a172-c53a3387fd3c","children":\[{"id":"42565ab4-eff9-4f17-9a33-d7cc3fde244f","children":\[],"zIndex":52,"html":"根元素 html"},{"html":"float 属性不为 none","id":"03ca4a9d-8853-4975-8124-c575fa6c0417","children":\[],"zIndex":54},{"html":"overflow 不为 visible","id":"1e4c5100-9393-4a9d-b25a-b574995675fd","children":\[],"zIndex":53},{"html":"position 为 absolute 或 fixed","id":"119779de-2169-44a1-9624-2176706fe367","children":\[],"zIndex":51}],"zIndex":55}],"zIndex":61,"html":"BFC (Block Formatting Context)"},{"html":"IFC (Inline Formatting Context) ","id":"98f30bf3-e41a-4494-83e9-a84b97241cf0","children":\[{"id":"5a4d37ff-c8b5-4684-98d5-53aaf6201170","children":\[{"id":"4ec8f0df-ab17-4108-968e-abaaaeebb69f","children":\[],"zIndex":64,"html":"节点无法声明宽高，其中 margin 和 padding 在水平方向有效在垂直方向无效"},{"html":"当一个内联盒子超过父元素的宽度时，它会被分割成多盒子，这些盒子分布在多个 line box 中。如果子元素未设置强制换行的情况下，inline box 将不可被分割，将会溢出父元素","id":"e30c5939-a132-4702-a99c-bebfdfe7b9d1","children":\[],"zIndex":63}],"zIndex":65,"html":"特性"}],"zIndex":66},{"html":"FFC (Flex Formatting Context) ","id":"0633d46d-9a9c-4ceb-8028-f501a3b58884","children":\[],"zIndex":62},{"html":"GFC (Grid Formatting Context)","id":"4b7f4660-a40f-456d-9e47-df3be40d46cd","children":\[],"zIndex":50}],"zIndex":67},{"html":"浮动","id":"d0f22dd9-32ab-44df-a7a6-b84d35fe8fb7","children":\[{"id":"94744bb9-6fc7-4aca-b1ac-dd005fd72984","children":\[{"id":"15c69042-098a-464b-9aab-1ddef176ca15","children":\[],"zIndex":41,"html":"脱离文档流，指定元素相对于屏幕视口（viewport）的位置来指定元素位置"},{"html":"当祖先元素里 transform 不为 null 的时候，会相对这个元素进行定位，实际上是因为 生成了新的 Stacking Context","id":"2feccc74-4f33-4a5f-8d92-3570c7fc4b06","children":\[],"zIndex":40}],"zIndex":42,"html":"fixed"},{"html":"absolute","id":"8ae35cb7-9b4b-4abb-a978-1d68cc500853","children":\[{"id":"3ed89c53-0bd8-493a-bea2-a7b913aecf04","children":\[],"zIndex":47,"html":"脱离文档流，指定元素相对于最近的非 static 定位祖先元素的偏移"}],"zIndex":48},{"html":"relative","id":"cfee8958-65cc-4eee-b884-580f39c9c87f","children":\[{"id":"02b70046-44b1-4f98-a071-cba32234c7b2","children":\[],"zIndex":45,"html":"不会脱离文档流，相对于原位置进行偏移"}],"zIndex":46},{"html":"static","id":"23a16434-4cdd-4f80-9f57-e71e1a243a49","children":\[{"id":"d10ace74-8b3e-4961-b309-827062d7b9f7","children":\[],"zIndex":43,"html":"正常文档流，元素默认都是这个值"}],"zIndex":44},{"html":"sticky","id":"a049a3b1-1ea9-4727-8390-be10e41fd332","children":\[{"id":"1933a1d2-622a-4f8c-9c43-863746350757","children":\[],"zIndex":38,"html":"元素根据正常文档流进行定位，后相对它的*最近滚动祖先，进行定位"}],"zIndex":39}],"zIndex":49},{"html":"块状元素的流体性","id":"3a13a5e2-1d93-42c2-be9a-488a57e21e9b","children":\[{"id":"68388ee1-b84a-448b-8212-462ef423ea77","children":\[],"zIndex":30,"html":"即默认情况下，块状元素的宽度是会填满父容器的"},{"html":"当有 border margin padding 值时，元素的内容实际宽度会自适应的缩小","id":"97a1fba7-3a8b-4676-a208-7f0e6de94f53","children":\[],"zIndex":29}],"zIndex":31}],"zIndex":140,"html":"CSS知识点"},{"html":"HTML知识点","treeEdge":{"stroke":"#6EC4C4"},"id":"fdf5e0d3-7211-42f6-8019-83432f1d356c","children":\[{"id":"2d2b1676-3f6d-4fca-b05a-db19201cfbf8","children":\[{"id":"38ae8534-0bde-4c29-a806-4bc742e70023","children":\[{"id":"7a45da02-5fa9-485e-afb2-e5a1c0424541","children":\[],"zIndex":154,"html":"事件从 window 开始向下传递直到事件的触发元素"}],"zIndex":155,"html":"捕获阶段"},{"html":"冒泡阶段","id":"0649d1f6-8715-4112-b9cb-ece221657f62","children":\[{"id":"7371cc9a-2578-4171-875f-54ceb114fa5d","children":\[],"zIndex":161,"html":"事件从触发元素一级级往上传递，直到 window"}],"zIndex":162},{"html":"addEventListener","id":"0fc20124-f540-4cc4-bae6-d9aaa0cc6c6a","children":\[{"id":"5fb9b8f8-63ec-4927-b311-63357e7c62a2","children":\[],"zIndex":163,"html":"第三个参数控制在那个阶段触发，false 为冒泡 true 为 捕获"}],"zIndex":164},{"html":"阻止事件传递","id":"62ed7daf-749e-4780-90ac-8d4c6fc8c84a","children":\[{"id":"e932e7d6-76c6-47ca-9525-027d48791628","children":\[{"id":"24b2c36a-14ee-49fb-b4d7-2653c568f8ca","children":\[],"zIndex":158,"html":"停止事件的继续传播，无论哪个阶段"}],"zIndex":159,"html":"stopPropagation"},{"html":"stopImmediatePropagation","id":"a4793291-1dab-4210-8a6d-1c43f4383644","children":\[{"id":"d47ab8e8-39dc-4a3b-8c6b-e25364f24db7","children":\[],"zIndex":156,"html":"阻止事件冒泡并且阻止相同事件的其他侦听器被调用"}],"zIndex":157}],"zIndex":160},{"html":"阻止默认行为","id":"07afc6af-da89-47ac-b29e-839a8343fb21","children":\[{"id":"12ad5428-d37c-480f-a317-09a77a4c8337","children":\[{"id":"e31a5e56-791f-412a-bccb-c36643e35f71","children":\[],"zIndex":151,"html":"阻止某些控件的默认行为"}],"zIndex":152,"html":"preventDefault"}],"zIndex":153}],"zIndex":165,"html":"事件流"},{"html":"标签元素","id":"e8d9ded0-332e-46c4-9964-450b23e00cb3","children":\[],"zIndex":150}],"zIndex":166},{"html":"网络相关","treeEdge":{"stroke":"#DFB85D"},"id":"2a42a064-92e5-4b19-81fb-79c34e04c0bd","children":\[{"id":"1a7ebdcd-0f29-45e8-91e9-811c48927d00","children":\[{"id":"b3000749-e8f2-4827-9442-c73e3122b8cd","children":\[],"zIndex":252,"html":"todo"}],"zIndex":253,"html":"OSI 标准模型"},{"html":"TCP/IP 协议","id":"7aed0bac-9300-4885-9abf-1ab475331845","children":\[{"id":"c4965b6f-21e4-4ae0-b893-15bf894e902f","children":\[],"zIndex":256,"html":"通信链路层"},{"html":"网络层","id":"9112741d-7b76-4518-a416-a202a1481e9a","children":\[],"zIndex":258},{"html":"传输层","id":"3d9852a9-646f-4082-8f74-8cc17497a49e","children":\[],"zIndex":257},{"html":"应用层","id":"441c7ad4-8108-4485-a2b2-0d9c0b2078f1","children":\[],"zIndex":255}],"zIndex":259},{"html":"TCP","id":"cc7b6636-ba2c-4806-98a7-bc443d41f7e5","children":\[{"id":"81abf7af-d2cd-41ff-86e6-fe2bf1fd194d","children":\[],"zIndex":268,"html":"面向连接"},{"html":"可靠","id":"8354bd7c-689b-4be8-a419-2aff647064bc","children":\[],"zIndex":270},{"html":"全双工链接，双方都可以接受和发送","id":"0bdbb66b-aa7d-4a98-959b-fa03bdee3a1a","children":\[],"zIndex":271},{"html":"拥塞控制","id":"a5e7913d-8292-4c7c-9894-37d5e4023d10","children":\[],"zIndex":269},{"html":"三次握手/四次挥手","id":"df7a0cc4-099c-443b-a312-d0578f70f0d0","children":\[{"id":"67659963-efb0-4c52-a5a7-934c27e80a48","children":\[],"zIndex":266,"html":"三次握手针对连接，四次挥手针对结束链接（todo）"}],"zIndex":267}],"zIndex":272},{"html":"UDP","id":"868431f9-443b-405f-b2ac-5253deb39a0e","children":\[{"id":"8e8780b8-ca0f-4c59-bfb2-08d4aedb0e10","children":\[],"zIndex":279,"html":"无链接"},{"html":"没有握手过程","id":"cdd574b6-11cb-4cdd-aa06-ef3554d18e63","children":\[],"zIndex":278}],"zIndex":280},{"html":"HTTP 协议","id":"3beca84c-3462-46f1-af39-3a180818232d","children":\[{"id":"0e0e28f3-5ec4-4f02-a837-a0f2624fedab","children":\[{"id":"e63d41af-28b7-46f3-b84b-d828f3b6f6e2","children":\[],"zIndex":304,"html":"每个 TCP 连接只能发送一个请求，发送数据完毕，连接就关闭。"}],"zIndex":305,"html":"HTTP/1.0"},{"html":"HTTP/1.1","id":"c3c6628d-4075-4d0f-9d4b-9c1408b3388e","children":\[{"id":"55622d95-771f-4feb-a982-be71a0c3f562","children":\[],"zIndex":307,"html":"TCP 连接默认不关闭，可以被多个请求复用"},{"html":"管道机制，允许同时发出多个请求，不用排队","id":"94a9383d-c2ab-4c72-8f7b-c4686269b1f5","children":\[],"zIndex":309},{"html":"增加了多种方法 PUT、PATCH、HEAD、 OPTIONS、DELETE","id":"85936824-8c33-49e2-ba7c-c81a7bb5a039","children":\[],"zIndex":308},{"html":"队头堵塞，服务器要按顺序处理请求，如果前面处理很费时，会造成堵塞","id":"9dd33bdf-0f60-412b-99f1-909eb0695cb8","children":\[],"zIndex":306}],"zIndex":310},{"html":"HTTP/2","id":"8c4f14f5-b15b-485b-859e-df3d8cf20332","children":\[{"id":"2deddbd7-fa50-454e-9a07-6dd1495b9a29","children":\[],"zIndex":315,"html":"区别于之前文本传输，改为了二进制分帧传输"},{"html":"多路复用/可以发多个请求，被分为多个二进制帧，乱序发送，帧中标识了属于那个请求，服务端收到之后重新组装。避免了队头拥塞。","id":"1c056ae9-670e-4515-9422-12f467e196de","children":\[],"zIndex":317},{"html":"Header 压缩","id":"f33e09b5-5efc-44ff-af69-4abcabe0fdbe","children":\[],"zIndex":316},{"html":"PUSH 机制","id":"6969cae8-ef36-4e6c-905a-02dc8d543a86","children":\[],"zIndex":314}],"zIndex":318},{"html":"HTTP/3","id":"ff9c3823-3180-4186-8147-6d8095ad0e8c","children":\[{"id":"253d37bb-df6b-4868-86eb-94d00f7db3ea","children":\[],"zIndex":320,"html":"采用 QUIC 协议 "},{"html":"底层换成了 UDP 协议","id":"3859deac-08e3-4f3d-93f8-d2ee50625494","children":\[],"zIndex":319}],"zIndex":321},{"html":"HTTPS","id":"14bd7d14-45f1-4a60-bbbc-a807582f7a74","children":\[{"id":"5401f2cd-8969-4078-8052-37127239be96","children":\[],"zIndex":312,"html":"HTTP + SSL"},{"html":"客户端发送请求，服务端返回证书。客户端验证证书有效性。证书有效，生产随机字符串，用证书上的公钥加密。服务端收到过后用对应的私钥解密。之后的传输过程就用这个随机字符串进行对称加密。","id":"80ec18ab-15b8-41a9-9292-5c4b15801c7f","children":\[],"zIndex":311}],"zIndex":313},{"html":"状态码","id":"35eb5847-d400-4bf6-a1fb-2954c9243131","children":\[{"id":"d4e4706f-7b94-42e3-b752-e05bf5700d34","children":\[{"id":"e6186266-ddce-4d5b-af81-72cffd87f6dd","children":\[{"id":"19a18db1-e11f-4b2d-a575-d94ef6b5cefc","children":\[],"zIndex":285,"html":"101 -切换协议"}],"zIndex":286,"html":"信息，服务器收到请求，需要请求者继续执行操作"}],"zIndex":287,"html":"1xx"},{"html":"2xx","id":"09c64375-c74a-4e13-bd2e-e218c00c8b2f","children":\[{"id":"df229040-eb07-443f-9922-510113cef4a1","children":\[{"id":"3ccf5ec4-505f-4b0d-bcc7-e716281e231c","children":\[],"zIndex":289,"html":"200 - 请求成功"},{"html":"201 - 创建成功","id":"02d3c9ca-017c-492a-a6b8-021ac1b404b5","children":\[],"zIndex":288}],"zIndex":290,"html":"成功"}],"zIndex":291},{"html":"3xx","id":"82bf1d1e-ae22-4d84-a929-223aa1982c7d","children":\[{"id":"3417eb3d-9a0f-4c55-902c-97915b87ac2c","children":\[{"id":"d078eddd-aa30-4699-93c8-9621cda4ac47","children":\[],"zIndex":299,"html":"301 - 永久重定向"},{"html":"302 - 临时重定向","id":"8b112ca3-2d30-4508-bc29-844575067777","children":\[],"zIndex":300},{"html":"304 - not modified 资源未修改","id":"dd7c2b6c-5e9b-4268-8ba6-c530d27d3252","children":\[],"zIndex":298}],"zIndex":301,"html":"重定向，需要进一步的操作以完成请求"}],"zIndex":302},{"html":"4xx","id":"deb06bbf-c913-47dc-9280-f6f994423e39","children":\[{"id":"de501f63-e55b-411a-9bad-0a995fb0cc85","children":\[{"id":"1d205bf2-d249-466a-8a33-31718786faf4","children":\[],"zIndex":293,"html":"400 - 客户端请求的语法错误，服务器无法理解"},{"html":"401 - 未授权，需要用户登录","id":"65d5fb2b-4b24-4e41-b0b0-d88bbb44746e","children":\[],"zIndex":295},{"html":"403 - 禁止访问","id":"c311ef74-87c3-460c-8c54-968f7e621e5f","children":\[],"zIndex":294},{"html":"404 - 请求的资源不存在","id":"4d4d6173-49b2-4593-925b-2ea7a6374fc3","children":\[],"zIndex":292}],"zIndex":296,"html":"客户端错误"}],"zIndex":297},{"html":"5xx","id":"18a0cff7-9e37-4421-8fe9-44167f54c77a","children":\[{"id":"84695cdf-62d0-440c-974d-9a522202d011","children":\[{"id":"5ce35f88-8f83-4b17-9032-9a1cb339f1c1","children":\[],"zIndex":282,"html":"500 - 服务器内部错误"},{"html":"504 - 网关超时","id":"19538c1f-31b3-4862-b371-913ea718e1e1","children":\[],"zIndex":281}],"zIndex":283,"html":"服务器内部错误"}],"zIndex":284}],"zIndex":303}],"zIndex":322},{"html":"DNS","id":"38656d74-11f3-4ba6-9c3c-8509edd0fb02","children":\[{"id":"51f06178-b4eb-4d24-b433-1a3e2fe53dc9","children":\[],"zIndex":276,"html":" IP 地址一串数字，不方便记忆，就有了域名，并通过域名解析协议（DNS，Domain Name System）来将域名和 IP 地址相互映射，"},{"html":"顶级域名","id":"e5de4f96-b106-412b-86ee-1761004e4601","children":\[{"id":"9addd25f-0955-47ad-b799-6f06385f8bca","children":\[],"zIndex":274,"html":"通用顶级域名 .com/.net"},{"html":"国家顶级域名 .cn/.cc/.io","id":"6e3a8eed-c5aa-4fdf-a1ec-aa38bf9aa478","children":\[],"zIndex":273}],"zIndex":275}],"zIndex":277},{"html":"MQTT","id":"1f668f49-e4af-4bcd-bc21-3096e0ae2370","children":\[],"zIndex":265},{"html":"WebSocket","id":"bcf310c1-4792-4d05-a004-3652bcd9fcf7","children":\[{"id":"2e0c44bd-1f15-45a5-bd18-76fb7e60ad47","children":\[],"zIndex":261,"html":"长链接，基于 TCP"},{"html":"握手过程采用的 HTTP 协议","id":"ee205ed5-232c-4f32-8666-6d54b6a9cebe","children":\[],"zIndex":263},{"html":"可以传输二进制和文本","id":"bcca56bf-825d-4c87-9f7f-cbdb24c7aedf","children":\[],"zIndex":262},{"html":"new 一个实例，onOpen、onClose、onMessage 事件","id":"0d2e489b-b69d-4d83-b6a2-1620710c5fd4","children":\[],"zIndex":260}],"zIndex":264},{"html":"webrtc","id":"cce065e0-a559-48da-99f7-94fcc6ec3799","children":\[],"zIndex":254},{"html":"强缓存/协商缓存","id":"81423dee-4110-4207-8b70-d254849e7002","children":\[],"zIndex":251}],"zIndex":323},{"html":"React相关","treeEdge":{"stroke":"#B1C774"},"id":"0e8dfd4d-b911-4f06-9417-aa69e0d753a1","children":\[{"id":"c8c5787a-ff01-4ccc-8764-e3c539e9ea76","children":\[{"id":"f75cb735-3828-449b-a9ac-bea696480ace","children":\[{"id":"d664c322-4e8c-47cd-89d0-2d074bc409d7","children":\[],"zIndex":350,"html":"事件都挂载在 document 上"},{"html":"拥有事件池，事件对象会被复用","id":"b44538e0-a223-4d48-8779-03eccb332790","children":\[],"zIndex":349}],"zIndex":351,"html":"16.x"},{"html":"17.x","id":"9ec73772-7b6c-4c8b-9754-41307deebd9b","children":\[{"id":"4cc9bb65-55ba-4a38-a4f0-9999d50ecf5a","children":\[],"zIndex":353,"html":"事件都挂载在 root 节点上"},{"html":"删除事件池","id":"a1f889e0-25db-4eb9-b4da-7920970778a2","children":\[],"zIndex":354},{"html":"解决了多个 React 版本共存的问题","id":"ba70aad0-da64-4526-a3c5-9b3432abcf99","children":\[],"zIndex":352}],"zIndex":355},{"html":"好处","id":"056e34c8-9d44-4ad0-a165-acfb0f9c9db7","children":\[{"id":"973753a5-f33e-4b86-acce-ede3fad06d13","children":\[],"zIndex":346,"html":"事件委托到根节点上，避免了添加大量的 listener"},{"html":"抽象了一层自己的事件系统，抹平了浏览器之间的差异","id":"4219f7cc-5915-4b52-8163-fca68fcc0b90","children":\[],"zIndex":347},{"html":"方便迁移在各个平台","id":"92c9e1bd-0d4f-421e-aaaf-24e79a551918","children":\[],"zIndex":345}],"zIndex":348}],"zIndex":356,"html":"合成事件"},{"html":"setState","id":"b32cd472-50d1-4b48-a0f9-d26155ea8a84","children":\[{"id":"2526717a-3cdd-4868-a456-31e51f710ae5","children":\[{"id":"26fe6ad3-ad6c-4b2f-a286-2dd70b489019","children":\[],"zIndex":369,"html":"在 React 事件体系内，多次 setState 都会被 batchUpdate"},{"html":"在 React 事件体系外，诸如请求回调，原生浏览器事件，没有办法进行 batchUpdate，所以 setState 会马上触发 re-render","id":"91cd9bd4-bfaa-4598-bbdf-3eb2693b87e3","children":\[],"zIndex":370},{"html":"可以用 React.batchUpdate 手动合并多次 setState","id":"bdc97600-90e4-4e0a-8642-7a679910b6df","children":\[],"zIndex":368}],"zIndex":371,"html":"17.X"},{"id":"bcabacea-fc89-4afb-adef-b837c5f7715f","children":\[{"id":"485b8b53-05d9-4bbf-b92e-d7510e4b1a37","children":\[],"zIndex":365,"html":"自动合并多次 setState，无论是在哪里触发的"},{"html":"提供了 ReactDOM.flushSync 来立即触发 re-render","id":"2961591d-4eab-431c-a0a3-f4eaabd40f95","children":\[],"zIndex":366},{"html":"root 上对于当前是否正处于更新中，进行了一个标记动作，以此来保障这一批 setState 相关的更新行为处于同一次更新调度中","id":"6db2b5fd-994f-443c-a911-2fea3c39ca34","children":\[],"zIndex":364}],"zIndex":367,"html":"18.X"}],"zIndex":372},{"html":"diff","id":"5f8551b8-5c1b-41af-81c3-09baa7327843","children":\[{"id":"9b65412c-f9f0-40e3-9849-7479d4d0bbe7","children":\[{"id":"0c4b6149-d2b4-4855-b330-13d40d73fec1","children":\[],"zIndex":391,"html":"两棵树的比对，时间复杂度为O(n^3)"},{"html":"只对比同级元素，时间复杂度降为O(n^2)","id":"88625445-6d28-4720-8428-b6593a52414e","children":\[],"zIndex":392},{"html":"同级元素增加 key 属性，唯一标识一个元素，时间复杂度降为O(n)","id":"432e9bb1-d172-463b-b0cc-ec8d23bc3ce4","children":\[],"zIndex":390}],"zIndex":393,"html":"优化"},{"html":"key 在实际场景中理解","id":"abdaede7-77c2-4f86-8b33-7cb7661477f7","children":\[{"id":"30b7789f-bf41-46e9-97e9-e3002e76d277","children":\[],"zIndex":388,"html":"实际场景中，就列表中不建议使用 index 作为 key"},{"html":"React 靠 元素类型 + key 作为唯一标识一个元素，列表中基本上都是同样的元素类型，如果使用 index 作为 key 。在列表中增删或者移动元素后，顺序就被打乱了，此时某个位置上，元素类型 + key 标识的一个元素，就会被复用，但实际上这个元素可能已经被删除或者移动位置了，UI 就显示错乱了。","id":"e839ba7d-cbf9-4314-818f-34fa29671ce2","children":\[],"zIndex":387}],"zIndex":389}],"zIndex":394},{"html":"高阶组件","id":"aff8ab56-6ba8-4bb6-b310-3449eb9593d1","children":\[{"id":"38f23224-0371-4229-a490-5a608ecd5e95","children":\[],"zIndex":396,"html":"即接受一个组件，返回一个新组件"},{"html":"一般使用这种方法往组件里注入额外的 props","id":"ca75ce09-98ed-46ca-8ebf-be733b15fb00","children":\[],"zIndex":397},{"html":"class 组件还能在内部 extends 传入组件，进行某些修改","id":"f8cf4992-8f5f-4f60-8c4f-97296ac24e32","children":\[],"zIndex":395}],"zIndex":398},{"html":"生命周期","id":"749cc902-be55-4f4f-b9b5-6f28968e316f","children":\[{"id":"0eec83c7-411a-48da-8fb5-480a0ffa4f43","children":\[{"id":"b426c65c-b2d6-4e16-bea8-1013be83e1f3","children":\[],"zIndex":402,"html":"constuctor"},{"html":"getDerivedStateFromProps","id":"131821aa-f218-42cd-a340-520993d8597c","children":\[],"zIndex":404},{"html":"render","id":"06c9668a-8181-411b-8532-3236beea8d2d","children":\[],"zIndex":403},{"html":"componentDidMount","id":"17243d28-d0b8-42e3-b0a6-c71923939ae0","children":\[],"zIndex":401}],"zIndex":405,"html":"挂载时"},{"html":"更新时","id":"98f2c75b-4fff-4ac0-b104-572e7698ce0c","children":\[{"id":"b65690ff-0592-47fd-a28d-5ad9ec3d0d2e","children":\[],"zIndex":407,"html":"getDerivedStateFromProps"},{"html":"shouldCompoentUpdate","id":"283bef3d-192f-44b4-b77a-407ec2c79ffa","children":\[],"zIndex":409},{"html":"render","id":"7b182a63-cf16-4434-bd7d-3c4d2d0f5303","children":\[],"zIndex":410},{"html":"getSnapshotBeforeUpdate","id":"b7602afc-8a57-4ae9-a227-4ec1b724bc35","children":\[],"zIndex":408},{"html":"componentDidUpdate","id":"1019eca7-3b10-4a0e-bc4f-fddb75b28098","children":\[],"zIndex":406}],"zIndex":411},{"html":"卸载时","id":"28517df5-7524-41be-afd6-a6f42e986bef","children":\[{"id":"a550d920-c78e-42cb-be26-bc7c288898af","children":\[],"zIndex":399,"html":"componetWillUnmount"}],"zIndex":400}],"zIndex":412},{"html":"hooks","id":"1d09f601-d6b8-4d4c-b2bd-5b8bf09cc053","children":\[{"id":"fc29b8fe-4f23-4457-a35a-501f0ae58c9d","children":\[],"zIndex":383,"html":"在 hook 之前，函数组件是没有内部状态啊的，只能作为纯展示组件"},{"html":"hook 需要放在函数体顶部，不能在任何条件语句前","id":"1ee00d93-1990-4ed7-8210-3f65051f7fff","children":\[{"id":"df3ac3d9-1efe-4219-b38e-c4c7283a87be","children":\[],"zIndex":384,"html":"因为 hook 是以链表形式放在 fiber 上的，如果因为条件语句某个 hook 在一次 render 中不执行，就会打乱链表上 hook 的顺序，与上一次的对应不上，储存的状态就对不上，导致错误"}],"zIndex":385},{"html":"内置 hook 类型","id":"acdb88d1-bc0f-42fc-9222-f7c0518b862c","children":\[{"id":"818dc264-462f-471b-977a-0b5216cae1f9","children":\[],"zIndex":374,"html":"useState"},{"html":"useEffect","id":"9131d8ca-bd06-4194-95ed-7b35543b0f88","children":\[],"zIndex":376},{"html":"useLayoutEffect","id":"a2786aca-8cfd-4e14-b93f-fea7ca4d9445","children":\[],"zIndex":378},{"html":"useMemo","id":"6b5287a0-1050-4f66-b24c-9eabda515486","children":\[],"zIndex":380},{"html":"useCallback","id":"41d7d118-fe7c-44f7-b32b-a8968715c892","children":\[],"zIndex":381},{"html":"useRef","id":"c3049716-ff5c-4968-8dcc-7b452ea9524d","children":\[],"zIndex":379},{"html":"useContext","id":"bdc1ecf8-b59f-4b43-82a8-b83d74fc52db","children":\[],"zIndex":377},{"html":"useReducer","id":"f4b01ba2-8171-4922-8713-da16a6721289","children":\[],"zIndex":375},{"html":"useImperativeHandle","id":"0ec65d67-1517-42dd-86c1-827c8f765b2b","children":\[],"zIndex":373}],"zIndex":382}],"zIndex":386},{"html":"fiber","id":"a65dbbd0-51cf-4c0b-9875-cdde989884a1","children":\[{"id":"50a12225-0974-4b70-a0c3-e99d9bde7bc7","children":\[],"zIndex":362,"html":"一种数据结构"},{"html":"以链表的形式链接","id":"ebc40ca8-5cd3-43df-a6cf-527494012b4d","children":\[{"id":"fd2fe6d1-9ea5-46c0-a8ba-e62797310d70","children":\[],"zIndex":359,"html":"return"},{"html":"child","id":"6d11dd64-469d-43c9-a7df-bd8530bf607f","children":\[],"zIndex":360},{"html":"sibling","id":"9d982cc1-da8b-4ac0-ad0b-974b3b3f9003","children":\[],"zIndex":358}],"zIndex":361}],"zIndex":363},{"html":"context","id":"a64bf1f6-9c09-4817-9005-d2384529d8ba","children":\[],"zIndex":357},{"html":"受控组件/非受控组件","id":"a4e87ef8-88de-4d3a-b374-7963fc53817d","children":\[{"id":"ff315c90-81be-4fbe-a066-d4417a9ff904","children":\[{"id":"d82caedb-4f33-4b78-8a56-44462f0905db","children":\[],"zIndex":342,"html":"指表单组件的 value 由 react 的 state 接管"}],"zIndex":343,"html":"受控"},{"html":"非受控","id":"6093f1c3-3ed3-4c17-84bd-fbf8e78f85f6","children":\[{"id":"79892b1c-b93c-450f-abff-ae1a0784ab08","children":\[],"zIndex":340,"html":"指表单组件的 value 仍然由 表单自己维护"}],"zIndex":341}],"zIndex":344}],"zIndex":413},{"html":"Vue 相关","treeEdge":{"stroke":"#E48484"},"id":"8714b828-c985-4efc-8cd1-4a75bc12703b","children":\[{"id":"a24071d2-69de-429d-ac33-73d9d923b522","children":\[{"id":"071e8d54-ec43-4e05-9866-3f3c1df77d32","children":\[{"id":"7378a7cd-64b4-4f34-ad4b-af2f7a797496","children":\[],"zIndex":336,"html":"Object.defineproperty"}],"zIndex":337,"html":"2.x"},{"html":"3.x","id":"be529e1e-b529-48ba-9f4e-7fcfaab26317","children":\[{"id":"dceafa68-acaa-4650-8c46-735207ad6c77","children":\[],"zIndex":334,"html":"Proxy"}],"zIndex":335}],"zIndex":338,"html":"响应式系统"}],"zIndex":339},{"html":"编译相关","treeEdge":{"stroke":"#77C386"},"id":"9165beed-0e86-4c0d-905b-66d1f98891cd","children":\[{"id":"1f2a0f8d-e1a9-4c66-9704-a2c3ca3e538e","children":\[{"id":"afb34d06-09e6-4ecc-a7e1-62f0fd1a5b04","children":\[],"zIndex":326,"html":"打包过程"},{"html":"loader","id":"2ba3a22d-be3c-4be4-9a1e-53045223f0f3","children":\[],"zIndex":328},{"html":"plugin","id":"262163b2-058a-4506-b8ba-d03f3ab2f4fe","children":\[],"zIndex":327},{"html":"hash","id":"ff255459-e219-4186-a8a3-e6efb491298e","children":\[],"zIndex":325}],"zIndex":329,"html":"webpack"},{"html":"esbuild","id":"f477f7df-0192-4a4b-85ad-85db873fb6ac","children":\[],"zIndex":332},{"html":"rollup","id":"ba64b06a-c555-4664-9b55-e14dfa860ff4","children":\[],"zIndex":331},{"html":"vite","id":"93026d52-5964-4bb8-a8c7-3b017aa32088","children":\[],"zIndex":330},{"html":"babel","id":"43c74ed3-2724-449b-bfa8-1cb7e0b78c57","children":\[],"zIndex":324}],"zIndex":333},{"html":"NPM 相关","treeEdge":{"stroke":"#E482D4"},"id":"5fc83c07-af25-44d5-bfa5-708eec3f6858","children":\[{"id":"bc8513e1-abd1-4870-8d4c-2cc2a7b693e4","children":\[{"id":"a19971ea-0003-415d-9a98-4aa270ea13c5","children":\[],"zIndex":248,"html":"semver"},{"html":"各种前缀符号","id":"cf56d526-1836-47c8-b51c-15a65ce7ab36","children":\[],"zIndex":247}],"zIndex":249,"html":"版本"}],"zIndex":250},{"html":"JavaScript","treeEdge":{"stroke":"#C28976"},"id":"6c862fd4-38ce-4714-ad8d-36b32628865b","children":\[{"id":"6df8a514-44e1-4722-b0e7-da3e10314068","children":\[{"id":"342ea610-4130-4b64-b46d-9e078d11b294","html":"JS知识点","children":\[{"html":"\<a href="https://www.yuque.com/zackdk/web/zmu3a7" target="\_blank">闭包</a>","layout":{"quadrant":1},"treeEdge":{"stroke":"#A287E1"},"id":"b2627bb8-0bfa-4240-b062-66b6e6d0118a","children":\[],"zIndex":1},{"html":"\<a href="https://www.yuque.com/zackdk/web/fg3ebe" target="\_blank">基本数据类型</a>","layout":{"quadrant":1},"treeEdge":{"stroke":"#8169BF"},"id":"1eb32cc3-7a3f-452e-9934-2ce706865ed0","children":\[{"html":"值类型","id":"b775954c-c5e3-4d3c-b6b0-1fc9a35409e5","children":\[{"html":"number","id":"fb09ac57-7a49-4298-9162-2c6b80eb3310","children":\[],"zIndex":9},{"html":"boolean","id":"5ca42b55-2c85-44c2-996b-36ecf9c6c365","children":\[],"zIndex":11},{"html":"string","id":"94992c69-6d5b-4797-855e-ebda2633beb0","children":\[],"zIndex":12},{"html":"null","id":"9286f1aa-e443-4041-97a0-bd878399de11","children":\[],"zIndex":10},{"html":"undefined","id":"acef70b9-f79e-4c55-a66c-a087e84bdbe7","children":\[],"zIndex":8}],"collapsed":false,"zIndex":13},{"html":"引用类型","id":"59697a0e-7826-455a-8e0a-474329c31880","children":\[{"html":"object","id":"4ef8e1c7-90cc-43a8-9ca4-d0aba1b84724","children":\[{"html":"Array","id":"8b37238e-6902-4cb5-b2dd-85f603af7afa","children":\[],"zIndex":15},{"html":"Function","id":"b300d64b-f6e5-4438-9cdc-6f34b565b1f3","children":\[],"zIndex":16},{"html":"Date","id":"7d577997-086e-4719-8a21-395652cc5e84","children":\[],"zIndex":14}],"zIndex":17}],"zIndex":18},{"html":"Symbol","id":"851c5e75-e8dc-4b52-ae1b-07df28348d48","children":\[],"zIndex":7}],"collapsed":false,"zIndex":19},{"html":"\<a href="https://www.yuque.com/zackdk/web/uqt0t2" target="\_blank">异步任务</a>","layout":{"quadrant":1},"treeEdge":{"stroke":"#E48484"},"id":"caab821d-4e17-42ff-a2b3-53fbf6b668cd","children":\[{"html":"callback","id":"71e8a68b-4112-4b56-94ff-e53091491486","children":\[],"zIndex":21},{"html":"\<a href="https://www.yuque.com/zackdk/web/vyhgoc" target="\_blank">promise</a>","id":"0101b1dc-641a-4536-9678-197b64ec32c6","children":\[],"zIndex":24},{"html":"generator","id":"404b6342-09f5-4c05-af0f-7c07f6fa6354","children":\[{"html":"执行器（co）","id":"f265348f-a865-4524-a7f6-86c58a9b57ba","children":\[],"zIndex":22}],"zIndex":23},{"html":"async/await","id":"c136973c-3d71-4cfd-8a8a-811ff15503fd","children":\[],"zIndex":20}],"zIndex":25},{"html":"\<a href="https://www.yuque.com/zackdk/web/duugz2" target="\_blank" style>原型/原型链</a>","layout":{"quadrant":1},"treeEdge":{"stroke":"#69B1E4"},"id":"7c256564-54a0-4059-b5da-b24127d58ec5","children":\[],"zIndex":6},{"html":"作用域/作用域链/执行上下文","layout":{"quadrant":1},"treeEdge":{"stroke":"#DE81C6"},"id":"1e45f64b-7934-456a-a58d-4055fa65bda8","children":\[],"zIndex":5},{"html":"模块化","layout":{"quadrant":1},"treeEdge":{"stroke":"#77C386"},"id":"a88f074f-9055-4fab-aba3-7c85aff61dc3","children":\[],"zIndex":4},{"html":"this指向问题","layout":{"quadrant":1},"treeEdge":{"stroke":"#DFB85D"},"id":"9407e9a8-9f56-4733-92f7-631f54aff575","children":\[],"zIndex":3},{"html":"==和===","layout":{"quadrant":1},"treeEdge":{"stroke":"#A287E1"},"id":"42dc478b-0edc-4633-ba1c-42256d276796","children":\[],"zIndex":2},{"layout":{"quadrant":1},"id":"2bb7c795-cfbe-4dfa-81df-5fff19dec46b","children":\[],"zIndex":0}],"layout":{"quadrant":1},"zIndex":26}],"zIndex":179,"html":"旧","collapsed":true},{"html":"变量定义","id":"b422ba13-f552-407f-ae53-683af8ad30a1","children":\[{"id":"c60f0595-991c-464a-9e4f-470823018de0","children":\[{"id":"f599d264-e6f9-4fbd-8c27-ae0bcbb56834","children":\[],"zIndex":183,"html":"变量提升，声明会提到顶部，赋值在原处"},{"html":"全局作用域下，会挂在 window 上","id":"6f86d03a-b620-498c-ac28-e35cd07beb0c","children":\[],"zIndex":182}],"zIndex":184,"html":"var"},{"html":"let","id":"3d7103ac-0d7d-4259-8771-e148ad39ae96","children":\[{"id":"9bae0880-2638-4798-9544-f8b3aabbb1cf","children":\[],"zIndex":185,"html":"ES6 加入，拥有块级作用域，变量值可变"}],"zIndex":186},{"html":"const","id":"5843b0e5-fc0b-4007-a1e8-3554a3c2fe58","children":\[{"id":"db10fb6d-7a6d-4f64-a79b-75f3da12bc16","children":\[],"zIndex":180,"html":"ES6 加入，拥有块级作用域，变量值不可以修改，对象是指对象地址不可修改"}],"zIndex":181}],"zIndex":187},{"html":"面向对象","id":"dc078ae1-3620-454e-a271-b2ef07b82f29","children":\[{"id":"964de9d4-93c6-4c76-8822-a5927dd4c6d9","children":\[{"id":"8d534a1f-77a7-49fc-b501-1c875d396548","children":\[{"id":"62354724-4503-4ce3-a18b-884bc668b4d1","children":\[],"zIndex":230,"html":"新建一个干净对象"},{"html":"把对象关联到构造函数的prototype属性","id":"61bb858d-9331-4c64-b888-e7045b24c40a","children":\[],"zIndex":232},{"html":"以新建对象为this执行构造函数","id":"f0699198-f5c9-4347-b5b1-9873c3936de0","children":\[],"zIndex":231},{"html":"判断构造函数的返回值，对象就返回对象，不是就返回新建对象","id":"3cd6e118-c294-4f39-b3c1-3e957f3af96e","children":\[],"zIndex":229}],"zIndex":233,"html":"new 关键字"},{"html":"继承","id":"d1f3471f-1eb1-4f8d-9308-af07e86a01b5","children":\[{"id":"d1a4d4c4-8a8a-4f72-8332-02b5403f38e4","children":\[{"id":"02e5f7fb-e9cd-489d-b8aa-86499d925946","children":\[{"id":"a7d7549c-3f2a-44fd-b23f-2d1d5d96dd1a","children":\[],"zIndex":216,"html":"Child.prototype = new Parent()"}],"zIndex":217,"html":"将父类的实列对象关联到子类的原型上"}],"zIndex":218,"html":"原型链继承"},{"html":"借用构造函数继承","id":"bc139e7e-11bb-47c6-96eb-08588c759881","children":\[{"id":"c792f4fe-a0d6-4dbe-b946-c1337f80acdf","children":\[{"id":"5e5af724-8a16-4eda-8e53-6369ef646cf5","children":\[],"zIndex":221,"html":"function Child(){ Parent.call(this) }"}],"zIndex":222,"html":"在子类函数体内，显示改变 this 调用父类构造函数"}],"zIndex":223},{"html":"组合继承","id":"4487ef50-432b-4024-8a40-33af7be89332","children":\[{"id":"e23e95ac-71a2-4fce-8b1b-7e676ef93839","children":\[{"id":"8c651b7d-3ffd-47c1-aad3-13e9a0351bee","children":\[],"zIndex":225,"html":"function Child(){ Parent.call(this) }； Child.prototype = new Parent()"}],"zIndex":226,"html":"原型链 + 借用构造函数"},{"html":"父函数相当于执行了两次，造成了属性浪费","id":"c4e448ec-3ec2-45bf-b03a-d7383bcef47a","children":\[],"zIndex":224}],"zIndex":227},{"html":"寄生继承","id":"328539f6-6c63-49c8-9b00-1adbd9b2d01e","children":\[{"id":"47243b37-c417-42be-bcf7-8327c4ba1bbf","children":\[],"zIndex":219,"html":"解决属性浪费，直接在子类函数体内，拿到拥有父类原型的空函数生成的对象，把这个对象当作 this 继续执行。 "}],"zIndex":220},{"html":"组合寄生继承","id":"6c98ae65-3ed1-49ae-b80c-8a72b0167d70","children":\[{"id":"e1626d00-6d43-4fed-90a1-2667ea0b9a3d","children":\[{"id":"8214e341-2fbc-49ac-94ea-cd3c72369ad9","children":\[],"zIndex":213,"html":"function Child(){ Parent.call(this) }; Child.prototype  = Object.create(Parent.prototype);"}],"zIndex":214,"html":"组合 + 寄生继承"}],"zIndex":215}],"zIndex":228}],"zIndex":234,"html":"ES5"},{"html":"ES6","id":"40566ddb-6fa6-4b32-bc2e-511b14c26784","children":\[{"id":"109bfe71-dd07-4c9d-92e2-9a2df02beb09","children":\[],"zIndex":208,"html":"新增 class 关键字，依旧使用 new 生成对象实例"},{"html":"新增 extends 关键字，用于继承","id":"3c70f456-40f2-4b3e-b4b3-aee3e6e484a3","children":\[{"id":"d0bdaba3-c1f7-4880-b23b-e92a07de360f","children":\[],"zIndex":210,"html":"继承时，子类必须在 constructor 方法中调用 super 方法，因为子类的 this 要由父类构造而来。"}],"zIndex":211},{"html":"类方法实质上还是定义在 类的 prototype 上","id":"5bc913fd-e965-4781-b8cf-25897e7087cd","children":\[],"zIndex":209},{"html":"类静态方法实质上定义在类这个对象上，所以 new 生成实例上并不会有这个静态方法，但是静态方法可以被 extends 关键字继承","id":"d3862e3e-0d16-46bf-a48f-4cae558d4e0b","children":\[],"zIndex":207}],"zIndex":212}],"zIndex":235},{"html":"原型链","id":"65fa09c6-d589-42ae-90b0-5fd94167b3f3","children":\[{"id":"c117c13e-f0f4-4e54-8e37-2758f148e4a0","children":\[],"zIndex":243,"html":"每个对象都有 prototype"},{"html":"prototype 也是一个对象，也拥有 prototype 属性，顶端到 Object.prototype 它的原型指向 null，这样一层套一层就是所谓的原型链","id":"1c42dc79-296d-40b8-a440-aeec2165e3a2","children":\[],"zIndex":244},{"html":"当在对象本身上找不到的属性，会顺着原型链往上查找，直到顶端","id":"f87baf8b-335f-4656-b044-2a607c5a460f","children":\[],"zIndex":242}],"zIndex":245},{"html":"\<a href="https://www.yuque.com/zackdk/web/uqt0t2" target="\_blank">异步任务</a>","layout":{"quadrant":1},"treeEdge":{"stroke":"#E48484"},"id":"3f8e6e23-4c01-4021-bc33-ebee2d5ba22a","children":\[{"html":"callback","id":"75b965f4-de4b-475a-a3c1-2d74e2f4ea5e","children":\[],"zIndex":237},{"html":"\<a href="https://www.yuque.com/zackdk/web/vyhgoc" target="\_blank">promise</a>","id":"312be53f-3864-4192-8812-c8c0c877f677","children":\[],"zIndex":240},{"html":"generator","id":"f6a8c979-21b1-4328-8b1a-2c032e41520c","children":\[{"html":"执行器（co）","id":"eb6f0c09-3903-4a0d-86a5-4f0892f69afd","children":\[],"zIndex":238}],"zIndex":239},{"html":"async/await","id":"b4f14505-d487-4151-9711-f76881452c1d","children":\[],"zIndex":236}],"zIndex":241},{"html":"闭包","id":"162c4ce0-5c84-42c7-ab62-ee3104126337","children":\[{"id":"2ba062f7-312e-4a9b-9c5b-3494f17436d0","children":\[{"id":"0091ab8d-8547-4c83-9715-e16881ad7557","children":\[],"zIndex":201,"html":"自由变量是除参数和函数内部定义的变量之外的变量"},{"html":"词法作用域，自由变量的取值从函数定义时的外部作用域所定","id":"ce88024e-1a53-4e7e-934c-b7acbf7165b7","children":\[],"zIndex":203},{"id":"41a8371b-6eaf-4cfc-9a65-b3dfbdc91602","children":\[],"zIndex":204,"html":"当函数作为变量传递，并不知道会在何处调用，函数内部的自由变量寻址就成为一个问题。"},{"html":"JS 里采用词法作用域解决，所以函数需要保留一个定义时外部作用域的引用","id":"49917051-b955-4268-addf-06105fc2773a","children":\[],"zIndex":202},{"html":"这个函数定义时外部作用域的引用+函数本身构成了闭包","id":"14773c2f-aebc-43c4-8d4d-2fde99952a81","children":\[],"zIndex":200}],"zIndex":205,"html":"函数可以作为变量"},{"html":"应用","id":"b7b607a8-4108-4790-866b-368e54faf3a3","children":\[{"id":"c613f636-84b5-4ad2-b8a3-7c1fcfc04cf7","children":\[],"zIndex":198,"html":"todo"}],"zIndex":199}],"zIndex":206},{"html":"事件循环","id":"fa88ffb0-9ab7-4aca-b3c8-c01c9d03e553","children":\[{"id":"dffb3e4b-1a53-404b-920d-b86ca599ae1e","children":\[{"id":"f6e8761f-aabf-4156-9d65-a04ad3d3ff6d","children":\[{"id":"9373a699-c524-4bce-a754-6ba44c3f6d63","children":\[],"zIndex":190,"html":"script全部代码、setTimeout、setInterval、setImmediate"}],"zIndex":191,"html":"宏任务"},{"html":"微任务","id":"845c7f79-a00c-4f61-b01e-e0b48abaf29a","children":\[{"id":"85a8a517-9d88-4f50-9819-352274c3df9a","children":\[],"zIndex":193,"html":"Promise、MutationObserver"}],"zIndex":194},{"html":"所有宏任务会放进一个队列，先进先出","id":"9f414416-07e9-473b-bd60-b5c10eb1082e","children":\[],"zIndex":195},{"html":"所有微任务会放进一个队列，先进先出","id":"363471d6-3cfd-4669-8b73-4fc7498d770f","children":\[],"zIndex":192},{"html":"每当一个宏任务执行完后，会检查微任务队列，如果有值就执行微任务队列，直到微任务队列清空，再去宏任务队列取 Task 继续执行，以此往复。","id":"ecc9c3ae-9fff-4c22-bbf0-5a48e6f558eb","children":\[],"zIndex":189}],"zIndex":196,"html":"浏览器"},{"html":"nodejs","id":"7b6d3c88-4a76-4b78-992c-921e35de5ccb","children":\[],"zIndex":188}],"zIndex":197},{"html":"模块系统","id":"f7973902-e729-4518-9c2e-91e56c66fe4f","children":\[{"id":"5505e1f8-cd82-4eb8-811e-9941f43104fc","children":\[],"zIndex":173,"html":"AMD（历史产物）"},{"html":"UMD（历史产物）","id":"7e7d2c38-2245-4f09-88bc-79ae7d9c64b8","children":\[],"zIndex":174},{"html":"commonjs(node)","id":"e4c21b0c-02a5-4550-95b9-7a623353fda5","children":\[{"id":"5ed04703-12fc-4709-b78e-acc00eb6ebc6","children":\[],"zIndex":176,"html":"支持动态导入，引入语句发生在运行时"},{"html":"导入为值拷贝，值可修改","id":"184bd9a5-95e1-4390-a006-1f23a9c8190b","children":\[],"zIndex":175}],"zIndex":177},{"html":"esmodule","id":"04ecad3b-e352-4c5a-b3dd-8dde4b38cc60","children":\[{"id":"4dff95c5-03cf-44b6-a4d6-a54cb3773259","children":\[],"zIndex":168,"html":"引入语句发生编译时，方便做一些静态分析"},{"html":"导入为引用值，都是只读，无法直接修改","id":"f848b48e-7996-4fe4-84ae-fb4a82b895c1","children":\[],"zIndex":171},{"html":"动态导入","id":"a91e4ac0-9d93-440a-a97e-9b1f8cc91517","children":\[{"id":"48fd0156-72fb-47a3-8270-d2d3569f6036","children":\[],"zIndex":169,"html":"import() 返回一个 Promise"}],"zIndex":170},{"html":"支持 tree shaking","id":"57f65dc4-24ab-42bf-9a77-ffbced05750d","children":\[],"zIndex":167}],"zIndex":172}],"zIndex":178}],"zIndex":246},{"html":"Typescript","treeEdge":{"stroke":"#69B1E4"},"id":"59a8f991-1a09-44dc-a99e-fe2625affeca","children":\[{"id":"1969cdc9-2428-4c5d-837b-7af66e7ee91a","children":\[{"id":"0291a80a-a986-4151-9eef-485ca342a056","children":\[],"zIndex":143,"html":"interface"},{"html":"type","id":"34c983b3-2de6-48d7-b6fe-b296262c4e6a","children":\[],"zIndex":142}],"zIndex":144,"html":"类型定义"},{"html":"边界值","id":"b6029977-4347-4c86-b889-2660e7a17de1","children":\[{"id":"66d2428b-b14e-4994-92dd-3555737c8860","children":\[],"zIndex":146,"html":"any"},{"html":"never","id":"33d1d998-45ad-494a-a479-34b5745ad6e6","children":\[],"zIndex":147},{"html":"unkown","id":"8ff13c06-dfe3-4dc8-ae63-b2dcd0df2e44","children":\[],"zIndex":145}],"zIndex":148},{"html":"​","id":"7abcee5e-6ef3-4ca3-9e90-82ab99cf784a","children":\[],"zIndex":141}],"zIndex":149},{"html":"浏览器相关","treeEdge":{"stroke":"#C28976"},"id":"c8cfc5c4-d682-4d78-b777-4dc2115a9f55","children":\[{"id":"5537ce80-7653-40a0-9492-59556e523620","children":\[],"zIndex":27,"html":"同源策略"}],"zIndex":28}],"type":"mindmap","x":291,"y":136,"layout":{"type":"standard","direction":\[1,0]},"zIndex":414}]},"mode":"edit","viewportSetting":{"zoom":1.0499999999999974,"tlCanvasPoint":\[31.35714285714051,-2622.544642857137,0.9999999999999999],"width":1792,"height":839},"viewportOption":"adapt","text":"web知识图谱CSS知识点盒模型标准盒模型高版本的浏览器基本上默认都是使用标准盒模型盒子的 width = contentIE盒模型盒子的 width = content + padding + border选择器基础选择器标签选择器h1类选择器.headerID 选择 器#foot通配选择器*属性选择器\[attr]指定属性的元素\[attr=val]属性等于指定值的元素\[attr*=val]属性包含指定值的元素\[attr^=val]属性以指定值开头的元素\[attr$=val]属性以指定值结尾的元素组合选择器A + B相邻兄弟选择器A ~ B普通兄弟选择器A > B子选择器A B后代选择器常用伪类选择器:hover鼠标悬浮的元素:active鼠标激活的元素:not()用来匹配不符合一组选择器的元素:nth-child()元素中指定顺序索引的元素:first-child()元素中为首的元素:last-child()元素中为尾的元素:first-letter元素的首字母伪元素::after在元素后插入内容::before在元素前插入内容选择器优先级!important > 内联样式 > ID选择器 > 类选择器 >标签选择器 > 通配选择器、子代选择器、后代选择器当这些选择器组合的时候，对应有个数值，可以相加得到权重，通常来说权重高的优先级高一些，但有些情况比较特殊。CSS之选择器权重继承性默认继承父元素的属性字体相关font-family、font-style、font-size、font-weight 等文本相关text-align、text-indent、text-decoration、text-shadow、letter-spacing、word-spacing、white-space、line-height、color 等列表相关list-style、list-style-image、list-style-type、list-style-position 等其他属性visibility、cursor 等可以通过以下几个属性控制继承inherit继承父元素对应属性的计算值initial应用该属性的默认值unset如果属性是默认可以继承的，则取 inherit 的效果，否则同 initialrevert效果等同于 unset，兼容性差格式化上下文BFC (Block Formatting Context)特性BFC 区域内垂直方向 margin 会合并BFC 的区域不会与 float 盒子重叠(todo 验证)计算 BFC 的高度时，浮动元素也参与计算BFC 为独立的渲染区域，内外互不影响触发 BFC根元素 htmlfloat 属性不为 noneoverflow 不为 visibleposition 为 absolute 或 fixedIFC (Inline Formatting Context) 特性节点无法声明宽高，其中 margin 和 padding 在水平方向有效在垂直方向无效当一个内联盒子超过父元素的宽度时，它会被分割成多盒子，这些盒子分布在多个 line box 中。如果子元素未设置强制换行的情况下，inline box 将不可被分割，将会溢出父元素FFC (Flex Formatting Context) GFC (Grid Formatting Context)浮动fixed脱离文档流，指定元素相对于屏幕视口（viewport）的位置来指定元素位置当祖先元素里 transform 不为 null 的时候，会相对这个元素进行定位，实际上是因为 生成了新的 Stacking Contextabsolute脱离文档流，指定元素相对于最近的非 static 定位祖先元素的偏移relative不会脱离文档流，相对于原位置进行偏移static正常文档流，元素默认都是这个值sticky元素根据正常文档流进行定位，后相对它的*最近滚动祖先，进行定位块状元素的流体性即默认情况下，块状元素的宽度是会填满父容器的当有 border margin padding 值时，元素的内容实际宽度会自适应的缩小HTML知识点事件流捕获阶段事件从 window 开始向下传递直到事件的触发元素冒泡阶段事件从触发元素一级级往上传递，直到 windowaddEventListener第三个参数控制在那个阶段触发，false 为冒泡 true 为 捕获阻止事件传递stopPropagation停止事件的继续传播，无论哪个阶段stopImmediatePropagation阻止事件冒泡并且阻止相同事件的其他侦听器被调用阻止默认行为preventDefault阻止某些控件的默认行为标签元素网络相关OSI 标准模型todoTCP/IP 协议通信链路层网络层传输层应用层TCP面向连接可靠全双工链接，双方都可以接受和发送拥塞控制三次握手/四次挥手三次握手针对连接，四次挥手针对结束链接（todo）UDP无链接没有握手过程HTTP 协议HTTP/1.0每个 TCP 连接只能发送一个请求，发送数据完毕，连接就关闭。HTTP/1.1TCP 连接默认不关闭，可以被多个请求复用管道机制，允许同时发出多个请求，不用排队增加了多种方法 PUT、PATCH、HEAD、 OPTIONS、DELETE队头堵塞，服务器要按顺序处理请求，如果前面处理很费时，会造成堵塞HTTP/2区别于之前文本传输，改为了二进制分帧传输多路复用/可以发多个请求，被分为多个二进制帧，乱序发送，帧中标识了属于那个请求，服务端收到之后重新组装。避免了队头拥塞。Header 压缩PUSH 机制HTTP/3采用 QUIC 协议 底层换成了 UDP 协议HTTPSHTTP + SSL客户端发送请求，服务端返回证书。客户端验证证书有效性。证书有效，生产随机字符串，用证书上的公钥加密。服务端收到过后用对应的私钥解密。之后的传输过程就用这个随机字符串进行对称加密。状态码1xx信息，服务器收到请求，需要请求者继续执行操作101 -切换协议2xx成功200 - 请求成功201 - 创建成功3xx重定向，需要进一步的操作以完成请求301 - 永久重定向302 - 临时重定向304 - not modified 资源未修改4xx客户端错误400 - 客户端请求的语法错误，服务器无法理解401 - 未授权，需要用户登录403 - 禁止访问404 - 请求的资源不存在5xx服务器内部错误500 - 服务器内部错误504 - 网关超时DNSIP 地址一串数字，不方便记忆，就有了域名，并通过域名解析协议（DNS，Domain Name System）来将域名和 IP 地址相互映射，顶级域名通用顶级域名 .com/.net国家顶级域名 .cn/.cc/.ioMQTTWebSocket长链接，基于 TCP握手过程采用的 HTTP 协议可以传输二进制和文本new 一个实例，onOpen、onClose、onMessage 事件webrtc强缓存/协商缓存React相关合成事件16.x事件都挂载在 document 上拥有事件池，事件对象会被复用17.x事件都挂载在 root 节点上删除事件池解决了多个 React 版本共存的问题好处事件委托到根节点上，避免了添加大量的 listener抽象了一层自己的事件系统，抹平了浏览器之间的差异方便迁移在各个平台setState17.X在 React 事件体系内，多次 setState 都会被 batchUpdate在 React 事件体系外，诸如请求回调，原生浏览器事件，没有办法进行 batchUpdate，所以 setState 会马上触发 re-render可以用 React.batchUpdate 手动合并多次 setState18.X自动合并多次 setState，无论是在哪里触发的提供了 ReactDOM.flushSync 来立即触发 re-renderroot 上对于当前是否正处于更新中，进行了一个标记动作，以此来保障这一批 setState 相关的更新行为处于同一次更新调度中diff优化两棵树的比对，时间复杂度为O(n^3)只对比同级元素，时间复杂度降为O(n^2)同级元素增加 key 属性，唯一标识一个元素，时间复杂度降为O(n)key 在实际场景中理解实际场景中，就列表中不建议使用 index 作为 keyReact 靠 元素类型 + key 作为唯一标识一个元素，列表中基本上都是同样的元素类型，如果使用 index 作为 key 。在列表中增删或者移动元素后，顺序就被打乱了，此时某个位置上，元素类型 + key 标识的一个元素，就会被复用，但实际上这个元素可能已经被删除或者移动位置了，UI 就显示错乱了。高阶组件即接受一个组件，返回一个新组件一般使用这种方法往组件里注入额外的 propsclass 组件还能在内部 extends 传入组件，进行某些修改生命周期挂载时constuctorgetDerivedStateFromPropsrendercomponentDidMount更新时getDerivedStateFromPropsshouldCompoentUpdaterendergetSnapshotBeforeUpdatecomponentDidUpdate卸载时componetWillUnmounthooks在 hook 之前，函数组件是没有内部状态啊的，只能作为纯展示组件hook 需要放在函数体顶部，不能在任何条件语句前因为 hook 是以链表形式放在 fiber 上的，如果因为条件语句某个 hook 在一次 render 中不执行，就会打乱链表上 hook 的顺序，与上一次的对应不上，储存的状态就对不上，导致错误内置 hook 类型useStateuseEffectuseLayoutEffectuseMemouseCallbackuseRefuseContextuseReduceruseImperativeHandlefiber一种数据结构以链表的形式链接returnchildsiblingcontext受控组件/非受控组件受控指表单组件的 value 由 react 的 state 接管非受控指表单组件的 value 仍然由 表单自己维护Vue 相关响应式系统2.xObject.defineproperty3.xProxy编译相关webpack打包过程loaderpluginhashesbuildrollupvitebabelNPM 相关版本semver各种前缀符号JavaScript旧JS知识点闭包基本数据类型值类型numberbooleanstringnullundefined引用类型objectArrayFunctionDateSymbol异步任务callbackpromisegenerator执行器（co）async/await原型/原型链作用域/作用域链/执行上下文模块化this指向问题==和===变量定义var变量提升，声明会提到顶部，赋值在原处全局作用域下，会挂在 window 上letES6 加入，拥有块级作用域，变量值可变constES6 加入，拥有块级作用域，变量值不可以修改，对象是指对象地址不可修改面向对象ES5new 关键字新建一个干净对象把对象关联到构造函数的prototype属性以新建对象为this执行构造函数判断构造函数的返回值，对象就返回对象，不是就返回新建对象继承原型链继承将父类的实列对象关联到子类的原型上Child.prototype = new Parent()借用构造函数继承在子类函数体内，显示改变 this 调用父类构造函数function Child(){ Parent.call(this) }组合继承原型链 + 借用构造函数function Child(){ Parent.call(this) }； Child.prototype = new Parent()父函数相当于执行了两次，造成了属性浪费寄生继承解决属性浪费，直接在子类函数体内，拿到拥有父类原型的空函数生成的对象，把这个对象当作 this 继续执行。 组合寄生继承组合 + 寄生继承function Child(){ Parent.call(this) }; Child.prototype  = Object.create(Parent.prototype);ES6新增 class 关键字，依旧使用 new 生成对象实例新增 extends 关键字，用于继承继承时，子类必须在 constructor 方法中调用 super 方法，因为子类的 this 要由父类构造而来。类方法实质上还是定义在 类的 prototype 上类静态方法实质上定义在类这个对象上，所以 new 生成实例上并不会有这个静态方法，但是静态方法可以被 extends 关键字继承原型链每个对象都有 prototypeprototype 也是一个对象，也拥有 prototype 属性，顶端到 Object.prototype 它的原型指向 null，这样一层套一层就是所谓的原型链当在对象本身上找不到的属性，会顺着原型链往上查找，直到顶端异步任务callbackpromisegenerator执行器（co）async/await闭包函数可以作为变量自由变量是除参数和函数内部定义的变量之外的变量词法作用域，自由变量的取值从函数定义时的外部作用域所定当函数作为变量传递，并不知道会在何处调用，函数内部的自由变量寻址就成为一个问题。JS 里采用词法作用域解决，所以函数需要保留一个定义时外部作用域的引用这个函数定义时外部作用域的引用+函数本身构成了闭包应用todo事件循环浏览器宏任务script全部代码、setTimeout、setInterval、setImmediate微任务Promise、MutationObserver所有宏任务会放进一个队列，先进先出所有微任务会放进一个队列，先进先出每当一个宏任务执行完后，会检查微任务队列，如果有值就执行微任务队列，直到微任务队列清空，再去宏任务队列取 Task 继续执行，以此往复。nodejs模块系统AMD（历史产物）UMD（历史产物）commonjs(node)支持动态导入，引入语句发生在运行时导入为值拷贝，值可修改esmodule引入语句发生编译时，方便做一些静态分析导入为引用值，都是只读，无法直接修改动态导入import() 返回一个 Promise支持 tree shakingTypescript类型定义interfacetype边界值anyneverunkown​浏览器相关同源策略","graphicsBBox":{"x":291,"y":-4969.6875,"width":1455,"height":9124}}
+# web知识图谱
+
+## CSS知识点
+
+- 盒模型
+  - 标准盒模型
+    - 高版本的浏览器基本上默认都是使用标准盒模型
+    - 盒子的 width = content
+  - IE盒模型
+    - 盒子的 width = content + padding + border
+- 选择器
+  - 基础选择器
+    - 标签选择器
+        - h1
+    - 类选择器
+        - .header
+    - ID 选择 器
+        - #foot
+    - 通配选择器
+        - *
+  - 属性选择器
+    -  [attr]
+        - 指定属性的元素
+    -  [attr=val]
+        - 属性等于指定值的元素
+    -  [attr*=val]
+        - 属性包含指定值的元素
+    -  [attr^=val]
+        - 属性以指定值开头的元素
+    -  [attr$=val]
+        - 属性以指定值结尾的元素
+  - 组合选择器
+    - A + B
+        - 相邻兄弟选择器
+    - A ~ B
+        - 普通兄弟选择器
+    - A > B
+        - 子选择器
+    - A B
+        - 后代选择器
+  - 常用伪类选择器
+    - :hover
+        - 鼠标悬浮的元素
+    - :active
+        - 鼠标激活的元素
+    - :not()
+        - 用来匹配不符合一组选择器的元素
+    - :nth-child()
+        - 元素中指定顺序索引的元素
+    - :first-child()
+        - 元素中为首的元素
+    - :last-child()
+        - 元素中为尾的元素
+    - :first-letter
+        - 元素的首字母
+  - 伪元素
+    - ::after
+        - 在元素后插入内容
+    - ::before
+        - 在元素前插入内容
+  - 选择器优先级
+    - !important > 内联样式 > ID选择器 > 类选择器 >标签选择器 > 通配选择器、子代选择器、后代选择器
+    - 当这些选择器组合的时候，对应有个数值，可以相加得到权重，通常来说权重高的优先级高一些，但有些情况比较特殊。
+- 继承性
+  - 默认继承父元素的属性
+    - 字体相关
+        - font-family、font-style、font-size、font-weight 等
+    - 文本相关
+        - text-align、text-indent、text-decoration、text-shadow、letter-spacing、word-spacing、white-space、line-height、color 等
+    - 列表相关
+        - list-style、list-style-image、list-style-type、list-style-position 等
+    - 其他属性
+        - visibility、cursor 等
+  - 可以通过以下几个属性控制继承
+    - inherit
+        - 继承父元素对应属性的计算值
+    - initial
+        - 应用该属性的默认值
+    - unset
+        - 如果属性是默认可以继承的，则取 inherit 的效果，否则同 initial
+    - revert
+        - 效果等同于 unset，兼容性差
+- 格式化上下文
+  - BFC (Block Formatting Context)
+    - 特性
+        - BFC 区域内垂直方向 margin 会合并
+        - BFC 的区域不会与 float 盒子重叠(todo 验证)
+        - 计算 BFC 的高度时，浮动元素也参与计算
+        - BFC 为独立的渲染区域，内外互不影响
+    - 触发 BFC
+        - 根元素 html
+        - float 属性不为 none
+        - overflow 不为 visible
+        - position 为 absolute 或 fixed
+  - IFC (Inline Formatting Context) 
+    - 特性
+        - 节点无法声明宽高，其中 margin 和 padding 在水平方向有效在垂直方向无效
+        - 当一个内联盒子超过父元素的宽度时，它会被分割成多盒子，这些盒子分布在多个 line box 中。如果子元素未设置强制换行的情况下，inline box 将不可被分割，将会溢出父元素
+  - FFC (Flex Formatting Context) 
+  - GFC (Grid Formatting Context)
+- 浮动
+  - fixed
+    - 脱离文档流，指定元素相对于屏幕视口（viewport）的位置来指定元素位置
+    - 当祖先元素里 transform 不为 null 的时候，会相对这个元素进行定位，实际上是因为 生成了新的 Stacking Context
+  - absolute
+    - 脱离文档流，指定元素相对于最近的非 static 定位祖先元素的偏移
+  - relative
+    - 不会脱离文档流，相对于原位置进行偏移
+  - static
+    - 正常文档流，元素默认都是这个值
+  - sticky
+    - 元素根据正常文档流进行定位，后相对它的*最近滚动祖先，进行定位
+- 块状元素的流体性
+  - 即默认情况下，块状元素的宽度是会填满父容器的
+  - 当有 border margin padding 值时，元素的内容实际宽度会自适应的缩小
+## HTML知识点
+
+- 事件流
+  - 捕获阶段
+    - 事件从 window 开始向下传递直到事件的触发元素
+  - 冒泡阶段
+    - 事件从触发元素一级级往上传递，直到 window
+  - addEventListener
+    - 第三个参数控制在那个阶段触发，false 为冒泡 true 为 捕获
+  - 阻止事件传递
+    - stopPropagation
+        - 停止事件的继续传播，无论哪个阶段
+    - stopImmediatePropagation
+        - 阻止事件冒泡并且阻止相同事件的其他侦听器被调用
+  - 阻止默认行为
+    - preventDefault
+        - 阻止某些控件的默认行为
+- 标签元素
+## 网络相关
+
+- OSI 标准模型
+  - todo
+- TCP/IP 协议
+  - 通信链路层
+  - 网络层
+  - 传输层
+  - 应用层
+- TCP
+  - 面向连接
+  - 可靠
+  - 全双工链接，双方都可以接受和发送
+  - 拥塞控制
+  - 三次握手/四次挥手
+    - 三次握手针对连接，四次挥手针对结束链接（todo）
+- UDP
+  - 无链接
+  - 没有握手过程
+- HTTP 协议
+  - HTTP/1.0
+    - 每个 TCP 连接只能发送一个请求，发送数据完毕，连接就关闭。
+  - HTTP/1.1
+    - TCP 连接默认不关闭，可以被多个请求复用
+    - 管道机制，允许同时发出多个请求，不用排队
+    - 增加了多种方法 PUT、PATCH、HEAD、 OPTIONS、DELETE
+    - 队头堵塞，服务器要按顺序处理请求，如果前面处理很费时，会造成堵塞
+  - HTTP/2
+    - 区别于之前文本传输，改为了二进制分帧传输
+    - 多路复用/可以发多个请求，被分为多个二进制帧，乱序发送，帧中标识了属于那个请求，服务端收到之后重新组装。避免了队头拥塞。
+    - Header 压缩
+    - PUSH 机制
+  - HTTP/3
+    - 采用 QUIC 协议 
+    - 底层换成了 UDP 协议
+  - HTTPS
+    - HTTP + SSL
+    - 客户端发送请求，服务端返回证书。客户端验证证书有效性。证书有效，生产随机字符串，用证书上的公钥加密。服务端收到过后用对应的私钥解密。之后的传输过程就用这个随机字符串进行对称加密。
+  - 状态码
+    - 1xx
+        - 信息，服务器收到请求，需要请求者继续执行操作
+            - 101 -切换协议
+    - 2xx
+        - 成功
+            - 200 - 请求成功
+            - 201 - 创建成功
+    - 3xx
+        - 重定向，需要进一步的操作以完成请求
+            - 301 - 永久重定向
+            - 302 - 临时重定向
+            - 304 - not modified 资源未修改
+    - 4xx
+        - 客户端错误
+            - 400 - 客户端请求的语法错误，服务器无法理解
+            - 401 - 未授权，需要用户登录
+            - 403 - 禁止访问
+            - 404 - 请求的资源不存在
+    - 5xx
+        - 服务器内部错误
+            - 500 - 服务器内部错误
+            - 504 - 网关超时
+- DNS
+  -  IP 地址一串数字，不方便记忆，就有了域名，并通过域名解析协议（DNS，Domain Name System）来将域名和 IP 地址相互映射，
+  - 顶级域名
+    - 通用顶级域名 .com/.net
+    - 国家顶级域名 .cn/.cc/.io
+- MQTT
+- WebSocket
+  - 长链接，基于 TCP
+  - 握手过程采用的 HTTP 协议
+  - 可以传输二进制和文本
+  - new 一个实例，onOpen、onClose、onMessage 事件
+- webrtc
+- 强缓存/协商缓存
+## React相关
+
+- 合成事件
+  - 16.x
+    - 事件都挂载在 document 上
+    - 拥有事件池，事件对象会被复用
+  - 17.x
+    - 事件都挂载在 root 节点上
+    - 删除事件池
+    - 解决了多个 React 版本共存的问题
+  - 好处
+    - 事件委托到根节点上，避免了添加大量的 listener
+    - 抽象了一层自己的事件系统，抹平了浏览器之间的差异
+    - 方便迁移在各个平台
+- setState
+  - 17.X
+    - 在 React 事件体系内，多次 setState 都会被 batchUpdate
+    - 在 React 事件体系外，诸如请求回调，原生浏览器事件，没有办法进行 batchUpdate，所以 setState 会马上触发 re-render
+    - 可以用 React.batchUpdate 手动合并多次 setState
+  - 18.X
+    - 自动合并多次 setState，无论是在哪里触发的
+    - 提供了 ReactDOM.flushSync 来立即触发 re-render
+    - root 上对于当前是否正处于更新中，进行了一个标记动作，以此来保障这一批 setState 相关的更新行为处于同一次更新调度中
+- diff
+  - 优化
+    - 两棵树的比对，时间复杂度为O(n^3)
+    - 只对比同级元素，时间复杂度降为O(n^2)
+    - 同级元素增加 key 属性，唯一标识一个元素，时间复杂度降为O(n)
+  - key 在实际场景中理解
+    - 实际场景中，就列表中不建议使用 index 作为 key
+    - React 靠 元素类型 + key 作为唯一标识一个元素，列表中基本上都是同样的元素类型，如果使用 index 作为 key 。在列表中增删或者移动元素后，顺序就被打乱了，此时某个位置上，元素类型 + key 标识的一个元素，就会被复用，但实际上这个元素可能已经被删除或者移动位置了，UI 就显示错乱了。
+- 高阶组件
+  - 即接受一个组件，返回一个新组件
+  - 一般使用这种方法往组件里注入额外的 props
+  - class 组件还能在内部 extends 传入组件，进行某些修改
+- 生命周期
+  - 挂载时
+    - constuctor
+    - getDerivedStateFromProps
+    - render
+    - componentDidMount
+  - 更新时
+    - getDerivedStateFromProps
+    - shouldCompoentUpdate
+    - render
+    - getSnapshotBeforeUpdate
+    - componentDidUpdate
+  - 卸载时
+    - componetWillUnmount
+- hooks
+  - 在 hook 之前，函数组件是没有内部状态啊的，只能作为纯展示组件
+  - hook 需要放在函数体顶部，不能在任何条件语句前
+    - 因为 hook 是以链表形式放在 fiber 上的，如果因为条件语句某个 hook 在一次 render 中不执行，就会打乱链表上 hook 的顺序，与上一次的对应不上，储存的状态就对不上，导致错误
+  - 内置 hook 类型
+    - useState
+    - useEffect
+    - useLayoutEffect
+    - useMemo
+    - useCallback
+    - useRef
+    - useContext
+    - useReducer
+    - useImperativeHandle
+- fiber
+  - 一种数据结构
+  - 以链表的形式链接
+    - return
+    - child
+    - sibling
+- context
+- 受控组件/非受控组件
+  - 受控
+    - 指表单组件的 value 由 react 的 state 接管
+  - 非受控
+    - 指表单组件的 value 仍然由 表单自己维护
+## Vue 相关
+
+- 响应式系统
+  - 2.x
+    - Object.defineproperty
+  - 3.x
+    - Proxy
+## 编译相关
+
+- webpack
+  - 打包过程
+  - loader
+  - plugin
+  - hash
+- esbuild
+- rollup
+- vite
+- babel
+## NPM 相关
+
+- 版本
+  - semver
+  - 各种前缀符号
+## JS知识点
+
+- 基础类型
+    - 值类型
+        - number
+        - boolean
+        - string
+        - null
+        - undefined
+    - 引用类型
+        - object
+        - Array
+        - Function
+        - Date
+    - Symbol
+    - callback
+    - generator
+        - 执行器（co）
+    - async/await
+    - 作用域/作用域链/执行上下文
+    - 模块化
+    - this指向问题
+    - ==和===
+    - undefined
+- 变量定义
+  - var
+    - 变量提升，声明会提到顶部，赋值在原处
+    - 全局作用域下，会挂在 window 上
+  - let
+    - ES6 加入，拥有块级作用域，变量值可变
+  - const
+    - ES6 加入，拥有块级作用域，变量值不可以修改，对象是指对象地址不可修改
+- 面向对象
+  - ES5
+    - new 关键字
+        - 新建一个干净对象
+        - 把对象关联到构造函数的prototype属性
+        - 以新建对象为this执行构造函数
+        - 判断构造函数的返回值，对象就返回对象，不是就返回新建对象
+    - 继承
+        - 原型链继承
+            - 将父类的实列对象关联到子类的原型上
+                - `Child.prototype = new Parent()`
+        - 借用构造函数继承
+            - 在子类函数体内，显示改变 this 调用父类构造函数
+                - `function Child(){ Parent.call(this) }`
+        - 组合继承
+            - 原型链 + 借用构造函数
+                - `function Child(){ Parent.call(this) }； Child.prototype = new Parent()`
+            - 父函数相当于执行了两次，造成了属性浪费
+        - 寄生继承
+            - 解决属性浪费，直接在子类函数体内，拿到拥有父类原型的空函数生成的对象，把这个对象当作 this 继续执行。 
+        - 组合寄生继承
+            - 组合 + 寄生继承
+                - `function Child(){ Parent.call(this) }; Child.prototype  = Object.create(Parent.prototype);`
+  - ES6
+    - 新增 class 关键字，依旧使用 new 生成对象实例
+    - 新增 extends 关键字，用于继承
+        - 继承时，子类必须在 constructor 方法中调用 super 方法，因为子类的 this 要由父类构造而来。
+    - 类方法实质上还是定义在 类的 prototype 上
+    - 类静态方法实质上定义在类这个对象上，所以 new 生成实例上并不会有这个静态方法，但是静态方法可以被 extends 关键字继承
+- 原型链
+  - 每个对象都有 prototype
+  - prototype 也是一个对象，也拥有 prototype 属性，顶端到 Object.prototype 它的原型指向 null，这样一层套一层就是所谓的原型链
+  - 当在对象本身上找不到的属性，会顺着原型链往上查找，直到顶端
+- 闭包
+  - 函数可以作为变量
+    - 自由变量是除参数和函数内部定义的变量之外的变量
+    - 词法作用域，自由变量的取值从函数定义时的外部作用域所定
+    - 当函数作为变量传递，并不知道会在何处调用，函数内部的自由变量寻址就成为一个问题。
+    - JS 里采用词法作用域解决，所以函数需要保留一个定义时外部作用域的引用
+    - 这个函数定义时外部作用域的引用+函数本身构成了闭包
+  - 应用
+    - todo
+- 事件循环
+  - 浏览器
+    - 宏任务
+        - script全部代码、setTimeout、setInterval、setImmediate
+    - 微任务
+        - Promise、MutationObserver
+    - 所有宏任务会放进一个队列，先进先出
+    - 所有微任务会放进一个队列，先进先出
+    - 每当一个宏任务执行完后，会检查微任务队列，如果有值就执行微任务队列，直到微任务队列清空，再去宏任务队列取 Task 继续执行，以此往复。
+  - nodejs
+- 模块系统
+  - AMD（历史产物）
+  - UMD（历史产物）
+  - commonjs(node)
+    - 支持动态导入，引入语句发生在运行时
+    - 导入为值拷贝，值可修改
+  - esmodule
+    - 引入语句发生编译时，方便做一些静态分析
+    - 导入为引用值，都是只读，无法直接修改
+    - 动态导入
+        - import() 返回一个 Promise
+    - 支持 tree shaking
+## Typescript
+
+- 类型定义
+  - interface
+  - type
+- 边界值
+  - any
+  - never
+  - unkown
+- ​
+## 浏览器相关
+
+- 同源策略

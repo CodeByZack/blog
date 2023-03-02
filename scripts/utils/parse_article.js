@@ -2,38 +2,15 @@ import * as path from 'path';
 
 import frontMatter from 'front-matter';
 import cheerio from 'cheerio';
-import {micromark} from 'micromark';
-import {
-  gfmTaskListItem,
-  gfmTaskListItemHtml
-} from 'micromark-extension-gfm-task-list-item';
-import {gfmTable, gfmTableHtml} from 'micromark-extension-gfm-table';
-
 import fs from './fs.js';
 import directory from './directory.js';
 import toBuild from './to_build.js';
 import config from '../config.js';
 import readingTime from './read_time.js';
+import { markdown2html } from './markdown2html.js';
 
-export default async (id) => {
-  const mdPath = `${directory.ARTICLES}/${id}`;
-  const exist = await fs.exist(mdPath);
-  if (!exist) {
-    return null;
-  }
-  const mdText = (await fs.readFile(mdPath)).toString();
-  if (!mdText) {
-    return null;
-  }
-  const { attributes, body: mdBody } = frontMatter(mdText);
-
-  const readTimeStr = readingTime(mdBody).text;
-
-  const html = micromark(mdBody, {
-    extensions: [gfmTaskListItem,gfmTable],
-    htmlExtensions: [gfmTaskListItemHtml,gfmTableHtml],
-    allowDangerousHtml: true
-  })
+const transformNormalMarkdown = async (mdBody,mdPath)=>{
+  const html = await markdown2html(mdBody);
 
   const $ = cheerio.load(html);
 
@@ -125,6 +102,51 @@ export default async (id) => {
     node.html(node.html());
   }
 
+  return $.html();
+};
+
+/**
+ * 
+ * todo
+ * 
+ * markmap 不支持在 node 环境直接导出 svg
+ * 
+ * @param {*} mdBody 
+ * @returns 
+ */
+const transformMindMarkdown = (mdBody)=>{
+  const template = `<div class="markmap"><script type="text/template">---
+markmap:
+  initialExpandLevel: 1
+---
+  [MARKDOWN]</script></div>`
+  return template.replace('[MARKDOWN]',mdBody);
+};
+
+export default async (id) => {
+  const mdPath = `${directory.ARTICLES}/${id}`;
+  const exist = await fs.exist(mdPath);
+  if (!exist) {
+    return null;
+  }
+  const mdText = (await fs.readFile(mdPath)).toString();
+  if (!mdText) {
+    return null;
+  }
+  const { attributes, body: mdBody } = frontMatter(mdText);
+
+  const readTimeStr = readingTime(mdBody).text;
+
+  let content = "";
+
+  if(attributes.isMind){
+    content = await transformMindMarkdown(mdBody);
+  }else{
+    content = await transformNormalMarkdown(mdBody,mdPath);
+  }
+
+
+
   return {
     id,
     title: attributes.title || '',
@@ -134,8 +156,9 @@ export default async (id) => {
     publishTime: attributes.created_at || '2000-01-01',
     updates: attributes.updates || [],
     hidden: attributes.hidden || false,
-    content: $.html(),
+    content,
     mdText,
-    readTimeStr
+    readTimeStr,
+    isMind: attributes.isMind
   };
 };
