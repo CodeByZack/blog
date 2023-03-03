@@ -20,7 +20,7 @@
     <%- updates.length ? include('./article_updates.ejs') : null %>
   </article>
   <script>
-    const theme = localStorage.getItem("theme");
+    const giscusTheme = localStorage.getItem("theme");
     const giscusAttributes = {
       "src": "https://giscus.app/client.js",
       "data-repo": "CodeByZack/blog",
@@ -31,7 +31,7 @@
       "data-strict": "0",
       "data-reactions-enabled": "1",
       "data-emit-metadata": "0",
-      "data-theme": theme,
+      "data-theme": giscusTheme,
       "data-lang": "zh-CN",
       "crossorigin": "anonymous",
       "async": "",
