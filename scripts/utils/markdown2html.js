@@ -10,8 +10,8 @@ export const markdown2html = async (mdText) => {
         .use(remarkParse)
         .use(remarkGfm)
         .use(remarkPrism)
-        .use(remarkRehype)
-        .use(rehypeStringify)
+        .use(remarkRehype, {allowDangerousHtml: true})
+        .use(rehypeStringify, {allowDangerousHtml: true})
         .process(mdText)
     const html = String(file);
     return html;

@@ -52,7 +52,7 @@
   article p {
     max-width: var(--content-max-width);
     margin: 15px auto;
-    padding: 0 30px;
+    /* padding: 0 30px; */
     color: var(--normal-color);
   }
 
@@ -147,8 +147,9 @@
 
   article ul,
   article ol {
+    box-sizing: border-box;
     max-width: var(--content-max-width);
-    padding: 0 30px;
+    padding: 0 20px;
     margin: 15px auto;
     color: var(--normal-color);
     line-height: 1.5;
@@ -158,17 +159,17 @@
     counter-reset: li-count;
   }
   
-  article ul li, article ol li {
-    display: block;
-    margin: 5px 0;
+  article ul > li, article ol > li {
     position: relative;
+    margin: 5px 0;
   }
 
-  article ol li {
+  article ol > li {
     counter-increment: li-count;
   }
 
-  article ul li::before {
+  /* article ul > li::before {
+    position: absolute;
     content: '';
     display: inline-block;
     width: 6px;
@@ -181,10 +182,11 @@
     background-color: var(--primary-color);
   }
 
-  article ol li::before {
+  article ol > li::before {
+    position: absolute;
     content: counter( li-count) '. ';
     color: var(--primary-color);
-  }
+  } */
 
   article figcaption {
     font-size: 12px;
