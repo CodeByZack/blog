@@ -1,20 +1,19 @@
 #!/usr/bin/env node
 
-import fs from 'fs-extra';
-import buildSite from './build_site.js';
+import buildSite, { buildSinglePost } from './build_site_new.js';
 import directory from './utils/directory.js';
 import * as cp from 'child_process';
-
-function onChange(type, filename) {
-  console.log(`file ${type}: ${filename}`);
-  buildSite();
-}
+import chokidar from 'chokidar';
 
 const srcDir = directory.SRC;
 const dataDir = directory.ARTICLES;
+chokidar.watch([srcDir,dataDir],{ ignoreInitial : true }).on('all', (event, path) => {
+  console.log(event, path);
+  if(event === "change"){
+    buildSinglePost([])({ item : path.replace(directory.ARTICLES,'') });
+  }
 
-fs.watch(srcDir,{recursive:true},onChange);
-fs.watch(dataDir,{recursive:true},onChange);
+});
 
 await buildSite();
 
