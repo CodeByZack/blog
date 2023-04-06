@@ -37,6 +37,9 @@
     "yargs": "^17.0.1"
   },
   "dependencies": {
-    "chokidar": "^3.5.3"
+    "chokidar": "^3.5.3",
+    "koa": "^2.14.1",
+    "koa-static": "^5.0.0",
+    "ws": "^8.13.0"
   }
 }

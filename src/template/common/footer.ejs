@@ -33,3 +33,8 @@
   <!-- <a class="author" href="<%= config.public_path %>/rss.xml"><img src="/rss.png" alt="rss" /></a>
   <a class="author" href="<%= config.github_repository %>"><img src="/github.png" alt="github" /></a> -->
 </footer>
+
+<% if (config.isDev) { %>
+  <script src="/hotreload.js" ></script>
+<% } %>
+

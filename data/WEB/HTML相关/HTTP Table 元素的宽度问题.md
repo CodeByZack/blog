@@ -5,7 +5,6 @@ updated_at: '2023-03-03 20:20'
 hidden : false
 ---
 
-
 ## ColGroup
 
 `Table` 元素里有一个不怎么常见的元素 [`colgroup`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/colgroup) 和 [`col`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/col) ，这个主要用于批量控制 `cell` 的样式，宽度、颜色等等。 

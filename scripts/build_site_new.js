@@ -50,9 +50,9 @@ const MultiLineLog = (id) => {
       MultiLineLog.logTasks.map((t) => t.msg).join('\n');
   };
 
-  const succeed = (msg)=>MultiLineLog.spinner.succeed(msg);
-  const fail = (msg)=>MultiLineLog.spinner.fail(msg);
-  const info = (msg)=>MultiLineLog.spinner.info(msg);
+  const succeed = (msg) => MultiLineLog.spinner.succeed(msg);
+  const fail = (msg) => MultiLineLog.spinner.fail(msg);
+  const info = (msg) => MultiLineLog.spinner.info(msg);
 
   return {
     log,
@@ -63,7 +63,18 @@ const MultiLineLog = (id) => {
   };
 };
 
-export const buildSinglePost = (articleList) => async (obj) => {
+export const getPostIdByPath = (articleId) => {
+  const articleIdNoExt = articleId
+    .replace(path.extname(articleId), '')
+    .replace('/', '');
+  let id = articleIdNoExt.split(path.sep).join('/');
+  if (id.startsWith('/')) {
+    id = id.substr(1);
+  }
+  return id;
+};
+
+export const buildSinglePost = (articleList, single, isDev) => async (obj) => {
   const { item: articleId } = obj;
   const logTask = MultiLineLog(articleId);
   try {
@@ -79,7 +90,10 @@ export const buildSinglePost = (articleList) => async (obj) => {
     logTask.log(`${articleId}:::渲染html`);
     let html = await ejs.renderFile(articleTemplate, {
       ...data,
-      config,
+      config : {
+        ...config,
+        isDev
+      },
     });
     logTask.log(`${articleId}:::处理资源文件`);
     html = await parseHtmlResource(html);
@@ -108,10 +122,33 @@ export const buildSinglePost = (articleList) => async (obj) => {
     logTask.fail(`${articleId} 出错了-${error.message}`);
   } finally {
     logTask.cancel();
+    if (single) {
+      logTask.succeed('构建完成');
+    }
   }
 };
 
-const buildSite = async () => {
+export const buildIndex = async (articleList, isDev) => {
+  const spinner = ora.createSpinner('正在构建首页...');
+  let indexHtml = await ejs.renderFile(indexTemplate, {
+    articleList: articleList.sort(
+      (a, b) =>
+        new Date(b.publishTime) - new Date(a.publishTime),
+    ),
+    config : { ...config, isDev },
+  });
+indexHtml = await parseHtmlResource(indexHtml);
+await fs.writeFile(
+  `${directory.BUILD}/index.html`,
+  indexHtml,
+);
+spinner.succeed('首页已构建');
+await generateRobots();
+await generateSitemap(articleList);
+await generateRss(articleList);
+};
+
+const buildSite = async (isDev) => {
   await initial();
 
   let spinner = ora.createSpinner('正在查找文章列表...');
@@ -119,32 +156,15 @@ const buildSite = async () => {
   spinner.succeed(`共有 ${articleIdList.length} 篇文章`);
 
   const articleList = [];
-  const taskProcess = buildSinglePost(articleList);
+  const taskProcess = buildSinglePost(articleList,false,isDev);
   await requestPool({
     data: articleIdList,
     maxLimit: 5,
     iteratee: taskProcess,
   });
   MultiLineLog.spinner.succeed('构建成功');
-
-  spinner = ora.createSpinner('正在构建首页...');
-  let indexHtml = await ejs.renderFile(indexTemplate, {
-    articleList: articleList.sort(
-      (a, b) =>
-        new Date(b.publishTime) - new Date(a.publishTime),
-    ),
-    config,
-  });
-  indexHtml = await parseHtmlResource(indexHtml);
-  await fs.writeFile(
-    `${directory.BUILD}/index.html`,
-    indexHtml,
-  );
-  spinner.succeed('首页已构建');
-
-  await generateRobots();
-  await generateSitemap(articleList);
-  await generateRss(articleList);
+  await buildIndex(articleList,isDev);
+  return articleList;
 };
 
 export default buildSite;
