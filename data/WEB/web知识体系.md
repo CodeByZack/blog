@@ -2,8 +2,7 @@
 title: web知识体系
 url: 'https://www.yuque.com/zackdk/web/wo972c'
 created_at: '2022-09-23 15:16'
-updated_at: '2022-09-30 15:35'
-# hidden: true
+updated_at: '2023-04-25 13:45'
 isMind: true
 ---
 
@@ -408,6 +407,15 @@ isMind: true
     - 动态导入
         - import() 返回一个 Promise
     - 支持 tree shaking
+- WebWorker
+  - 特性
+    - 无法操作 DOM
+    - 无法读取 window
+    - 和主线程之间使用 postMessage 进行通信
+  - 分类
+    - 普通 Worker
+    - SharedWorker 多个同域之间可以共享
+
 ## Typescript
 
 - 类型定义
