@@ -7,6 +7,8 @@
     --article-space: 30px;
   }
 
+   
+
   article a {
     color: var(--link-color);
     text-decoration: none;
@@ -16,12 +18,17 @@
     text-decoration: underline;
   }
 
-  article h2, article h3, article h4, article h5, article h6 {
+  article h2, article h3, article h4, article h5, article h6, article summary {
     max-width: var(--content-max-width);
     padding: 0 30px;
     margin: 0 auto;
     line-height: 1.5;
     color: var(--normal-color);
+  }
+
+  article summary{
+    font-size: 20px;
+    cursor: pointer;
   }
 
   article h2 {
