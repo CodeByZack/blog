@@ -1,6 +1,6 @@
 # 行一度空山
 
-[https://zackdk.com](https://zackdk.com)
+[https://blog.zackdk.com](https://zackdk.com)
 
 ## License
 
