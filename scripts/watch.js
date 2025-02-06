@@ -20,11 +20,21 @@ const articleList = await buildSite(true);
 
 const srcDir = directory.SRC;
 const dataDir = directory.ARTICLES;
-chokidar.watch([srcDir,dataDir],{ ignoreInitial : true }).on('all', async (event, path) => {
+const draftDir = directory.DRAFT;
+chokidar.watch([srcDir,dataDir,draftDir],{ ignoreInitial : true }).on('all', async (event, path) => {
   console.log(event, path);
+
+  let itemPath = "";
+
+  if(path.includes(directory.ARTICLES)){
+    itemPath = path.replace(directory.ARTICLES,'');
+  }else if(path.includes(directory.DRAFT)){
+    itemPath = path.replace(directory.DRAFT,'');
+  }
+
   if(event === "change"){
     const hotReloadArticle = [];
-    await buildSinglePost(hotReloadArticle,true,true)({ item : path.replace(directory.ARTICLES,'') });
+    await buildSinglePost(hotReloadArticle,true,true)({ item : itemPath });
     if(!hotReloadArticle.length)return;
     const targetIndex = articleList.findIndex(a=>a.id === hotReloadArticle[0].id);
     if(targetIndex === -1){
@@ -36,7 +46,7 @@ chokidar.watch([srcDir,dataDir],{ ignoreInitial : true }).on('all', async (event
     notifyReload(path);
   }
   if(event === "unlink"){
-    const id = getPostIdByPath(path.replace(directory.ARTICLES,''));
+    const id = getPostIdByPath(itemPath);
     const index = articleList.findIndex(a=>a.id === id);
     if(index > -1){
         articleList.splice(index,1);
@@ -44,7 +54,7 @@ chokidar.watch([srcDir,dataDir],{ ignoreInitial : true }).on('all', async (event
   }
   if(event === "add"){
     const hotReloadArticle = [];
-    await buildSinglePost(hotReloadArticle,true)({ item : path.replace(directory.ARTICLES,'') });
+    await buildSinglePost(hotReloadArticle,true)({ item : itemPath });
     articleList.push(hotReloadArticle[0]);
     await buildIndex(articleList,true);
     notifyReload(path);

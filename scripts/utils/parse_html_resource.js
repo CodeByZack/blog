@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 
 import directory from './directory.js';
 import fs from './fs.js';

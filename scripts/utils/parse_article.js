@@ -1,7 +1,7 @@
 import * as path from 'path';
 
 import frontMatter from 'front-matter';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import fs from './fs.js';
 import directory from './directory.js';
 import toBuild from './to_build.js';
@@ -124,11 +124,16 @@ markmap:
 };
 
 export default async (id) => {
-  const mdPath = `${directory.ARTICLES}/${id}`;
-  const exist = await fs.exist(mdPath);
+  let mdPath = `${directory.DRAFT}/${id}`;
+  let exist = await fs.exist(mdPath);
   if (!exist) {
-    return null;
+    mdPath = `${directory.ARTICLES}/${id}`;
+    exist = await fs.exist(mdPath);
+    if (!exist) {
+      return null;
+    }
   }
+
   const mdText = (await fs.readFile(mdPath)).toString();
   if (!mdText) {
     return null;

@@ -12,4 +12,5 @@ export default {
   SRC: path.join(CURRENT_DIR, '../../src'),
   TEMPLATE: path.join(CURRENT_DIR, '../../src/template'),
   STATIC: path.join(CURRENT_DIR, '../../src/static'),
+  DRAFT: path.join(CURRENT_DIR, '../../draft'),
 };

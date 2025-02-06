@@ -152,7 +152,14 @@ const buildSite = async (isDev) => {
   await initial();
 
   let spinner = ora.createSpinner('正在查找文章列表...');
-  const articleIdList = await readArticles(directory.ARTICLES);
+  // const articleIdList = await readArticles(directory.ARTICLES);
+
+  const directoriesToRead = [directory.ARTICLES];
+  if (isDev) {
+    directoriesToRead.push(directory.DRAFT);
+  }
+  const articleIdList = await readArticles(directoriesToRead);
+
   spinner.succeed(`共有 ${articleIdList.length} 篇文章`);
 
   const articleList = [];
