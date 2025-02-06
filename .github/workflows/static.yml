@@ -33,9 +33,9 @@ jobs:
       - run: |
           npm install
           npm run build    
-      - run: echo 'zackdk.com' > build/CNAME
+      - run: echo 'blog.zackdk.com' > build/CNAME
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: build
 
