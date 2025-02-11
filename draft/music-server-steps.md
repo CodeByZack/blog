@@ -1,7 +1,7 @@
 ---
 title: music-server-steps
 created_at: '2025-02-06 10:42'
-updated_at: '2025-02-08 02:17'
+updated_at: '2025-02-11 06:07'
 ---
 
 # 音乐流媒体服务器开发步骤
@@ -34,6 +34,457 @@ updated_at: '2025-02-08 02:17'
 ### 难点：
 - 如何处理大量音频文件时，数据库的查询效率和性能。
 - 如何设计数据库模型以支持后期扩展，如添加更多元数据、支持更多功能。
+
+
+<details>
+
+<summary>prisma-scheme</summary>
+
+prisma-scheme
+
+```ts
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model album {
+  id                       String              @id
+  name                     String              @default("")
+  artist_id                String              @default("")
+  embed_art_path           String              @default("")
+  artist                   String              @default("")
+  album_artist             String              @default("")
+  min_year                 Int                 @default(0)
+  max_year                 Int                 @default(0)
+  compilation              Unsupported("bool") @default(dbgenerated("FALSE"))
+  song_count               Int                 @default(0)
+  duration                 Float               @default(0)
+  genre                    String              @default("")
+  created_at               DateTime?
+  updated_at               DateTime?
+  full_text                String?             @default("")
+  album_artist_id          String?             @default("")
+  size                     Int                 @default(0)
+  all_artist_ids           String?
+  description              String              @default("")
+  small_image_url          String              @default("")
+  medium_image_url         String              @default("")
+  large_image_url          String              @default("")
+  external_url             String              @default("")
+  external_info_updated_at DateTime?
+  date                     String              @default("")
+  min_original_year        Int                 @default(0)
+  max_original_year        Int                 @default(0)
+  original_date            String              @default("")
+  release_date             String              @default("")
+  releases                 Int                 @default(0)
+  image_files              String              @default("")
+  order_album_name         String              @default("")
+  order_album_artist_name  String              @default("")
+  sort_album_name          String              @default("")
+  sort_album_artist_name   String              @default("")
+  catalog_num              String              @default("")
+  comment                  String              @default("")
+  paths                    String              @default("")
+  mbz_album_id             String              @default("")
+  mbz_album_artist_id      String              @default("")
+  mbz_album_type           String              @default("")
+  mbz_album_comment        String              @default("")
+  discs                    Json                @default("{}")
+  library_id               Int                 @default(1)
+  library                  library             @relation(fields: [library_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  album_genres             album_genres[]
+
+  @@index([updated_at], map: "album_updated_at")
+  @@index([size], map: "album_size")
+  @@index([order_album_name], map: "album_order_album_name")
+  @@index([order_album_artist_name], map: "album_order_album_artist_name")
+  @@index([name], map: "album_name")
+  @@index([min_year], map: "album_min_year")
+  @@index([mbz_album_type], map: "album_mbz_album_type")
+  @@index([max_year], map: "album_max_year")
+  @@index([genre], map: "album_genre")
+  @@index([full_text], map: "album_full_text")
+  @@index([created_at], map: "album_created_at")
+  @@index([artist_id], map: "album_artist_id")
+  @@index([album_artist_id], map: "album_artist_album_id")
+  @@index([artist], map: "album_artist_album")
+  @@index([artist], map: "album_artist")
+  @@index([compilation, order_album_artist_name, order_album_name], map: "album_alphabetical_by_artist")
+  @@index([all_artist_ids], map: "album_all_artist_ids")
+}
+
+model album_genres {
+  album_id String
+  genre_id String
+  genre    genre  @relation(fields: [genre_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  album    album  @relation(fields: [album_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([album_id, genre_id], map: "sqlite_autoindex_album_genres_1")
+}
+
+model annotation {
+  user_id    String              @default("")
+  item_id    String              @default("")
+  item_type  String              @default("")
+  play_count Int?                @default(0)
+  play_date  DateTime?
+  rating     Int?                @default(0)
+  starred    Unsupported("bool") @default(dbgenerated("FALSE"))
+  starred_at DateTime?
+
+  @@unique([user_id, item_id, item_type], map: "sqlite_autoindex_annotation_1")
+  @@index([starred_at], map: "annotation_starred_at")
+  @@index([starred], map: "annotation_starred")
+  @@index([rating], map: "annotation_rating")
+  @@index([play_date], map: "annotation_play_date")
+  @@index([play_count], map: "annotation_play_count")
+}
+
+model artist {
+  id                       String           @id
+  name                     String           @default("")
+  album_count              Int              @default(0)
+  full_text                String?          @default("")
+  song_count               Int              @default(0)
+  size                     Int              @default(0)
+  biography                String           @default("")
+  small_image_url          String           @default("")
+  medium_image_url         String           @default("")
+  large_image_url          String           @default("")
+  similar_artists          String           @default("")
+  external_url             String           @default("")
+  external_info_updated_at DateTime?
+  order_artist_name        String           @default("")
+  sort_artist_name         String           @default("")
+  mbz_artist_id            String           @default("")
+  artist_genres            artist_genres[]
+  library_artist           library_artist[]
+
+  @@index([size], map: "artist_size")
+  @@index([order_artist_name], map: "artist_order_artist_name")
+  @@index([name], map: "artist_name")
+  @@index([full_text], map: "artist_full_text")
+}
+
+model artist_genres {
+  artist_id String
+  genre_id  String
+  genre     genre  @relation(fields: [genre_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  artist    artist @relation(fields: [artist_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([artist_id, genre_id], map: "sqlite_autoindex_artist_genres_1")
+}
+
+model bookmark {
+  user_id    String
+  item_id    String
+  item_type  String
+  comment    String?
+  position   Int?
+  changed_by String?
+  created_at DateTime?
+  updated_at DateTime?
+  user       user      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, item_id, item_type], map: "sqlite_autoindex_bookmark_1")
+}
+
+model genre {
+  id                String              @id
+  name              String              @unique(map: "sqlite_autoindex_genre_2")
+  album_genres      album_genres[]
+  artist_genres     artist_genres[]
+  media_file_genres media_file_genres[]
+}
+
+model goose_db_version {
+  id         Int       @id @default(autoincrement())
+  version_id Int
+  is_applied Int
+  tstamp     DateTime? @default(now())
+}
+
+model library {
+  id             Int              @id @default(autoincrement())
+  name           String           @unique(map: "sqlite_autoindex_library_1")
+  path           String           @unique(map: "sqlite_autoindex_library_2")
+  remote_path    String?          @default("")
+  last_scan_at   DateTime         @default(dbgenerated("'0000-00-00 00:00:00'"))
+  updated_at     DateTime         @default(now())
+  created_at     DateTime         @default(now())
+  album          album[]
+  library_artist library_artist[]
+  media_file     media_file[]
+}
+
+model library_artist {
+  library_id Int     @default(1)
+  artist_id  String
+  artist     artist  @relation(fields: [artist_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  library    library @relation(fields: [library_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([library_id, artist_id], map: "sqlite_autoindex_library_artist_1")
+}
+
+model media_file {
+  id                      String              @id
+  path                    String              @default("")
+  title                   String              @default("")
+  album                   String              @default("")
+  artist                  String              @default("")
+  artist_id               String              @default("")
+  album_artist            String              @default("")
+  album_id                String              @default("")
+  has_cover_art           Unsupported("bool") @default(dbgenerated("FALSE"))
+  track_number            Int                 @default(0)
+  disc_number             Int                 @default(0)
+  year                    Int                 @default(0)
+  size                    Int                 @default(0)
+  suffix                  String              @default("")
+  duration                Float               @default(0)
+  bit_rate                Int                 @default(0)
+  genre                   String              @default("")
+  compilation             Unsupported("bool") @default(dbgenerated("FALSE"))
+  created_at              DateTime?
+  updated_at              DateTime?
+  full_text               String?             @default("")
+  album_artist_id         String?             @default("")
+  date                    String              @default("")
+  original_year           Int                 @default(0)
+  original_date           String              @default("")
+  release_year            Int                 @default(0)
+  release_date            String              @default("")
+  order_album_name        String              @default("")
+  order_album_artist_name String              @default("")
+  order_artist_name       String              @default("")
+  sort_album_name         String              @default("")
+  sort_artist_name        String              @default("")
+  sort_album_artist_name  String              @default("")
+  sort_title              String              @default("")
+  disc_subtitle           String              @default("")
+  catalog_num             String              @default("")
+  comment                 String              @default("")
+  order_title             String              @default("")
+  mbz_recording_id        String              @default("")
+  mbz_album_id            String              @default("")
+  mbz_artist_id           String              @default("")
+  mbz_album_artist_id     String              @default("")
+  mbz_album_type          String              @default("")
+  mbz_album_comment       String              @default("")
+  mbz_release_track_id    String              @default("")
+  bpm                     Int                 @default(0)
+  channels                Int                 @default(0)
+  rg_album_gain           Float               @default(0)
+  rg_album_peak           Float               @default(0)
+  rg_track_gain           Float               @default(0)
+  rg_track_peak           Float               @default(0)
+  lyrics                  Json                @default("[]")
+  sample_rate             Int                 @default(0)
+  library_id              Int                 @default(1)
+  library                 library             @relation(fields: [library_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  media_file_genres       media_file_genres[]
+  scrobble_buffer         scrobble_buffer[]
+
+  @@index([year], map: "media_file_year")
+  @@index([updated_at], map: "media_file_updated_at")
+  @@index([disc_number, track_number], map: "media_file_track_number")
+  @@index([title], map: "media_file_title")
+  @@index([sample_rate], map: "media_file_sample_rate")
+  @@index([path], map: "media_file_path_nocase")
+  @@index([path], map: "media_file_path")
+  @@index([order_title], map: "media_file_order_title")
+  @@index([order_artist_name], map: "media_file_order_artist_name")
+  @@index([order_album_name], map: "media_file_order_album_name")
+  @@index([mbz_recording_id], map: "media_file_mbz_track_id")
+  @@index([genre], map: "media_file_genre")
+  @@index([full_text], map: "media_file_full_text")
+  @@index([duration], map: "media_file_duration")
+  @@index([created_at], map: "media_file_created_at")
+  @@index([channels], map: "media_file_channels")
+  @@index([bpm], map: "media_file_bpm")
+  @@index([artist_id], map: "media_file_artist_id")
+  @@index([album_artist_id], map: "media_file_artist_album_id")
+  @@index([artist], map: "media_file_artist")
+  @@index([album_id], map: "media_file_album_id")
+  @@index([album_artist], map: "media_file_album_artist")
+}
+
+model media_file_genres {
+  media_file_id String
+  genre_id      String
+  genre         genre      @relation(fields: [genre_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  media_file    media_file @relation(fields: [media_file_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([media_file_id, genre_id], map: "sqlite_autoindex_media_file_genres_1")
+}
+
+model player {
+  id               String               @id
+  name             String
+  user_agent       String?
+  user_id          String
+  client           String
+  ip               String?
+  last_seen        DateTime?
+  max_bit_rate     Int?                 @default(0)
+  transcoding_id   String?
+  report_real_path Unsupported("bool")  @default(dbgenerated("FALSE"))
+  scrobble_enabled Unsupported("bool")? @default(dbgenerated("true"))
+  user             user                 @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([name], map: "player_name")
+  @@index([client, user_agent, user_id], map: "player_match")
+}
+
+model playlist {
+  id              String                @id
+  name            String                @default("")
+  comment         String                @default("")
+  duration        Float                 @default(0)
+  song_count      Int                   @default(0)
+  public          Unsupported("bool")   @default(dbgenerated("FALSE"))
+  created_at      DateTime?
+  updated_at      DateTime?
+  path            Unsupported("string") @default(dbgenerated("''"))
+  sync            Unsupported("bool")   @default(dbgenerated("false"))
+  size            Int                   @default(0)
+  rules           String?
+  evaluated_at    DateTime?
+  owner_id        String
+  user            user                  @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  playlist_fields playlist_fields[]
+  playlist_tracks playlist_tracks[]
+
+  @@index([updated_at], map: "playlist_updated_at")
+  @@index([size], map: "playlist_size")
+  @@index([name], map: "playlist_name")
+  @@index([evaluated_at], map: "playlist_evaluated_at")
+  @@index([created_at], map: "playlist_created_at")
+}
+
+model playlist_fields {
+  field       String
+  playlist_id String
+  playlist    playlist @relation(fields: [playlist_id], references: [id], onDelete: Cascade)
+
+  @@unique([field, playlist_id], map: "playlist_fields_idx")
+}
+
+model playlist_tracks {
+  id            Int      @default(0)
+  playlist_id   String
+  media_file_id String
+  playlist      playlist @relation(fields: [playlist_id], references: [id], onDelete: Cascade)
+
+  @@unique([playlist_id, id], map: "playlist_tracks_pos")
+}
+
+model playqueue {
+  id         String    @id @default(cuid())
+  user_id    String
+  current    String?
+  position   Float?
+  changed_by String?
+  items      String?
+  created_at DateTime?
+  updated_at DateTime?
+  user       user      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model property {
+  id    String @id
+  value String @default("")
+}
+
+model radio {
+  id            String    @id
+  name          String    @unique(map: "sqlite_autoindex_radio_2")
+  stream_url    String
+  home_page_url String    @default("")
+  created_at    DateTime?
+  updated_at    DateTime?
+
+  @@index([name], map: "radio_name")
+}
+
+model scrobble_buffer {
+  user_id       String
+  service       String
+  media_file_id String
+  play_time     DateTime
+  enqueue_time  DateTime   @default(now())
+  id            String     @unique(map: "scrobble_buffer_id_ix") @default("")
+  media_file    media_file @relation(fields: [media_file_id], references: [id], onDelete: Cascade)
+  user          user       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, service, media_file_id, play_time], map: "sqlite_autoindex_scrobble_buffer_1")
+}
+
+model share {
+  id              String              @id
+  expires_at      DateTime?
+  last_visited_at DateTime?
+  resource_ids    String
+  created_at      DateTime?
+  updated_at      DateTime?
+  user_id         String
+  downloadable    Unsupported("bool") @default(dbgenerated("false"))
+  description     String              @default("")
+  resource_type   String              @default("")
+  contents        String              @default("")
+  format          String              @default("")
+  max_bit_rate    Int                 @default(0)
+  visit_count     Int                 @default(0)
+  user            user                @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model transcoding {
+  id               String @id
+  name             String @unique(map: "sqlite_autoindex_transcoding_2")
+  target_format    String @unique(map: "sqlite_autoindex_transcoding_3")
+  command          String @default("")
+  default_bit_rate Int?   @default(192)
+}
+
+model user {
+  id              String              @id
+  user_name       String              @unique(map: "sqlite_autoindex_user_2") @default("")
+  name            String              @default("")
+  email           String              @default("")
+  password        String              @default("")
+  is_admin        Unsupported("bool") @default(dbgenerated("FALSE"))
+  last_login_at   DateTime?
+  last_access_at  DateTime?
+  created_at      DateTime
+  updated_at      DateTime
+  bookmark        bookmark[]
+  player          player[]
+  playlist        playlist[]
+  playqueue       playqueue[]         @ignore
+  scrobble_buffer scrobble_buffer[]
+  share           share[]
+  user_props      user_props[]
+
+  @@index([user_name, password], map: "user_username_password")
+}
+
+model user_props {
+  user_id String
+  key     String
+  value   String?
+  user    user    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@id([user_id, key])
+}
+```
+
+</details>
 
 ---
 
