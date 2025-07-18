@@ -13,6 +13,7 @@ import parseHtmlResource from './utils/parse_html_resource.js';
 import config from './config.js';
 import readArticles from './utils/read_articles.js';
 import requestPool from './utils/request_pool.js';
+import copyPublic from './tasks/copy_public.js';
 
 const articleTemplate = `${directory.TEMPLATE}/article/index.ejs`;
 const indexTemplate = `${directory.TEMPLATE}/index.ejs`;
@@ -150,6 +151,7 @@ await generateRss(articleList);
 
 const buildSite = async (isDev) => {
   await initial();
+  await copyPublic();
 
   let spinner = ora.createSpinner('正在查找文章列表...');
   // const articleIdList = await readArticles(directory.ARTICLES);
